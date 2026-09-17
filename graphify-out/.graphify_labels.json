@@ -1,0 +1,21 @@
+{
+  "0": "Gameplay UI Screens",
+  "1": "Build Toolchain Dependencies",
+  "2": "Runtime App Dependencies",
+  "3": "TypeScript Configuration",
+  "4": "Simulation API Domain",
+  "5": "Terminal Simulation Engine",
+  "6": "Detection Replay API",
+  "7": "Event Driven Design Docs",
+  "8": "Package Scripts",
+  "9": "Scenario Initialization",
+  "10": "Visual Design System",
+  "11": "App Layout Fonts",
+  "12": "Glasshouse Reconstruction",
+  "13": "Generic UI Icons",
+  "14": "Next.js Vercel Branding",
+  "15": "ESLint Configuration",
+  "16": "Next.js Configuration",
+  "17": "PostCSS Configuration",
+  "18": "Prisma Configuration"
+}
