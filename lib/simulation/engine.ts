@@ -2,6 +2,8 @@ import { AccessLevel, ScenarioState, SecurityEventCategory, SecurityEventSeverit
 import { prisma } from "@/lib/prisma";
 import type { CommandResult, SimulationEvent, TerminalState } from "./types";
 import { detectionForAction } from "./rules";
+import { getDefinitionForScenario } from "./initializer";
+import type { ScenarioDefinition, ScenarioEventDefinition } from "./scenarios";
 
 type EventInput = {
   action: string;
@@ -16,7 +18,14 @@ type EventInput = {
 };
 
 export class SimulationEngine {
+  private scenarioDefinition?: Promise<ScenarioDefinition>;
+
   constructor(private scenarioId: string, private actorId: string) {}
+
+  private definition() {
+    this.scenarioDefinition ??= getDefinitionForScenario(this.scenarioId);
+    return this.scenarioDefinition;
+  }
 
   async executeCommand(command: string, state: TerminalState): Promise<CommandResult> {
     const [raw = "", ...args] = command.trim().split(/\s+/);
@@ -36,7 +45,7 @@ export class SimulationEngine {
       case "ping": return this.ping(args, state);
       case "nmap": return this.scan(args, state);
       case "curl": return this.curl(args, state);
-      case "msfconsole": return this.result(true, "Metasploit simulation ready. Use: exploit WEB-01");
+      case "msfconsole": return this.result(true, "Metasploit simulation ready. Use: exploit <host>");
       case "exploit": return this.exploit(args, state);
       case "ssh": return this.ssh(args, state);
       case "john": return this.john(args);
@@ -57,7 +66,7 @@ export class SimulationEngine {
 Recon:       nmap <host> · ping <host> · curl <url> · ip
 Access:      exploit <host> · ssh <user@host> · sessions
 Filesystem:  pwd · cd <path> · ls [path] · cat <path> · retrieve <file>
-System:      whoami · hostname · ps · privesc backup-sync
+System:      whoami · hostname · ps · privesc <trusted-service>
 Tools:       john <file> · msfconsole · install-agent · clear`;
   }
 
@@ -70,7 +79,9 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
   }
 
   private async target(value: string) {
-    const resolved = value === "portal.meridian.test" || value === "fin-app.internal" ? (value.startsWith("portal") ? "WEB-01" : "FIN-APP") : value;
+    const definition = await this.definition();
+    const normalized = value.replace(/^https?:\/\//, "").split("/")[0].toLowerCase();
+    const resolved = definition.aliases[normalized] ?? normalized;
     return prisma.machine.findFirst({ where: { scenarioId: this.scenarioId, OR: [{ hostname: resolved.toUpperCase() }, { ip: resolved }] }, include: { services: true, users: true } });
   }
 
@@ -83,7 +94,8 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
         metadata: input.metadata ? JSON.stringify(input.metadata) : undefined,
       },
     });
-    const detection = detectionForAction(event.action);
+    const definition = await this.definition();
+    const detection = detectionForAction(event.action, definition.detections);
     if (detection) {
       await prisma.securityEvent.create({
         data: {
@@ -105,8 +117,33 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
   }
 
   private async discoveredHosts() {
-    const events = await prisma.securityEvent.findMany({ where: { scenarioId: this.scenarioId, action: "HOST_DISCOVERED" }, include: { targetMachine: true } });
-    return ["portal.meridian.test", ...new Set(events.flatMap((event) => event.targetMachine ? [event.targetMachine.hostname] : []))];
+    const [definition, events] = await Promise.all([
+      this.definition(),
+      prisma.securityEvent.findMany({ where: { scenarioId: this.scenarioId, action: "HOST_DISCOVERED" }, include: { targetMachine: true } }),
+    ]);
+    return [...new Set([...definition.startingKnowledge.knownAssets, ...definition.startingKnowledge.knownHosts, ...events.flatMap((event) => event.targetMachine ? [event.targetMachine.hostname] : [])])];
+  }
+
+  private emitDefinition(definition: ScenarioEventDefinition, context: Omit<EventInput, "action" | "category" | "severity">) {
+    return this.emit({ ...context, ...definition, metadata: { ...context.metadata, ...definition.metadata } });
+  }
+
+  private async applyDiscovery(kind: "file" | "web", host: string, value: string, sourceMachineId?: string) {
+    const definition = await this.definition();
+    const discovery = definition.discoveries.find((entry) => entry.trigger.kind === kind && entry.trigger.host === host && (kind === "file" ? entry.trigger.value === value : value.includes(entry.trigger.value)));
+    if (!discovery) return { events: [] as SimulationEvent[], output: undefined as string | undefined };
+    const events: SimulationEvent[] = [];
+    const discoveryHost = await this.target(host);
+    for (const hostname of discovery.hosts ?? []) {
+      const machine = await this.target(hostname);
+      events.push(await this.emit({ action: "HOST_DISCOVERED", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.INFO, sourceMachineId, targetMachineId: machine?.id, visibleToBlue: false }));
+    }
+    for (const credential of discovery.credentials ?? []) {
+      const machine = await this.target(credential.scope);
+      events.push(await this.emit({ action: "CREDENTIAL_DISCOVERED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId, targetMachineId: machine?.id, userId: credential.username, visibleToBlue: false, metadata: { scope: credential.scope, origin: `${host}:${value}` } }));
+    }
+    for (const evidence of discovery.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId, targetMachineId: discoveryHost?.id, metadata: { origin: `${host}:${value}` } }));
+    return { events, output: discovery.output };
   }
 
   private changeDirectory(args: string[], state: TerminalState) {
@@ -134,22 +171,15 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const events: SimulationEvent[] = [];
     events.push(await this.emit({ action: file.isSecret ? "SENSITIVE_FILE_READ" : "FILE_READ", category: SecurityEventCategory.FILESYSTEM, severity: file.isSecret ? SecurityEventSeverity.HIGH : SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: file.isSecret, metadata: { path: file.path } }));
 
-    const discoveries: Record<string, { host: string; credential: string; scope: string }> = {
-      "/var/www/meridian/app.conf": { host: "DEV-01", credential: "deploy", scope: "DEV-01" },
-      "/etc/meridian/routes.conf": { host: "FIN-APP", credential: "svc_web", scope: "FIN-APP" },
-      "/etc/fin-app/db.conf": { host: "FIN-DB", credential: "finance_app", scope: "FIN-DB" },
-    };
-    const clue = discoveries[file.path];
-    if (clue) {
-      const machine = await this.target(clue.host);
-      events.push(await this.emit({ action: "CREDENTIAL_DISCOVERED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, targetMachineId: machine?.id, userId: clue.credential, visibleToBlue: false, metadata: { ...clue, origin: `${session.machine.hostname}:${file.path}` } }));
-      events.push(await this.emit({ action: "HOST_DISCOVERED", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.INFO, targetMachineId: machine?.id, visibleToBlue: false }));
-    }
-    if (file.path.endsWith("PROJECT_ATLAS.pdf")) {
-      if (!retrieve) return this.result(true, `${file.contents}\n\nUse 'retrieve PROJECT_ATLAS.pdf' to extract the objective.`, events);
-      events.push(await this.emit({ action: "OBJECTIVE_RETRIEVED", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.CRITICAL, targetMachineId: session.machine.id, userId: session.user.username, metadata: { file: "PROJECT_ATLAS.pdf" } }));
+    const discovery = await this.applyDiscovery("file", session.machine.hostname, file.path, session.machine.id);
+    events.push(...discovery.events);
+    const definition = await this.definition();
+    const objective = definition.objectives.find((entry) => entry.type === "retrieve_file" && entry.host === session.machine.hostname && entry.path === file.path);
+    if (objective) {
+      if (!retrieve) return this.result(true, `${file.contents}\n\nUse 'retrieve ${file.path.split("/").at(-1)}' to extract the objective.`, events);
+      events.push(await this.emit({ action: "OBJECTIVE_RETRIEVED", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.CRITICAL, targetMachineId: session.machine.id, userId: session.user.username, metadata: { objectiveId: objective.id, file: objective.path.split("/").at(-1) } }));
       await prisma.scenario.update({ where: { id: this.scenarioId }, data: { state: ScenarioState.COMPLETED, endedAt: new Date() } });
-      return { success: true, output: "PROJECT_ATLAS.pdf retrieved. Operation Glasshouse complete.", events, objectiveRetrieved: true, discoveredHosts: await this.discoveredHosts() };
+      return { success: true, output: `${objective.label.replace(/^Retrieve /, "")} retrieved. Operation complete.`, events, objectiveRetrieved: true, discoveredHosts: await this.discoveredHosts() };
     }
     return { success: true, output: file.contents ?? "(empty)", events, discoveredHosts: await this.discoveredHosts() };
   }
@@ -189,28 +219,31 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     if (!args[0]) return this.result(false, "Usage: curl <url>");
     const source = await this.currentMachine(state);
     if (!source) return this.result(false, "No active session.");
-    if (args[0].includes("portal.meridian.test") || args[0].includes("10.10.10.10")) {
-      const web = await this.target("WEB-01");
-      const event = await this.emit({ action: "WEB_REQUEST", category: SecurityEventCategory.WEB, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: web?.id, metadata: { path: args[0] } });
-      return this.result(true, "Meridian Employee Portal\nNotice: legacy upload endpoint /legacy-upload", [event]);
-    }
-    return this.result(false, "curl: connection failed");
+    const target = await this.target(args[0]);
+    if (!target?.services.some((service) => service.name === "http" || service.name === "https")) return this.result(false, "curl: connection failed");
+    const events = [await this.emit({ action: "WEB_REQUEST", category: SecurityEventCategory.WEB, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { path: args[0] } })];
+    const discovery = await this.applyDiscovery("web", target.hostname, args[0], source.machine.id);
+    events.push(...discovery.events);
+    return { success: true, output: discovery.output ?? `${target.hostname} responded.`, events, discoveredHosts: await this.discoveredHosts() };
   }
 
   private async exploit(args: string[], state: TerminalState) {
     const source = await this.currentMachine(state);
     const target = await this.target(args[0] ?? "");
-    if (!source || target?.hostname !== "WEB-01") return this.result(false, "Target is not vulnerable.");
-    const scanned = await prisma.securityEvent.count({ where: { scenarioId: this.scenarioId, action: "PORT_PROBE", targetMachineId: target.id } });
-    if (!scanned) return this.result(false, "Exploit profile unknown. Scan and inspect the portal first.");
-    const user = target.users.find((entry) => entry.username === "www-data")!;
-    const events = [
-      await this.emit({ action: "EXPLOIT_EXECUTED", category: SecurityEventCategory.WEB, severity: SecurityEventSeverity.HIGH, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { module: "legacy_upload" } }),
-      await this.emit({ action: "PROCESS_SPAWN", category: SecurityEventCategory.PROCESS, severity: SecurityEventSeverity.MEDIUM, targetMachineId: target.id, userId: user.username }),
-      await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: user.username, metadata: { privilege: user.privilege } }),
-    ];
+    const definition = await this.definition();
+    const profile = definition.exploits.find((entry) => entry.target === target?.hostname);
+    if (!source || !target || !profile) return this.result(false, "Target is not vulnerable.");
+    if (profile.prerequisiteAction) {
+      const satisfied = await prisma.securityEvent.count({ where: { scenarioId: this.scenarioId, action: profile.prerequisiteAction, targetMachineId: target.id } });
+      if (!satisfied) return this.result(false, "Exploit profile unknown. Gather service evidence first.");
+    }
+    const user = target.users.find((entry) => entry.username === profile.sessionUser);
+    if (!user) return this.result(false, "Exploit session identity is unavailable.");
+    const events: SimulationEvent[] = [];
+    for (const evidence of profile.evidence) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: evidence.action === "PROCESS_SPAWN" ? user.username : undefined }));
+    events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: user.username, metadata: { privilege: user.privilege } }));
     const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId } });
-    return { success: true, output: "Session opened: www-data@WEB-01", events, sessionUpdated: true, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true } };
+    return { success: true, output: profile.output, events, sessionUpdated: true, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true } };
   }
 
   private async ssh(args: string[], state: TerminalState) {
@@ -228,7 +261,9 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const events = [await this.emit({ action: allowed ? "AUTH_SUCCESS" : "AUTH_FAILED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username })];
     if (!allowed || !user) return this.result(false, "Permission denied or route blocked.", events);
     events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username, metadata: { privilege: user.privilege } }));
-    events.push(await this.emit({ action: "LATERAL_MOVEMENT", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username, visibleToRed: false }));
+    const definition = await this.definition();
+    const connection = definition.connections.find((entry) => entry.source === source.machine.hostname && entry.target === target.hostname && entry.port === link?.port);
+    if (connection?.accessEvent) events.push(await this.emitDefinition(connection.accessEvent, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username, metadata: { connectionPort: link?.port } }));
     const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId } });
     return { success: true, output: `Connected to ${target.hostname}.`, events, sessionUpdated: true, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true } };
   }
@@ -244,13 +279,15 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
 
   private async privesc(args: string[], state: TerminalState) {
     const current = await this.currentMachine(state);
-    if (args[0] !== "backup-sync" || current?.machine.hostname !== "DEV-01" || current.user.username !== "deploy") return this.result(false, "Usage from deploy@DEV-01: privesc backup-sync");
-    const root = await prisma.user.findFirstOrThrow({ where: { machineId: current.machine.id, username: "root" } });
-    const actions = ["PRIVILEGED_CONFIG_MODIFIED", "SERVICE_RESTARTED", "PRIVILEGE_ESCALATION", "ROOT_SESSION_CREATED"];
+    const definition = await this.definition();
+    const escalation = definition.privilegeEscalations.find((entry) => entry.command === args[0] && entry.host === current?.machine.hostname && entry.fromUser === current?.user.username);
+    if (!current || !escalation) return this.result(false, "No matching trusted-service escalation was found in this context.");
+    const elevated = await prisma.user.findFirstOrThrow({ where: { machineId: current.machine.id, username: escalation.toUser } });
     const events: SimulationEvent[] = [];
-    for (const action of actions) events.push(await this.emit({ action, category: action === "PRIVILEGED_CONFIG_MODIFIED" ? SecurityEventCategory.FILESYSTEM : SecurityEventCategory.PRIVILEGE, severity: action === "PRIVILEGE_ESCALATION" ? SecurityEventSeverity.CRITICAL : SecurityEventSeverity.HIGH, targetMachineId: current.machine.id, userId: action === "ROOT_SESSION_CREATED" ? "root" : "deploy", metadata: action === "ROOT_SESSION_CREATED" ? { privilege: AccessLevel.ROOT } : undefined }));
-    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: root.id, machineId: current.machine.id, privilege: AccessLevel.ROOT, sourceMachineId: current.machine.id, scenarioId: this.scenarioId } });
-    return { success: true, output: "backup-sync trusted the modified hook. Root session opened.", events, sessionUpdated: true, newSession: { id: session.id, userId: "root", machineId: "DEV-01", privilege: AccessLevel.ROOT, createdAt: session.createdAt, active: true } };
+    for (const evidence of escalation.evidence) events.push(await this.emitDefinition(evidence, { targetMachineId: current.machine.id, userId: current.user.username }));
+    events.push(await this.emit({ action: "ROOT_SESSION_CREATED", category: SecurityEventCategory.PRIVILEGE, severity: SecurityEventSeverity.HIGH, targetMachineId: current.machine.id, userId: elevated.username, metadata: { privilege: elevated.privilege } }));
+    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: elevated.id, machineId: current.machine.id, privilege: elevated.privilege, sourceMachineId: current.machine.id, scenarioId: this.scenarioId } });
+    return { success: true, output: escalation.output, events, sessionUpdated: true, newSession: { id: session.id, userId: elevated.username, machineId: current.machine.hostname, privilege: elevated.privilege, createdAt: session.createdAt, active: true } };
   }
 
   private async installAgent(state: TerminalState) {

@@ -1,4 +1,5 @@
 import { detectionForAction, parseMetadata } from "./rules";
+import type { RouteDefinition } from "./scenarios";
 
 export type ReplayLens = "RED" | "BLUE" | "TRUTH";
 
@@ -42,6 +43,13 @@ export type ReplaySummary = {
   sessionCount: number;
   persistenceInstalled: boolean;
   evidenceCount: number;
+  route: {
+    id: string;
+    name: string;
+    trustRelationship: string;
+    evidenceProfile: RouteDefinition["evidenceProfile"];
+    actual: { networkEvents: number; authenticationEvents: number; endpointEvents: number; detectionCount: number };
+  } | null;
 };
 
 export type KeyDecision = {
@@ -55,8 +63,8 @@ export function visibleToLens(event: ReplayEvent, lens: ReplayLens) {
   return lens === "TRUTH" || (lens === "RED" ? event.visibleToRed : event.visibleToBlue);
 }
 
-export function snapshotAt(events: ReplayEvent[], lens: ReplayLens, throughEventId?: string): ReplaySnapshot {
-  const known = new Set<string>(lens === "RED" ? ["INTERNET", "WEB-01"] : []);
+export function snapshotAt(events: ReplayEvent[], lens: ReplayLens, throughEventId?: string, initialKnownHosts: string[] = ["INTERNET", "WEB-01"]): ReplaySnapshot {
+  const known = new Set<string>(lens === "RED" ? initialKnownHosts : []);
   const accessed = new Set<string>();
   const privileged = new Set<string>();
   const isolated = new Set<string>();
@@ -110,16 +118,29 @@ export function snapshotAt(events: ReplayEvent[], lens: ReplayLens, throughEvent
   };
 }
 
-export function summarizeReplay(events: ReplayEvent[], scenario: ReplayScenario): ReplaySummary {
+export function attackPathFromEvents(events: ReplayEvent[]) {
+  const path: string[] = ["INTERNET"];
+  for (const event of events) {
+    if (event.action === "SESSION_CREATED" && event.target && path.at(-1) !== event.target) path.push(event.target);
+  }
+  return path;
+}
+
+export function identifyRoute(events: ReplayEvent[], routes: RouteDefinition[]) {
+  const path = attackPathFromEvents(events);
+  return routes.find((route) => route.hosts.length === path.length && route.hosts.every((host, index) => path[index] === host))
+    ?? routes.filter((route) => route.hosts.every((host) => path.includes(host))).sort((a, b) => b.hosts.length - a.hosts.length)[0];
+}
+
+export function summarizeReplay(events: ReplayEvent[], scenario: ReplayScenario, routes: RouteDefinition[] = []): ReplaySummary {
   const objective = events.find((event) => event.action === "OBJECTIVE_RETRIEVED");
   const containment = events.find((event) => event.action === "ATTACK_CONTAINED");
   const firstDetection = events.find((event) => event.action === "DETECTION_TRIGGERED" || Boolean(detectionForAction(event.action)));
   const start = scenario.startedAt ? new Date(scenario.startedAt).getTime() : events[0] ? new Date(events[0].timestamp).getTime() : 0;
   const end = scenario.endedAt ? new Date(scenario.endedAt).getTime() : events.at(-1) ? new Date(events.at(-1)!.timestamp).getTime() : start;
-  const path: string[] = ["INTERNET"];
-  for (const event of events) {
-    if (event.action === "SESSION_CREATED" && event.target && path.at(-1) !== event.target) path.push(event.target);
-  }
+  const path = attackPathFromEvents(events);
+  const route = identifyRoute(events, routes);
+  const evidence = events.filter((event) => event.action !== "DETECTION_TRIGGERED");
   const objectiveRetrieved = Boolean(objective);
   const contained = Boolean(containment);
   return {
@@ -131,11 +152,30 @@ export function summarizeReplay(events: ReplayEvent[], scenario: ReplayScenario)
     attackPath: path,
     sessionCount: events.filter((event) => event.action === "SESSION_CREATED" || event.action === "ROOT_SESSION_CREATED").length,
     persistenceInstalled: events.some((event) => event.action === "PERSISTENCE_INSTALLED"),
-    evidenceCount: events.filter((event) => event.action !== "DETECTION_TRIGGERED").length,
+    evidenceCount: evidence.length,
+    route: route ? {
+      id: route.id,
+      name: route.name,
+      trustRelationship: route.trustRelationship,
+      evidenceProfile: route.evidenceProfile,
+      actual: {
+        networkEvents: evidence.filter((event) => event.category === "NETWORK" || event.category === "WEB").length,
+        authenticationEvents: evidence.filter((event) => event.category === "AUTH").length,
+        endpointEvents: evidence.filter((event) => ["PROCESS", "FILESYSTEM", "PRIVILEGE", "PERSISTENCE"].includes(event.category)).length,
+        detectionCount: events.filter((event) => event.action === "DETECTION_TRIGGERED").length,
+      },
+    } : null,
   };
 }
 
-export function selectKeyDecision(events: ReplayEvent[]): KeyDecision {
+export function selectKeyDecision(events: ReplayEvent[], routes: RouteDefinition[] = []): KeyDecision {
+  const route = identifyRoute(events, routes);
+  if (route) return {
+    title: `${route.name} route reconstructed from recorded session evidence`,
+    analysis: `${route.trustRelationship} ${route.evidenceProfile.comparison}`,
+    redPerspective: `${route.evidenceProfile.consequence} This was one viable route, not a universally correct answer.`,
+    bluePerspective: `${route.evidenceProfile.detections} The evidence profile should be assessed against the alternate route, not as a fixed attack script.`,
+  };
   const unusualLogin = events.find((event) => event.action === "LATERAL_MOVEMENT");
   if (unusualLogin) return {
     title: `Valid credentials moved the operation to ${unusualLogin.target ?? "an internal host"}`,

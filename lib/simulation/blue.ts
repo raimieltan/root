@@ -2,12 +2,8 @@ import { ScenarioState, SecurityEventCategory, SecurityEventSeverity } from "@/a
 import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "./engine";
 import type { TerminalState } from "./types";
-
-const aiCommands = [
-  "nmap WEB-01", "exploit WEB-01", "cat /var/www/meridian/app.conf", "ssh deploy@DEV-01",
-  "privesc backup-sync", "cat /etc/meridian/routes.conf", "ssh svc_web@FIN-APP",
-  "cat /etc/fin-app/db.conf", "ssh finance_app@FIN-DB", "retrieve PROJECT_ATLAS.pdf",
-];
+import { getDefinitionForScenario } from "./initializer";
+import { parseMetadata } from "./rules";
 
 export async function advanceBlueScenario(scenarioId: string, blueActorId: string) {
   const scenario = await prisma.scenario.findFirst({ where: { id: scenarioId, mode: "BLUE" }, include: { actors: true } });
@@ -19,6 +15,13 @@ export async function advanceBlueScenario(scenarioId: string, blueActorId: strin
   }
   const redActor = scenario.actors.find((actor) => actor.role === "red_ai");
   if (!redActor) throw new Error("Red actor missing");
+  const definition = await getDefinitionForScenario(scenarioId);
+  const mission = await prisma.securityEvent.findFirst({ where: { scenarioId, action: "MISSION_STARTED" }, orderBy: { timestamp: "asc" } });
+  const missionMetadata = parseMetadata(mission?.metadata);
+  const profileId = typeof missionMetadata.blueProfileId === "string" ? missionMetadata.blueProfileId : definition.defaultBlueProfile;
+  const profile = definition.blueProfiles.find((entry) => entry.id === profileId) ?? definition.blueProfiles[0];
+  if (!profile) throw new Error("Scenario attacker profile missing");
+  const aiCommands = profile.commands;
   const step = await prisma.securityEvent.count({ where: { scenarioId, action: "AI_STEP" } });
   if (step >= aiCommands.length) return { advanced: false, state: scenario.state };
   const latest = await prisma.session.findFirst({ where: { scenarioId, actorId: redActor.id, active: true }, include: { machine: true, user: true }, orderBy: { createdAt: "desc" } });

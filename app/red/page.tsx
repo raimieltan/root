@@ -30,7 +30,7 @@ export default function RedTeamPage() {
   useEffect(() => { void (async () => {
     const response = await fetch("/api/sim/init", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ mode: "RED" }) });
     const data = await response.json();
-    if (data.success) { const next = { scenarioId: data.scenarioId, actorId: data.actorId }; setIds(next); sessionStorage.setItem(`root:${data.scenarioId}:actor`, data.actorId); await refresh(next); }
+    if (data.success) { const next = { scenarioId: data.scenarioId, actorId: data.actorId }; setIds(next); if (data.startingState) setTerminalState(data.startingState); sessionStorage.setItem(`root:${data.scenarioId}:actor`, data.actorId); await refresh(next); }
   })(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!ids || !view) return <main className="loading-screen"><div className="boot-mark">ROOT<span>/OS</span></div><p>Provisioning Meridian simulation…</p></main>;
@@ -44,7 +44,7 @@ export default function RedTeamPage() {
         <NetworkMap machines={view.machines} current={terminalState.currentMachine} />
         {activeApp === "Mission" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} />}
         {activeApp === "Files" && <DataPanel title={`FILES // ${terminalState.currentMachine}`} rows={(currentMachine?.files ?? []).map((file) => `${file.permissions}  ${file.owner.padEnd(12)} ${file.path}`)} empty="No filesystem access on this host." />}
-        {activeApp === "Browser" && <section className="panel content-panel"><div className="panel-title"><span>BROWSER <b>{"// portal.meridian.test"}</b></span></div><div className="browser-page"><b>MERIDIAN DYNAMICS</b><h2>Employee operations portal</h2><p>Authorized staff access only.</p><code>/legacy-upload · legacy integration endpoint</code></div></section>}
+        {activeApp === "Browser" && <section className="panel content-panel"><div className="panel-title"><span>BROWSER <b>{"// portal.meridian.test"}</b></span></div><div className="browser-page"><b>MERIDIAN DYNAMICS</b><h2>Employee operations portal</h2><p>Authorized staff access only.</p><code>/legacy-upload · legacy integration endpoint</code><code>vpn.meridian.test · field operations remote access</code></div></section>}
         {activeApp === "Credentials" && <DataPanel title="CREDENTIALS // DISCOVERED" rows={view.credentials.map((credential) => `${credential.username.padEnd(14)} ${credential.scope.padEnd(10)} source: ${credential.origin}`)} empty="No credentials recorded. Inspect files and application configuration." />}
         {activeApp === "Intel" && <DataPanel title="INTEL // RELATIONSHIPS" rows={[...view.intel.hosts.map((host) => `HOST  ${host}`), ...view.intel.relationships.map((relationship) => `TRUST ${relationship}`)]} empty="No relationships recorded." />}
         {activeApp === "Logs" && <DataPanel title="RED-VISIBLE EVENT LOG" rows={view.events.slice(-12).reverse().map((event) => `${event.severity.padEnd(8)} ${event.action} ${event.target ?? ""}`)} empty="No telemetry yet." />}

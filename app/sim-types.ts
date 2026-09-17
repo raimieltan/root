@@ -11,5 +11,8 @@ export type ScenarioView = {
   credentials: Array<{ username: string; scope: string; origin: string }>;
   intel: { hosts: string[]; relationships: string[] };
   opsec: { network: string; authentication: string; endpoint: string };
-  progress: Record<"scanned" | "initialAccess" | "credential" | "devAccess" | "root" | "finApp" | "finDb" | "objective", boolean>;
+  guidance: {
+    objective: string;
+    hypotheses: Array<{ id: string; title: string; question: string; status: "OPEN" | "SUPPORTED" | "VALIDATED"; evidence: string[] }>;
+  };
 };

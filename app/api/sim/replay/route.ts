@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { normalizeReplayEvent, selectKeyDecision, summarizeReplay } from "@/lib/simulation/replay";
+import { getDefinitionForScenario } from "@/lib/simulation/initializer";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -22,12 +23,14 @@ export async function GET(request: Request) {
     visibleToRed: event.visibleToRed,
     visibleToBlue: event.visibleToBlue,
   }));
+  const definition = await getDefinitionForScenario(scenario.id);
   return Response.json({
     success: true,
     scenario: { id: scenario.id, mode: scenario.mode, ...replayScenario },
     machines: scenario.machines.map((machine) => ({ hostname: machine.hostname, ip: machine.ip, zone: machine.zone })),
+    startingKnowledge: definition.startingKnowledge,
     events,
-    summary: summarizeReplay(events, replayScenario),
-    keyDecision: selectKeyDecision(events),
+    summary: summarizeReplay(events, replayScenario, definition.routes),
+    keyDecision: selectKeyDecision(events, definition.routes),
   });
 }

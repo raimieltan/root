@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { alertsFromEvents, parseMetadata, suspicionFromEvents } from "./rules";
+import { getDefinitionForScenario } from "./initializer";
 
 export async function getScenarioView(scenarioId: string, actorId: string) {
   const scenario = await prisma.scenario.findUnique({
@@ -12,6 +13,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     },
   });
   if (!scenario) return null;
+  const definition = await getDefinitionForScenario(scenarioId);
   const actor = scenario.actors.find((entry) => entry.id === actorId);
   if (!actor) return null;
   const isBlue = actor.role === "blue_operator";
@@ -19,7 +21,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
   const actorSessions = scenario.sessions.filter((session) => session.actorId === redActor?.id);
   const activeSessions = actorSessions.filter((session) => session.active);
   const current = activeSessions.at(-1);
-  const discovered = new Set(["WEB-01"]);
+  const discovered = new Set(definition.startingKnowledge.knownHosts);
   for (const event of scenario.events) if (event.action === "HOST_DISCOVERED" && event.targetMachine) discovered.add(event.targetMachine.hostname);
   for (const session of actorSessions) discovered.add(session.machine.hostname);
   const visibleEvents = scenario.events.filter((event) => isBlue ? event.visibleToBlue : event.visibleToRed);
@@ -82,15 +84,20 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
       authentication: level(redFootprint.filter((event) => event.category === "AUTH").length),
       endpoint: level(redFootprint.filter((event) => ["PROCESS", "FILESYSTEM", "PRIVILEGE", "PERSISTENCE"].includes(event.category)).length),
     },
-    progress: {
-      scanned: scenario.events.some((event) => event.action === "PORT_PROBE"),
-      initialAccess: actorSessions.some((session) => session.machine.hostname === "WEB-01"),
-      credential: scenario.events.some((event) => event.action === "CREDENTIAL_DISCOVERED"),
-      devAccess: actorSessions.some((session) => session.machine.hostname === "DEV-01"),
-      root: actorSessions.some((session) => session.machine.hostname === "DEV-01" && session.privilege === "ROOT"),
-      finApp: actorSessions.some((session) => session.machine.hostname === "FIN-APP"),
-      finDb: actorSessions.some((session) => session.machine.hostname === "FIN-DB"),
-      objective: objectiveRetrieved,
+    guidance: {
+      objective: definition.objectives[0]?.label ?? "Complete the objective",
+      hypotheses: definition.routes.map((route) => {
+        const reached = route.hosts.filter((host) => host !== "INTERNET" && actorSessions.some((session) => session.machine.hostname === host));
+        const observed = route.hosts.filter((host) => discovered.has(host));
+        const newObservation = observed.some((host) => !definition.startingKnowledge.knownHosts.includes(host));
+        return {
+          id: route.id,
+          title: `${route.name} hypothesis`,
+          question: route.hypothesis,
+          status: objectiveRetrieved && route.hosts.every((host) => host === "INTERNET" || actorSessions.some((session) => session.machine.hostname === host)) ? "VALIDATED" : reached.length || newObservation ? "SUPPORTED" : "OPEN",
+          evidence: [...new Set([...observed.map((host) => `${host} observed`), ...reached.map((host) => `${host} accessed`)])],
+        };
+      }),
     },
   };
 }

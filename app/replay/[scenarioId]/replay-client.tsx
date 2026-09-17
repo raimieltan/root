@@ -11,6 +11,7 @@ type ReplayPayload = {
   events: ReplayEvent[];
   summary: ReplaySummary;
   keyDecision: KeyDecision;
+  startingKnowledge: { knownHosts: string[]; knownAssets: string[] };
 };
 
 const emptySnapshot: ReplaySnapshot = { knownHosts: [], accessedHosts: [], privilegedHosts: [], isolatedHosts: [], activeSessions: [], detections: [], objectiveRetrieved: false };
@@ -57,7 +58,7 @@ export default function ReplayClient({ scenarioId, actorId }: { scenarioId: stri
 
   const selected = visible[selectedIndex];
   const selectedTruthIndex = selected && payload ? payload.events.findIndex((event) => event.id === selected.id) : -1;
-  const snapshot = payload && selectedTruthIndex >= 0 ? snapshotAt(payload.events.slice(0, selectedTruthIndex + 1), lens, selected?.id) : emptySnapshot;
+  const snapshot = payload && selectedTruthIndex >= 0 ? snapshotAt(payload.events.slice(0, selectedTruthIndex + 1), lens, selected?.id, payload.startingKnowledge.knownHosts) : emptySnapshot;
   const start = payload?.scenario.startedAt ? new Date(payload.scenario.startedAt).getTime() : 0;
 
   if (error) return <main className="loading-screen"><div className="boot-mark">ROOT<span>/REPLAY</span></div><p>{error}</p><Link className="primary-button" href="/">Return to operations</Link></main>;
@@ -84,13 +85,13 @@ export default function ReplayClient({ scenarioId, actorId }: { scenarioId: stri
       </section>
 
       <aside className="replay-side">
-        <section className="panel operation-summary"><div className="panel-title"><span>♦ OPERATION RESULT</span><strong>{payload.summary.status}</strong></div><h2>OPERATION GLASSHOUSE</h2><p>Meridian Dynamics<br />Objective: PROJECT_ATLAS.pdf</p><dl><dt>DURATION</dt><dd>{formatElapsed(payload.summary.durationMs)}</dd><dt>DETECTION TIME</dt><dd>{formatElapsed(payload.summary.detectionTimeMs)}</dd><dt>CONTAINED</dt><dd>{payload.summary.contained ? "Yes" : "No"}</dd><dt>SESSIONS CREATED</dt><dd>{payload.summary.sessionCount}</dd><dt>PERSISTENCE</dt><dd>{payload.summary.persistenceInstalled ? "Installed" : "None"}</dd><dt>STATUS</dt><dd className={payload.summary.status === "SUCCESS" ? "green-text" : "red-text"}>{payload.summary.status}</dd></dl></section>
+        <section className="panel operation-summary"><div className="panel-title"><span>♦ OPERATION RESULT</span><strong>{payload.summary.status}</strong></div><h2>OPERATION GLASSHOUSE</h2><p>Meridian Dynamics<br />Objective: PROJECT_ATLAS.pdf</p><dl><dt>ROUTE IDENTIFIED</dt><dd>{payload.summary.route?.name ?? "Unresolved"}</dd><dt>DURATION</dt><dd>{formatElapsed(payload.summary.durationMs)}</dd><dt>DETECTION TIME</dt><dd>{formatElapsed(payload.summary.detectionTimeMs)}</dd><dt>CONTAINED</dt><dd>{payload.summary.contained ? "Yes" : "No"}</dd><dt>SESSIONS CREATED</dt><dd>{payload.summary.sessionCount}</dd><dt>PERSISTENCE</dt><dd>{payload.summary.persistenceInstalled ? "Installed" : "None"}</dd><dt>STATUS</dt><dd className={payload.summary.status === "SUCCESS" ? "green-text" : "red-text"}>{payload.summary.status}</dd></dl></section>
         <section className="panel path-panel"><div className="panel-title"><span>ATTACK PATH <b>{"// EVENT DERIVED"}</b></span></div><div className="attack-path">{payload.summary.attackPath.map((host, index) => <span key={`${host}-${index}`}>{index > 0 && <i>→</i>}<b>{host}</b></span>)}</div></section>
       </aside>
 
       <section className="panel replay-state-panel"><div className="panel-title"><span>SYSTEM STATE <b>{`// ${selected ? selected.action.replaceAll("_", " ") : "START"}`}</b></span><span>{snapshot.detections.length} DETECTIONS</span></div><div className="replay-hosts">{lensHosts.map((machine) => { const state = snapshot.isolatedHosts.includes(machine.hostname) ? "ISOLATED" : snapshot.privilegedHosts.includes(machine.hostname) ? "PRIVILEGED" : snapshot.accessedHosts.includes(machine.hostname) ? "ACCESSED" : "OBSERVED"; return <article key={machine.hostname} className={state.toLowerCase()}><strong>{machine.hostname}</strong><span>{machine.ip}</span><em>{state}</em></article>; })}</div></section>
 
-      <section className="panel learning-summary"><div className="panel-title"><span>KEY DECISION ANALYSIS</span><span>{payload.summary.evidenceCount} EVIDENCE EVENTS</span></div><article><h2>{payload.keyDecision.title}</h2><p>{perspective}</p><small>{snapshot.objectiveRetrieved ? "Objective state: retrieved" : "Objective state: protected"} · Active sessions: {snapshot.activeSessions.length}</small></article><Link className="primary-button" href="/">START ANOTHER OPERATION →</Link></section>
+      <section className="panel learning-summary"><div className="panel-title"><span>KEY DECISION & EVIDENCE PROFILE</span><span>{payload.summary.evidenceCount} EVIDENCE EVENTS</span></div><article><h2>{payload.keyDecision.title}</h2><p>{perspective}</p>{payload.summary.route && <p>{payload.summary.route.evidenceProfile.comparison} Actual footprint: {payload.summary.route.actual.networkEvents} network/web · {payload.summary.route.actual.authenticationEvents} auth · {payload.summary.route.actual.endpointEvents} endpoint · {payload.summary.route.actual.detectionCount} detections.</p>}<small>{snapshot.objectiveRetrieved ? "Objective state: retrieved" : "Objective state: protected"} · Active sessions: {snapshot.activeSessions.length}</small></article><Link className="primary-button" href="/">START ANOTHER OPERATION →</Link></section>
     </div>
   </RootChrome>;
 }

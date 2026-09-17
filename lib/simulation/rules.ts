@@ -38,8 +38,8 @@ const detectionRules: Record<string, DetectionRule> = {
   AGENT_BEACON: { id: "C2-BEACON-01", title: "Persistent outbound beacon", severity: "HIGH", rationale: "A new process began periodic outbound communication." },
 };
 
-export function detectionForAction(action: string) {
-  return detectionRules[action];
+export function detectionForAction(action: string, scenarioRules?: Record<string, DetectionRule>) {
+  return scenarioRules?.[action] ?? detectionRules[action];
 }
 
 export function alertsFromEvents(events: Array<EventLike & { id?: string }>): AlertView[] {
