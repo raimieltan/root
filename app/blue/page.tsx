@@ -7,7 +7,7 @@ import RootChrome from "@/app/ui/root-chrome";
 import { useOperation } from "@/app/use-operation";
 
 export default function BlueTeamPage() {
-  const { ids, view, refresh, error, setError } = useOperation("BLUE");
+  const { ids, view, refresh, error, setError, retry } = useOperation("BLUE");
 
   const [running, setRunning] = useState(false);
   const [pending, setPending] = useState(false);
@@ -112,8 +112,9 @@ export default function BlueTeamPage() {
   if (!ids || !view) {
     return (
       <main className="loading-screen">
-        <p>{error || "Connecting defensive telemetry…"}</p>
-        <Link href="/">Operations</Link>
+        <p role={error ? "alert" : undefined}>{error || "Connecting defensive telemetry…"}</p>
+        {error && <button type="button" onClick={retry}>Retry connection</button>}
+        <Link href="/">Return to operations</Link>
       </main>
     );
   }
@@ -167,7 +168,7 @@ export default function BlueTeamPage() {
 
         <button
           type="button"
-          disabled={!active}
+          disabled={!active || pending}
           onClick={() => setRunning((current) => !current)}
         >
           {running ? "Pause simulation" : "Run simulation"}
@@ -175,7 +176,7 @@ export default function BlueTeamPage() {
 
         <button
           type="button"
-          disabled={!active}
+          disabled={!active || pending}
           onClick={() => void advance()}
         >
           Advance one step
@@ -187,6 +188,8 @@ export default function BlueTeamPage() {
           {error}
         </p>
       )}
+
+      {pending && <p className="workspace-status" role="status">Synchronizing evidence and simulation state…</p>}
 
       <fieldset
         className="soc-fieldset"

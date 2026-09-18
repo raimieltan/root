@@ -1592,6 +1592,20 @@ button.operation-row.selected {
   font-size: 9px;
 }
 
+.workspace-status {
+  position: absolute;
+  z-index: 50;
+  right: 12px;
+  top: 54px;
+  max-width: 520px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--border-strong);
+  background: var(--panel);
+  color: var(--text-secondary);
+  font-size: 9px;
+}
+
 .live-dot {
   width: 7px;
   height: 7px;

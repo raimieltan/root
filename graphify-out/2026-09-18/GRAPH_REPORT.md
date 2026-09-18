@@ -1,16 +1,16 @@
 # Graph Report - root  (2026-09-18)
 
 ## Corpus Check
-- 58 files · ~609,560 words
+- 57 files · ~608,396 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 327 nodes · 657 edges · 21 communities (16 shown, 3 thin omitted)
+- 321 nodes · 652 edges · 20 communities (15 shown, 3 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b629d802`
+- Built from commit: `10c040f9`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -33,7 +33,6 @@
 - ESLint Configuration
 - Next.js Configuration
 - PostCSS Configuration
-- error-context.md
 
 ## God Nodes (most connected - your core abstractions)
 1. `SimulationEngine` - 34 edges
@@ -66,7 +65,7 @@
 - **Shared Simulation Model** — docs_root_canonical_plan_shared_simulation, docs_root_canonical_plan_everything_leaves_evidence, docs_root_canonical_plan_post_operation_reconstruction [EXTRACTED 1.00]
 - **ROOT Operational UI Reference Set** — docs_ui_chatgpt_image_sep_18_2026_12_05_06_am_1_red_operations_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_09_am_4_blue_soc_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_10_am_5_reconstruction_workspace [INFERRED 0.95]
 
-## Communities (21 total, 3 thin omitted)
+## Communities (20 total, 3 thin omitted)
 
 ### Community 0 - "red/page.tsx"
 Cohesion: 0.10
@@ -128,26 +127,22 @@ Nodes (3): File Icon Asset, Globe Icon Asset, Window Icon Asset
 Cohesion: 0.67
 Nodes (3): Next.js Wordmark Asset, Vercel Mark Asset, Next.js Bootstrap Instructions
 
-### Community 20 - "error-context.md"
-Cohesion: 0.33
-Nodes (5): Error details, Instructions, Page snapshot, Test info, Test source
-
 ## Knowledge Gaps
-- **116 isolated node(s):** `geistSans`, `geistMono`, `metadata`, `apps`, `Props` (+111 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 135 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **111 isolated node(s):** `geistSans`, `geistMono`, `metadata`, `apps`, `Props` (+106 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 130 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `SimulationEngine` connect `SimulationEngine` to `campaign.test.ts`, `index.ts`?**
-  _High betweenness centrality (0.049) - this node is a cross-community bridge._
+  _High betweenness centrality (0.051) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Runtime App Dependencies` to `Package Scripts`?**
-  _High betweenness centrality (0.032) - this node is a cross-community bridge._
+  _High betweenness centrality (0.033) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `Build Toolchain Dependencies` to `Package Scripts`?**
-  _High betweenness centrality (0.032) - this node is a cross-community bridge._
+  _High betweenness centrality (0.033) - this node is a cross-community bridge._
 - **What connects `geistSans`, `geistMono`, `metadata` to the rest of the system?**
-  _116 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _111 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `red/page.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.1 - nodes in this community are weakly interconnected._
 - **Should `Build Toolchain Dependencies` be split into smaller, more focused modules?**

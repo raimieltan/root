@@ -11,12 +11,12 @@ import Terminal, { type TerminalState } from "./terminal";
 const apps = ["Mission", "Files", "Browser", "Credentials", "Intel", "Logs", "Processes", "Sessions"] as const;
 
 export default function RedTeamPage() {
-  const { ids, view, refresh, error } = useOperation("RED");
+  const { ids, view, refresh, error, retry } = useOperation("RED");
   const [activeApp, setActiveApp] = useState<(typeof apps)[number]>("Mission");
   const assistance = view?.assistance;
   const [terminalState, setTerminalState] = useState<TerminalState>({ currentMachine: "INTERNET", currentUser: "attacker", currentPrivilege: "NONE", currentPath: "/", discoveredHosts: [] });
 
-  if (!ids || !view) return <main className="loading-screen"><div className="boot-mark">ROOT<span>/OS</span></div><p>{error || "Provisioning operation…"}</p><Link href="/">Operations</Link></main>;
+  if (!ids || !view) return <main className="loading-screen"><div className="boot-mark">ROOT<span>/OS</span></div><p role={error ? "alert" : undefined}>{error || "Provisioning operation…"}</p>{error && <button type="button" onClick={retry}>Retry connection</button>}<Link href="/">Return to operations</Link></main>;
   const currentMachine = view.machines.find((machine) => machine.hostname === terminalState.currentMachine);
 
   return <RootChrome context="red" active="terminal" tone="red" title="OPS // RED TEAM OPERATIONS" operator={`${terminalState.currentUser}@${terminalState.currentMachine}`} privilege={terminalState.currentPrivilege}>

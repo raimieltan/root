@@ -7,6 +7,7 @@ export function useOperation(mode: "RED" | "BLUE") {
   const [ids, setIds] = useState<{ scenarioId: string; actorId: string }>();
   const [view, setView] = useState<ScenarioView>();
   const [error, setError] = useState("");
+  const [attempt, setAttempt] = useState(0);
   const started = useRef(false);
   const refresh = useCallback(async (override?: { scenarioId: string; actorId: string }) => {
     const current = override ?? ids;
@@ -38,7 +39,16 @@ export function useOperation(mode: "RED" | "BLUE") {
       saveRun({ ...current, definitionId, name: definitionId, mode, assistance, startedAt: new Date().toISOString() });
       params.set("run", current.scenarioId); history.replaceState(null, "", `${location.pathname}?${params}`);
       await refresh(current);
-    })().catch((reason) => setError(String(reason)));
-  }, [mode, refresh]);
-  return { ids, view, refresh, error, setError };
+    })().catch((reason) => setError(reason instanceof Error ? reason.message : "Operation unavailable"));
+  }, [attempt, mode, refresh]);
+
+  const retry = useCallback(() => {
+    started.current = false;
+    setIds(undefined);
+    setView(undefined);
+    setError("");
+    setAttempt((value) => value + 1);
+  }, []);
+
+  return { ids, view, refresh, error, setError, retry };
 }

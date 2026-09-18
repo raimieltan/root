@@ -36,9 +36,9 @@
     "semantic_hash": "60ef4db65c90955768412b52d153b067"
   },
   "app/blue/page.tsx": {
-    "mtime": 1789703683.6046586,
-    "seen": 1789705313.370538,
-    "ast_hash": "a1d6bf3372d43267c420bfc8a6aada27",
+    "mtime": 1789706821.5959308,
+    "seen": 1789706934.639758,
+    "ast_hash": "5e192161b7cd7277fcd3f2a2a013182a",
     "semantic_hash": ""
   },
   "app/layout.tsx": {
@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "app/red/page.tsx": {
-    "mtime": 1789684049.1445472,
-    "seen": 1789700830.165756,
-    "ast_hash": "deb4d4033b6a2f2b25fe93d5be6b98d2",
+    "mtime": 1789706110.9515057,
+    "seen": 1789706934.639869,
+    "ast_hash": "289acf319473ec864685c30e01e4f27a",
     "semantic_hash": ""
   },
   "app/red/terminal.tsx": {
@@ -342,9 +342,9 @@
     "semantic_hash": ""
   },
   "app/use-operation.ts": {
-    "mtime": 1789683519.151412,
-    "seen": 1789700830.1658828,
-    "ast_hash": "55c3177d071230ac965786e4bc5a35b0",
+    "mtime": 1789706110.8310938,
+    "seen": 1789706934.6400158,
+    "ast_hash": "5afe50711d91c5e1ecdd7fc0978bf14a",
     "semantic_hash": ""
   },
   "lib/campaign.ts": {
@@ -396,15 +396,15 @@
     "semantic_hash": ""
   },
   "playwright.config.ts": {
-    "mtime": 1789705116.933517,
-    "seen": 1789705313.373315,
-    "ast_hash": "110f17be7e5c03d2d40c384ce8647e38",
+    "mtime": 1789706609.9976997,
+    "seen": 1789706934.640681,
+    "ast_hash": "24d2ddf4ba9e81a1c4415c38b31de1f2",
     "semantic_hash": ""
   },
   "tests/browser/campaign.spec.ts": {
-    "mtime": 1789705372.0440922,
-    "seen": 1789705501.6832929,
-    "ast_hash": "23643618fa1fb89b8c00f020c5d34461",
+    "mtime": 1789706955.945462,
+    "seen": 1789707037.2052548,
+    "ast_hash": "48f8a8af491d062ad39e82d223c53884",
     "semantic_hash": ""
   },
   "Screenshot 2026-09-18 at 10.56.08.png": {
@@ -426,8 +426,8 @@
     "semantic_hash": ""
   },
   "test-results/.last-run.json": {
-    "mtime": 1789705451.744902,
-    "seen": 1789705501.68329,
+    "mtime": 1789707011.7586963,
+    "seen": 1789707037.2052522,
     "ast_hash": "f196824657d8858bc7fa44eecbba38b1",
     "semantic_hash": ""
   },

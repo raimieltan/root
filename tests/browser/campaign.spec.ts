@@ -8,11 +8,16 @@ test("operation selection → all Red campaign results → reconstruction → un
     await page.getByRole("button", { name: new RegExp(operation.name) }).click();
     await page.getByRole("link", { name: `Launch ${operation.name}` }).click();
     await expect(page.locator("#command")).toBeVisible();
-    for (const command of operation.blueProfiles[0].commands) {
+    const profile = operation.id === "glasshouse" ? operation.blueProfiles[1] : operation.id === "dead-drop" ? operation.blueProfiles[1] : operation.blueProfiles[0];
+    for (const [index, command] of profile.commands.entries()) {
       await page.locator("#command").fill(command);
       const response = page.waitForResponse((r) => r.url().includes("/api/sim/command") && r.request().method() === "POST");
       await page.locator("#command").press("Enter");
       expect((await response).ok(), command).toBe(true);
+      if (index === 0) {
+        await page.reload();
+        await expect(page.locator("#command")).toBeVisible();
+      }
     }
     await expect(page.getByText("OBJECTIVE SECURED")).toBeVisible();
     await page.getByRole("link", { name: "Open reconstruction" }).click();
@@ -29,15 +34,48 @@ test("operation selection → all Red campaign results → reconstruction → un
   await page.screenshot({ path: "/tmp/root-campaign-browser.png", fullPage: true });
 });
 
+test("every Blue operation resolves and opens its reconstruction", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("root:campaign:v1", JSON.stringify([
+    { scenarioId: "prior-glasshouse", actorId: "prior", definitionId: "glasshouse", name: "Operation Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: [], availability: 100 } },
+    { scenarioId: "prior-nightshift", actorId: "prior", definitionId: "nightshift", name: "Operation Nightshift", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "endpoint-agent", detected: true, concepts: [], availability: 100 } },
+  ])));
+  await page.goto("/");
+  for (const operation of campaign) {
+    await page.getByRole("button", { name: new RegExp(operation.name) }).click();
+    await page.getByRole("button", { name: "Blue Team", exact: true }).click();
+    await page.getByRole("link", { name: `Launch ${operation.name}` }).click();
+    for (let step = 0; step < operation.blueProfiles[0].commands.length + 3; step++) {
+      if (await page.getByRole("link", { name: "Open reconstruction" }).count()) break;
+      const state = page.waitForResponse((r) => r.url().includes("/api/sim/state") && r.request().method() === "GET");
+      const response = page.waitForResponse((r) => r.url().includes("/blue/advance") && r.request().method() === "POST");
+      await page.getByRole("button", { name: "Advance one step" }).click();
+      expect((await response).ok()).toBe(true);
+      expect((await state).ok()).toBe(true);
+      await expect(page.getByRole("link", { name: "Open reconstruction" }).or(page.locator("button:not([disabled])", { hasText: "Advance one step" }))).toBeVisible();
+      if (step === 0) {
+        await page.reload();
+        await expect(page.getByRole("button", { name: "Advance one step" })).toBeVisible();
+      }
+    }
+    await expect(page.getByRole("link", { name: "Open reconstruction" })).toBeVisible();
+    await page.getByRole("link", { name: "Open reconstruction" }).click();
+    await expect(page.getByRole("heading", { name: new RegExp(`${operation.name}.*RECONSTRUCTION`) })).toBeVisible();
+    await page.getByRole("link", { name: "START ANOTHER OPERATION" }).click();
+  }
+});
+
 test("Blue investigation, precise containment, results and replay", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Blue Team", exact: true }).click();
   await page.getByRole("link", { name: "Launch Operation Glasshouse" }).click();
   await expect(page.getByRole("button", { name: "Advance one step" })).toBeVisible();
-  async function step() { const response = page.waitForResponse((r) => r.url().includes("/blue/advance")); await page.getByRole("button", { name: "Advance one step" }).click(); expect((await response).ok()).toBe(true); await expect(page.getByRole("button", { name: "Advance one step" })).toBeVisible(); }
+  async function step() { const state = page.waitForResponse((r) => r.url().includes("/api/sim/state") && r.request().method() === "GET"); const response = page.waitForResponse((r) => r.url().includes("/blue/advance")); await page.getByRole("button", { name: "Advance one step" }).click(); expect((await response).ok()).toBe(true); expect((await state).ok()).toBe(true); await expect(page.getByRole("link", { name: "Open reconstruction" }).or(page.locator("button:not([disabled])", { hasText: "Advance one step" }))).toBeVisible(); }
   await step();
   await expect(page.getByRole("button", { name: "Investigate and pin" }).first()).toBeVisible();
+  const pinResponse = page.waitForResponse((response) => response.url().includes("/blue/respond") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Investigate and pin" }).first().click();
+  expect((await pinResponse).ok()).toBe(true);
+  await expect(page.getByText("Synchronizing evidence and simulation state…")).toBeHidden();
   await page.getByLabel("Finding", { exact: true }).fill("Concentrated probing merits host and identity correlation.");
   const findingResponse = page.waitForResponse((response) => response.url().includes("/blue/respond") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Record finding" }).click();
