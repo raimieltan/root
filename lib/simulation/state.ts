@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { alertsFromEvents, parseMetadata, suspicionFromEvents } from "./rules";
 import { getDefinitionForScenario } from "./initializer";
+import { operationPresentation } from "./scenarios";
+import { businessAvailability } from "./availability";
 
 export async function getScenarioView(scenarioId: string, actorId: string) {
   const scenario = await prisma.scenario.findUnique({
@@ -17,6 +19,9 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
   const actor = scenario.actors.find((entry) => entry.id === actorId);
   if (!actor) return null;
   const isBlue = actor.role === "blue_operator";
+  const mission = parseMetadata(scenario.events.find((event) => event.action === "MISSION_STARTED")?.metadata);
+  const availability = await businessAvailability(scenarioId);
+  const connections = isBlue ? await prisma.networkConnection.findMany({ where: { source: { scenarioId } }, include: { source: true, target: true } }) : [];
   const redActor = scenario.actors.find((entry) => entry.role === "red_operator" || entry.role === "red_ai");
   const actorSessions = scenario.sessions.filter((session) => session.actorId === redActor?.id);
   const activeSessions = actorSessions.filter((session) => session.active);
@@ -38,18 +43,18 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
       const suspicious = scenario.events.some((event) => event.targetMachineId === machine.id && event.visibleToBlue && ["HIGH", "CRITICAL"].includes(event.severity));
       return {
         id: machine.id, hostname: machine.hostname, ip: machine.ip, zone: machine.zone, os: machine.os,
-        state: isolated.has(machine.id) ? "ISOLATED" : compromised ? "COMPROMISED" : accessed ? "ACCESSED" : suspicious ? "SUSPICIOUS" : "HEALTHY",
+        state: isolated.has(machine.id) ? "ISOLATED" : isBlue ? (suspicious ? "SUSPICIOUS" : "HEALTHY") : compromised ? "COMPROMISED" : accessed ? "ACCESSED" : "DISCOVERED",
         services: machine.services.map((service) => ({ name: service.name, port: service.port, status: service.status })),
         processes: (isBlue || current?.machineId === machine.id) ? machine.processes : [],
         files: current?.machineId === machine.id && !isBlue ? machine.files.map((file) => ({ path: file.path, owner: file.owner, permissions: file.permissions, isSecret: file.isSecret })) : [],
-        persistence: machine.persistence.filter((artifact) => artifact.active),
+        persistence: isBlue && !scenario.events.some((e) => e.action === "INSPECT_HOST" && e.targetMachineId === machine.id) ? [] : machine.persistence.filter((artifact) => artifact.active),
         availability: isolated.has(machine.id) ? "OFFLINE" : "ONLINE",
       };
     });
   const events = visibleEvents.map((event) => ({
     id: event.id, timestamp: event.timestamp.toISOString(), category: event.category, action: event.action,
     severity: event.severity, source: event.sourceMachine?.hostname ?? null, target: event.targetMachine?.hostname ?? null,
-    userId: event.userId, metadata: parseMetadata(event.metadata), visibleToRed: event.visibleToRed, visibleToBlue: event.visibleToBlue,
+    userId: event.userId, metadata: Object.fromEntries(Object.entries(parseMetadata(event.metadata)).filter(([key]) => !isBlue || key !== "background")), visibleToRed: event.visibleToRed, visibleToBlue: event.visibleToBlue,
   }));
   const rawEvents = scenario.events.map((event) => ({ ...event, metadata: event.metadata }));
   const objectiveRetrieved = scenario.events.some((event) => event.action === "OBJECTIVE_RETRIEVED");
@@ -71,14 +76,18 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
   const redFootprint = scenario.events.filter((event) => event.actorId === redActor?.id && event.visibleToRed && event.action !== "DETECTION_TRIGGERED");
   const level = (count: number) => count >= 8 ? "ELEVATED" : count >= 3 ? "MODERATE" : "LOW";
   return {
+    operation: operationPresentation(definition),
+    assistance: mission.assistance === "OPERATOR" ? "OPERATOR" : "GUIDED",
+    availability,
+    connections: connections.map((c) => ({ id: c.id, source: c.source.hostname, target: c.target.hostname, port: c.port, allowed: c.allowed })),
     scenario: { id: scenario.id, mode: scenario.mode, state: scenario.state, startedAt: scenario.startedAt?.toISOString(), endedAt: scenario.endedAt?.toISOString() },
-    actor: { id: actor.id, role: actor.role }, redActorId: redActor?.id,
-    currentSession: current ? { id: current.id, machine: current.machine.hostname, user: current.user.username, privilege: current.privilege } : null,
-    sessions: activeSessions.map((session) => ({ id: session.id, machine: session.machine.hostname, user: session.user.username, privilege: session.privilege, createdAt: session.createdAt.toISOString() })),
-    discoveredHosts: [...discovered], machines, events,
-    alerts: alertsFromEvents(rawEvents), suspicion: suspicionFromEvents(rawEvents), objectiveRetrieved,
-    credentials,
-    intel: { hosts: [...discovered], relationships },
+    actor: { id: actor.id, role: actor.role },
+    currentSession: !isBlue && current ? { id: current.id, machine: current.machine.hostname, user: current.user.username, privilege: current.privilege } : null,
+    sessions: (isBlue ? scenario.sessions.filter((s) => s.active && s.machine.zone !== "EXTERNAL") : activeSessions).map((session) => ({ id: session.id, machine: session.machine.hostname, user: session.user.username, privilege: session.privilege, createdAt: session.createdAt.toISOString() })),
+    discoveredHosts: isBlue ? machines.map((m) => m.hostname) : [...discovered], machines, events,
+    alerts: isBlue ? alertsFromEvents(rawEvents) : [], suspicion: isBlue ? suspicionFromEvents(rawEvents) : 0, objectiveRetrieved,
+    credentials: isBlue ? [] : credentials,
+    intel: { hosts: isBlue ? machines.map((m) => m.hostname) : [...discovered], relationships: isBlue ? [] : relationships },
     opsec: {
       network: level(redFootprint.filter((event) => event.category === "NETWORK" || event.category === "WEB").length),
       authentication: level(redFootprint.filter((event) => event.category === "AUTH").length),
@@ -86,7 +95,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     },
     guidance: {
       objective: definition.objectives[0]?.label ?? "Complete the objective",
-      hypotheses: definition.routes.map((route) => {
+      hypotheses: isBlue || mission.assistance === "OPERATOR" ? [] : definition.routes.map((route) => {
         const reached = route.hosts.filter((host) => host !== "INTERNET" && actorSessions.some((session) => session.machine.hostname === host));
         const observed = route.hosts.filter((host) => discovered.has(host));
         const newObservation = observed.some((host) => !definition.startingKnowledge.knownHosts.includes(host));

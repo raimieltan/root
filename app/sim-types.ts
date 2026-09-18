@@ -1,6 +1,10 @@
 export type MachineView = { id: string; hostname: string; ip: string; zone: string; os: string; state: string; availability: string; services: Array<{ name: string; port: number; status: string }>; processes: Array<{ id: string; name: string; pid: number; runningAs: string }>; files: Array<{ path: string; owner: string; permissions: string; isSecret: boolean }>; persistence: Array<{ id: string; type: string; active: boolean }> };
 export type EventView = { id: string; timestamp: string; category: string; action: string; severity: string; source: string | null; target: string | null; userId: string | null; metadata: Record<string, unknown>; visibleToRed: boolean; visibleToBlue: boolean };
 export type ScenarioView = {
+  operation: import("@/lib/simulation/scenarios").OperationPresentation;
+  assistance: "GUIDED" | "OPERATOR";
+  availability: { percent: number; services: Array<{ name: string; hosts: string[]; impact: string; state: string }> };
+  connections: Array<{ id: string; source: string; target: string; port: number; allowed: boolean }>;
   scenario: { id: string; mode: string; state: string; startedAt?: string; endedAt?: string };
   actor: { id: string; role: string }; redActorId?: string;
   currentSession: { id: string; machine: string; user: string; privilege: string } | null;

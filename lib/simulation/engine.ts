@@ -4,6 +4,7 @@ import type { CommandResult, SimulationEvent, TerminalState } from "./types";
 import { detectionForAction } from "./rules";
 import { getDefinitionForScenario } from "./initializer";
 import type { ScenarioDefinition, ScenarioEventDefinition } from "./scenarios";
+import { reachable } from "./network";
 
 type EventInput = {
   action: string;
@@ -28,6 +29,8 @@ export class SimulationEngine {
   }
 
   async executeCommand(command: string, state: TerminalState): Promise<CommandResult> {
+    const scenario = await prisma.scenario.findUnique({ where: { id: this.scenarioId } });
+    if (!scenario || scenario.state !== "ACTIVE") return this.result(false, "This operation has ended.");
     const [raw = "", ...args] = command.trim().split(/\s+/);
     const cmd = raw.toLowerCase();
     switch (cmd) {
@@ -49,7 +52,7 @@ export class SimulationEngine {
       case "exploit": return this.exploit(args, state);
       case "ssh": return this.ssh(args, state);
       case "john": return this.john(args);
-      case "sessions": return this.sessions();
+      case "sessions": return this.sessions(args);
       case "privesc": return this.privesc(args, state);
       case "install-agent": return this.installAgent(state);
       default: return this.result(false, `Command not found: ${cmd}. Type help.`);
@@ -86,17 +89,21 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
   }
 
   private async emit(input: EventInput): Promise<SimulationEvent> {
+    const definition = await this.definition();
+    const hostId = input.targetMachineId ?? input.sourceMachineId;
+    const machine = hostId ? await prisma.machine.findUnique({ where: { id: hostId } }) : null;
+    const control = definition.securityControls.find((entry) => entry.host === machine?.hostname);
+    const monitored = input.category === "SYSTEM" || Boolean(control?.telemetry.includes(input.category));
     const event = await prisma.securityEvent.create({
       data: {
         scenarioId: this.scenarioId, actorId: this.actorId, action: input.action, category: input.category,
         severity: input.severity, sourceMachineId: input.sourceMachineId, targetMachineId: input.targetMachineId,
-        userId: input.userId, visibleToRed: input.visibleToRed ?? true, visibleToBlue: input.visibleToBlue ?? true,
+        userId: input.userId, visibleToRed: input.visibleToRed ?? true, visibleToBlue: (input.visibleToBlue ?? true) && monitored,
         metadata: input.metadata ? JSON.stringify(input.metadata) : undefined,
       },
     });
-    const definition = await this.definition();
     const detection = detectionForAction(event.action, definition.detections);
-    if (detection) {
+    if (detection && event.visibleToBlue) {
       await prisma.securityEvent.create({
         data: {
           scenarioId: this.scenarioId,
@@ -166,7 +173,8 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const file = session.machine.files.find((entry) => entry.path === args[0] || entry.path.endsWith(`/${args[0]}`));
     if (!file) return this.result(false, `File not found: ${args[0]}`);
     const groups = session.user.groups;
-    const allowed = session.privilege === AccessLevel.ROOT || file.owner === session.user.username || Boolean(file.group && groups.includes(file.group)) || file.permissions.endsWith("4");
+    const permission = file.owner === session.user.username ? file.permissions[0] : file.group && groups.includes(file.group) ? file.permissions[1] : file.permissions[2];
+    const allowed = session.privilege === AccessLevel.ROOT || Boolean(Number(permission) & 4);
     if (!allowed) return this.result(false, "Permission denied");
     const events: SimulationEvent[] = [];
     events.push(await this.emit({ action: file.isSecret ? "SENSITIVE_FILE_READ" : "FILE_READ", category: SecurityEventCategory.FILESYSTEM, severity: file.isSecret ? SecurityEventSeverity.HIGH : SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: file.isSecret, metadata: { path: file.path } }));
@@ -178,7 +186,8 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     if (objective) {
       if (!retrieve) return this.result(true, `${file.contents}\n\nUse 'retrieve ${file.path.split("/").at(-1)}' to extract the objective.`, events);
       events.push(await this.emit({ action: "OBJECTIVE_RETRIEVED", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.CRITICAL, targetMachineId: session.machine.id, userId: session.user.username, metadata: { objectiveId: objective.id, file: objective.path.split("/").at(-1) } }));
-      await prisma.scenario.update({ where: { id: this.scenarioId }, data: { state: ScenarioState.COMPLETED, endedAt: new Date() } });
+      const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: this.scenarioId } });
+      await prisma.scenario.update({ where: { id: this.scenarioId }, data: { state: scenario.mode === "BLUE" ? ScenarioState.FAILED : ScenarioState.COMPLETED, endedAt: new Date() } });
       return { success: true, output: `${objective.label.replace(/^Retrieve /, "")} retrieved. Operation complete.`, events, objectiveRetrieved: true, discoveredHosts: await this.discoveredHosts() };
     }
     return { success: true, output: file.contents ?? "(empty)", events, discoveredHosts: await this.discoveredHosts() };
@@ -200,6 +209,7 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     if (!args[0]) return this.result(false, "Usage: ping <host>");
     const [source, target] = await Promise.all([this.currentMachine(state), this.target(args[0])]);
     if (!source || !target) return this.result(false, `ping: ${args[0]}: unknown host`);
+    if (!await reachable(this.scenarioId, source.machine.id, target.id)) return this.result(false, "Destination unreachable: network policy denies this path.");
     const event = await this.emit({ action: "PING", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.LOW, sourceMachineId: source.machine.id, targetMachineId: target.id });
     return this.result(true, `64 bytes from ${target.ip}: time=1.2 ms`, [event]);
   }
@@ -208,6 +218,7 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     if (!args[0]) return this.result(false, "Usage: nmap <host>");
     const [source, target] = await Promise.all([this.currentMachine(state), this.target(args[0])]);
     if (!source || !target) return this.result(false, "Host seems down.");
+    if (!await reachable(this.scenarioId, source.machine.id, target.id)) return this.result(false, "Host unreachable from this session.");
     const events: SimulationEvent[] = [];
     for (const service of target.services) events.push(await this.emit({ action: "PORT_PROBE", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.LOW, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { port: service.port, service: service.name } }));
     events.push(await this.emit({ action: "HOST_DISCOVERED", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, visibleToBlue: false }));
@@ -221,6 +232,7 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     if (!source) return this.result(false, "No active session.");
     const target = await this.target(args[0]);
     if (!target?.services.some((service) => service.name === "http" || service.name === "https")) return this.result(false, "curl: connection failed");
+    if (!await reachable(this.scenarioId, source.machine.id, target.id, [80, 443])) return this.result(false, "curl: route blocked");
     const events = [await this.emit({ action: "WEB_REQUEST", category: SecurityEventCategory.WEB, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { path: args[0] } })];
     const discovery = await this.applyDiscovery("web", target.hostname, args[0], source.machine.id);
     events.push(...discovery.events);
@@ -233,12 +245,14 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const definition = await this.definition();
     const profile = definition.exploits.find((entry) => entry.target === target?.hostname);
     if (!source || !target || !profile) return this.result(false, "Target is not vulnerable.");
+    if (!await reachable(this.scenarioId, source.machine.id, target.id, [80, 443])) return this.result(false, "Exploit cannot reach the target service.");
     if (profile.prerequisiteAction) {
       const satisfied = await prisma.securityEvent.count({ where: { scenarioId: this.scenarioId, action: profile.prerequisiteAction, targetMachineId: target.id } });
       if (!satisfied) return this.result(false, "Exploit profile unknown. Gather service evidence first.");
     }
     const user = target.users.find((entry) => entry.username === profile.sessionUser);
     if (!user) return this.result(false, "Exploit session identity is unavailable.");
+    await prisma.process.create({ data: { machineId: target.id, name: `${profile.module} → interactive-shell`, pid: 3000 + Math.floor(Math.random() * 900), runningAs: user.username } });
     const events: SimulationEvent[] = [];
     for (const evidence of profile.evidence) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: evidence.action === "PROCESS_SPAWN" ? user.username : undefined }));
     events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: user.username, metadata: { privilege: user.privilege } }));
@@ -257,7 +271,7 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const link = await prisma.networkConnection.findFirst({ where: { sourceMachineId: source.machine.id, targetMachineId: target.id, port: { in: [22, 5432] }, allowed: true } });
     const isolated = await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "HOST_ISOLATED", targetMachineId: { in: [source.machine.id, target.id] } }, orderBy: { timestamp: "desc" } });
     const restored = isolated ? await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "HOST_RESTORED", targetMachineId: isolated.targetMachineId, timestamp: { gt: isolated.timestamp } } }) : null;
-    const allowed = Boolean(user && credential && !reset && link && (!isolated || restored));
+    const allowed = Boolean(user && credential && !reset && (!args[1] || args[1] === user.password) && link && (!isolated || restored) && await reachable(this.scenarioId, source.machine.id, target.id, [22, 5432]));
     const events = [await this.emit({ action: allowed ? "AUTH_SUCCESS" : "AUTH_FAILED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username })];
     if (!allowed || !user) return this.result(false, "Permission denied or route blocked.", events);
     events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username, metadata: { privilege: user.privilege } }));
@@ -269,11 +283,16 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
   }
 
   private john(args: string[]) {
-    return args[0] ? this.result(true, "Loaded 1 simulated hash\ndeployed (deploy)\n1 hash cracked") : this.result(false, "Usage: john <file>");
+    return this.result(false, args[0] ? "No supported hash material has been discovered in this operation." : "Usage: john <file>");
   }
 
-  private async sessions() {
+  private async sessions(args: string[] = []) {
     const sessions = await prisma.session.findMany({ where: { scenarioId: this.scenarioId, actorId: this.actorId, active: true }, include: { machine: true, user: true }, orderBy: { createdAt: "asc" } });
+    if (args[0]) {
+      const selected = sessions[Number(args[0]) - 1];
+      if (!selected) return this.result(false, "Unknown session number. Use sessions to list active sessions.");
+      return { ...this.result(true, `Using ${selected.user.username}@${selected.machine.hostname}`), newSession: { id: selected.id, machineId: selected.machine.hostname, userId: selected.user.username, privilege: selected.privilege, active: selected.active, createdAt: selected.createdAt, sourceMachineId: selected.sourceMachineId ?? undefined }, sessionUpdated: true };
+    }
     return this.result(true, sessions.map((session, index) => `[${index + 1}] ${session.user.username}@${session.machine.hostname} (${session.privilege})`).join("\n") || "No active sessions");
   }
 
@@ -292,10 +311,12 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
 
   private async installAgent(state: TerminalState) {
     const current = await this.currentMachine(state);
-    if (!current || current.privilege !== AccessLevel.ROOT) return this.result(false, "Root access is required.");
-    const artifact = await prisma.persistence.create({ data: { machineId: current.machine.id, type: "remote_agent" } });
-    const process = await prisma.process.create({ data: { machineId: current.machine.id, name: "root-agent", pid: 4400 + Math.floor(Math.random() * 400), runningAs: current.user.username } });
+    const policy = (await this.definition()).persistencePolicy;
+    if (!current || current.privilege !== policy.requiredPrivilege) return this.result(false, `${policy.requiredPrivilege} access is required.`);
+    if (await prisma.persistence.count({ where: { machineId: current.machine.id, active: true } })) return this.result(false, "An active agent is already installed.");
+    const artifact = await prisma.persistence.create({ data: { machineId: current.machine.id, type: "remote_agent", beaconIntervalSeconds: policy.beaconSeconds } });
+    const process = await prisma.process.create({ data: { machineId: current.machine.id, name: policy.process, pid: 4400 + Math.floor(Math.random() * 400), runningAs: current.user.username } });
     const events = [await this.emit({ action: "PERSISTENCE_INSTALLED", category: SecurityEventCategory.PERSISTENCE, severity: SecurityEventSeverity.HIGH, targetMachineId: current.machine.id, userId: current.user.username, metadata: { artifactId: artifact.id, processId: process.id } }), await this.emit({ action: "AGENT_BEACON", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.HIGH, sourceMachineId: current.machine.id, metadata: { intervalSeconds: 30 } })];
-    return this.result(true, "root-agent installed; beacon interval 30 seconds.", events);
+    return this.result(true, `${policy.process} installed; beacon interval ${policy.beaconSeconds} seconds. Revocation alone will not remove persistent access.`, events);
   }
 }

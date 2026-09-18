@@ -135,7 +135,7 @@ export function identifyRoute(events: ReplayEvent[], routes: RouteDefinition[]) 
 export function summarizeReplay(events: ReplayEvent[], scenario: ReplayScenario, routes: RouteDefinition[] = []): ReplaySummary {
   const objective = events.find((event) => event.action === "OBJECTIVE_RETRIEVED");
   const containment = events.find((event) => event.action === "ATTACK_CONTAINED");
-  const firstDetection = events.find((event) => event.action === "DETECTION_TRIGGERED" || Boolean(detectionForAction(event.action)));
+  const firstDetection = events.find((event) => event.action === "DETECTION_TRIGGERED") ?? (routes.length ? undefined : events.find((event) => Boolean(detectionForAction(event.action))));
   const start = scenario.startedAt ? new Date(scenario.startedAt).getTime() : events[0] ? new Date(events[0].timestamp).getTime() : 0;
   const end = scenario.endedAt ? new Date(scenario.endedAt).getTime() : events.at(-1) ? new Date(events.at(-1)!.timestamp).getTime() : start;
   const path = attackPathFromEvents(events);

@@ -2,6 +2,7 @@ import { AccessLevel } from "@/app/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "@/lib/simulation/engine";
 import type { TerminalState } from "@/lib/simulation/types";
+import { getDefinitionForScenario } from "@/lib/simulation/initializer";
 
 export async function POST(request: Request) {
   try {
@@ -14,7 +15,8 @@ export async function POST(request: Request) {
     if (!actor) return Response.json({ success: false, error: "Unauthorized actor" }, { status: 403 });
     const scenario = await prisma.scenario.findUnique({ where: { id: scenarioId } });
     if (!scenario || scenario.state !== "ACTIVE") return Response.json({ success: false, output: "This operation has ended." }, { status: 409 });
-    if (scenario.startedAt && Date.now() - scenario.startedAt.getTime() >= 15 * 60_000) {
+    const definition = await getDefinitionForScenario(scenarioId);
+    if (scenario.startedAt && Date.now() - scenario.startedAt.getTime() >= definition.conditions.timeLimitMinutes * 60_000) {
       await prisma.scenario.update({ where: { id: scenarioId }, data: { state: "FAILED", endedAt: new Date() } });
       return Response.json({ success: false, output: "Operation timer expired." }, { status: 409 });
     }

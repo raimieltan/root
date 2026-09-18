@@ -37,6 +37,16 @@ export type ScenarioDefinition = {
   id: string;
   name: string;
   organization: string;
+  briefing: { red: string; blue: string; constraints: string[] };
+  presentation: { caseId: string; focus: string[]; order: number; prerequisite?: string };
+  availableModes: Array<"RED" | "BLUE">;
+  assistance: { guided: string[]; operator: string };
+  conditions: { timeLimitMinutes: number; minimumAvailability: number };
+  securityControls: Array<{ host: string; telemetry: string[] }>;
+  businessServices: Array<{ name: string; hosts: string[]; impact: string }>;
+  persistencePolicy: { process: string; requiredPrivilege: AccessLevel; beaconSeconds: number };
+  knowledgeRewards: Array<{ concept: string; actions: string[] }>;
+  backgroundActivity: Array<{ host: string; user: string; source?: string; action: string; context: string }>;
   aliases: Record<string, string>;
   startingKnowledge: { knownHosts: string[]; knownAssets: string[] };
   machines: Array<{

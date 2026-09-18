@@ -39,7 +39,7 @@ const detectionRules: Record<string, DetectionRule> = {
 };
 
 export function detectionForAction(action: string, scenarioRules?: Record<string, DetectionRule>) {
-  return scenarioRules?.[action] ?? detectionRules[action];
+  return scenarioRules ? scenarioRules[action] : detectionRules[action];
 }
 
 export function alertsFromEvents(events: Array<EventLike & { id?: string }>): AlertView[] {

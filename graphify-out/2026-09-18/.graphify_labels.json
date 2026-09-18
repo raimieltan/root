@@ -1,14 +1,14 @@
 {
-  "0": "Gameplay UI Screens",
+  "0": "red/page.tsx",
   "1": "Build Toolchain Dependencies",
   "2": "Runtime App Dependencies",
   "3": "TypeScript Configuration",
-  "4": "Simulation API Domain",
-  "5": "Terminal Simulation Engine",
-  "6": "Detection Replay API",
+  "4": "campaign.test.ts",
+  "5": "SimulationEngine",
+  "6": "index.ts",
   "7": "Event Driven Design Docs",
   "8": "Package Scripts",
-  "9": "Scenario Initialization",
+  "9": "replay-client.tsx",
   "10": "Visual Design System",
   "11": "App Layout Fonts",
   "12": "Glasshouse Reconstruction",
@@ -17,5 +17,6 @@
   "15": "ESLint Configuration",
   "16": "Next.js Configuration",
   "17": "PostCSS Configuration",
-  "18": "Prisma Configuration"
+  "18": "Prisma Configuration",
+  "19": "playwright.config.ts"
 }

@@ -48,7 +48,7 @@ describe("Glasshouse replay projection", () => {
 
     assert.equal(summary.status, "SUCCESS");
     assert.equal(summary.durationMs, 12_000);
-    assert.equal(summary.detectionTimeMs, 5_000);
+    assert.equal(summary.detectionTimeMs, 6_000);
     assert.deepEqual(summary.attackPath, ["INTERNET", "WEB-01", "DEV-01", "FIN-APP", "FIN-DB"]);
     assert.equal(summary.sessionCount, 5);
   });

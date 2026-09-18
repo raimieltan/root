@@ -1,7 +1,16 @@
 import { glasshouse } from "./glasshouse";
 import type { ScenarioDefinition } from "./types";
+import { nightshift } from "./nightshift";
+import { deadDrop } from "./dead-drop";
+import { validateScenario } from "./validate";
 
-const scenarios: Record<string, ScenarioDefinition> = { [glasshouse.id]: glasshouse };
+export const campaign = [glasshouse, nightshift, deadDrop].map(validateScenario);
+const scenarios: Record<string, ScenarioDefinition> = Object.fromEntries(campaign.map((definition) => [definition.id, definition]));
+
+export function operationPresentation(definition: ScenarioDefinition) {
+  return { id: definition.id, name: definition.name, organization: definition.organization, briefing: definition.briefing, presentation: definition.presentation, availableModes: definition.availableModes, assistance: definition.assistance, conditions: definition.conditions, startingKnowledge: definition.startingKnowledge, objective: definition.objectives[0].label };
+}
+export type OperationPresentation = ReturnType<typeof operationPresentation>;
 
 export function getScenarioDefinition(id = glasshouse.id) {
   const definition = scenarios[id];

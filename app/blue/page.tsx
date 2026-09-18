@@ -1,59 +1,692 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import type { ScenarioView } from "@/app/sim-types";
-import NetworkMap from "@/app/red/network-map";
+import { useEffect, useRef, useState } from "react";
+
 import RootChrome from "@/app/ui/root-chrome";
+import { useOperation } from "@/app/use-operation";
 
 export default function BlueTeamPage() {
-  const [ids, setIds] = useState<{ scenarioId: string; actorId: string }>();
-  const [view, setView] = useState<ScenarioView>();
-  const [selectedHost, setSelectedHost] = useState<string>();
-  const [autoAdvance, setAutoAdvance] = useState(true);
+  const { ids, view, refresh, error, setError } = useOperation("BLUE");
 
-  const refresh = useCallback(async (override?: { scenarioId: string; actorId: string }) => {
-    const current = override ?? ids; if (!current) return;
-    const data = await fetch(`/api/sim/state?scenarioId=${current.scenarioId}&actorId=${current.actorId}`, { cache: "no-store" }).then((response) => response.json());
-    if (data.success) { setView(data); setSelectedHost((selected) => selected ?? data.machines.find((machine: { hostname: string }) => machine.hostname === "WEB-01")?.id); }
-  }, [ids]);
+  const [running, setRunning] = useState(false);
+  const [pending, setPending] = useState(false);
 
-  useEffect(() => { void (async () => {
-    const data = await fetch("/api/sim/init", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ mode: "BLUE" }) }).then((response) => response.json());
-    if (data.success) { const next = { scenarioId: data.scenarioId, actorId: data.actorId }; setIds(next); sessionStorage.setItem(`root:${data.scenarioId}:actor`, data.actorId); await refresh(next); }
-  })(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const busy = useRef(false);
 
-  useEffect(() => {
-    if (!ids || !autoAdvance || view?.scenario.state !== "ACTIVE") return;
-    const timer = window.setInterval(async () => {
-      await fetch("/api/sim/blue/advance", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(ids) });
+  const [hostId, setHostId] = useState("");
+  const [identity, setIdentity] = useState("");
+  const [category, setCategory] = useState("");
+  const [query, setQuery] = useState("");
+
+  const [evidence, setEvidence] = useState<string[]>([]);
+  const [finding, setFinding] = useState("");
+  const [findingStatus, setFindingStatus] = useState("HYPOTHESIS");
+
+  const selected =
+    view?.machines.find((machine) => machine.id === hostId) ??
+    view?.machines.find((machine) => machine.zone !== "EXTERNAL");
+
+  async function advance() {
+    if (!ids || busy.current) return;
+
+    busy.current = true;
+    setPending(true);
+
+    try {
+      const response = await fetch("/api/sim/blue/advance", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ids),
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to advance simulation");
+      }
+
       await refresh();
-    }, 4500);
-    return () => window.clearInterval(timer);
-  }, [autoAdvance, ids, refresh, view?.scenario.state]);
-
-  async function respond(action: string, extras: Record<string, string | undefined> = {}) {
-    if (!ids) return;
-    await fetch("/api/sim/blue/respond", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...ids, action, targetId: selectedHost, ...extras }) });
-    await refresh();
+    } catch (reason) {
+      setError(String(reason));
+    } finally {
+      busy.current = false;
+      setPending(false);
+    }
   }
 
-  const selected = view?.machines.find((machine) => machine.id === selectedHost);
-  const authEvents = useMemo(() => view?.events.filter((event) => event.category === "AUTH").slice(-8).reverse() ?? [], [view]);
-  if (!ids || !view) return <main className="loading-screen"><div className="boot-mark blue">ROOT<span>/SOC</span></div><p>Connecting defensive telemetry…</p></main>;
+  useEffect(() => {
+    if (!running || view?.scenario.state !== "ACTIVE") {
+      return;
+    }
 
-  return <RootChrome context="blue" active="soc" tone="blue" title="MERIDIAN DYNAMICS // SECURITY OPERATIONS" operator="blue.team@mdc" privilege="ANALYST" network="PRODUCTION">
-    <div className="workspace-toolbar"><div><span className="live-dot blue" /> SOC WORKSPACE <b>{`// ${view.scenario.state}`}</b></div><div className="soc-tabs"><button className="active">LIVE EVENTS</button><button>THREAT TIMELINE</button><button>INVESTIGATION</button></div><button className="ghost-button" onClick={() => setAutoAdvance((value) => !value)}>{autoAdvance ? "Ⅱ PAUSE ATTACKER" : "▶ RESUME ATTACKER"}</button></div>
-    <div className="soc-grid">
-      <NetworkMap machines={view.machines} />
-      <section className="panel alert-panel"><div className="panel-title">ALERT QUEUE <span>{view.alerts.length}</span></div><div className="data-list">{view.alerts.slice().reverse().map((alert) => <button key={alert.id} title={alert.rationale} className={`alert-row ${alert.severity.toLowerCase()}`}><b>{alert.ruleId} · {alert.title}</b><span>{alert.summary}</span><em>{alert.severity}</em></button>)}</div></section>
-      <section className="panel incident-panel"><div className="panel-title">INCIDENT <span>GLASSHOUSE-01</span></div><div className="incident-score"><strong>{view.suspicion}</strong><span>THREAT PRESSURE</span></div><p>{view.objectiveRetrieved ? "Critical finance file extracted." : "Investigate the attack path and contain it before finance access."}</p><div className="meter"><span style={{ width: `${view.suspicion}%` }} /></div></section>
-      <section className="panel logs-panel"><div className="panel-title">LIVE LOGS</div><div className="data-list compact">{view.events.slice(-14).reverse().map((event) => <code key={event.id}><b>{event.severity}</b> {event.action} · {event.source ?? "—"} → {event.target ?? "—"}</code>)}</div></section>
-      <section className="panel"><div className="panel-title">AUTHENTICATION</div><div className="data-list compact">{authEvents.map((event) => <code key={event.id}>{event.action} · {event.userId} · {event.target}</code>)}</div></section>
-      <section className="panel"><div className="panel-title">HOST INSPECTOR</div><select value={selectedHost} onChange={(event) => setSelectedHost(event.target.value)}>{view.machines.filter((machine) => machine.hostname !== "INTERNET").map((machine) => <option key={machine.id} value={machine.id}>{machine.hostname}</option>)}</select><div className="data-list compact"><code>STATE {selected?.state}</code><code>AVAILABILITY {selected?.availability}</code>{selected?.processes.map((process) => <code key={process.id}>{process.pid} {process.runningAs} {process.name}</code>)}</div></section>
-      <section className="panel response-panel"><div className="panel-title">RESPONSE ACTIONS</div><div className="action-grid"><button onClick={() => void respond("INSPECT_HOST")}>Inspect host</button><button onClick={() => void respond("INSPECT_USER", { username: view.sessions.at(-1)?.user })}>Inspect user</button><button onClick={() => void respond("INSPECT_PROCESS")}>Inspect processes</button><button onClick={() => void respond("INCREASE_MONITORING")}>Increase monitoring</button><button onClick={() => void respond("ISOLATE_HOST")}>Isolate host</button><button onClick={() => void respond("RESTORE_HOST")}>Restore host</button><button onClick={() => void respond("BLOCK_CONNECTION")}>Block connections</button><button onClick={() => void respond("REMOVE_PERSISTENCE")}>Remove persistence</button><button disabled={!view.sessions.at(-1)} onClick={() => void respond("REVOKE_SESSION", { sessionId: view.sessions.at(-1)?.id })}>Revoke latest session</button><button onClick={() => void respond("RESET_PASSWORD", { username: "deploy" })}>Reset deploy credential</button></div></section>
-      <section className="panel availability-panel"><div className="panel-title">SERVICE AVAILABILITY</div>{view.machines.filter((machine) => ["WEB-01", "DEV-01", "FIN-APP", "FIN-DB"].includes(machine.hostname)).map((machine) => <div key={machine.id}><span>{machine.hostname}</span><b className={machine.availability.toLowerCase()}>{machine.availability}</b></div>)}</section>
-    </div>
-    {view.scenario.state !== "ACTIVE" && <div className="operation-result"><strong>{view.scenario.state === "COMPLETED" ? "ATTACK CONTAINED" : "OBJECTIVE LOST"}</strong><Link className="primary-button" href={`/replay/${ids.scenarioId}?actor=${ids.actorId}`}>Review reconstruction</Link></div>}
-  </RootChrome>;
+    const timer = window.setInterval(() => {
+      void advance();
+    }, 12000);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [running, view?.scenario.state, ids]);
+
+  async function respond(
+    action: string,
+    extras: Record<string, unknown> = {},
+  ) {
+    if (!ids || busy.current) return;
+
+    busy.current = true;
+    setPending(true);
+
+    try {
+      const response = await fetch("/api/sim/blue/respond", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...ids,
+          action,
+          targetId: selected?.id,
+          ...extras,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error ?? "Response failed");
+      }
+
+      setError("");
+
+      await refresh();
+    } catch (reason) {
+      setError(String(reason));
+    } finally {
+      busy.current = false;
+      setPending(false);
+    }
+  }
+
+  if (!ids || !view) {
+    return (
+      <main className="loading-screen">
+        <p>{error || "Connecting defensive telemetry…"}</p>
+        <Link href="/">Operations</Link>
+      </main>
+    );
+  }
+
+  const active = view.scenario.state === "ACTIVE";
+
+  const events = view.events.filter((event) => {
+    const categoryMatch = !category || event.category === category;
+
+    const queryMatch =
+      !query ||
+      `${event.source} ${event.target} ${event.userId} ${event.action}`
+        .toLowerCase()
+        .includes(query.toLowerCase());
+
+    return categoryMatch && queryMatch;
+  });
+
+  const reviewed = new Set(
+    view.events
+      .filter((event) => event.action === "ALERT_REVIEWED")
+      .flatMap(
+        (event) =>
+          (event.metadata.evidenceIds as string[] | undefined) ?? [],
+      ),
+  );
+
+  const identities = [
+    ...new Set(
+      view.events
+        .map((event) => event.userId)
+        .filter((user): user is string => Boolean(user)),
+    ),
+  ];
+
+  return (
+    <RootChrome
+      context="blue"
+      active="soc"
+      tone="blue"
+      title={`${view.operation.organization} // SECURITY OPERATIONS`}
+      operator="analyst@nodeline"
+      privilege="ANALYST"
+    >
+      <div className="workspace-toolbar">
+        <strong>{view.operation.name}</strong>
+
+        <span>
+          {view.scenario.state} // {view.availability.percent}% AVAILABILITY
+        </span>
+
+        <button
+          type="button"
+          disabled={!active}
+          onClick={() => setRunning((current) => !current)}
+        >
+          {running ? "Pause simulation" : "Run simulation"}
+        </button>
+
+        <button
+          type="button"
+          disabled={!active}
+          onClick={() => void advance()}
+        >
+          Advance one step
+        </button>
+      </div>
+
+      {error && (
+        <p className="workspace-error" role="alert">
+          {error}
+        </p>
+      )}
+
+      <fieldset
+        className="soc-fieldset"
+        disabled={pending}
+        aria-busy={pending}
+      >
+        <div className="soc-grid campaign-soc">
+          {/* MISSION */}
+          <section className="panel soc-mission">
+            <header className="panel-title">
+              MISSION // RESPONSE WINDOW
+            </header>
+
+            <div className="data-list">
+              <p>{view.operation.briefing.blue}</p>
+
+              {view.operation.briefing.constraints.map((constraint) => (
+                <p key={constraint}>{constraint}</p>
+              ))}
+
+              {view.assistance === "GUIDED" && (
+                <p>
+                  Review alerts, filter authentication by identity and host,
+                  and pin evidence into a finding. Stop every objective path
+                  while keeping at least{" "}
+                  {view.operation.conditions.minimumAvailability}%
+                  availability. Pause to investigate; advance when ready.
+                </p>
+              )}
+            </div>
+          </section>
+
+          {/* ALERTS */}
+          <section className="panel soc-alerts">
+            <header className="panel-title">ALERT QUEUE</header>
+
+            <div className="data-list">
+              {view.alerts.map((alert) => (
+                <article key={alert.id}>
+                  <b>
+                    {alert.severity} // {alert.title}
+                  </b>
+
+                  <p>{alert.summary}</p>
+                  <p>{alert.rationale}</p>
+
+                  <button
+                    type="button"
+                    disabled={!active || reviewed.has(alert.id)}
+                    onClick={() => {
+                      setEvidence((items) => [
+                        ...new Set([
+                          ...items,
+                          alert.evidenceEventId ?? alert.id,
+                        ]),
+                      ]);
+
+                      void respond("ALERT_REVIEWED", {
+                        evidenceIds: [alert.id],
+                      });
+                    }}
+                  >
+                    {reviewed.has(alert.id)
+                      ? "Reviewed"
+                      : "Investigate and pin"}
+                  </button>
+                </article>
+              ))}
+
+              {!view.alerts.length && (
+                <p>No detection rules have fired.</p>
+              )}
+            </div>
+          </section>
+
+          {/* EVENT TIMELINE */}
+          <section className="panel soc-events">
+            <header className="panel-title">
+              EVENT TIMELINE // SHARED TELEMETRY
+            </header>
+
+            <div className="campaign-filters">
+              <label>
+                Category
+
+                <select
+                  value={category}
+                  onChange={(event) => setCategory(event.target.value)}
+                >
+                  <option value="">All</option>
+
+                  {[
+                    "AUTH",
+                    "NETWORK",
+                    "WEB",
+                    "PROCESS",
+                    "FILESYSTEM",
+                    "PRIVILEGE",
+                    "PERSISTENCE",
+                    "SYSTEM",
+                  ].map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label>
+                Host or identity
+
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                />
+              </label>
+            </div>
+
+            <div className="campaign-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Evidence</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                    <th>Source → target</th>
+                    <th>Identity</th>
+                    <th>Context</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {events
+                    .slice()
+                    .reverse()
+                    .map((event) => (
+                      <tr key={event.id}>
+                        <td>
+                          <input
+                            type="checkbox"
+                            aria-label={`Pin ${event.action} ${event.id}`}
+                            checked={evidence.includes(event.id)}
+                            onChange={() =>
+                              setEvidence((items) =>
+                                items.includes(event.id)
+                                  ? items.filter(
+                                      (item) => item !== event.id,
+                                    )
+                                  : [...items, event.id],
+                              )
+                            }
+                          />
+                        </td>
+
+                        <td>{event.timestamp.slice(11, 19)}</td>
+
+                        <td>{event.action}</td>
+
+                        <td>
+                          {event.source ?? "—"} →{" "}
+                          {event.target ?? "—"}
+                        </td>
+
+                        <td>{event.userId ?? "—"}</td>
+
+                        <td>
+                          {String(event.metadata.context ?? "")}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* HOST INSPECTION */}
+          <section className="panel soc-host">
+            <header className="panel-title">
+              HOST / PROCESS INSPECTION
+            </header>
+
+            <div className="data-list">
+              <label>
+                Host
+
+                <select
+                  value={selected?.id ?? ""}
+                  onChange={(event) =>
+                    setHostId(event.target.value)
+                  }
+                >
+                  {view.machines
+                    .filter(
+                      (machine) => machine.zone !== "EXTERNAL",
+                    )
+                    .map((machine) => (
+                      <option
+                        key={machine.id}
+                        value={machine.id}
+                      >
+                        {machine.hostname} // {machine.state}
+                      </option>
+                    ))}
+                </select>
+              </label>
+
+              <div className="response-grid">
+                {[
+                  ["INSPECT_HOST", "Inspect host"],
+                  ["INSPECT_PROCESS", "Inspect processes"],
+                  ["ISOLATE_HOST", "Isolate host"],
+                  ["REMOVE_PERSISTENCE", "Remove persistence"],
+                  ["RESTORE_HOST", "Restore service"],
+                ].map(([action, label]) => (
+                  <button
+                    type="button"
+                    disabled={!active}
+                    key={action}
+                    onClick={() => void respond(action)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              {selected?.processes.map((process) => (
+                <code key={process.id}>
+                  {process.pid} {process.runningAs} {process.name}
+                </code>
+              ))}
+
+              {selected?.persistence.map((persistence) => (
+                <p key={persistence.id}>
+                  Startup artifact: {persistence.type}
+                </p>
+              ))}
+
+              {view.availability.services
+                .filter((service) =>
+                  service.hosts.includes(
+                    selected?.hostname ?? "",
+                  ),
+                )
+                .map((service) => (
+                  <p key={service.name}>
+                    {service.name}: {service.state}. Containment
+                    consequence: {service.impact}
+                  </p>
+                ))}
+            </div>
+          </section>
+
+          {/* AUTHENTICATION */}
+          <section className="panel soc-auth">
+            <header className="panel-title">
+              AUTHENTICATION / SESSIONS
+            </header>
+
+            <div className="data-list">
+              <label>
+                Identity
+
+                <select
+                  value={identity}
+                  onChange={(event) =>
+                    setIdentity(event.target.value)
+                  }
+                >
+                  <option value="">
+                    Select observed identity
+                  </option>
+
+                  {identities.map((user) => (
+                    <option key={user} value={user}>
+                      {user}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <button
+                type="button"
+                disabled={!active || !identity}
+                onClick={() => {
+                  setCategory("AUTH");
+                  setQuery(identity);
+
+                  void respond("INSPECT_USER", {
+                    username: identity,
+                  });
+                }}
+              >
+                Inspect identity
+              </button>
+
+              <button
+                type="button"
+                disabled={!active || !identity}
+                onClick={() =>
+                  void respond("RESET_PASSWORD", {
+                    username: identity,
+                  })
+                }
+              >
+                Reset credential
+              </button>
+
+              {view.sessions
+                .filter(
+                  (session) =>
+                    session.machine === selected?.hostname,
+                )
+                .map((session) => (
+                  <p key={session.id}>
+                    {session.user}@{session.machine}{" "}
+
+                    <button
+                      type="button"
+                      disabled={!active}
+                      onClick={() =>
+                        void respond("REVOKE_SESSION", {
+                          sessionId: session.id,
+                        })
+                      }
+                    >
+                      Revoke session
+                    </button>
+                  </p>
+                ))}
+            </div>
+          </section>
+
+          {/* NETWORK */}
+          <section className="panel soc-network">
+            <header className="panel-title">
+              NETWORK RESPONSE
+            </header>
+
+            <div className="data-list">
+              {view.connections
+                .filter(
+                  (connection) =>
+                    connection.target ===
+                      selected?.hostname ||
+                    connection.source ===
+                      selected?.hostname,
+                )
+                .map((connection) => (
+                  <p key={connection.id}>
+                    {connection.source} → {connection.target}:
+                    {connection.port} //{" "}
+                    {connection.allowed
+                      ? "ALLOWED"
+                      : "BLOCKED"}{" "}
+
+                    <button
+                      type="button"
+                      disabled={!active || !connection.allowed}
+                      onClick={() =>
+                        void respond("BLOCK_CONNECTION", {
+                          connectionId: connection.id,
+                        })
+                      }
+                    >
+                      Block connection
+                    </button>
+                  </p>
+                ))}
+            </div>
+          </section>
+
+          {/* INCIDENT */}
+          <section className="panel soc-incident">
+            <header className="panel-title">
+              INCIDENT WORKSPACE
+            </header>
+
+            <div className="data-list">
+              <p>{evidence.length} evidence items pinned</p>
+
+              <label>
+                Finding
+
+                <textarea
+                  value={finding}
+                  onChange={(event) =>
+                    setFinding(event.target.value)
+                  }
+                  maxLength={2000}
+                />
+              </label>
+
+              <label>
+                Status
+
+                <select
+                  value={findingStatus}
+                  onChange={(event) =>
+                    setFindingStatus(event.target.value)
+                  }
+                >
+                  <option value="HYPOTHESIS">
+                    HYPOTHESIS
+                  </option>
+                  <option value="CONFIRMED">
+                    CONFIRMED
+                  </option>
+                  <option value="DISMISSED">
+                    DISMISSED
+                  </option>
+                </select>
+              </label>
+
+              <button
+                type="button"
+                disabled={
+                  !active ||
+                  !evidence.length ||
+                  !finding.trim()
+                }
+                onClick={() =>
+                  void respond("INCIDENT_FINDING", {
+                    evidenceIds: evidence,
+                    finding,
+                    status: findingStatus,
+                  })
+                }
+              >
+                Record finding
+              </button>
+
+              {view.events
+                .filter(
+                  (event) =>
+                    event.action === "INCIDENT_FINDING",
+                )
+                .map((event) => {
+                  const findingEvidence =
+                    (event.metadata
+                      .evidenceIds as string[] | undefined) ??
+                    [];
+
+                  return (
+                    <article key={event.id}>
+                      <b>
+                        {String(event.metadata.status)}
+                      </b>
+
+                      <p>
+                        {String(event.metadata.finding)}
+                      </p>
+
+                      <small>
+                        {findingEvidence.length} linked
+                        observations
+                      </small>
+                    </article>
+                  );
+                })}
+            </div>
+          </section>
+
+          {/* AVAILABILITY */}
+          <section className="panel soc-availability">
+            <header className="panel-title">
+              SERVICE AVAILABILITY
+            </header>
+
+            <div className="data-list">
+              {view.availability.services.map((service) => (
+                <p key={service.name}>
+                  {service.name}:{" "}
+                  <b>{service.state}</b>{" "}
+                  {service.state !== "HEALTHY" &&
+                    service.impact}
+                </p>
+              ))}
+            </div>
+          </section>
+        </div>
+      </fieldset>
+
+      {!active && (
+        <div className="operation-result">
+          <strong>
+            {view.scenario.state === "COMPLETED"
+              ? "OBJECTIVE PROTECTED"
+              : view.objectiveRetrieved
+                ? "OBJECTIVE LOST"
+                : "AVAILABILITY REQUIREMENT MISSED"}
+          </strong>
+
+          <Link
+            className="primary-button"
+            href={`/replay/${ids.scenarioId}?actor=${ids.actorId}`}
+          >
+            Open reconstruction
+          </Link>
+        </div>
+      )}
+    </RootChrome>
+  );
 }

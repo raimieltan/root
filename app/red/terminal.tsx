@@ -11,7 +11,7 @@ export default function Terminal({ scenarioId, actorId, initialState, onStateCha
   const [state, setState] = useState(initialState);
   const [line, setLine] = useState("");
   const [busy, setBusy] = useState(false);
-  const [history, setHistory] = useState<Line[]>([{ kind: "output", text: "ROOT/OS v1.0 — Operation Glasshouse\nType 'help' for commands." }]);
+  const [history, setHistory] = useState<Line[]>([{ kind: "output", text: "ROOT/OS — Authorized operation\nType 'help' for commands. Use ls to inspect available files and sessions <number> to switch active access." }]);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [history]);

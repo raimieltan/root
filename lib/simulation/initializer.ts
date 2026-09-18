@@ -4,8 +4,10 @@ import { parseMetadata } from "./rules";
 import { getScenarioDefinition } from "./scenarios";
 import type { ScenarioDefinition } from "./scenarios";
 
-export async function initializeScenario(mode: ScenarioMode = ScenarioMode.RED, definitionId = "glasshouse", blueProfileId?: string) {
+export async function initializeScenario(mode: ScenarioMode = ScenarioMode.RED, definitionId = "glasshouse", blueProfileId?: string, assistance: "GUIDED" | "OPERATOR" = "GUIDED") {
   const definition = getScenarioDefinition(definitionId);
+  if (!definition.availableModes.includes(mode as "RED" | "BLUE")) throw new Error("Unavailable mode");
+  if (blueProfileId && !definition.blueProfiles.some((profile) => profile.id === blueProfileId)) throw new Error("Unknown attacker profile");
   return prisma.$transaction(async (tx) => {
     const scenario = await tx.scenario.create({ data: { mode, state: ScenarioState.SETUP } });
     const created = new Map<string, { id: string }>();
@@ -58,12 +60,20 @@ export async function initializeScenario(mode: ScenarioMode = ScenarioMode.RED, 
         visibleToBlue: false,
         metadata: JSON.stringify({
           scenarioDefinitionId: definition.id,
+          assistance,
           knownHosts: definition.startingKnowledge.knownHosts,
           knownAssets: definition.startingKnowledge.knownAssets,
           blueProfileId: blueProfileId ?? definition.defaultBlueProfile,
         }),
       },
     });
+    const businessActor = await tx.actor.create({ data: { scenarioId: scenario.id, name: "Business activity", role: "business" } });
+    for (const activity of definition.backgroundActivity) {
+      const identity = users.get(`${activity.host}:${activity.user}`);
+      const privilege = definition.machines.find((m) => m.hostname === activity.host)?.users.find((u) => u.username === activity.user)?.privilege;
+      if (identity && privilege) await tx.session.create({ data: { scenarioId: scenario.id, actorId: businessActor.id, machineId: id(activity.host), userId: identity.id, privilege, sourceMachineId: activity.source ? id(activity.source) : undefined } });
+      await tx.securityEvent.create({ data: { scenarioId: scenario.id, actorId: businessActor.id, targetMachineId: id(activity.host), sourceMachineId: activity.source ? id(activity.source) : undefined, userId: activity.user, action: activity.action, category: "AUTH", severity: "INFO", visibleToRed: false, visibleToBlue: true, metadata: JSON.stringify({ context: activity.context, background: true }) } });
+    }
     await tx.scenario.update({ where: { id: scenario.id }, data: { state: ScenarioState.ACTIVE, startedAt: new Date() } });
     return {
       scenarioId: scenario.id,
@@ -77,7 +87,7 @@ export async function initializeScenario(mode: ScenarioMode = ScenarioMode.RED, 
         discoveredHosts: [...definition.startingKnowledge.knownHosts],
       },
     };
-  });
+  }, { timeout: 30_000 });
 }
 
 export async function getDefinitionForScenario(scenarioId: string): Promise<ScenarioDefinition> {

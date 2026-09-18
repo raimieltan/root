@@ -3,15 +3,15 @@
 import type { MachineView } from "@/app/sim-types";
 import { Globe2, Server } from "lucide-react";
 
-export default function NetworkMap({ machines, current }: { machines: MachineView[]; current?: string }) {
+export default function NetworkMap({ machines, current, organization = "INFRASTRUCTURE" }: { machines: MachineView[]; current?: string; organization?: string }) {
   return <section className="panel network-panel">
-    <div className="panel-title"><span>NETWORK MAP <b>{"// MERIDIAN DYNAMICS"}</b></span><span>VIEW: INFRASTRUCTURE⌄</span></div>
+    <div className="panel-title"><span>NETWORK MAP <b>{organization}</b></span><span>VIEW: INFRASTRUCTURE</span></div>
     <div className="network-grid">
       <div className="internet-node"><Globe2 /><span>INTERNET</span></div>
       {machines.filter((machine) => machine.hostname !== "INTERNET").map((machine) => <article key={machine.id} className={`host-card ${machine.state.toLowerCase()} ${current === machine.hostname ? "current" : ""}`}>
         <Server aria-hidden="true" /><div><strong>{machine.hostname}</strong><small>{machine.ip}</small><small>{machine.services.slice(0, 2).map(service => service.name.toUpperCase()).join(" | ") || machine.zone}</small></div><div className="host-led" /><em>{machine.state}</em>
       </article>)}
     </div>
-    <footer className="network-legend"><span><i className="online" /> ONLINE</span><span><i className="discovered" /> DISCOVERED</span><span><i className="flagged" /> FLAGGED</span><b>MERIDIAN DYNAMICS&nbsp;&nbsp;//&nbsp;&nbsp;10.20.0.0/16</b></footer>
+    <footer className="network-legend"><span><i className="online" /> ONLINE</span><span><i className="discovered" /> DISCOVERED</span><span><i className="flagged" /> FLAGGED</span><b>{organization}</b></footer>
   </section>;
 }
