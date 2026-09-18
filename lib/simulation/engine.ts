@@ -5,6 +5,7 @@ import { detectionForAction } from "./rules";
 import { getDefinitionForScenario } from "./initializer";
 import type { ScenarioDefinition, ScenarioEventDefinition } from "./scenarios";
 import { reachable } from "./network";
+import { parseTerminalInput, psqlUsage } from "./tools";
 
 type EventInput = {
   action: string;
@@ -31,8 +32,10 @@ export class SimulationEngine {
   async executeCommand(command: string, state: TerminalState): Promise<CommandResult> {
     const scenario = await prisma.scenario.findUnique({ where: { id: this.scenarioId } });
     if (!scenario || scenario.state !== "ACTIVE") return this.result(false, "This operation has ended.");
-    const [raw = "", ...args] = command.trim().split(/\s+/);
-    const cmd = raw.toLowerCase();
+    const intent = parseTerminalInput(command, state.context);
+    if (intent.kind === "PSQL_CONNECT") return this.connectPostgres(intent, state);
+    if (intent.kind === "PSQL_INPUT") return this.postgresInput(intent.input, state);
+    const { command: cmd, args } = intent;
     switch (cmd) {
       case "help": return this.result(true, this.help());
       case "clear": return this.result(true, "");
@@ -48,6 +51,7 @@ export class SimulationEngine {
       case "ping": return this.ping(args, state);
       case "nmap": return this.scan(args, state);
       case "curl": return this.curl(args, state);
+      case "psql": return this.result(false, psqlUsage);
       case "msfconsole": return this.result(true, "Metasploit simulation ready. Use: exploit <host>");
       case "exploit": return this.exploit(args, state);
       case "ssh": return this.ssh(args, state);
@@ -70,12 +74,18 @@ Recon:       nmap <host> · ping <host> · curl <url> · ip
 Access:      exploit <host> · ssh <user@host> · sessions
 Filesystem:  pwd · cd <path> · ls [path] · cat <path> · retrieve <file>
 System:      whoami · hostname · ps · privesc <trusted-service>
+Database:    psql -h HOST -U USER -d DATABASE --password SECRET
 Tools:       john <file> · msfconsole · install-agent · clear`;
   }
 
   private async currentMachine(state: TerminalState) {
     const session = await prisma.session.findFirst({
-      where: { scenarioId: this.scenarioId, actorId: this.actorId, active: true, machine: { hostname: state.currentMachine }, user: { username: state.currentUser } },
+      where: {
+        scenarioId: this.scenarioId,
+        actorId: this.actorId,
+        active: true,
+        ...(state.currentSessionId ? { id: state.currentSessionId } : { machine: { hostname: state.currentMachine }, user: { username: state.currentUser } }),
+      },
       include: { machine: { include: { files: true, services: true, processes: true } }, user: true },
     });
     return session;
@@ -239,6 +249,72 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     return { success: true, output: discovery.output ?? `${target.hostname} responded.`, events, discoveredHosts: await this.discoveredHosts() };
   }
 
+  private async connectPostgres(intent: Extract<ReturnType<typeof parseTerminalInput>, { kind: "PSQL_CONNECT" }>, state: TerminalState) {
+    const [source, target, definition] = await Promise.all([this.currentMachine(state), this.target(intent.host), this.definition()]);
+    const database = definition.databases?.find((entry) => entry.host === target?.hostname && entry.service === "postgres" && entry.database === intent.database);
+    const service = target?.services.find((entry) => entry.name === "postgres" && entry.status === "RUNNING");
+    const identity = target?.users.find((entry) => entry.username === intent.username);
+    const credential = target && identity ? await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "CREDENTIAL_DISCOVERED", targetMachineId: target.id, userId: intent.username } }) : null;
+    const reset = identity ? await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "RESET_PASSWORD", userId: intent.username }, orderBy: { timestamp: "desc" } }) : null;
+    const allowed = Boolean(source && target && service && database && identity && credential && !reset && intent.password === identity.password && await reachable(this.scenarioId, source.machine.id, target.id, [5432]));
+    const events = source && target ? [await this.emit({ action: allowed ? "POSTGRES_AUTH_SUCCESS" : "POSTGRES_AUTH_FAILED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: intent.username, metadata: { database: intent.database, service: "postgres" } })] : [];
+    if (!allowed || !source || !target || !identity || !service || !database) return this.result(false, "psql: connection or authentication failed", events);
+    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: identity.id, machineId: target.id, privilege: identity.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "POSTGRES", serviceName: service.name, databaseName: database.database } });
+    events.push(await this.emit({ action: "DATABASE_SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: identity.username, metadata: { sessionId: session.id, database: database.database } }));
+    return {
+      success: true,
+      output: `psql (ROOT simulated PostgreSQL)\nSSL connection established.\n\nType "\\?" for help.`,
+      events,
+      sessionUpdated: true,
+      context: { type: "POSTGRES" as const, serviceName: service.name, databaseName: database.database },
+      newSession: { id: session.id, userId: identity.username, machineId: target.hostname, privilege: identity.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "POSTGRES" as const, serviceName: service.name, databaseName: database.database },
+    };
+  }
+
+  private async postgresInput(input: string, state: TerminalState) {
+    const session = await this.currentMachine(state);
+    if (!session || session.context !== "POSTGRES" || !session.databaseName || !session.serviceName) return this.result(false, "PostgreSQL session is no longer active.");
+    const database = (await this.definition()).databases?.find((entry) => entry.host === session.machine.hostname && entry.service === session.serviceName && entry.database === session.databaseName);
+    const access = database?.identities.find((entry) => entry.username === session.user.username);
+    if (!database || !access) return this.result(false, "ERROR: permission denied for database");
+    if (input === "\\dt") return this.result(true, ` Schema | Name\n--------+-----------------\n${access.tables.map((table) => ` public | ${table.name}`).join("\n")}`);
+    if (input === "\\?") return this.result(true, "ROOT psql supports: \\dt, SELECT <columns> FROM <table>;, \\q");
+    if (input === "\\q") {
+      await prisma.session.update({ where: { id: session.id }, data: { active: false } });
+      const parent = await prisma.session.findFirst({
+        where: { scenarioId: this.scenarioId, actorId: this.actorId, active: true, id: { not: session.id } },
+        include: { machine: true, user: true },
+        orderBy: { createdAt: "desc" },
+      });
+      if (!parent) return { ...this.result(true, "PostgreSQL session closed."), context: { type: "UNIX" as const } };
+      const context = parent.context === "POSTGRES" && parent.serviceName && parent.databaseName
+        ? { type: "POSTGRES" as const, serviceName: parent.serviceName, databaseName: parent.databaseName }
+        : { type: parent.context === "SSH" ? "SSH" as const : "UNIX" as const };
+      return {
+        ...this.result(true, "PostgreSQL session closed."),
+        context,
+        sessionUpdated: true,
+        newSession: { id: parent.id, userId: parent.user.username, machineId: parent.machine.hostname, privilege: parent.privilege, sourceMachineId: parent.sourceMachineId ?? undefined, createdAt: parent.createdAt, active: parent.active, context: parent.context, serviceName: parent.serviceName ?? undefined, databaseName: parent.databaseName ?? undefined },
+      };
+    }
+    const match = input.match(/^SELECT\s+([\w\s,*]+)\s+FROM\s+(\w+)\s*;?$/i);
+    if (!match) return this.result(false, "ERROR: ROOT psql supports bounded SELECT queries only.");
+    const table = access.tables.find((entry) => entry.name.toLowerCase() === match[2].toLowerCase());
+    if (!table) return this.result(false, `ERROR: relation "${match[2]}" does not exist`);
+    const requested = match[1].trim() === "*" ? table.columns : match[1].split(",").map((column) => column.trim());
+    if (requested.some((column) => !table.columns.includes(column))) return this.result(false, "ERROR: column does not exist");
+    const rows = table.rows.map((row) => requested.map((column) => row[column] ?? "").join(" | "));
+    const events = [await this.emit({ action: "DATABASE_QUERY", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.HIGH, sourceMachineId: session.sourceMachineId ?? undefined, targetMachineId: session.machineId, userId: session.user.username, metadata: { database: database.database, table: table.name, columns: requested } })];
+    const objective = (await this.definition()).objectives.find((entry) => entry.host === session.machine.hostname && table.rows.some((row) => row.filename === entry.path.split("/").at(-1)));
+    if (objective) {
+      events.push(await this.emit({ action: "OBJECTIVE_RETRIEVED", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.CRITICAL, targetMachineId: session.machineId, userId: session.user.username, metadata: { objectiveId: objective.id, file: objective.path.split("/").at(-1), via: "postgres" } }));
+      const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: this.scenarioId } });
+      await prisma.scenario.update({ where: { id: this.scenarioId }, data: { state: scenario.mode === "BLUE" ? ScenarioState.FAILED : ScenarioState.COMPLETED, endedAt: new Date() } });
+      return { success: true, output: `${requested.join(" | ")}\n${requested.map(() => "----------------").join("+")}\n${rows.join("\n")}\n(${rows.length} row)\n\n${objective.label.replace(/^Retrieve /, "")} retrieved. Operation complete.`, events, objectiveRetrieved: true };
+    }
+    return { success: true, output: `${requested.join(" | ")}\n${requested.map(() => "----------------").join("+")}\n${rows.join("\n")}\n(${rows.length} row)`, events };
+  }
+
   private async exploit(args: string[], state: TerminalState) {
     const source = await this.currentMachine(state);
     const target = await this.target(args[0] ?? "");
@@ -256,8 +332,8 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const events: SimulationEvent[] = [];
     for (const evidence of profile.evidence) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: evidence.action === "PROCESS_SPAWN" ? user.username : undefined }));
     events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: user.username, metadata: { privilege: user.privilege } }));
-    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId } });
-    return { success: true, output: profile.output, events, sessionUpdated: true, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true } };
+    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "SSH" } });
+    return { success: true, output: profile.output, events, sessionUpdated: true, context: { type: "SSH" as const }, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "SSH" as const } };
   }
 
   private async ssh(args: string[], state: TerminalState) {
@@ -278,8 +354,8 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const definition = await this.definition();
     const connection = definition.connections.find((entry) => entry.source === source.machine.hostname && entry.target === target.hostname && entry.port === link?.port);
     if (connection?.accessEvent) events.push(await this.emitDefinition(connection.accessEvent, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username, metadata: { connectionPort: link?.port } }));
-    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId } });
-    return { success: true, output: `Connected to ${target.hostname}.`, events, sessionUpdated: true, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true } };
+    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "SSH", serviceName: "ssh" } });
+    return { success: true, output: `Connected to ${target.hostname}.`, events, sessionUpdated: true, context: { type: "SSH" as const }, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "SSH" as const, serviceName: "ssh" } };
   }
 
   private john(args: string[]) {
@@ -291,7 +367,10 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     if (args[0]) {
       const selected = sessions[Number(args[0]) - 1];
       if (!selected) return this.result(false, "Unknown session number. Use sessions to list active sessions.");
-      return { ...this.result(true, `Using ${selected.user.username}@${selected.machine.hostname}`), newSession: { id: selected.id, machineId: selected.machine.hostname, userId: selected.user.username, privilege: selected.privilege, active: selected.active, createdAt: selected.createdAt, sourceMachineId: selected.sourceMachineId ?? undefined }, sessionUpdated: true };
+      const context = selected.context === "POSTGRES" && selected.serviceName && selected.databaseName
+        ? { type: "POSTGRES" as const, serviceName: selected.serviceName, databaseName: selected.databaseName }
+        : { type: selected.context === "SSH" ? "SSH" as const : "UNIX" as const };
+      return { ...this.result(true, `Using ${selected.user.username}@${selected.machine.hostname}`), context, newSession: { id: selected.id, machineId: selected.machine.hostname, userId: selected.user.username, privilege: selected.privilege, active: selected.active, createdAt: selected.createdAt, sourceMachineId: selected.sourceMachineId ?? undefined, context: selected.context, serviceName: selected.serviceName ?? undefined, databaseName: selected.databaseName ?? undefined }, sessionUpdated: true };
     }
     return this.result(true, sessions.map((session, index) => `[${index + 1}] ${session.user.username}@${session.machine.hostname} (${session.privilege})`).join("\n") || "No active sessions");
   }
@@ -305,8 +384,8 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const events: SimulationEvent[] = [];
     for (const evidence of escalation.evidence) events.push(await this.emitDefinition(evidence, { targetMachineId: current.machine.id, userId: current.user.username }));
     events.push(await this.emit({ action: "ROOT_SESSION_CREATED", category: SecurityEventCategory.PRIVILEGE, severity: SecurityEventSeverity.HIGH, targetMachineId: current.machine.id, userId: elevated.username, metadata: { privilege: elevated.privilege } }));
-    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: elevated.id, machineId: current.machine.id, privilege: elevated.privilege, sourceMachineId: current.machine.id, scenarioId: this.scenarioId } });
-    return { success: true, output: escalation.output, events, sessionUpdated: true, newSession: { id: session.id, userId: elevated.username, machineId: current.machine.hostname, privilege: elevated.privilege, createdAt: session.createdAt, active: true } };
+    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: elevated.id, machineId: current.machine.id, privilege: elevated.privilege, sourceMachineId: current.machine.id, scenarioId: this.scenarioId, context: "SSH" } });
+    return { success: true, output: escalation.output, events, sessionUpdated: true, context: { type: "SSH" as const }, newSession: { id: session.id, userId: elevated.username, machineId: current.machine.hostname, privilege: elevated.privilege, createdAt: session.createdAt, active: true, context: "SSH" as const } };
   }
 
   private async installAgent(state: TerminalState) {

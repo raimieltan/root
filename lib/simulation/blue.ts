@@ -39,14 +39,20 @@ export async function advanceBlueScenario(scenarioId: string, blueActorId: strin
       current = { ...session, machine: old.machine, user: old.user };
     }
   }
-  const state: TerminalState | undefined = current ? { currentMachine: current.machine.hostname, currentUser: current.user.username, currentPrivilege: current.privilege, currentPath: "/", activeSessions: [], discoveredHosts: [], credentials: new Map() } : undefined;
+  const previousContext = previous.context;
+  const terminalContext = previousContext && typeof previousContext === "object" && "type" in previousContext && (previousContext.type === "UNIX" || previousContext.type === "SSH" || previousContext.type === "POSTGRES")
+    ? previousContext as TerminalState["context"]
+    : current?.context === "POSTGRES" && current.serviceName && current.databaseName
+      ? { type: "POSTGRES" as const, serviceName: current.serviceName, databaseName: current.databaseName }
+      : { type: current?.context === "SSH" ? "SSH" as const : "UNIX" as const };
+  const state: TerminalState | undefined = current ? { currentMachine: current.machine.hostname, currentUser: current.user.username, currentSessionId: current.id, currentPrivilege: current.privilege, currentPath: "/", context: terminalContext, activeSessions: [], discoveredHosts: [], credentials: new Map() } : undefined;
   const command = profile.commands[step];
   const result = state && command ? await new SimulationEngine(scenarioId, red.id).executeCommand(command, state) : { success: false, output: "No usable session", newSession: undefined, objectiveRetrieved: false };
   if (!result.success) {
     await prisma.securityEvent.create({ data: { scenarioId, actorId: red.id, action: "AI_ROUTE_BLOCKED", category: "SYSTEM", severity: "INFO", visibleToRed: false, visibleToBlue: false, metadata: JSON.stringify({ profileId: profile.id, routeId: profile.routeId, command, reason: result.output }) } });
     return { advanced: false, state: "ACTIVE", routeInterrupted: true };
   }
-  await prisma.securityEvent.create({ data: { scenarioId, actorId: red.id, action: "AI_STEP", category: "SYSTEM", severity: "INFO", visibleToRed: false, visibleToBlue: false, metadata: JSON.stringify({ profileId: profile.id, step, command, machine: result.newSession?.machineId ?? state!.currentMachine, user: result.newSession?.userId ?? state!.currentUser }) } });
+  await prisma.securityEvent.create({ data: { scenarioId, actorId: red.id, action: "AI_STEP", category: "SYSTEM", severity: "INFO", visibleToRed: false, visibleToBlue: false, metadata: JSON.stringify({ profileId: profile.id, step, command, machine: result.newSession?.machineId ?? state!.currentMachine, user: result.newSession?.userId ?? state!.currentUser, context: ("context" in result ? result.context : undefined) ?? state!.context }) } });
   return { advanced: true, step, objectiveRetrieved: result.objectiveRetrieved };
 }
 

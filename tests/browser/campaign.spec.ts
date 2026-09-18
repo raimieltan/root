@@ -4,7 +4,7 @@ import { campaign } from "../../lib/simulation/scenarios";
 test("operation selection → all Red campaign results → reconstruction → unlocks", async ({ page }) => {
   const errors: string[] = []; page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
-  for (const operation of campaign) {
+  for (const [operationIndex, operation] of campaign.entries()) {
     await page.getByRole("button", { name: new RegExp(operation.name) }).click();
     await page.getByRole("link", { name: `Launch ${operation.name}` }).click();
     await expect(page.locator("#command")).toBeVisible();
@@ -25,6 +25,10 @@ test("operation selection → all Red campaign results → reconstruction → un
     for (const lens of ["RED VIEW", "BLUE VIEW", "FULL TRUTH"]) await page.getByRole("button", { name: new RegExp(lens) }).click();
     await expect(page.getByText("Demonstrated knowledge", { exact: true })).toBeVisible();
     await page.getByRole("link", { name: "START ANOTHER OPERATION" }).click();
+    if (operationIndex === 2) {
+      await expect(page.getByRole("heading", { name: "Operator", exact: true })).toBeVisible();
+      await expect(page.getByText("Operator Mode: CLEARED", { exact: true })).toBeVisible();
+    }
   }
   await expect(page.getByText("MVP CAMPAIGN COMPLETE")).toBeVisible();
   await page.reload();

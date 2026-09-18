@@ -15,12 +15,12 @@ export const glasshouse: ScenarioDefinition = {
   briefing: { red: "Assess the public portal and remote access relationships. Retrieve the protected finance document without modifying production data.", blue: "Investigate unusual application execution and remote access. Prevent finance extraction while preserving the portal and backup services.", constraints: ["Do not modify financial records", "Contain precisely and restore affected services"] },
   presentation: { caseId: "FIN-06", focus: ["Fundamentals", "Privilege escalation", "Finance trust"], order: 1 },
   availableModes: ["RED", "BLUE"],
-  assistance: { guided: ["Use curl on the known portal to inspect published relationships, or nmap to inspect its services.", "Use ls and cat after gaining a session. Files reveal identities and reachable systems.", "Compare a service's running identity with who can modify its configuration. ps exposes service names for privesc."], operator: "Follow the evidence across application and backup trust boundaries." },
+  assistance: { guided: ["Use curl on the known portal to inspect published relationships, or nmap to inspect its services.", "Use ls and cat after gaining a session. Files reveal identities and reachable systems.", "A PostgreSQL service accepts a known identity through psql; inspect only the tables that identity can read."], operator: "Follow the evidence across application, backup, and database trust boundaries." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },
   securityControls: [{ host: "WEB-01", telemetry: ["WEB", "NETWORK", "PROCESS", "AUTH"] }, { host: "DEV-01", telemetry: ["AUTH", "NETWORK", "PRIVILEGE", "FILESYSTEM", "PERSISTENCE"] }, { host: "FIN-APP", telemetry: ["AUTH", "NETWORK"] }, { host: "VPN-01", telemetry: ["AUTH", "NETWORK"] }, { host: "BACKUP-01", telemetry: ["AUTH", "NETWORK"] }, { host: "FIN-DB", telemetry: ["AUTH", "FILESYSTEM"] }],
   businessServices: [{ name: "Employee portal", hosts: ["WEB-01"], impact: "Employees cannot access operations requests." }, { name: "Finance", hosts: ["FIN-APP", "FIN-DB"], impact: "Invoice processing stops." }, { name: "Backups", hosts: ["VPN-01", "BACKUP-01"], impact: "Scheduled recovery copies are delayed." }],
   persistencePolicy: { process: "root-agent", requiredPrivilege: AccessLevel.ROOT, beaconSeconds: 30 },
-  knowledgeRewards: [{ concept: "Trust relationships", actions: ["LATERAL_MOVEMENT"] }, { concept: "Privilege escalation", actions: ["PRIVILEGE_ESCALATION"] }, { concept: "Incident response", actions: ["ATTACK_CONTAINED"] }],
+  knowledgeRewards: [{ concept: "Trust relationships", actions: ["LATERAL_MOVEMENT", "BACKUP_TRUST_LOGIN"] }, { concept: "Privilege escalation", actions: ["PRIVILEGE_ESCALATION"] }, { concept: "Incident response", actions: ["ATTACK_CONTAINED"] }],
   backgroundActivity: [{ host: "FIN-APP", user: "svc_web", action: "AUTH_SUCCESS", context: "Approved invoice application service account; scheduled processing." }],
   aliases: {
     "portal.meridian.test": "WEB-01",
@@ -100,8 +100,8 @@ export const glasshouse: ScenarioDefinition = {
     {
       hostname: "FIN-DB", ip: "10.30.10.21", zone: NetworkZone.FINANCE, os: "linux",
       users: [
-        { username: "finance_app", role: "service", privilege: AccessLevel.SERVICE, groups: ["db_users"] },
-        { username: "db_backup", role: "backup_service", privilege: AccessLevel.SERVICE, groups: ["db_users", "backup"] },
+        { username: "finance_app", role: "service", privilege: AccessLevel.SERVICE, groups: ["db_users"], password: "FinanceApp2026!Secure" },
+        { username: "db_backup", role: "backup_service", privilege: AccessLevel.SERVICE, groups: ["db_users", "backup"], password: "AtlasBackup-91d2" },
         { username: "root", role: "admin", privilege: AccessLevel.ROOT, groups: ["root"] },
       ],
       services: [{ name: "postgres", port: 5432, runningAsUser: "finance_app", exposedZones: [NetworkZone.FINANCE] }],
@@ -147,6 +147,15 @@ export const glasshouse: ScenarioDefinition = {
     { trigger: { kind: "file", host: "VPN-01", value: "/etc/vpn/backup-peers.conf" }, hosts: ["BACKUP-01"], credentials: [{ username: "backup_svc", scope: "BACKUP-01" }] },
     { trigger: { kind: "file", host: "BACKUP-01", value: "/etc/backup/finance-db.conf" }, hosts: ["FIN-DB"], credentials: [{ username: "db_backup", scope: "FIN-DB" }] },
   ],
+  databases: [{
+    host: "FIN-DB",
+    service: "postgres",
+    database: "finance",
+    identities: [
+      { username: "finance_app", tables: [{ name: "documents", columns: ["filename", "classification"], rows: [{ filename: "PROJECT_ATLAS.pdf", classification: "CONFIDENTIAL" }] }] },
+      { username: "db_backup", tables: [{ name: "documents", columns: ["filename", "classification"], rows: [{ filename: "PROJECT_ATLAS.pdf", classification: "CONFIDENTIAL" }] }] },
+    ],
+  }],
   exploits: [{
     target: "WEB-01", sessionUser: "www-data", prerequisiteAction: "PORT_PROBE", module: "legacy_upload", output: "Session opened: www-data@WEB-01",
     evidence: [
@@ -199,7 +208,7 @@ export const glasshouse: ScenarioDefinition = {
   ],
   blueProfiles: [
     { id: "noisy-application", routeId: "application-chain", commands: ["nmap WEB-01", "exploit WEB-01", "cat /var/www/meridian/app.conf", "ssh deploy@DEV-01", "privesc backup-sync", "cat /etc/meridian/routes.conf", "ssh svc_web@FIN-APP", "cat /etc/fin-app/db.conf", "ssh finance_app@FIN-DB", "retrieve PROJECT_ATLAS.pdf"] },
-    { id: "trusted-backup", routeId: "backup-trust", commands: ["curl portal.meridian.test", "ssh fieldops@VPN-01", "cat /etc/vpn/backup-peers.conf", "ssh backup_svc@BACKUP-01", "cat /etc/backup/finance-db.conf", "ssh db_backup@FIN-DB", "retrieve PROJECT_ATLAS.pdf"] },
+    { id: "trusted-backup", routeId: "backup-trust", commands: ["curl portal.meridian.test", "ssh fieldops@VPN-01", "cat /etc/vpn/backup-peers.conf", "ssh backup_svc@BACKUP-01", "cat /etc/backup/finance-db.conf", "psql -h FIN-DB -U db_backup -d finance --password AtlasBackup-91d2", "\\dt", "SELECT filename, classification FROM documents;"] },
   ],
   defaultBlueProfile: "noisy-application",
 };

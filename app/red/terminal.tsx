@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 
-export type TerminalState = { currentMachine: string; currentUser: string; currentPrivilege: string; currentPath: string; discoveredHosts: string[] };
+export type TerminalState = { currentMachine: string; currentUser: string; currentPrivilege: string; currentPath: string; currentSessionId?: string; context?: { type: "UNIX" | "SSH" } | { type: "POSTGRES"; serviceName: string; databaseName: string }; discoveredHosts: string[] };
 
 type Props = { scenarioId: string; actorId: string; initialState: TerminalState; onStateChange: (state: TerminalState) => void; onRefresh: () => void };
 type Line = { kind: "command" | "output" | "error"; text: string };
@@ -21,13 +21,15 @@ export default function Terminal({ scenarioId, actorId, initialState, onStateCha
     const command = line.trim();
     if (!command || busy) return;
     setLine(""); setBusy(true);
-    setHistory((items) => [...items, { kind: "command", text: `${state.currentUser}@${state.currentMachine}:${state.currentPath}$ ${command}` }]);
+    const prompt = state.context?.type === "POSTGRES" ? `${state.context.databaseName}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`;
+    setHistory((items) => [...items, { kind: "command", text: `${prompt} ${command}` }]);
     if (command === "clear") { setHistory([]); setBusy(false); return; }
     try {
-      const response = await fetch("/api/sim/command", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ scenarioId, actorId, command, currentMachine: state.currentMachine, currentUser: state.currentUser, currentPath: state.currentPath }) });
+      const response = await fetch("/api/sim/command", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ scenarioId, actorId, command, currentSessionId: state.currentSessionId, currentMachine: state.currentMachine, currentUser: state.currentUser, currentPath: state.currentPath, context: state.context }) });
       const data = await response.json();
       const next = { ...state };
-      if (data.newSession) { next.currentMachine = data.newSession.machineId; next.currentUser = data.newSession.userId; next.currentPrivilege = data.newSession.privilege; next.currentPath = "/"; }
+      if (data.newSession) { next.currentMachine = data.newSession.machineId; next.currentUser = data.newSession.userId; next.currentPrivilege = data.newSession.privilege; next.currentSessionId = data.newSession.id; next.currentPath = "/"; }
+      if (data.context) next.context = data.context;
       if (data.currentPath) next.currentPath = data.currentPath;
       if (data.discoveredHosts) next.discoveredHosts = data.discoveredHosts;
       setState(next); onStateChange(next);
@@ -45,7 +47,7 @@ export default function Terminal({ scenarioId, actorId, initialState, onStateCha
       <div ref={bottomRef} />
     </div>
     <form className="terminal-input" onSubmit={submit}>
-      <label htmlFor="command">{state.currentUser}@{state.currentMachine}:{state.currentPath}$</label>
+      <label htmlFor="command">{state.context?.type === "POSTGRES" ? `${state.context.databaseName}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`}</label>
       <input id="command" autoComplete="off" autoFocus value={line} onChange={(event) => setLine(event.target.value)} disabled={busy} />
     </form>
   </section>;

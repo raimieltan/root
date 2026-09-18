@@ -30,6 +30,12 @@ enum ServiceStatus {
   STOPPED
 }
 
+enum SessionContext {
+  UNIX
+  SSH
+  POSTGRES
+}
+
 enum SecurityEventCategory {
   NETWORK
   AUTH
@@ -207,6 +213,9 @@ model Session {
 
   privilege    AccessLevel
   sourceMachineId String?
+  context      SessionContext @default(UNIX)
+  serviceName  String?
+  databaseName String?
 
   scenario     Scenario     @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
   scenarioId   String

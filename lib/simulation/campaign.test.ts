@@ -22,6 +22,53 @@ describe("Canonical campaign", { concurrency: false }, () => {
       assert.ok(definition.knowledgeRewards.some((reward) => reward.concept === "Incident response"));
     }
   });
+  it("takes a guided newcomer through the prerequisite path to Operator", async () => {
+    const onboardingProfiles = [campaign[0].blueProfiles[1], campaign[1].blueProfiles[0], campaign[2].blueProfiles[1]];
+    const runs: LocalRun[] = [];
+
+    for (const [index, profile] of onboardingProfiles.entries()) {
+      const definition = campaign[index];
+      const initialized = await initializeScenario("RED", definition.id);
+      try {
+        const state: TerminalState = { ...initialized.startingState, activeSessions: [], credentials: new Map() };
+        const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+        for (const command of profile.commands) {
+          const result = await engine.executeCommand(command, state);
+          assert.equal(result.success, true, `${definition.id}: ${command}: ${result.output}`);
+          if (result.newSession) {
+            state.currentMachine = result.newSession.machineId;
+            state.currentUser = result.newSession.userId;
+            state.currentPrivilege = result.newSession.privilege;
+            state.currentSessionId = result.newSession.id;
+            state.context = result.context;
+          }
+        }
+        const events = await prisma.securityEvent.findMany({ where: { scenarioId: initialized.scenarioId, actorId: initialized.actorId } });
+        const actions = new Set(events.map((event) => event.action));
+        runs.push({
+          ...initialized,
+          definitionId: definition.id,
+          name: definition.name,
+          mode: "RED",
+          assistance: "GUIDED",
+          startedAt: "",
+          result: {
+            won: true,
+            route: profile.routeId,
+            detected: events.some((event) => event.action === "DETECTION_TRIGGERED"),
+            concepts: definition.knowledgeRewards.filter((reward) => reward.actions.some((action) => actions.has(action))).map((reward) => reward.concept),
+            availability: 100,
+          },
+        });
+      } finally {
+        await deleteScenario(initialized.scenarioId);
+      }
+    }
+
+    const progress = campaignProgress(runs);
+    assert.equal(progress.designation, "Operator");
+    assert.equal(progress.operatorModeUnlocked, true);
+  });
   for (const definition of campaign) for (const profile of definition.blueProfiles) {
     it(`${definition.id}/${profile.id}: Red completes and leaves route evidence`, async () => {
       const run = await initializeScenario("RED", definition.id);
@@ -31,7 +78,7 @@ describe("Canonical campaign", { concurrency: false }, () => {
         for (const command of profile.commands) {
           const result = await engine.executeCommand(command, state);
           assert.equal(result.success, true, `${command}: ${result.output}`);
-          if (result.newSession) { state.currentMachine = result.newSession.machineId; state.currentUser = result.newSession.userId; state.currentPrivilege = result.newSession.privilege; }
+          if (result.newSession) { state.currentMachine = result.newSession.machineId; state.currentUser = result.newSession.userId; state.currentPrivilege = result.newSession.privilege; state.currentSessionId = result.newSession.id; state.context = result.context; }
         }
         const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: run.scenarioId }, include: { events: true } });
         assert.equal(scenario.state, "COMPLETED");

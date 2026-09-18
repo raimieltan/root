@@ -1,16 +1,16 @@
 # Graph Report - root  (2026-09-18)
 
 ## Corpus Check
-- 63 files · ~615,195 words
+- 66 files · ~627,457 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 341 nodes · 752 edges · 19 communities (14 shown, 3 thin omitted)
+- 416 nodes · 848 edges · 23 communities (18 shown, 3 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `da4c15ac`
+- Built from commit: `0f24e567`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,10 +19,11 @@
 - devDependencies
 - dependencies
 - TypeScript Configuration
-- campaign.test.ts
+- engine.ts
 - SimulationEngine
 - index.ts
 - Event Driven Design Docs
+- tools-unix.md
 - replay-client.tsx
 - Visual Design System
 - App Layout Fonts
@@ -32,10 +33,13 @@
 - ESLint Configuration
 - Next.js Configuration
 - PostCSS Configuration
+- 44. MVP Tool Set
+- 46. Player Progression
+- 47. Scenario Design Standard
 
 ## God Nodes (most connected - your core abstractions)
-1. `SimulationEngine` - 34 edges
-2. `TerminalState` - 20 edges
+1. `SimulationEngine` - 36 edges
+2. `TerminalState` - 22 edges
 3. `getDefinitionForScenario()` - 16 edges
 4. `compilerOptions` - 16 edges
 5. `ScenarioDefinition` - 15 edges
@@ -64,39 +68,43 @@
 - **Shared Simulation Model** — docs_root_canonical_plan_shared_simulation, docs_root_canonical_plan_everything_leaves_evidence, docs_root_canonical_plan_post_operation_reconstruction [EXTRACTED 1.00]
 - **ROOT Operational UI Reference Set** — docs_ui_chatgpt_image_sep_18_2026_12_05_06_am_1_red_operations_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_09_am_4_blue_soc_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_10_am_5_reconstruction_workspace [INFERRED 0.95]
 
-## Communities (19 total, 3 thin omitted)
+## Communities (23 total, 3 thin omitted)
 
 ### Community 0 - "career/page.tsx"
-Cohesion: 0.08
-Nodes (32): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), MissionPanel(), NetworkMap() (+24 more)
+Cohesion: 0.09
+Nodes (31): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), MissionPanel(), NetworkMap() (+23 more)
 
 ### Community 1 - "devDependencies"
-Cohesion: 0.05
-Nodes (41): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+33 more)
+Cohesion: 0.06
+Nodes (31): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+23 more)
 
 ### Community 2 - "dependencies"
-Cohesion: 0.06
-Nodes (31): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+23 more)
+Cohesion: 0.05
+Nodes (41): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+33 more)
 
 ### Community 3 - "TypeScript Configuration"
 Cohesion: 0.07
 Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules (+20 more)
 
-### Community 4 - "campaign.test.ts"
-Cohesion: 0.10
-Nodes (36): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+28 more)
+### Community 4 - "engine.ts"
+Cohesion: 0.09
+Nodes (38): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+30 more)
 
 ### Community 5 - "SimulationEngine"
-Cohesion: 0.28
-Nodes (5): SimulationEngine, reachable(), CommandResult, SimulationEvent, TerminalState
+Cohesion: 0.27
+Nodes (6): SimulationEngine, reachable(), parseTerminalInput(), CommandResult, SimulationEvent, TerminalState
 
 ### Community 6 - "index.ts"
-Cohesion: 0.21
-Nodes (22): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+14 more)
+Cohesion: 0.17
+Nodes (24): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+16 more)
 
 ### Community 7 - "Event Driven Design Docs"
 Cohesion: 0.18
 Nodes (12): Repository Agent Rules, Canonical Plan Precedence, Graphify-First Codebase Navigation, Claude Agent Rules Reference, Local PostgreSQL Service, Action to Replay Pipeline, Everything Leaves Evidence, Shared Authoritative Simulation (+4 more)
+
+### Community 8 - "tools-unix.md"
+Cohesion: 0.04
+Nodes (50): 10. Filesystem Simulation, 11. Services as First-Class Simulation Objects, 12. PostgreSQL Simulation, 13. Supported PostgreSQL Commands, 14. Database Simulation Model, 15. Credentials as First-Class Objects, 16. Credential Usage, 17. Credentials Application (+42 more)
 
 ### Community 9 - "replay-client.tsx"
 Cohesion: 0.14
@@ -122,25 +130,37 @@ Nodes (3): File Icon Asset, Globe Icon Asset, Window Icon Asset
 Cohesion: 0.67
 Nodes (3): Next.js Wordmark Asset, Vercel Mark Asset, Next.js Bootstrap Instructions
 
+### Community 20 - "44. MVP Tool Set"
+Cohesion: 0.29
+Nodes (7): 44. MVP Tool Set, Database, Network, Remote Access, Supporting ROOT/OS Apps, Unix, Web
+
+### Community 21 - "46. Player Progression"
+Cohesion: 0.33
+Nodes (6): 46. Player Progression, Stage 1, Stage 2, Stage 3, Stage 4, Stage 5
+
+### Community 22 - "47. Scenario Design Standard"
+Cohesion: 0.50
+Nodes (4): 1. What does the player observe?, 2. What relationship can they infer?, 3. What concrete interaction can they perform?, 47. Scenario Design Standard
+
 ## Knowledge Gaps
-- **112 isolated node(s):** `proficiencyLabel`, `geistSans`, `geistMono`, `metadata`, `apps` (+107 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 131 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **177 isolated node(s):** `proficiencyLabel`, `geistSans`, `geistMono`, `metadata`, `apps` (+172 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 196 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `SimulationEngine` connect `SimulationEngine` to `campaign.test.ts`, `index.ts`?**
-  _High betweenness centrality (0.053) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `dependencies` to `devDependencies`?**
-  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+- **Why does `SimulationEngine` connect `SimulationEngine` to `engine.ts`, `index.ts`?**
+  _High betweenness centrality (0.038) - this node is a cross-community bridge._
+- **Why does `devDependencies` connect `devDependencies` to `dependencies`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **What connects `proficiencyLabel`, `geistSans`, `geistMono` to the rest of the system?**
-  _112 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _177 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `career/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.07607843137254902 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08792270531400966 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
-- **Should `dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
 - **Should `TypeScript Configuration` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._

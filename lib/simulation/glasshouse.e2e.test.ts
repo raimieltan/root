@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "./engine";
 import { deleteScenario, initializeScenario } from "./initializer";
 import { normalizeReplayEvent, summarizeReplay } from "./replay";
+import { respondToAttack } from "./blue";
 import { glasshouse } from "./scenarios";
 import type { TerminalState } from "./types";
 
@@ -30,6 +31,16 @@ const routes = {
     "ssh db_backup@FIN-DB",
     "retrieve PROJECT_ATLAS.pdf",
   ],
+  postgres: [
+    "curl portal.meridian.test",
+    "ssh fieldops@VPN-01",
+    "cat /etc/vpn/backup-peers.conf",
+    "ssh backup_svc@BACKUP-01",
+    "cat /etc/backup/finance-db.conf",
+    "psql -h FIN-DB -U db_backup -d finance --password AtlasBackup-91d2",
+    "\\dt",
+    "SELECT filename, classification FROM documents;",
+  ],
 };
 
 async function runRoute(commands: string[]) {
@@ -52,6 +63,8 @@ async function runRoute(commands: string[]) {
         state.currentMachine = result.newSession.machineId;
         state.currentUser = result.newSession.userId;
         state.currentPrivilege = result.newSession.privilege;
+        state.currentSessionId = result.newSession.id;
+        state.context = result.context;
         state.currentPath = "/";
       }
     }
@@ -114,5 +127,44 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
     assert.ok(!detections.includes("WEB-EXEC-01"));
     assert.ok(!result.events.some((event) => event.action === "EXPLOIT_EXECUTED"));
     assert.ok(!result.events.some((event) => event.action === "PRIVILEGE_ESCALATION"));
+  });
+
+  it("uses a bounded PostgreSQL context and produces shared database telemetry", async () => {
+    const result = await runRoute(routes.postgres);
+    const actions = result.events.map((event) => event.action);
+
+    assert.equal(result.state, "COMPLETED");
+    assert.ok(actions.includes("POSTGRES_AUTH_SUCCESS"));
+    assert.ok(actions.includes("DATABASE_SESSION_CREATED"));
+    assert.ok(actions.includes("DATABASE_QUERY"));
+    assert.equal(result.events.find((event) => event.action === "OBJECTIVE_RETRIEVED")?.metadata.via, "postgres");
+  });
+
+  it("invalidates an active PostgreSQL context when Blue resets its identity", async () => {
+    const initialized = await initializeScenario(ScenarioMode.BLUE);
+    const state: TerminalState = {
+      currentMachine: "INTERNET", currentUser: "attacker", currentPrivilege: AccessLevel.NONE,
+      activeSessions: [], discoveredHosts: ["WEB-01"], credentials: new Map(), currentPath: "/",
+    };
+    try {
+      const engine = new SimulationEngine(initialized.scenarioId, initialized.redActorId);
+      for (const command of routes.postgres.slice(0, -2)) {
+        const result = await engine.executeCommand(command, state);
+        assert.equal(result.success, true, `${command}: ${result.output}`);
+        if (result.newSession) {
+          state.currentMachine = result.newSession.machineId;
+          state.currentUser = result.newSession.userId;
+          state.currentPrivilege = result.newSession.privilege;
+          state.currentSessionId = result.newSession.id;
+          state.context = result.context;
+        }
+      }
+      await respondToAttack({ scenarioId: initialized.scenarioId, actorId: initialized.actorId, action: "RESET_PASSWORD", username: "db_backup" });
+      const result = await engine.executeCommand("SELECT filename FROM documents;", state);
+      assert.equal(result.success, false);
+      assert.match(result.output, /no longer active/i);
+    } finally {
+      await deleteScenario(initialized.scenarioId);
+    }
   });
 });

@@ -3,10 +3,11 @@
   "1": "devDependencies",
   "2": "dependencies",
   "3": "TypeScript Configuration",
-  "4": "campaign.test.ts",
+  "4": "engine.ts",
   "5": "SimulationEngine",
   "6": "index.ts",
   "7": "Event Driven Design Docs",
+  "8": "tools-unix.md",
   "9": "replay-client.tsx",
   "10": "Visual Design System",
   "11": "App Layout Fonts",
@@ -17,5 +18,8 @@
   "16": "Next.js Configuration",
   "17": "PostCSS Configuration",
   "18": "Prisma Configuration",
-  "19": "playwright.config.ts"
+  "19": "playwright.config.ts",
+  "20": "44. MVP Tool Set",
+  "21": "46. Player Progression",
+  "22": "47. Scenario Design Standard"
 }

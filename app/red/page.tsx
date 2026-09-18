@@ -14,7 +14,7 @@ export default function RedTeamPage() {
   const { ids, view, refresh, error, retry } = useOperation("RED");
   const [activeApp, setActiveApp] = useState<(typeof apps)[number]>("Mission");
   const assistance = view?.assistance;
-  const [terminalState, setTerminalState] = useState<TerminalState>({ currentMachine: "INTERNET", currentUser: "attacker", currentPrivilege: "NONE", currentPath: "/", discoveredHosts: [] });
+  const [terminalState, setTerminalState] = useState<TerminalState>({ currentMachine: "INTERNET", currentUser: "attacker", currentPrivilege: "NONE", currentPath: "/", context: { type: "UNIX" }, discoveredHosts: [] });
 
   if (!ids || !view) return <main className="loading-screen"><div className="boot-mark">ROOT<span>/OS</span></div><p role={error ? "alert" : undefined}>{error || "Provisioning operation…"}</p>{error && <button type="button" onClick={retry}>Retry connection</button>}<Link href="/">Return to operations</Link></main>;
   const currentMachine = view.machines.find((machine) => machine.hostname === terminalState.currentMachine);
@@ -22,7 +22,7 @@ export default function RedTeamPage() {
   return <RootChrome context="red" active="terminal" tone="red" title="OPS // RED TEAM OPERATIONS" operator={`${terminalState.currentUser}@${terminalState.currentMachine}`} privilege={terminalState.currentPrivilege}>
     <div className="workspace-toolbar"><div><span className="live-dot" /> {view.operation.name} <b>{view.scenario.state}</b></div><div className="app-tabs">{apps.map((app) => <button key={app} className={activeApp === app ? "active" : ""} onClick={() => setActiveApp(app)}>{app}</button>)}</div><span>{view.operation.organization} // {view.operation.presentation.caseId}</span></div>
     <div className="red-layout">
-      <Terminal scenarioId={ids.scenarioId} actorId={ids.actorId} initialState={view.currentSession ? { currentMachine: view.currentSession.machine, currentUser: view.currentSession.user, currentPrivilege: view.currentSession.privilege, currentPath: "/", discoveredHosts: view.discoveredHosts } : terminalState} onStateChange={setTerminalState} onRefresh={() => void refresh()} />
+      <Terminal scenarioId={ids.scenarioId} actorId={ids.actorId} initialState={view.currentSession ? { currentMachine: view.currentSession.machine, currentUser: view.currentSession.user, currentPrivilege: view.currentSession.privilege, currentSessionId: view.currentSession.id, currentPath: "/", context: { type: "UNIX" }, discoveredHosts: view.discoveredHosts } : terminalState} onStateChange={setTerminalState} onRefresh={() => void refresh()} />
       <div className="intel-stack">
         <NetworkMap machines={view.machines} current={terminalState.currentMachine} organization={view.operation.organization} />
         {activeApp === "Mission" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} />}

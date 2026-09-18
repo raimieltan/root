@@ -48,7 +48,14 @@ export type SimSession = {
   sourceMachineId?: string;
   createdAt: Date;
   active: boolean;
+  context: "UNIX" | "SSH" | "POSTGRES";
+  serviceName?: string;
+  databaseName?: string;
 };
+
+export type TerminalContext =
+  | { type: "UNIX" | "SSH" }
+  | { type: "POSTGRES"; serviceName: string; databaseName: string };
 
 export type SimulationEvent = {
   id: string;
@@ -71,6 +78,7 @@ export type CommandResult = {
   events: SimulationEvent[];
   sessionUpdated?: boolean;
   newSession?: SimSession;
+  context?: TerminalContext;
   objectiveRetrieved?: boolean;
   discoveredHosts?: string[];
   currentPath?: string;
@@ -84,4 +92,6 @@ export type TerminalState = {
   discoveredHosts: string[];
   credentials: Map<string, { username: string; password: string; scope: string }>;
   currentPath?: string;
+  currentSessionId?: string;
+  context?: TerminalContext;
 };

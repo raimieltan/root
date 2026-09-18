@@ -66,6 +66,15 @@ export type ScenarioDefinition = {
     accessEvent?: ScenarioEventDefinition;
   }>;
   discoveries: ScenarioDiscovery[];
+  databases?: Array<{
+    host: string;
+    service: string;
+    database: string;
+    identities: Array<{
+      username: string;
+      tables: Array<{ name: string; columns: string[]; rows: Array<Record<string, string>> }>;
+    }>;
+  }>;
   exploits: Array<{
     target: string;
     sessionUser: string;
