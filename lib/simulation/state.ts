@@ -56,6 +56,39 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     severity: event.severity, source: event.sourceMachine?.hostname ?? null, target: event.targetMachine?.hostname ?? null,
     userId: event.userId, metadata: Object.fromEntries(Object.entries(parseMetadata(event.metadata)).filter(([key]) => !isBlue || key !== "background")), visibleToRed: event.visibleToRed, visibleToBlue: event.visibleToBlue,
   }));
+  const investigation = !isBlue ? [] : definition.routes.map((route) => {
+    const routeConnections = connections.filter((connection) =>
+      route.hosts.includes(connection.source.hostname) && route.hosts.includes(connection.target.hostname),
+    );
+    const routeEvents = events.filter((event) =>
+      [event.source, event.target].some((host) => host && host !== "INTERNET" && route.hosts.includes(host)),
+    );
+    const observedHosts = new Set(routeEvents.flatMap((event) => [event.source, event.target]).filter((host): host is string => Boolean(host)));
+    const observedIdentities = [...new Set(routeEvents.map((event) => event.userId).filter((identity): identity is string => Boolean(identity)))];
+    const observedProcesses = machines
+      .filter((machine) => observedHosts.has(machine.hostname))
+      .flatMap((machine) => machine.processes.map((process) => `${machine.hostname}: ${process.runningAs} ${process.name}`));
+    const blockedLinks = routeConnections.filter((connection) => !connection.allowed);
+    const unobservedHosts = route.hosts.filter((host) => host !== "INTERNET" && !observedHosts.has(host));
+    const routeServices = definition.businessServices.filter((service) => service.hosts.some((host) => route.hosts.includes(host)));
+    return {
+      id: route.id,
+      name: route.name,
+      hypothesis: route.hypothesis,
+      status: blockedLinks.length ? "CONTAINED" : routeEvents.length >= 2 ? "SUPPORTED" : "OPEN",
+      evidence: {
+        hosts: [...observedHosts],
+        identities: observedIdentities,
+        processes: observedProcesses,
+        connections: routeConnections.map((connection) => ({ id: connection.id, source: connection.source.hostname, target: connection.target.hostname, port: connection.port, allowed: connection.allowed })),
+        timeline: routeEvents.map((event) => ({ id: event.id, timestamp: event.timestamp, action: event.action, source: event.source, target: event.target, identity: event.userId })),
+      },
+      uncertainty: unobservedHosts.length
+        ? `No observed telemetry yet from ${unobservedHosts.join(", ")}; the route remains a hypothesis.`
+        : "Observed telemetry supports the route, but intent and the final objective still need confirmation.",
+      businessImpact: routeServices.map((service) => ({ name: service.name, impact: service.impact })),
+    };
+  });
   const rawEvents = scenario.events.map((event) => ({ ...event, metadata: event.metadata }));
   const objectiveRetrieved = scenario.events.some((event) => event.action === "OBJECTIVE_RETRIEVED");
   const credentials = scenario.events
@@ -85,6 +118,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     currentSession: !isBlue && current ? { id: current.id, machine: current.machine.hostname, user: current.user.username, privilege: current.privilege } : null,
     sessions: (isBlue ? scenario.sessions.filter((s) => s.active && s.machine.zone !== "EXTERNAL") : activeSessions).map((session) => ({ id: session.id, machine: session.machine.hostname, user: session.user.username, privilege: session.privilege, createdAt: session.createdAt.toISOString() })),
     discoveredHosts: isBlue ? machines.map((m) => m.hostname) : [...discovered], machines, events,
+    investigation,
     alerts: isBlue ? alertsFromEvents(rawEvents) : [], suspicion: isBlue ? suspicionFromEvents(rawEvents) : 0, objectiveRetrieved,
     credentials: isBlue ? [] : credentials,
     intel: { hosts: isBlue ? machines.map((m) => m.hostname) : [...discovered], relationships: isBlue ? [] : relationships },

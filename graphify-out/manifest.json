@@ -36,9 +36,9 @@
     "semantic_hash": "60ef4db65c90955768412b52d153b067"
   },
   "app/blue/page.tsx": {
-    "mtime": 1789706821.5959308,
-    "seen": 1789706934.639758,
-    "ast_hash": "5e192161b7cd7277fcd3f2a2a013182a",
+    "mtime": 1789708113.3463407,
+    "seen": 1789708554.369472,
+    "ast_hash": "d6a5ec0da8fa9090582258ac998f911b",
     "semantic_hash": ""
   },
   "app/layout.tsx": {
@@ -84,9 +84,9 @@
     "semantic_hash": ""
   },
   "app/sim-types.ts": {
-    "mtime": 1789683518.731085,
-    "seen": 1789700830.1658251,
-    "ast_hash": "e42d62085fbf5a49aa541da95b07e0ab",
+    "mtime": 1789707291.3643203,
+    "seen": 1789708554.369798,
+    "ast_hash": "488e8a07205a027475216914ed64af53",
     "semantic_hash": ""
   },
   "app/ui/root-chrome.tsx": {
@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/state.ts": {
-    "mtime": 1789687846.1121356,
-    "seen": 1789700830.166067,
-    "ast_hash": "8a3b5fa0d760e5e890e2e8c8bfb48324",
+    "mtime": 1789708577.3538163,
+    "seen": 1789708588.329427,
+    "ast_hash": "2b1d1993052883c0d0145e210bc30259",
     "semantic_hash": ""
   },
   "lib/simulation/types.ts": {
@@ -402,9 +402,9 @@
     "semantic_hash": ""
   },
   "tests/browser/campaign.spec.ts": {
-    "mtime": 1789706955.945462,
-    "seen": 1789707037.2052548,
-    "ast_hash": "48f8a8af491d062ad39e82d223c53884",
+    "mtime": 1789708392.0319974,
+    "seen": 1789708554.370912,
+    "ast_hash": "184d6c9204ed3244dec3072b119f011c",
     "semantic_hash": ""
   },
   "Screenshot 2026-09-18 at 10.56.08.png": {
@@ -426,8 +426,8 @@
     "semantic_hash": ""
   },
   "test-results/.last-run.json": {
-    "mtime": 1789707011.7586963,
-    "seen": 1789707037.2052522,
+    "mtime": 1789708452.608431,
+    "seen": 1789708554.37091,
     "ast_hash": "f196824657d8858bc7fa44eecbba38b1",
     "semantic_hash": ""
   },

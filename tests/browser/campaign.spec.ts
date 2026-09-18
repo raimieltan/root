@@ -97,3 +97,53 @@ test("Blue investigation, precise containment, results and replay", async ({ pag
   await page.getByRole("link", { name: "Open reconstruction" }).click();
   await expect(page.getByText("BLUE outcome: SUCCESS", { exact: false })).toBeVisible();
 });
+
+test("Blue analysts correlate evidence and contain every viable route across operations", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("root:campaign:v1", JSON.stringify([
+    { scenarioId: "prior-glasshouse", actorId: "prior", definitionId: "glasshouse", name: "Operation Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: [], availability: 100 } },
+    { scenarioId: "prior-nightshift", actorId: "prior", definitionId: "nightshift", name: "Operation Nightshift", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "endpoint-agent", detected: true, concepts: [], availability: 100 } },
+  ])));
+
+  async function step() {
+    const response = page.waitForResponse((r) => r.url().includes("/blue/advance") && r.request().method() === "POST");
+    await page.getByRole("button", { name: "Advance one step" }).click();
+    expect((await response).ok()).toBe(true);
+    await expect(page.getByText("Synchronizing evidence and simulation state…")).toBeHidden();
+  }
+
+  await page.goto("/");
+  for (const operation of campaign) {
+    await page.getByRole("button", { name: new RegExp(operation.name) }).click();
+    await page.getByRole("button", { name: "Blue Team", exact: true }).click();
+    await page.getByRole("link", { name: `Launch ${operation.name}` }).click();
+    await step();
+    await step();
+
+    const investigate = page.getByRole("button", { name: "Investigate and pin" });
+    if (await investigate.count()) {
+      await investigate.first().click();
+      await expect(page.getByText("Synchronizing evidence and simulation state…")).toBeHidden();
+    } else {
+      await page.getByRole("checkbox", { name: /Pin / }).first().check();
+    }
+    await page.getByLabel("Finding", { exact: true }).fill(`${operation.name}: host, identity, process, connection, and timeline support the active route.`);
+    await page.getByRole("button", { name: "Record finding" }).click();
+    await expect(page.getByText("linked observations")).toBeVisible();
+
+    await expect(page.getByText("INCIDENT WORKSPACE // EVIDENCE CHAIN")).toBeVisible();
+    await expect(page.getByText("UNCERTAINTY //")).toBeVisible();
+    await expect(page.getByText("CONTAINMENT PLAN")).toBeVisible();
+    await expect(page.getByText("Business impact:").first()).toBeVisible();
+
+    const supported = page.getByRole("tab", { name: /SUPPORTED/ }).first();
+    await expect(supported).toBeVisible();
+    const plan = page.locator(".containment-plan");
+    await expect(plan.getByText(/Blocks .*remain viable/).first()).toBeVisible();
+    const contain = plan.locator("article").last().getByRole("button", { name: /Block link — contain/ });
+    const containmentResponse = page.waitForResponse((response) => response.url().includes("/blue/respond") && response.request().method() === "POST");
+    await contain.click();
+    expect((await containmentResponse).ok()).toBe(true);
+    await expect(page.getByRole("tab", { name: /CONTAINED/ })).toBeVisible();
+    await page.goto("/");
+  }
+});

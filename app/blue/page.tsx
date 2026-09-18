@@ -22,6 +22,7 @@ export default function BlueTeamPage() {
   const [evidence, setEvidence] = useState<string[]>([]);
   const [finding, setFinding] = useState("");
   const [findingStatus, setFindingStatus] = useState("HYPOTHESIS");
+  const [incidentRouteId, setIncidentRouteId] = useState("");
 
   const selected =
     view?.machines.find((machine) => machine.id === hostId) ??
@@ -149,6 +150,12 @@ export default function BlueTeamPage() {
         .filter((user): user is string => Boolean(user)),
     ),
   ];
+  const incidentRoute =
+    view.investigation.find((route) => route.id === incidentRouteId) ??
+    view.investigation[0];
+  const alternateRoutes = view.investigation.filter(
+    (route) => route.id !== incidentRoute?.id && route.status !== "CONTAINED",
+  );
 
   return (
     <RootChrome
@@ -564,11 +571,77 @@ export default function BlueTeamPage() {
           {/* INCIDENT */}
           <section className="panel soc-incident">
             <header className="panel-title">
-              INCIDENT WORKSPACE
+              INCIDENT WORKSPACE // EVIDENCE CHAIN
             </header>
 
             <div className="data-list">
               <p>{evidence.length} evidence items pinned</p>
+
+              <div
+                className="incident-route-tabs"
+                role="tablist"
+                aria-label="Route hypotheses"
+                style={{ position: "relative", zIndex: 2 }}
+              >
+                {view.investigation.map((route) => (
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={incidentRoute?.id === route.id}
+                    className={incidentRoute?.id === route.id ? "active" : ""}
+                    key={route.id}
+                    onClick={() => setIncidentRouteId(route.id)}
+                  >
+                    {route.name} // {route.status}
+                  </button>
+                ))}
+              </div>
+
+              {incidentRoute && (
+                <article className={`evidence-chain ${incidentRoute.status.toLowerCase()}`}>
+                  <header>
+                    <b>{incidentRoute.name}</b>
+                    <span>{incidentRoute.status}</span>
+                  </header>
+                  <p>{incidentRoute.hypothesis}</p>
+
+                  <dl>
+                    <div><dt>HOSTS</dt><dd>{incidentRoute.evidence.hosts.join(" → ") || "No route hosts observed"}</dd></div>
+                    <div><dt>IDENTITY</dt><dd>{incidentRoute.evidence.identities.join(", ") || "Not yet observed"}</dd></div>
+                    <div><dt>PROCESS</dt><dd>{incidentRoute.evidence.processes.join(", ") || "No process evidence"}</dd></div>
+                    <div><dt>TIMELINE</dt><dd>{incidentRoute.evidence.timeline.slice(-3).map((event) => `${event.timestamp.slice(11, 19)} ${event.action}`).join(" · ") || "Awaiting telemetry"}</dd></div>
+                  </dl>
+
+                  <p className="uncertainty"><b>UNCERTAINTY //</b> {incidentRoute.uncertainty}</p>
+                </article>
+              )}
+
+              {incidentRoute && (
+                <div className="containment-plan">
+                  <b>CONTAINMENT PLAN</b>
+                  <p>Choose a link that interrupts this route. Blocking a link can degrade the named business service; isolating a host is broader and stops its services.</p>
+                  {incidentRoute.evidence.connections.map((connection) => (
+                    <article key={connection.id}>
+                      <b>{connection.source} → {connection.target}:{connection.port}</b>
+                      <p>
+                        {connection.allowed
+                          ? `Blocks ${incidentRoute.name}. ${alternateRoutes.length ? `${alternateRoutes.map((route) => route.name).join(" and ")} remain viable.` : "No known alternate route remains viable."}`
+                          : `${incidentRoute.name} is interrupted at this link.`}
+                      </p>
+                      <p className="impact-preview">
+                        Business impact: {incidentRoute.businessImpact.map((service) => `${service.name} — ${service.impact}`).join(" ") || "No mapped business service."}
+                      </p>
+                      <button
+                        type="button"
+                        disabled={!active || !connection.allowed}
+                        onClick={() => void respond("BLOCK_CONNECTION", { connectionId: connection.id })}
+                      >
+                        {connection.allowed ? `Block link — contain ${incidentRoute.name}` : "Link blocked"}
+                      </button>
+                    </article>
+                  ))}
+                </div>
+              )}
 
               <label>
                 Finding
