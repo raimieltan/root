@@ -536,7 +536,7 @@
       "file_type": "code",
       "norm_label": "blueteampage()",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L7"
+      "source_location": "L9"
     },
     {
       "id": "app_blue_page_blueteampage_advance",
@@ -548,7 +548,7 @@
       "file_type": "code",
       "norm_label": "advance()",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L20"
+      "source_location": "L30"
     },
     {
       "id": "app_blue_page_blueteampage_respond",
@@ -560,7 +560,7 @@
       "file_type": "code",
       "norm_label": "respond()",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L31"
+      "source_location": "L72"
     },
     {
       "id": "app_page_home",
@@ -2493,6 +2493,78 @@
       "source_location": "L27"
     },
     {
+      "id": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context",
+      "label": "error-context.md",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "error-context.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "error-context.md",
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_error_details",
+      "label": "Error details",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "error-context.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "error details",
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L12"
+    },
+    {
+      "id": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_instructions",
+      "label": "Instructions",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "error-context.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "instructions",
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_page_snapshot",
+      "label": "Page snapshot",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "error-context.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "page snapshot",
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L25"
+    },
+    {
+      "id": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_test_info",
+      "label": "Test info",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "error-context.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "test info",
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_test_source",
+      "label": "Test source",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "error-context.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "test source",
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L242"
+    },
+    {
       "id": "tsconfig",
       "label": "tsconfig.json",
       "_origin": "ast",
@@ -3995,7 +4067,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L8",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -4007,7 +4079,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L15",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -4019,7 +4091,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L16",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -5483,7 +5555,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L20",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -5495,7 +5567,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L31",
+      "source_location": "L72",
       "weight": 1.0
     },
     {
@@ -5892,7 +5964,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -5904,7 +5976,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L5",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -5917,6 +5989,18 @@
       "context": "import",
       "source_file": "app/page.tsx",
       "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "lib_simulation_scenarios_index_campaign",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -7801,7 +7885,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -7813,7 +7897,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L5",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -7838,7 +7922,6 @@
       "context": "import",
       "source_file": "app/page.tsx",
       "source_location": "L5",
-      "type_only": true,
       "weight": 1.0
     },
     {
@@ -9001,7 +9084,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/blue/page.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -10655,6 +10738,61 @@
       "weight": 1.0
     },
     {
+      "source": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context",
+      "target": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_instructions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context",
+      "target": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_error_details",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context",
+      "target": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_test_source",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L242",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context",
+      "target": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_page_snapshot",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context",
+      "target": "test_results_campaign_blue_investigatio_09b33_tainment_results_and_replay_error_context_test_info",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
       "source": "tests_browser_campaign_spec",
       "target": "tests_browser_campaign_spec_step",
       "relation": "contains",
@@ -11475,5 +11613,5 @@
       "source_file": "docs/ui/VISUAL_STYLES.md"
     }
   ],
-  "built_at_commit": "ea5db12cbc36f09089c5446fae015aba8a7581fa"
+  "built_at_commit": "b629d802917ae945b9e0cbe55c2c6f0f50b22a7e"
 }

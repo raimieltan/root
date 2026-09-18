@@ -3,9 +3,9 @@
   "1": "Build Toolchain Dependencies",
   "2": "Runtime App Dependencies",
   "3": "TypeScript Configuration",
-  "4": "index.ts",
+  "4": "campaign.test.ts",
   "5": "SimulationEngine",
-  "6": "content.ts",
+  "6": "index.ts",
   "7": "Event Driven Design Docs",
   "8": "Package Scripts",
   "9": "replay-client.tsx",
@@ -18,7 +18,5 @@
   "16": "Next.js Configuration",
   "17": "PostCSS Configuration",
   "18": "Prisma Configuration",
-  "19": "playwright.config.ts",
-  "20": "campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md",
-  "21": "campaign-operation-selecti-b6de4--→-reconstruction-→-unlocks/error-context.md"
+  "19": "playwright.config.ts"
 }

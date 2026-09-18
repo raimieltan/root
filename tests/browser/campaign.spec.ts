@@ -39,10 +39,16 @@ test("Blue investigation, precise containment, results and replay", async ({ pag
   await expect(page.getByRole("button", { name: "Investigate and pin" }).first()).toBeVisible();
   await page.getByRole("button", { name: "Investigate and pin" }).first().click();
   await page.getByLabel("Finding", { exact: true }).fill("Concentrated probing merits host and identity correlation.");
+  const findingResponse = page.waitForResponse((response) => response.url().includes("/blue/respond") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Record finding" }).click();
+  expect((await findingResponse).ok()).toBe(true);
   await expect(page.getByText("linked observations")).toBeVisible();
-  await page.getByLabel("Host", { exact: true }).selectOption({ label: "FIN-DB // HEALTHY" });
+  const host = page.locator(".soc-host select");
+  await expect(host).toBeEnabled();
+  await host.selectOption({ label: "FIN-DB // HEALTHY" });
+  const isolateResponse = page.waitForResponse((response) => response.url().includes("/blue/respond") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Isolate host", exact: true }).click();
+  expect((await isolateResponse).ok()).toBe(true);
   await expect(page.getByText(/Finance: OFFLINE/).first()).toBeVisible();
   for (let i = 0; i < 25; i++) {
     if (await page.getByRole("link", { name: "Open reconstruction" }).count()) break;

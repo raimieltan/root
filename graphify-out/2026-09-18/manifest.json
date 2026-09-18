@@ -36,9 +36,9 @@
     "semantic_hash": "60ef4db65c90955768412b52d153b067"
   },
   "app/blue/page.tsx": {
-    "mtime": 1789687873.3050406,
-    "seen": 1789700830.1657002,
-    "ast_hash": "1b0ac8c3de126c83b6a104752c2e24c0",
+    "mtime": 1789703683.6046586,
+    "seen": 1789705313.370538,
+    "ast_hash": "a1d6bf3372d43267c420bfc8a6aada27",
     "semantic_hash": ""
   },
   "app/layout.tsx": {
@@ -48,9 +48,9 @@
     "semantic_hash": "4a0e0f8914b7b23788e48de392f8d8ca"
   },
   "app/page.tsx": {
-    "mtime": 1789683573.8452156,
-    "seen": 1789700830.165751,
-    "ast_hash": "2f018a33af920e0cc91f0c3c7f6059ae",
+    "mtime": 1789701533.6959298,
+    "seen": 1789703628.0968409,
+    "ast_hash": "78e248add547ca6dace8e063a24dd56e",
     "semantic_hash": ""
   },
   "app/red/mission-panel.tsx": {
@@ -396,27 +396,15 @@
     "semantic_hash": ""
   },
   "playwright.config.ts": {
-    "mtime": 1789684096.869596,
-    "seen": 1789700830.166205,
-    "ast_hash": "70eec1d9fe27f6c5b08367dbe71683d9",
+    "mtime": 1789705116.933517,
+    "seen": 1789705313.373315,
+    "ast_hash": "110f17be7e5c03d2d40c384ce8647e38",
     "semantic_hash": ""
   },
   "tests/browser/campaign.spec.ts": {
     "mtime": 1789684096.9938555,
     "seen": 1789700830.166292,
     "ast_hash": "df9bea0517a4aea108ff0dc1e6d68347",
-    "semantic_hash": ""
-  },
-  "test-results/.playwright-artifacts-0/traces/resources/1f0b83a18a61ebfc7fc428cefb551a8fe5c9665b.html": {
-    "mtime": 1789700231.0347364,
-    "seen": 1789700830.1666508,
-    "ast_hash": "925829b9ef84d4810ea62fcfa65b17a7",
-    "semantic_hash": ""
-  },
-  "test-results/.playwright-artifacts-0/traces/resources/8ed540c531f8aef461bd43d7d8543bd5c790b3b7.html": {
-    "mtime": 1789700186.8353572,
-    "seen": 1789700830.166653,
-    "ast_hash": "275e8c22500c01624ad1a74325c08b6a",
     "semantic_hash": ""
   },
   "Screenshot 2026-09-18 at 10.56.08.png": {
@@ -437,34 +425,46 @@
     "ast_hash": "b62190f1bc8805c65860328849d6d8d2",
     "semantic_hash": ""
   },
-  "test-results/.playwright-artifacts-0/traces/screencast/page@7c75751b619c25f7a9c6cb9b7263a513-1789700183885.jpeg": {
-    "mtime": 1789700183.9080222,
-    "seen": 1789700830.167192,
-    "ast_hash": "cf098d11930c48dad2c25ee8c7feff19",
+  "test-results/.last-run.json": {
+    "mtime": 1789705281.4344108,
+    "seen": 1789705313.373451,
+    "ast_hash": "797819599283668ff156f0095a094c33",
     "semantic_hash": ""
   },
-  "test-results/.playwright-artifacts-0/traces/screencast/page@7c75751b619c25f7a9c6cb9b7263a513-1789700187038.jpeg": {
-    "mtime": 1789700187.3100305,
-    "seen": 1789700830.1671941,
-    "ast_hash": "2240c9bcf5bbded23a1a78c74c18f4df",
+  "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md": {
+    "mtime": 1789705281.0108666,
+    "seen": 1789705313.3740458,
+    "ast_hash": "2c4de7a32d9765928895aba0711bd94a",
     "semantic_hash": ""
   },
-  "test-results/.playwright-artifacts-0/traces/screencast/page@7c75751b619c25f7a9c6cb9b7263a513-1789700189125.jpeg": {
-    "mtime": 1789700189.1824622,
-    "seen": 1789700830.1671948,
-    "ast_hash": "2240c9bcf5bbded23a1a78c74c18f4df",
+  "image copy 2.png": {
+    "mtime": 1789702280.975278,
+    "seen": 1789703628.104036,
+    "ast_hash": "2f5863128c1ee689c52be4dc9b140c7a",
     "semantic_hash": ""
   },
-  "test-results/.playwright-artifacts-0/traces/screencast/page@7c75751b619c25f7a9c6cb9b7263a513-1789700230928.jpeg": {
-    "mtime": 1789700230.934751,
-    "seen": 1789700830.167197,
-    "ast_hash": "2240c9bcf5bbded23a1a78c74c18f4df",
+  "image copy 3.png": {
+    "mtime": 1789702689.8370676,
+    "seen": 1789703628.104042,
+    "ast_hash": "286676935b30bab5b26b58a8335a3a4f",
     "semantic_hash": ""
   },
-  "test-results/.playwright-artifacts-0/traces/screencast/page@7c75751b619c25f7a9c6cb9b7263a513-1789700231194.jpeg": {
-    "mtime": 1789700231.198985,
-    "seen": 1789700830.167199,
-    "ast_hash": "2240c9bcf5bbded23a1a78c74c18f4df",
+  "image copy 4.png": {
+    "mtime": 1789702966.902627,
+    "seen": 1789703628.104046,
+    "ast_hash": "5404d1da9339c458171fe0410013803d",
+    "semantic_hash": ""
+  },
+  "image copy 5.png": {
+    "mtime": 1789702985.5517874,
+    "seen": 1789703628.104057,
+    "ast_hash": "d1f064fec1cc8f4fccbc2d734a803b8b",
+    "semantic_hash": ""
+  },
+  "image copy.png": {
+    "mtime": 1789702148.2007427,
+    "seen": 1789703628.104061,
+    "ast_hash": "4b29669c0e874a2eba2a46717fde314c",
     "semantic_hash": ""
   }
 }
