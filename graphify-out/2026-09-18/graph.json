@@ -579,6 +579,18 @@
       "source_location": "L36"
     },
     {
+      "id": "app_api_operations_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "career/page.tsx",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "app/api/operations/route.ts",
+      "source_location": "L2"
+    },
+    {
       "id": "app_blue_page_blueteampage",
       "label": "BlueTeamPage()",
       "_callable": true,
@@ -819,6 +831,18 @@
       "source_location": "L60"
     },
     {
+      "id": "tests_browser_campaign_spec_step",
+      "label": "step()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "career/page.tsx",
+      "file_type": "code",
+      "norm_label": "step()",
+      "source_file": "tests/browser/campaign.spec.ts",
+      "source_location": "L77"
+    },
+    {
       "id": "app_layout_rootlayout",
       "label": "RootLayout()",
       "_callable": true,
@@ -960,7 +984,7 @@
       "file_type": "code",
       "norm_label": "runroute()",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L46"
+      "source_location": "L47"
     },
     {
       "id": "lib_simulation_initializer_deletescenario",
@@ -1092,7 +1116,7 @@
       "file_type": "code",
       "norm_label": ".applydiscovery()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L148"
+      "source_location": "L151"
     },
     {
       "id": "lib_simulation_engine_simulationengine_changedirectory",
@@ -1104,7 +1128,7 @@
       "file_type": "code",
       "norm_label": ".changedirectory()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L166"
+      "source_location": "L169"
     },
     {
       "id": "lib_simulation_engine_simulationengine_connectpostgres",
@@ -1116,7 +1140,7 @@
       "file_type": "code",
       "norm_label": ".connectpostgres()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L252"
+      "source_location": "L283"
     },
     {
       "id": "lib_simulation_engine_simulationengine_constructor",
@@ -1140,7 +1164,7 @@
       "file_type": "code",
       "norm_label": ".curl()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L239"
+      "source_location": "L242"
     },
     {
       "id": "lib_simulation_engine_simulationengine_currentmachine",
@@ -1152,7 +1176,7 @@
       "file_type": "code",
       "norm_label": ".currentmachine()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L81"
+      "source_location": "L84"
     },
     {
       "id": "lib_simulation_engine_simulationengine_definition",
@@ -1176,7 +1200,7 @@
       "file_type": "code",
       "norm_label": ".discoveredhosts()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L136"
+      "source_location": "L139"
     },
     {
       "id": "lib_simulation_engine_simulationengine_emit",
@@ -1188,7 +1212,7 @@
       "file_type": "code",
       "norm_label": ".emit()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L101"
+      "source_location": "L104"
     },
     {
       "id": "lib_simulation_engine_simulationengine_emitdefinition",
@@ -1200,7 +1224,7 @@
       "file_type": "code",
       "norm_label": ".emitdefinition()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L144"
+      "source_location": "L147"
     },
     {
       "id": "lib_simulation_engine_simulationengine_executecommand",
@@ -1224,7 +1248,7 @@
       "file_type": "code",
       "norm_label": ".exploit()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L304"
+      "source_location": "L349"
     },
     {
       "id": "lib_simulation_engine_simulationengine_help",
@@ -1236,7 +1260,7 @@
       "file_type": "code",
       "norm_label": ".help()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L70"
+      "source_location": "L72"
     },
     {
       "id": "lib_simulation_engine_simulationengine_installagent",
@@ -1248,7 +1272,7 @@
       "file_type": "code",
       "norm_label": ".installagent()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L377"
+      "source_location": "L422"
     },
     {
       "id": "lib_simulation_engine_simulationengine_ip",
@@ -1260,7 +1284,7 @@
       "file_type": "code",
       "norm_label": ".ip()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L213"
+      "source_location": "L216"
     },
     {
       "id": "lib_simulation_engine_simulationengine_john",
@@ -1272,7 +1296,7 @@
       "file_type": "code",
       "norm_label": ".john()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L347"
+      "source_location": "L392"
     },
     {
       "id": "lib_simulation_engine_simulationengine_listfiles",
@@ -1284,7 +1308,7 @@
       "file_type": "code",
       "norm_label": ".listfiles()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L171"
+      "source_location": "L174"
     },
     {
       "id": "lib_simulation_engine_simulationengine_ping",
@@ -1296,7 +1320,7 @@
       "file_type": "code",
       "norm_label": ".ping()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L218"
+      "source_location": "L221"
     },
     {
       "id": "lib_simulation_engine_simulationengine_postgresinput",
@@ -1308,7 +1332,7 @@
       "file_type": "code",
       "norm_label": ".postgresinput()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L274"
+      "source_location": "L305"
     },
     {
       "id": "lib_simulation_engine_simulationengine_privesc",
@@ -1320,7 +1344,7 @@
       "file_type": "code",
       "norm_label": ".privesc()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L364"
+      "source_location": "L409"
     },
     {
       "id": "lib_simulation_engine_simulationengine_processes",
@@ -1332,7 +1356,7 @@
       "file_type": "code",
       "norm_label": ".processes()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L206"
+      "source_location": "L209"
     },
     {
       "id": "lib_simulation_engine_simulationengine_readfile",
@@ -1344,7 +1368,7 @@
       "file_type": "code",
       "norm_label": ".readfile()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L179"
+      "source_location": "L182"
     },
     {
       "id": "lib_simulation_engine_simulationengine_result",
@@ -1356,7 +1380,7 @@
       "file_type": "code",
       "norm_label": ".result()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L66"
+      "source_location": "L68"
     },
     {
       "id": "lib_simulation_engine_simulationengine_scan",
@@ -1368,7 +1392,19 @@
       "file_type": "code",
       "norm_label": ".scan()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L227"
+      "source_location": "L230"
+    },
+    {
+      "id": "lib_simulation_engine_simulationengine_serviceoperation",
+      "label": ".serviceOperation()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "SimulationEngine",
+      "file_type": "code",
+      "norm_label": ".serviceoperation()",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L267"
     },
     {
       "id": "lib_simulation_engine_simulationengine_sessions",
@@ -1380,7 +1416,7 @@
       "file_type": "code",
       "norm_label": ".sessions()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L351"
+      "source_location": "L396"
     },
     {
       "id": "lib_simulation_engine_simulationengine_ssh",
@@ -1392,7 +1428,7 @@
       "file_type": "code",
       "norm_label": ".ssh()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L325"
+      "source_location": "L370"
     },
     {
       "id": "lib_simulation_engine_simulationengine_target",
@@ -1404,7 +1440,7 @@
       "file_type": "code",
       "norm_label": ".target()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L94"
+      "source_location": "L97"
     },
     {
       "id": "lib_simulation_network_reachable",
@@ -1428,19 +1464,7 @@
       "file_type": "code",
       "norm_label": "parseterminalinput()",
       "source_file": "lib/simulation/tools.ts",
-      "source_location": "L13"
-    },
-    {
-      "id": "app_api_operations_route_get",
-      "label": "GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "index.ts",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "app/api/operations/route.ts",
-      "source_location": "L2"
+      "source_location": "L15"
     },
     {
       "id": "lib_simulation_scenarios_content_discover",
@@ -1537,18 +1561,6 @@
       "norm_label": "validatescenario()",
       "source_file": "lib/simulation/scenarios/validate.ts",
       "source_location": "L3"
-    },
-    {
-      "id": "tests_browser_campaign_spec_step",
-      "label": "step()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "index.ts",
-      "file_type": "code",
-      "norm_label": "step()",
-      "source_file": "tests/browser/campaign.spec.ts",
-      "source_location": "L77"
     },
     {
       "id": "app_replay_scenarioid_page_replaypage",
@@ -1693,6 +1705,17 @@
       "norm_label": "detectionforaction()",
       "source_file": "lib/simulation/rules.ts",
       "source_location": "L41"
+    },
+    {
+      "id": "app_api_operations_route",
+      "label": "operations/route.ts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "career/page.tsx",
+      "file_type": "code",
+      "norm_label": "operations/route.ts",
+      "source_file": "app/api/operations/route.ts",
+      "source_location": "L1"
     },
     {
       "id": "app_blue_page",
@@ -1858,6 +1881,28 @@
       "norm_label": "trainingmodules",
       "source_file": "lib/campaign.ts",
       "source_location": "L7"
+    },
+    {
+      "id": "lib_simulation_scenarios_index_campaign",
+      "label": "campaign",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "career/page.tsx",
+      "file_type": "code",
+      "norm_label": "campaign",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L12"
+    },
+    {
+      "id": "tests_browser_campaign_spec",
+      "label": "campaign.spec.ts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "career/page.tsx",
+      "file_type": "code",
+      "norm_label": "campaign.spec.ts",
+      "source_file": "tests/browser/campaign.spec.ts",
+      "source_location": "L1"
     },
     {
       "id": "package_devdependencies",
@@ -2999,6 +3044,774 @@
       "source_location": "L1934"
     },
     {
+      "id": "docs_story_canon_story",
+      "label": "canon-story.md",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "canon-story.md",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_story_canon_story_10_thread_17",
+      "label": "10. THREAD-17",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "10. thread-17",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L418"
+    },
+    {
+      "id": "docs_story_canon_story_12_root_os_as_a_narrative_device",
+      "label": "12. ROOT/OS as a Narrative Device",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "12. root/os as a narrative device",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L517"
+    },
+    {
+      "id": "docs_story_canon_story_14_optional_evidence",
+      "label": "14. Optional Evidence",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "14. optional evidence",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L657"
+    },
+    {
+      "id": "docs_story_canon_story_15_the_case_board",
+      "label": "15. The Case Board",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "15. the case board",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L703"
+    },
+    {
+      "id": "docs_story_canon_story_16_moral_ambiguity",
+      "label": "16. Moral Ambiguity",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "16. moral ambiguity",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L742"
+    },
+    {
+      "id": "docs_story_canon_story_18_nodeline_s_role_in_the_final_act",
+      "label": "18. Nodeline's Role in the Final Act",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "18. nodeline's role in the final act",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L847"
+    },
+    {
+      "id": "docs_story_canon_story_19_final_narrative_question",
+      "label": "19. Final Narrative Question",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "19. final narrative question",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L879"
+    },
+    {
+      "id": "docs_story_canon_story_1_story_purpose",
+      "label": "1. Story Purpose",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. story purpose",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L3"
+    },
+    {
+      "id": "docs_story_canon_story_21_story_delivery",
+      "label": "21. Story Delivery",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "21. story delivery",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L935"
+    },
+    {
+      "id": "docs_story_canon_story_22_red_blue_full_truth_as_storytelling",
+      "label": "22. Red / Blue / Full Truth as Storytelling",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "22. red / blue / full truth as storytelling",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L970"
+    },
+    {
+      "id": "docs_story_canon_story_24_campaign_progression_summary",
+      "label": "24. Campaign Progression Summary",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "24. campaign progression summary",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1074"
+    },
+    {
+      "id": "docs_story_canon_story_25_canonical_story_principle",
+      "label": "25. Canonical Story Principle",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "25. canonical story principle",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1109"
+    },
+    {
+      "id": "docs_story_canon_story_2_core_narrative_principle",
+      "label": "2. Core Narrative Principle",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. core narrative principle",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L49"
+    },
+    {
+      "id": "docs_story_canon_story_3_nodeline_security",
+      "label": "3. Nodeline Security",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. nodeline security",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L71"
+    },
+    {
+      "id": "docs_story_canon_story_4_the_player",
+      "label": "4. The Player",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. the player",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L99"
+    },
+    {
+      "id": "docs_story_canon_story_5_campaign_structure",
+      "label": "5. Campaign Structure",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "5. campaign structure",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L152"
+    },
+    {
+      "id": "docs_story_canon_story_9_the_vendor_thread",
+      "label": "9. The Vendor Thread",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "9. the vendor thread",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L381"
+    },
+    {
+      "id": "docs_story_canon_story_halloway_systems",
+      "label": "Halloway Systems",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "halloway systems",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L387"
+    },
+    {
+      "id": "docs_story_canon_story_root_canonical_story",
+      "label": "ROOT \u2014 Canonical Story",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "canon-story.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "root \u2014 canonical story",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_story_canon_story_23_1_no_cartoon_villains",
+      "label": "23.1 No Cartoon Villains",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "23. Story Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "23.1 no cartoon villains",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1012"
+    },
+    {
+      "id": "docs_story_canon_story_23_2_no_omniscient_hacker_fantasy",
+      "label": "23.2 No Omniscient Hacker Fantasy",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "23. Story Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "23.2 no omniscient hacker fantasy",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1016"
+    },
+    {
+      "id": "docs_story_canon_story_23_3_technical_events_must_matter",
+      "label": "23.3 Technical Events Must Matter",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "23. Story Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "23.3 technical events must matter",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1020"
+    },
+    {
+      "id": "docs_story_canon_story_23_4_normality_creates_tension",
+      "label": "23.4 Normality Creates Tension",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "23. Story Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "23.4 normality creates tension",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1036"
+    },
+    {
+      "id": "docs_story_canon_story_23_5_evidence_before_revelation",
+      "label": "23.5 Evidence Before Revelation",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "23. Story Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "23.5 evidence before revelation",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1046"
+    },
+    {
+      "id": "docs_story_canon_story_23_6_not_everything_is_connected",
+      "label": "23.6 Not Everything Is Connected",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "23. Story Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "23.6 not everything is connected",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1050"
+    },
+    {
+      "id": "docs_story_canon_story_23_7_the_player_is_not_the_center_of_the_universe",
+      "label": "23.7 The Player Is Not the Center of the Universe",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "23. Story Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "23.7 the player is not the center of the universe",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1062"
+    },
+    {
+      "id": "docs_story_canon_story_23_story_rules",
+      "label": "23. Story Rules",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "23. Story Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "23. story rules",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1008"
+    },
+    {
+      "id": "docs_story_canon_story_6_act_i_noise",
+      "label": "6. ACT I \u2014 NOISE",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "6. ACT I \u2014 NOISE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "6. act i \u2014 noise",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L170"
+    },
+    {
+      "id": "docs_story_canon_story_concepts",
+      "label": "Concepts",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "6. ACT I \u2014 NOISE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "concepts",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L200"
+    },
+    {
+      "id": "docs_story_canon_story_example_operations",
+      "label": "Example Operations",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "6. ACT I \u2014 NOISE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "example operations",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L194"
+    },
+    {
+      "id": "docs_story_canon_story_player_role",
+      "label": "Player Role",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "6. ACT I \u2014 NOISE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "player role",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L176"
+    },
+    {
+      "id": "docs_story_canon_story_purpose",
+      "label": "Purpose",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "6. ACT I \u2014 NOISE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "purpose",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L180"
+    },
+    {
+      "id": "docs_story_canon_story_story_layer",
+      "label": "Story Layer",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "6. ACT I \u2014 NOISE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "story layer",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L211"
+    },
+    {
+      "id": "docs_story_canon_story_theme",
+      "label": "Theme",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "6. ACT I \u2014 NOISE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "theme",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L172"
+    },
+    {
+      "id": "docs_story_canon_story_tone",
+      "label": "Tone",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "6. ACT I \u2014 NOISE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "tone",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L184"
+    },
+    {
+      "id": "docs_story_canon_story_7_act_ii_pattern",
+      "label": "7. ACT II \u2014 PATTERN",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "7. ACT II \u2014 PATTERN",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "7. act ii \u2014 pattern",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L242"
+    },
+    {
+      "id": "docs_story_canon_story_concepts_264",
+      "label": "Concepts",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "7. ACT II \u2014 PATTERN",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "concepts",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L264"
+    },
+    {
+      "id": "docs_story_canon_story_example_operations_256",
+      "label": "Example Operations",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "7. ACT II \u2014 PATTERN",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "example operations",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L256"
+    },
+    {
+      "id": "docs_story_canon_story_key_narrative_principle",
+      "label": "Key Narrative Principle",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "7. ACT II \u2014 PATTERN",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "key narrative principle",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L303"
+    },
+    {
+      "id": "docs_story_canon_story_player_role_248",
+      "label": "Player Role",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "7. ACT II \u2014 PATTERN",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "player role",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L248"
+    },
+    {
+      "id": "docs_story_canon_story_purpose_252",
+      "label": "Purpose",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "7. ACT II \u2014 PATTERN",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "purpose",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L252"
+    },
+    {
+      "id": "docs_story_canon_story_story_layer_274",
+      "label": "Story Layer",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "7. ACT II \u2014 PATTERN",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "story layer",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L274"
+    },
+    {
+      "id": "docs_story_canon_story_theme_244",
+      "label": "Theme",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "7. ACT II \u2014 PATTERN",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "theme",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L244"
+    },
+    {
+      "id": "docs_story_canon_story_11_act_iv_ghosts",
+      "label": "11. ACT IV \u2014 GHOSTS",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "11. ACT IV \u2014 GHOSTS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "11. act iv \u2014 ghosts",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L452"
+    },
+    {
+      "id": "docs_story_canon_story_concepts_473",
+      "label": "Concepts",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "11. ACT IV \u2014 GHOSTS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "concepts",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L473"
+    },
+    {
+      "id": "docs_story_canon_story_example_operations_466",
+      "label": "Example Operations",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "11. ACT IV \u2014 GHOSTS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "example operations",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L466"
+    },
+    {
+      "id": "docs_story_canon_story_player_role_458",
+      "label": "Player Role",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "11. ACT IV \u2014 GHOSTS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "player role",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L458"
+    },
+    {
+      "id": "docs_story_canon_story_purpose_462",
+      "label": "Purpose",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "11. ACT IV \u2014 GHOSTS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "purpose",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L462"
+    },
+    {
+      "id": "docs_story_canon_story_story_layer_483",
+      "label": "Story Layer",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "11. ACT IV \u2014 GHOSTS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "story layer",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L483"
+    },
+    {
+      "id": "docs_story_canon_story_theme_454",
+      "label": "Theme",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "11. ACT IV \u2014 GHOSTS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "theme",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L454"
+    },
+    {
+      "id": "docs_story_canon_story_8_act_iii_access",
+      "label": "8. ACT III \u2014 ACCESS",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "8. ACT III \u2014 ACCESS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "8. act iii \u2014 access",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L311"
+    },
+    {
+      "id": "docs_story_canon_story_concepts_335",
+      "label": "Concepts",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "8. ACT III \u2014 ACCESS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "concepts",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L335"
+    },
+    {
+      "id": "docs_story_canon_story_example_operations_325",
+      "label": "Example Operations",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "8. ACT III \u2014 ACCESS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "example operations",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L325"
+    },
+    {
+      "id": "docs_story_canon_story_player_role_317",
+      "label": "Player Role",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "8. ACT III \u2014 ACCESS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "player role",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L317"
+    },
+    {
+      "id": "docs_story_canon_story_purpose_321",
+      "label": "Purpose",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "8. ACT III \u2014 ACCESS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "purpose",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L321"
+    },
+    {
+      "id": "docs_story_canon_story_story_layer_346",
+      "label": "Story Layer",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "8. ACT III \u2014 ACCESS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "story layer",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L346"
+    },
+    {
+      "id": "docs_story_canon_story_theme_313",
+      "label": "Theme",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "8. ACT III \u2014 ACCESS",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "theme",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L313"
+    },
+    {
+      "id": "docs_story_canon_story_17_act_v_root",
+      "label": "17. ACT V \u2014 ROOT",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "17. ACT V \u2014 ROOT",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "17. act v \u2014 root",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L790"
+    },
+    {
+      "id": "docs_story_canon_story_player_role_798",
+      "label": "Player Role",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "17. ACT V \u2014 ROOT",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "player role",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L798"
+    },
+    {
+      "id": "docs_story_canon_story_possible_operations",
+      "label": "Possible Operations",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "17. ACT V \u2014 ROOT",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "possible operations",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L806"
+    },
+    {
+      "id": "docs_story_canon_story_purpose_802",
+      "label": "Purpose",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "17. ACT V \u2014 ROOT",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "purpose",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L802"
+    },
+    {
+      "id": "docs_story_canon_story_story_layer_813",
+      "label": "Story Layer",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "17. ACT V \u2014 ROOT",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "story layer",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L813"
+    },
+    {
+      "id": "docs_story_canon_story_theme_792",
+      "label": "Theme",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "17. ACT V \u2014 ROOT",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "theme",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L792"
+    },
+    {
       "id": "tsconfig",
       "label": "tsconfig.json",
       "_origin": "ast",
@@ -3318,6 +4131,138 @@
       "source_location": "L25"
     },
     {
+      "id": "docs_story_canon_story_20_meaning_of_the_title",
+      "label": "20. Meaning of the Title",
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "20. Meaning of the Title",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "20. meaning of the title",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L905"
+    },
+    {
+      "id": "docs_story_canon_story_personal_meaning",
+      "label": "Personal Meaning",
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "20. Meaning of the Title",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "personal meaning",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L927"
+    },
+    {
+      "id": "docs_story_canon_story_root_access",
+      "label": "Root Access",
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "20. Meaning of the Title",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "root access",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L909"
+    },
+    {
+      "id": "docs_story_canon_story_root_cause",
+      "label": "Root Cause",
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "20. Meaning of the Title",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "root cause",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L915"
+    },
+    {
+      "id": "docs_story_canon_story_root_of_the_incident",
+      "label": "Root of the Incident",
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "20. Meaning of the Title",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "root of the incident",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L923"
+    },
+    {
+      "id": "docs_story_canon_story_root_of_trust",
+      "label": "Root of Trust",
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "20. Meaning of the Title",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "root of trust",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L919"
+    },
+    {
+      "id": "docs_story_canon_story_13_canonical_recurring_characters",
+      "label": "13. Canonical Recurring Characters",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "13. Canonical Recurring Characters",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "13. canonical recurring characters",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L572"
+    },
+    {
+      "id": "docs_story_canon_story_daniel_kade_senior_red_operator",
+      "label": "Daniel Kade \u2014 Senior Red Operator",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "13. Canonical Recurring Characters",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "daniel kade \u2014 senior red operator",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L594"
+    },
+    {
+      "id": "docs_story_canon_story_elias_ward_founder_of_nodeline_security",
+      "label": "Elias Ward \u2014 Founder of Nodeline Security",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "13. Canonical Recurring Characters",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "elias ward \u2014 founder of nodeline security",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L638"
+    },
+    {
+      "id": "docs_story_canon_story_lena_ortiz_soc_lead",
+      "label": "Lena Ortiz \u2014 SOC Lead",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "13. Canonical Recurring Characters",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "lena ortiz \u2014 soc lead",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L618"
+    },
+    {
+      "id": "docs_story_canon_story_mara_voss_director_of_operations",
+      "label": "Mara Voss \u2014 Director of Operations",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "13. Canonical Recurring Characters",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "mara voss \u2014 director of operations",
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L574"
+    },
+    {
       "id": "app_api_sim_blue_advance_route",
       "label": "advance/route.ts",
       "_origin": "ast",
@@ -3557,7 +4502,7 @@
       "file_type": "code",
       "norm_label": "psqlusage",
       "source_file": "lib/simulation/tools.ts",
-      "source_location": "L36"
+      "source_location": "L51"
     },
     {
       "id": "lib_simulation_types",
@@ -3568,17 +4513,6 @@
       "file_type": "code",
       "norm_label": "simulation/types.ts",
       "source_file": "lib/simulation/types.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_api_operations_route",
-      "label": "operations/route.ts",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "index.ts",
-      "file_type": "code",
-      "norm_label": "operations/route.ts",
-      "source_file": "app/api/operations/route.ts",
       "source_location": "L1"
     },
     {
@@ -3690,17 +4624,6 @@
       "norm_label": "index.ts",
       "source_file": "lib/simulation/scenarios/index.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "lib_simulation_scenarios_index_campaign",
-      "label": "campaign",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "index.ts",
-      "file_type": "code",
-      "norm_label": "campaign",
-      "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L12"
     },
     {
       "id": "lib_simulation_scenarios_index_scenarios",
@@ -3843,17 +4766,6 @@
       "file_type": "code",
       "norm_label": "validate.ts",
       "source_file": "lib/simulation/scenarios/validate.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_browser_campaign_spec",
-      "label": "campaign.spec.ts",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "index.ts",
-      "file_type": "code",
-      "norm_label": "campaign.spec.ts",
-      "source_file": "tests/browser/campaign.spec.ts",
       "source_location": "L1"
     },
     {
@@ -5436,24 +6348,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L149",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_applydiscovery",
       "target": "lib_simulation_engine_simulationengine_target",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L153",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_applydiscovery",
-      "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5465,6 +6365,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_applydiscovery",
+      "target": "lib_simulation_engine_simulationengine_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_applydiscovery",
       "target": "lib_simulation_engine_simulationengine_emitdefinition",
       "relation": "calls",
       "_origin": "ast",
@@ -5472,7 +6384,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L162",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -5484,7 +6396,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L167",
+      "source_location": "L170",
       "weight": 1.0
     },
     {
@@ -5496,7 +6408,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L253",
+      "source_location": "L284",
       "weight": 1.0
     },
     {
@@ -5508,7 +6420,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L253",
+      "source_location": "L284",
       "weight": 1.0
     },
     {
@@ -5520,7 +6432,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L253",
+      "source_location": "L284",
       "weight": 1.0
     },
     {
@@ -5532,7 +6444,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L259",
+      "source_location": "L290",
       "weight": 1.0
     },
     {
@@ -5544,7 +6456,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L260",
+      "source_location": "L291",
       "weight": 1.0
     },
     {
@@ -5556,36 +6468,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L261",
+      "source_location": "L292",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_curl",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L240",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_curl",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L241",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_curl",
-      "target": "lib_simulation_engine_simulationengine_target",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5597,19 +6485,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_curl",
-      "target": "lib_simulation_network_reachable",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L245",
+      "source_location": "L244",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_curl",
-      "target": "lib_simulation_engine_simulationengine_emit",
+      "target": "lib_simulation_engine_simulationengine_target",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5621,6 +6509,54 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_network_reachable",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L248",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_engine_simulationengine_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L250",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_engine_simulationengine_definition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L251",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_engine_simulationengine_emitdefinition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L257",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_curl",
       "target": "lib_simulation_engine_simulationengine_applydiscovery",
       "relation": "calls",
       "_origin": "ast",
@@ -5628,7 +6564,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L247",
+      "source_location": "L262",
       "weight": 1.0
     },
     {
@@ -5640,7 +6576,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L249",
+      "source_location": "L264",
       "weight": 1.0
     },
     {
@@ -5664,7 +6600,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L138",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -5676,7 +6612,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L102",
+      "source_location": "L105",
       "weight": 1.0
     },
     {
@@ -5688,7 +6624,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L115",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -5700,7 +6636,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L145",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -5753,6 +6689,30 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_executecommand",
+      "target": "lib_simulation_engine_simulationengine_curl",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_executecommand",
+      "target": "lib_simulation_engine_simulationengine_serviceoperation",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_executecommand",
       "target": "lib_simulation_engine_simulationengine_help",
       "relation": "calls",
       "_origin": "ast",
@@ -5760,7 +6720,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L40",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -5772,7 +6732,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L45",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -5784,7 +6744,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L46",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -5796,7 +6756,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L47",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -5808,7 +6768,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L49",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -5820,7 +6780,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L50",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -5832,7 +6792,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L51",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -5844,19 +6804,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L52",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_executecommand",
-      "target": "lib_simulation_engine_simulationengine_curl",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L53",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -5868,7 +6816,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L56",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
@@ -5880,7 +6828,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L57",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -5892,7 +6840,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L58",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -5904,7 +6852,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L59",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -5916,7 +6864,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L60",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -5928,7 +6876,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L61",
+      "source_location": "L63",
       "weight": 1.0
     },
     {
@@ -5940,7 +6888,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L305",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -5952,7 +6900,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L306",
+      "source_location": "L351",
       "weight": 1.0
     },
     {
@@ -5964,7 +6912,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L307",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -5976,7 +6924,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L309",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -5988,7 +6936,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L310",
+      "source_location": "L355",
       "weight": 1.0
     },
     {
@@ -6000,7 +6948,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L319",
+      "source_location": "L364",
       "weight": 1.0
     },
     {
@@ -6012,7 +6960,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L320",
+      "source_location": "L365",
       "weight": 1.0
     },
     {
@@ -6024,7 +6972,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L378",
+      "source_location": "L423",
       "weight": 1.0
     },
     {
@@ -6036,7 +6984,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L379",
+      "source_location": "L424",
       "weight": 1.0
     },
     {
@@ -6048,7 +6996,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L380",
+      "source_location": "L425",
       "weight": 1.0
     },
     {
@@ -6060,7 +7008,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L384",
+      "source_location": "L429",
       "weight": 1.0
     },
     {
@@ -6072,7 +7020,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L214",
+      "source_location": "L217",
       "weight": 1.0
     },
     {
@@ -6084,7 +7032,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L215",
+      "source_location": "L218",
       "weight": 1.0
     },
     {
@@ -6096,7 +7044,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L348",
+      "source_location": "L393",
       "weight": 1.0
     },
     {
@@ -6108,7 +7056,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L172",
+      "source_location": "L175",
       "weight": 1.0
     },
     {
@@ -6120,48 +7068,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L173",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_ping",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L219",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_ping",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L220",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_ping",
-      "target": "lib_simulation_engine_simulationengine_target",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L220",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_ping",
-      "target": "lib_simulation_network_reachable",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6173,7 +7085,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_ping",
-      "target": "lib_simulation_engine_simulationengine_emit",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6184,6 +7096,42 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_engine_simulationengine_ping",
+      "target": "lib_simulation_engine_simulationengine_target",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L223",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_ping",
+      "target": "lib_simulation_network_reachable",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L225",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_ping",
+      "target": "lib_simulation_engine_simulationengine_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_engine_simulationengine_postgresinput",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
       "relation": "calls",
@@ -6192,7 +7140,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L275",
+      "source_location": "L306",
       "weight": 1.0
     },
     {
@@ -6204,7 +7152,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L276",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -6216,7 +7164,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L277",
+      "source_location": "L308",
       "weight": 1.0
     },
     {
@@ -6228,7 +7176,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L293",
+      "source_location": "L338",
       "weight": 1.0
     },
     {
@@ -6240,7 +7188,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L365",
+      "source_location": "L410",
       "weight": 1.0
     },
     {
@@ -6252,7 +7200,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L366",
+      "source_location": "L411",
       "weight": 1.0
     },
     {
@@ -6264,7 +7212,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L368",
+      "source_location": "L413",
       "weight": 1.0
     },
     {
@@ -6276,7 +7224,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L371",
+      "source_location": "L416",
       "weight": 1.0
     },
     {
@@ -6288,7 +7236,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L372",
+      "source_location": "L417",
       "weight": 1.0
     },
     {
@@ -6300,7 +7248,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L207",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -6312,7 +7260,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L208",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
@@ -6324,7 +7272,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L180",
+      "source_location": "L183",
       "weight": 1.0
     },
     {
@@ -6336,7 +7284,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L181",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -6348,7 +7296,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L190",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
@@ -6360,7 +7308,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L192",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -6372,7 +7320,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L194",
+      "source_location": "L197",
       "weight": 1.0
     },
     {
@@ -6384,48 +7332,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L201",
+      "source_location": "L204",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_scan",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L228",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_scan",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L229",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_scan",
-      "target": "lib_simulation_engine_simulationengine_target",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L229",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_scan",
-      "target": "lib_simulation_network_reachable",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6437,6 +7349,42 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_scan",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L232",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_scan",
+      "target": "lib_simulation_engine_simulationengine_target",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L232",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_scan",
+      "target": "lib_simulation_network_reachable",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_scan",
       "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
@@ -6444,7 +7392,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L233",
+      "source_location": "L236",
       "weight": 1.0
     },
     {
@@ -6456,7 +7404,67 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L236",
+      "source_location": "L239",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L268",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_definition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L268",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_result",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L273",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_emitdefinition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L277",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L278",
       "weight": 1.0
     },
     {
@@ -6468,7 +7476,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L355",
+      "source_location": "L400",
       "weight": 1.0
     },
     {
@@ -6480,7 +7488,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L326",
+      "source_location": "L371",
       "weight": 1.0
     },
     {
@@ -6492,7 +7500,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L328",
+      "source_location": "L373",
       "weight": 1.0
     },
     {
@@ -6504,7 +7512,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L328",
+      "source_location": "L373",
       "weight": 1.0
     },
     {
@@ -6516,7 +7524,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L336",
+      "source_location": "L381",
       "weight": 1.0
     },
     {
@@ -6528,7 +7536,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L337",
+      "source_location": "L382",
       "weight": 1.0
     },
     {
@@ -6540,7 +7548,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L340",
+      "source_location": "L385",
       "weight": 1.0
     },
     {
@@ -6552,7 +7560,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L342",
+      "source_location": "L387",
       "weight": 1.0
     },
     {
@@ -6564,7 +7572,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L95",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -6576,7 +7584,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L47",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -6588,7 +7596,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L58",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -6600,7 +7608,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L75",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -6612,7 +7620,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L91",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -6624,7 +7632,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L94",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -6925,7 +7933,19 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L252",
+      "source_location": "L283",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_tools_parseterminalinput",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L242",
       "weight": 1.0
     },
     {
@@ -6937,7 +7957,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L101",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -6950,6 +7970,18 @@
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
       "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_tools_parseterminalinput",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L267",
       "weight": 1.0
     },
     {
@@ -11124,7 +12156,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L166",
+      "source_location": "L169",
       "weight": 1.0
     },
     {
@@ -11136,7 +12168,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L252",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -11148,7 +12180,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L239",
+      "source_location": "L242",
       "weight": 1.0
     },
     {
@@ -11160,7 +12192,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L81",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -11172,7 +12204,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L144",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -11196,7 +12228,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L304",
+      "source_location": "L349",
       "weight": 1.0
     },
     {
@@ -11208,7 +12240,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L377",
+      "source_location": "L422",
       "weight": 1.0
     },
     {
@@ -11220,7 +12252,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L213",
+      "source_location": "L216",
       "weight": 1.0
     },
     {
@@ -11232,7 +12264,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L171",
+      "source_location": "L174",
       "weight": 1.0
     },
     {
@@ -11244,7 +12276,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L218",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -11256,7 +12288,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L274",
+      "source_location": "L305",
       "weight": 1.0
     },
     {
@@ -11268,7 +12300,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L364",
+      "source_location": "L409",
       "weight": 1.0
     },
     {
@@ -11280,7 +12312,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L206",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -11292,7 +12324,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L179",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -11304,7 +12336,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L66",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -11316,7 +12348,19 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L227",
+      "source_location": "L230",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_types_terminalstate",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L267",
       "weight": 1.0
     },
     {
@@ -11328,7 +12372,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L325",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -11379,7 +12423,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L66",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -11820,6 +12864,820 @@
       "confidence_score": 1.0,
       "source_file": "app/use-operation.ts",
       "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_root_canonical_story",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_23_story_rules",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1008",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_24_campaign_progression_summary",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1074",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_25_canonical_story_principle",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1109",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_5_campaign_structure",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_6_act_i_noise",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_7_act_ii_pattern",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L242",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_8_act_iii_access",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L311",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_9_the_vendor_thread",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L381",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_halloway_systems",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L387",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_10_thread_17",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L418",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_11_act_iv_ghosts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L452",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_2_core_narrative_principle",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_12_root_os_as_a_narrative_device",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L517",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_13_canonical_recurring_characters",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L572",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_14_optional_evidence",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L657",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_15_the_case_board",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L703",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_3_nodeline_security",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_16_moral_ambiguity",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L742",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_17_act_v_root",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L790",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_18_nodeline_s_role_in_the_final_act",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L847",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_19_final_narrative_question",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L879",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_20_meaning_of_the_title",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L905",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_21_story_delivery",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L935",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_22_red_blue_full_truth_as_storytelling",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L970",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story",
+      "target": "docs_story_canon_story_4_the_player",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_11_act_iv_ghosts",
+      "target": "docs_story_canon_story_theme_454",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L454",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_11_act_iv_ghosts",
+      "target": "docs_story_canon_story_player_role_458",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L458",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_11_act_iv_ghosts",
+      "target": "docs_story_canon_story_purpose_462",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L462",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_11_act_iv_ghosts",
+      "target": "docs_story_canon_story_example_operations_466",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L466",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_11_act_iv_ghosts",
+      "target": "docs_story_canon_story_concepts_473",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L473",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_11_act_iv_ghosts",
+      "target": "docs_story_canon_story_story_layer_483",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L483",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_13_canonical_recurring_characters",
+      "target": "docs_story_canon_story_mara_voss_director_of_operations",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L574",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_13_canonical_recurring_characters",
+      "target": "docs_story_canon_story_daniel_kade_senior_red_operator",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L594",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_13_canonical_recurring_characters",
+      "target": "docs_story_canon_story_lena_ortiz_soc_lead",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L618",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_13_canonical_recurring_characters",
+      "target": "docs_story_canon_story_elias_ward_founder_of_nodeline_security",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L638",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_17_act_v_root",
+      "target": "docs_story_canon_story_theme_792",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L792",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_17_act_v_root",
+      "target": "docs_story_canon_story_player_role_798",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L798",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_17_act_v_root",
+      "target": "docs_story_canon_story_purpose_802",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L802",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_17_act_v_root",
+      "target": "docs_story_canon_story_possible_operations",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L806",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_17_act_v_root",
+      "target": "docs_story_canon_story_story_layer_813",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L813",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_20_meaning_of_the_title",
+      "target": "docs_story_canon_story_root_access",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L909",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_20_meaning_of_the_title",
+      "target": "docs_story_canon_story_root_cause",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L915",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_20_meaning_of_the_title",
+      "target": "docs_story_canon_story_root_of_trust",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L919",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_20_meaning_of_the_title",
+      "target": "docs_story_canon_story_root_of_the_incident",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L923",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_20_meaning_of_the_title",
+      "target": "docs_story_canon_story_personal_meaning",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L927",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_23_story_rules",
+      "target": "docs_story_canon_story_23_1_no_cartoon_villains",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1012",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_23_story_rules",
+      "target": "docs_story_canon_story_23_2_no_omniscient_hacker_fantasy",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1016",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_23_story_rules",
+      "target": "docs_story_canon_story_23_3_technical_events_must_matter",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1020",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_23_story_rules",
+      "target": "docs_story_canon_story_23_4_normality_creates_tension",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1036",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_23_story_rules",
+      "target": "docs_story_canon_story_23_5_evidence_before_revelation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1046",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_23_story_rules",
+      "target": "docs_story_canon_story_23_6_not_everything_is_connected",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1050",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_23_story_rules",
+      "target": "docs_story_canon_story_23_7_the_player_is_not_the_center_of_the_universe",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L1062",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_6_act_i_noise",
+      "target": "docs_story_canon_story_theme",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_6_act_i_noise",
+      "target": "docs_story_canon_story_player_role",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_6_act_i_noise",
+      "target": "docs_story_canon_story_purpose",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L180",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_6_act_i_noise",
+      "target": "docs_story_canon_story_tone",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_6_act_i_noise",
+      "target": "docs_story_canon_story_example_operations",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L194",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_6_act_i_noise",
+      "target": "docs_story_canon_story_concepts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L200",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_6_act_i_noise",
+      "target": "docs_story_canon_story_story_layer",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L211",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_7_act_ii_pattern",
+      "target": "docs_story_canon_story_theme_244",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L244",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_7_act_ii_pattern",
+      "target": "docs_story_canon_story_player_role_248",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L248",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_7_act_ii_pattern",
+      "target": "docs_story_canon_story_purpose_252",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L252",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_7_act_ii_pattern",
+      "target": "docs_story_canon_story_example_operations_256",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L256",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_7_act_ii_pattern",
+      "target": "docs_story_canon_story_concepts_264",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L264",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_7_act_ii_pattern",
+      "target": "docs_story_canon_story_story_layer_274",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L274",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_7_act_ii_pattern",
+      "target": "docs_story_canon_story_key_narrative_principle",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L303",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_8_act_iii_access",
+      "target": "docs_story_canon_story_theme_313",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L313",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_8_act_iii_access",
+      "target": "docs_story_canon_story_player_role_317",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L317",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_8_act_iii_access",
+      "target": "docs_story_canon_story_purpose_321",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L321",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_8_act_iii_access",
+      "target": "docs_story_canon_story_example_operations_325",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L325",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_8_act_iii_access",
+      "target": "docs_story_canon_story_concepts_335",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L335",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_8_act_iii_access",
+      "target": "docs_story_canon_story_story_layer_346",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L346",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_story_canon_story_root_canonical_story",
+      "target": "docs_story_canon_story_1_story_purpose",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/story/canon-story.md",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -12787,7 +14645,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L46",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -13436,7 +15294,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/tools.ts",
-      "source_location": "L13",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -13458,7 +15316,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/tools.ts",
-      "source_location": "L36",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -14270,7 +16128,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L101",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -14281,7 +16139,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L136",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -14292,7 +16150,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L144",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -14303,7 +16161,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L148",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -14314,7 +16172,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L166",
+      "source_location": "L169",
       "weight": 1.0
     },
     {
@@ -14325,7 +16183,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L171",
+      "source_location": "L174",
       "weight": 1.0
     },
     {
@@ -14336,7 +16194,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L179",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -14347,7 +16205,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L206",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -14358,7 +16216,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L213",
+      "source_location": "L216",
       "weight": 1.0
     },
     {
@@ -14369,7 +16227,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L218",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -14380,7 +16238,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L227",
+      "source_location": "L230",
       "weight": 1.0
     },
     {
@@ -14391,7 +16249,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L239",
+      "source_location": "L242",
       "weight": 1.0
     },
     {
@@ -14407,13 +16265,13 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine",
-      "target": "lib_simulation_engine_simulationengine_connectpostgres",
+      "target": "lib_simulation_engine_simulationengine_serviceoperation",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L252",
+      "source_location": "L267",
       "weight": 1.0
     },
     {
@@ -14429,24 +16287,24 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine",
+      "target": "lib_simulation_engine_simulationengine_connectpostgres",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L283",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine",
       "target": "lib_simulation_engine_simulationengine_postgresinput",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L274",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine",
-      "target": "lib_simulation_engine_simulationengine_exploit",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L304",
+      "source_location": "L305",
       "weight": 1.0
     },
     {
@@ -14462,13 +16320,24 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine",
+      "target": "lib_simulation_engine_simulationengine_exploit",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L349",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine",
       "target": "lib_simulation_engine_simulationengine_ssh",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L325",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -14479,7 +16348,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L347",
+      "source_location": "L392",
       "weight": 1.0
     },
     {
@@ -14490,7 +16359,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L351",
+      "source_location": "L396",
       "weight": 1.0
     },
     {
@@ -14501,7 +16370,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L364",
+      "source_location": "L409",
       "weight": 1.0
     },
     {
@@ -14512,7 +16381,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L377",
+      "source_location": "L422",
       "weight": 1.0
     },
     {
@@ -14523,7 +16392,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L66",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -14534,7 +16403,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L70",
+      "source_location": "L72",
       "weight": 1.0
     },
     {
@@ -14545,7 +16414,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L81",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -14556,7 +16425,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L94",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -14568,7 +16437,7 @@
       "confidence_score": 0.8,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L60",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -14887,5 +16756,5 @@
       "source_file": "docs/ui/VISUAL_STYLES.md"
     }
   ],
-  "built_at_commit": "0f24e56787822f9e026881da0f3bd401c86593a2"
+  "built_at_commit": "92c6c4a33bdc6b9300cedeaa85c4ac519fd27b8a"
 }

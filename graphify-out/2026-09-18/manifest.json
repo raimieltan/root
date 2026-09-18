@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/engine.ts": {
-    "mtime": 1789726310.583448,
-    "seen": 1789726577.9641988,
-    "ast_hash": "2877fba6d5e51e05735fcc381412ba76",
+    "mtime": 1789727082.1650767,
+    "seen": 1789727202.807967,
+    "ast_hash": "18adcd46defc33228bf88fb3e548f6dc",
     "semantic_hash": ""
   },
   "lib/simulation/initializer.ts": {
@@ -306,21 +306,21 @@
     "semantic_hash": ""
   },
   "lib/simulation/replay.ts": {
-    "mtime": 1789683767.8144119,
-    "seen": 1789700830.16605,
-    "ast_hash": "a280721d630ec3eae7049947339a33e4",
+    "mtime": 1789727133.7706246,
+    "seen": 1789727202.8081229,
+    "ast_hash": "d4ad0d63b88659d9c7e58695a568873e",
     "semantic_hash": ""
   },
   "lib/simulation/glasshouse.e2e.test.ts": {
-    "mtime": 1789726408.2963123,
-    "seen": 1789726577.964202,
-    "ast_hash": "b0a62d7d344c719a468d7b0be0e73aa7",
+    "mtime": 1789727065.1180415,
+    "seen": 1789727202.807971,
+    "ast_hash": "c9b77f40572808098d6e789139b190d3",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/glasshouse.ts": {
-    "mtime": 1789726664.8553507,
-    "seen": 1789726749.869958,
-    "ast_hash": "8d93e4f948ff1fdfa5eff8db633eb8a9",
+    "mtime": 1789727004.198996,
+    "seen": 1789727202.8088808,
+    "ast_hash": "7391b4e2ff7b1dbba92a40e71acaf9dc",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/index.ts": {
@@ -330,9 +330,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/types.ts": {
-    "mtime": 1789726037.451548,
-    "seen": 1789726577.965409,
-    "ast_hash": "96b673f2cf1c6774317d636ad6c9836f",
+    "mtime": 1789727003.96096,
+    "seen": 1789727202.809451,
+    "ast_hash": "94f33771ac07d375fbb47384d5529516",
     "semantic_hash": ""
   },
   "app/api/operations/route.ts": {
@@ -504,15 +504,21 @@
     "semantic_hash": ""
   },
   "lib/simulation/tools.ts": {
-    "mtime": 1789726037.3467274,
-    "seen": 1789726577.9655502,
-    "ast_hash": "6ba3d2179b2963a72a6da26c21e73712",
+    "mtime": 1789727003.7894287,
+    "seen": 1789727202.8095539,
+    "ast_hash": "27d25959c8724ce157e625d3ea1a1548",
     "semantic_hash": ""
   },
   "docs/tools/tools-unix.md": {
     "mtime": 1789725783.194687,
     "seen": 1789726577.9666839,
     "ast_hash": "2b0c1855343faa29ad2fde84714c327d",
+    "semantic_hash": ""
+  },
+  "docs/story/canon-story.md": {
+    "mtime": 1789726998.4116852,
+    "seen": 1789727202.8101912,
+    "ast_hash": "49c44f964e983afa2035059336a188f9",
     "semantic_hash": ""
   }
 }

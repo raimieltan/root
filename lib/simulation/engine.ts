@@ -42,11 +42,15 @@ export class SimulationEngine {
       case "help": return this.result(true, this.help());
       case "clear": return this.result(true, "");
       case "whoami": return this.result(true, state.currentUser);
+      case "id": return this.identity(state);
+      case "env": return this.environment(state);
       case "hostname": return this.result(true, state.currentMachine);
       case "pwd": return this.result(true, state.currentPath ?? "/");
       case "cd": return this.changeDirectory(args, state);
       case "ls": return this.listFiles(args, state);
       case "cat": return this.readFile(args, state, false);
+      case "grep": return this.grep(args, state);
+      case "find": return this.find(args, state);
       case "retrieve": return this.readFile(args, state, true);
       case "ps": return this.processes(state);
       case "ip": return this.ip(state);
@@ -74,8 +78,8 @@ export class SimulationEngine {
 
 Recon:       nmap <host> · ping <host> · curl <url> · ip
 Access:      ssh <user@host> · sessions
-Filesystem:  pwd · cd <path> · ls [path] · cat <path> · retrieve <file>
-System:      whoami · hostname · ps · backup-sync --run-hook
+Filesystem:  pwd · cd <path> · ls [-l] [path] · cat <path> · grep TEXT [path] · find [path] -name NAME
+System:      whoami · id · hostname · env · ps · backup-sync --run-hook
 Web:         curl [-X METHOD] URL [--data BODY]
 Database:    psql -h HOST -U USER -d DATABASE --password SECRET
 Tools:       john <file> · msfconsole · install-agent · clear`;
@@ -171,12 +175,38 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     return { ...this.result(true, ""), currentPath: args[0].startsWith("/") ? args[0] : `${state.currentPath ?? "/"}/${args[0]}`.replace(/\/+/g, "/") } as CommandResult;
   }
 
+  private async identity(state: TerminalState) {
+    const session = await this.currentMachine(state);
+    if (!session) return this.result(false, "No active session for this host.");
+    const uid = 1000 + [...session.user.username].reduce((sum, character) => sum + character.charCodeAt(0), 0) % 800;
+    return this.result(true, `uid=${uid}(${session.user.username}) gid=${uid}(${session.user.username}) groups=${session.user.groups.map((group) => `${group}`).join(",")}`);
+  }
+
+  private async environment(state: TerminalState) {
+    const session = await this.currentMachine(state);
+    if (!session) return this.result(false, "No active session for this host.");
+    return this.result(true, [
+      `HOME=/home/${session.user.username}`,
+      `HOSTNAME=${session.machine.hostname}`,
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "SHELL=/bin/sh",
+      `USER=${session.user.username}`,
+      `ROOT_CONTEXT=${session.context}`,
+    ].join("\n"));
+  }
+
+  private canReadFile(file: { owner: string; group: string | null; permissions: string }, user: { username: string; groups: string[]; privilege: AccessLevel }) {
+    const permission = file.owner === user.username ? file.permissions[0] : file.group && user.groups.includes(file.group) ? file.permissions[1] : file.permissions[2];
+    return user.privilege === AccessLevel.ROOT || Boolean(Number(permission) & 4);
+  }
+
   private async listFiles(args: string[], state: TerminalState) {
     const session = await this.currentMachine(state);
     if (!session) return this.result(false, "No active session for this host.");
-    const path = args[0] ?? state.currentPath ?? "/";
-    const files = session.machine.files.filter((file) => file.path.startsWith(path === "/" ? "/" : path));
-    return this.result(true, files.length ? files.map((file) => `${file.permissions} ${file.owner}:${file.group ?? file.owner} ${file.path}`).join("\n") : "(empty)");
+    const detailed = args[0] === "-l";
+    const path = args.find((argument) => argument !== "-l") ?? state.currentPath ?? "/";
+    const files = session.machine.files.filter((file) => file.path === path || file.path.startsWith(path === "/" ? "/" : `${path.replace(/\/$/, "")}/`));
+    return this.result(true, files.length ? files.map((file) => detailed ? `${file.permissions} ${file.owner}:${file.group ?? file.owner} ${file.path}` : file.path.split("/").at(-1)).join("\n") : "(empty)");
   }
 
   private async readFile(args: string[], state: TerminalState, retrieve: boolean) {
@@ -185,10 +215,7 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     if (!session) return this.result(false, "No active session for this host.");
     const file = session.machine.files.find((entry) => entry.path === args[0] || entry.path.endsWith(`/${args[0]}`));
     if (!file) return this.result(false, `File not found: ${args[0]}`);
-    const groups = session.user.groups;
-    const permission = file.owner === session.user.username ? file.permissions[0] : file.group && groups.includes(file.group) ? file.permissions[1] : file.permissions[2];
-    const allowed = session.privilege === AccessLevel.ROOT || Boolean(Number(permission) & 4);
-    if (!allowed) return this.result(false, "Permission denied");
+    if (!this.canReadFile(file, session.user)) return this.result(false, "Permission denied");
     const events: SimulationEvent[] = [];
     events.push(await this.emit({ action: file.isSecret ? "SENSITIVE_FILE_READ" : "FILE_READ", category: SecurityEventCategory.FILESYSTEM, severity: file.isSecret ? SecurityEventSeverity.HIGH : SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: file.isSecret, metadata: { path: file.path } }));
 
@@ -204,6 +231,28 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
       return { success: true, output: `${objective.label.replace(/^Retrieve /, "")} retrieved. Operation complete.`, events, objectiveRetrieved: true, discoveredHosts: await this.discoveredHosts() };
     }
     return { success: true, output: file.contents ?? "(empty)", events, discoveredHosts: await this.discoveredHosts() };
+  }
+
+  private async grep(args: string[], state: TerminalState) {
+    const pattern = args[0];
+    if (!pattern) return this.result(false, "Usage: grep <text> [path]");
+    const session = await this.currentMachine(state);
+    if (!session) return this.result(false, "No active session for this host.");
+    const path = args[1];
+    const files = session.machine.files.filter((file) => (!path || file.path === path || file.path.endsWith(`/${path}`)) && this.canReadFile(file, session.user));
+    const lines = files.flatMap((file) => (file.contents ?? "").split("\n").flatMap((line, index) => line.toLowerCase().includes(pattern.toLowerCase()) ? [`${file.path}:${index + 1}:${line}`] : []));
+    return this.result(true, lines.join("\n") || "");
+  }
+
+  private async find(args: string[], state: TerminalState) {
+    const session = await this.currentMachine(state);
+    if (!session) return this.result(false, "No active session for this host.");
+    const nameIndex = args.indexOf("-name");
+    const name = nameIndex >= 0 ? args[nameIndex + 1] : undefined;
+    if (nameIndex >= 0 && !name) return this.result(false, "Usage: find [path] -name <name>");
+    const root = args.find((argument, index) => index !== nameIndex && index !== nameIndex + 1 && !argument.startsWith("-")) ?? state.currentPath ?? "/";
+    const files = session.machine.files.filter((file) => file.path.startsWith(root === "/" ? "/" : root) && this.canReadFile(file, session.user) && (!name || file.path.split("/").at(-1) === name));
+    return this.result(true, files.map((file) => file.path).join("\n") || "");
   }
 
   private async processes(state: TerminalState) {

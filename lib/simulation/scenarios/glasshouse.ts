@@ -225,7 +225,7 @@ export const glasshouse: ScenarioDefinition = {
     },
   ],
   blueProfiles: [
-    { id: "noisy-application", routeId: "application-chain", commands: ["nmap WEB-01", "curl -X POST portal.meridian.test/legacy-upload --data upload=archive", "cat /var/www/meridian/app.conf", "ssh deploy@DEV-01", "cat /etc/backup-sync.conf", "backup-sync --run-hook", "cat /etc/meridian/routes.conf", "ssh svc_web@FIN-APP", "cat /etc/fin-app/db.conf", "psql -h FIN-DB -U finance_app -d finance --password FinanceApp2026!Secure", "SELECT filename, classification FROM documents;"] },
+    { id: "noisy-application", routeId: "application-chain", commands: ["nmap WEB-01", "curl -X POST portal.meridian.test/legacy-upload --data upload=archive", "cat /var/www/meridian/app.conf", "ssh deploy@DEV-01", "id", "ls -l /opt/backup/run.sh", "grep RUN_HOOK /etc/backup-sync.conf", "find /opt -name run.sh", "backup-sync --run-hook", "cat /etc/meridian/routes.conf", "ssh svc_web@FIN-APP", "cat /etc/fin-app/db.conf", "psql -h FIN-DB -U finance_app -d finance --password FinanceApp2026!Secure", "SELECT filename, classification FROM documents;"] },
     { id: "trusted-backup", routeId: "backup-trust", commands: ["curl portal.meridian.test", "ssh fieldops@VPN-01", "cat /etc/vpn/backup-peers.conf", "ssh backup_svc@BACKUP-01", "cat /etc/backup/finance-db.conf", "psql -h FIN-DB -U db_backup -d finance --password AtlasBackup-91d2", "\\dt", "SELECT filename, classification FROM documents;"] },
   ],
   defaultBlueProfile: "noisy-application",

@@ -1,16 +1,16 @@
 # Graph Report - root  (2026-09-18)
 
 ## Corpus Check
-- 66 files · ~627,348 words
+- 67 files · ~631,657 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 416 nodes · 848 edges · 23 communities (18 shown, 3 thin omitted)
+- 492 nodes · 934 edges · 32 communities (27 shown, 3 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0f24e567`
+- Built from commit: `92c6c4a3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -36,10 +36,19 @@
 - 44. MVP Tool Set
 - 46. Player Progression
 - 47. Scenario Design Standard
+- canon-story.md
+- 23. Story Rules
+- 6. ACT I — NOISE
+- 7. ACT II — PATTERN
+- 11. ACT IV — GHOSTS
+- 8. ACT III — ACCESS
+- 17. ACT V — ROOT
+- 20. Meaning of the Title
+- 13. Canonical Recurring Characters
 
 ## God Nodes (most connected - your core abstractions)
-1. `SimulationEngine` - 36 edges
-2. `TerminalState` - 22 edges
+1. `SimulationEngine` - 37 edges
+2. `TerminalState` - 23 edges
 3. `getDefinitionForScenario()` - 16 edges
 4. `compilerOptions` - 16 edges
 5. `ScenarioDefinition` - 15 edges
@@ -68,11 +77,11 @@
 - **Shared Simulation Model** — docs_root_canonical_plan_shared_simulation, docs_root_canonical_plan_everything_leaves_evidence, docs_root_canonical_plan_post_operation_reconstruction [EXTRACTED 1.00]
 - **ROOT Operational UI Reference Set** — docs_ui_chatgpt_image_sep_18_2026_12_05_06_am_1_red_operations_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_09_am_4_blue_soc_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_10_am_5_reconstruction_workspace [INFERRED 0.95]
 
-## Communities (23 total, 3 thin omitted)
+## Communities (32 total, 3 thin omitted)
 
 ### Community 0 - "career/page.tsx"
-Cohesion: 0.09
-Nodes (31): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), MissionPanel(), NetworkMap() (+23 more)
+Cohesion: 0.08
+Nodes (32): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), MissionPanel(), NetworkMap() (+24 more)
 
 ### Community 1 - "devDependencies"
 Cohesion: 0.06
@@ -95,8 +104,8 @@ Cohesion: 0.27
 Nodes (6): SimulationEngine, reachable(), parseTerminalInput(), CommandResult, SimulationEvent, TerminalState
 
 ### Community 6 - "index.ts"
-Cohesion: 0.17
-Nodes (24): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+16 more)
+Cohesion: 0.21
+Nodes (23): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+15 more)
 
 ### Community 7 - "Event Driven Design Docs"
 Cohesion: 0.18
@@ -142,22 +151,58 @@ Nodes (6): 46. Player Progression, Stage 1, Stage 2, Stage 3, Stage 4, Stage 5
 Cohesion: 0.50
 Nodes (4): 1. What does the player observe?, 2. What relationship can they infer?, 3. What concrete interaction can they perform?, 47. Scenario Design Standard
 
+### Community 23 - "canon-story.md"
+Cohesion: 0.10
+Nodes (19): 10. THREAD-17, 12. ROOT/OS as a Narrative Device, 14. Optional Evidence, 15. The Case Board, 16. Moral Ambiguity, 18. Nodeline's Role in the Final Act, 19. Final Narrative Question, 1. Story Purpose (+11 more)
+
+### Community 24 - "23. Story Rules"
+Cohesion: 0.25
+Nodes (8): 23.1 No Cartoon Villains, 23.2 No Omniscient Hacker Fantasy, 23.3 Technical Events Must Matter, 23.4 Normality Creates Tension, 23.5 Evidence Before Revelation, 23.6 Not Everything Is Connected, 23.7 The Player Is Not the Center of the Universe, 23. Story Rules
+
+### Community 25 - "6. ACT I — NOISE"
+Cohesion: 0.25
+Nodes (8): 6. ACT I — NOISE, Concepts, Example Operations, Player Role, Purpose, Story Layer, Theme, Tone
+
+### Community 26 - "7. ACT II — PATTERN"
+Cohesion: 0.25
+Nodes (8): 7. ACT II — PATTERN, Concepts, Example Operations, Key Narrative Principle, Player Role, Purpose, Story Layer, Theme
+
+### Community 27 - "11. ACT IV — GHOSTS"
+Cohesion: 0.29
+Nodes (7): 11. ACT IV — GHOSTS, Concepts, Example Operations, Player Role, Purpose, Story Layer, Theme
+
+### Community 28 - "8. ACT III — ACCESS"
+Cohesion: 0.29
+Nodes (7): 8. ACT III — ACCESS, Concepts, Example Operations, Player Role, Purpose, Story Layer, Theme
+
+### Community 29 - "17. ACT V — ROOT"
+Cohesion: 0.33
+Nodes (6): 17. ACT V — ROOT, Player Role, Possible Operations, Purpose, Story Layer, Theme
+
+### Community 30 - "20. Meaning of the Title"
+Cohesion: 0.33
+Nodes (6): 20. Meaning of the Title, Personal Meaning, Root Access, Root Cause, Root of the Incident, Root of Trust
+
+### Community 31 - "13. Canonical Recurring Characters"
+Cohesion: 0.40
+Nodes (5): 13. Canonical Recurring Characters, Daniel Kade — Senior Red Operator, Elias Ward — Founder of Nodeline Security, Lena Ortiz — SOC Lead, Mara Voss — Director of Operations
+
 ## Knowledge Gaps
-- **177 isolated node(s):** `proficiencyLabel`, `geistSans`, `geistMono`, `metadata`, `apps` (+172 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 196 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **242 isolated node(s):** `proficiencyLabel`, `geistSans`, `geistMono`, `metadata`, `apps` (+237 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 261 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `SimulationEngine` connect `SimulationEngine` to `engine.ts`, `index.ts`?**
-  _High betweenness centrality (0.038) - this node is a cross-community bridge._
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `devDependencies` to `dependencies`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **What connects `proficiencyLabel`, `geistSans`, `geistMono` to the rest of the system?**
-  _177 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _242 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `career/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.08792270531400966 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07607843137254902 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**

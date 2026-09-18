@@ -1,5 +1,5 @@
 {
-  "0": "career/page.tsx",
+  "0": "replay-client.tsx",
   "1": "devDependencies",
   "2": "dependencies",
   "3": "TypeScript Configuration",
@@ -8,7 +8,7 @@
   "6": "index.ts",
   "7": "Event Driven Design Docs",
   "8": "tools-unix.md",
-  "9": "replay-client.tsx",
+  "9": "red/page.tsx",
   "10": "Visual Design System",
   "11": "App Layout Fonts",
   "12": "Glasshouse Reconstruction",
@@ -21,5 +21,14 @@
   "19": "playwright.config.ts",
   "20": "44. MVP Tool Set",
   "21": "46. Player Progression",
-  "22": "47. Scenario Design Standard"
+  "22": "47. Scenario Design Standard",
+  "23": "canon-story.md",
+  "24": "23. Story Rules",
+  "25": "6. ACT I — NOISE",
+  "26": "7. ACT II — PATTERN",
+  "27": "11. ACT IV — GHOSTS",
+  "28": "8. ACT III — ACCESS",
+  "29": "17. ACT V — ROOT",
+  "30": "20. Meaning of the Title",
+  "31": "13. Canonical Recurring Characters"
 }
