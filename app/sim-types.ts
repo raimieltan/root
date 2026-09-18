@@ -29,7 +29,7 @@ export type ScenarioView = {
     lastResponse?: { action: string; timestamp: string; availability: number; businessImpact: string[] };
   };
   suspicion: number; objectiveRetrieved: boolean;
-  credentials: Array<{ username: string; scope: string; origin: string }>;
+  credentials: Array<{ id: string; username: string; type: string; scope: string; origin: string; serviceName: string | null; databaseName: string | null; valid: boolean }>;
   intel: { hosts: string[]; relationships: string[] };
   opsec: { network: string; authentication: string; endpoint: string };
   guidance: {

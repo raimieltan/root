@@ -4,10 +4,10 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 
 export type TerminalState = { currentMachine: string; currentUser: string; currentPrivilege: string; currentPath: string; currentSessionId?: string; context?: { type: "UNIX" | "SSH" } | { type: "POSTGRES"; serviceName: string; databaseName: string } | { type: "AUTHENTICATING"; serviceName: string; username: string; host: string; databaseName?: string }; discoveredHosts: string[] };
 
-type Props = { scenarioId: string; actorId: string; initialState: TerminalState; onStateChange: (state: TerminalState) => void; onRefresh: () => void };
+type Props = { scenarioId: string; actorId: string; initialState: TerminalState; prefill?: string; onStateChange: (state: TerminalState) => void; onRefresh: () => void };
 type Line = { kind: "command" | "output" | "error"; text: string };
 
-export default function Terminal({ scenarioId, actorId, initialState, onStateChange, onRefresh }: Props) {
+export default function Terminal({ scenarioId, actorId, initialState, prefill, onStateChange, onRefresh }: Props) {
   const [state, setState] = useState(initialState);
   const [line, setLine] = useState("");
   const [busy, setBusy] = useState(false);
@@ -15,6 +15,7 @@ export default function Terminal({ scenarioId, actorId, initialState, onStateCha
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [history]);
+  useEffect(() => { if (prefill) setLine(prefill); }, [prefill]);
 
   async function submit(event: FormEvent) {
     event.preventDefault();

@@ -80,7 +80,11 @@ export async function respondToAttack(input: ResponseInput) {
   }
   if (["RESET_PASSWORD", "INSPECT_USER"].includes(input.action)) {
     if (!input.username || !await prisma.user.count({ where: { username: input.username, machine: { scenarioId: input.scenarioId } } })) throw new Error("Select a valid identity");
-    if (input.action === "RESET_PASSWORD") affected = (await prisma.session.updateMany({ where: { scenarioId: input.scenarioId, active: true, user: { username: input.username } }, data: { active: false } })).count + 1;
+    if (input.action === "RESET_PASSWORD") {
+      const closed = await prisma.session.updateMany({ where: { scenarioId: input.scenarioId, active: true, user: { username: input.username } }, data: { active: false } });
+      const invalidated = await prisma.credential.updateMany({ where: { scenarioId: input.scenarioId, username: input.username, valid: true }, data: { valid: false } });
+      affected = closed.count + invalidated.count + 1;
+    }
   }
   if (input.action === "BLOCK_CONNECTION") {
     const connection = await prisma.networkConnection.findFirst({ where: { id: input.connectionId ?? "", source: { scenarioId: input.scenarioId }, target: { scenarioId: input.scenarioId } } });

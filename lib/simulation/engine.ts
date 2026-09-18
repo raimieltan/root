@@ -165,6 +165,19 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     }
     for (const credential of discovery.credentials ?? []) {
       const machine = await this.target(credential.scope);
+      const identity = machine?.users.find((user) => user.username === credential.username);
+      const database = definition.databases?.find((entry) => entry.host === machine?.hostname && entry.identities.some((entry) => entry.username === credential.username));
+      const reset = await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "RESET_PASSWORD", userId: credential.username } });
+      if (machine && identity) {
+        await prisma.credential.upsert({
+          where: { scenarioId_username_knownScope: { scenarioId: this.scenarioId, username: credential.username, knownScope: credential.scope } },
+          create: {
+            scenarioId: this.scenarioId, username: credential.username, origin: `${host}:${value}`, knownScope: credential.scope,
+            secret: identity.password, privilege: identity.privilege, valid: !reset, serviceName: database ? "postgres" : "ssh", databaseName: database?.database,
+          },
+          update: { origin: `${host}:${value}`, secret: identity.password, privilege: identity.privilege, valid: !reset, serviceName: database ? "postgres" : "ssh", databaseName: database?.database },
+        });
+      }
       events.push(await this.emit({ action: "CREDENTIAL_DISCOVERED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId, targetMachineId: machine?.id, userId: credential.username, visibleToBlue: false, metadata: { scope: credential.scope, origin: `${host}:${value}` } }));
     }
     for (const evidence of discovery.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId, targetMachineId: discoveryHost?.id, metadata: { origin: `${host}:${value}` } }));
@@ -335,13 +348,12 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const database = definition.databases?.find((entry) => entry.host === target?.hostname && entry.service === "postgres" && entry.database === intent.database);
     const service = target?.services.find((entry) => entry.name === "postgres" && entry.status === "RUNNING");
     const identity = target?.users.find((entry) => entry.username === intent.username);
-    const credential = target && identity ? await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "CREDENTIAL_DISCOVERED", targetMachineId: target.id, userId: intent.username } }) : null;
-    const reset = identity ? await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "RESET_PASSWORD", userId: intent.username }, orderBy: { timestamp: "desc" } }) : null;
+    const credential = target && identity ? await prisma.credential.findFirst({ where: { scenarioId: this.scenarioId, username: intent.username, knownScope: target.hostname, valid: true, serviceName: "postgres" } }) : null;
     if (source && target && service && database && identity && !intent.password) {
       const pending = await prisma.session.create({ data: { actorId: this.actorId, userId: identity.id, machineId: target.id, privilege: identity.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "AUTHENTICATING", serviceName: "postgres", databaseName: database.database } });
       return { success: true, output: `Password for user ${identity.username}:`, events: [], sessionUpdated: true, context: { type: "AUTHENTICATING" as const, serviceName: "postgres", username: identity.username, host: target.hostname, databaseName: database.database }, newSession: { id: pending.id, userId: identity.username, machineId: target.hostname, privilege: identity.privilege, sourceMachineId: source.machine.id, createdAt: pending.createdAt, active: true, context: "AUTHENTICATING" as const, serviceName: "postgres", databaseName: database.database } };
     }
-    const allowed = Boolean(source && target && service && database && identity && credential && !reset && intent.password === identity.password && await reachable(this.scenarioId, source.machine.id, target.id, [5432]));
+    const allowed = Boolean(source && target && service && database && identity && credential && intent.password === credential.secret && await reachable(this.scenarioId, source.machine.id, target.id, [5432]));
     const events = source && target ? [await this.emit({ action: allowed ? "POSTGRES_AUTH_SUCCESS" : "POSTGRES_AUTH_FAILED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: intent.username, metadata: { database: intent.database, service: "postgres" } })] : [];
     if (!allowed || !source || !target || !identity || !service || !database) return this.result(false, "psql: connection or authentication failed", events);
     const session = await prisma.session.create({ data: { actorId: this.actorId, userId: identity.id, machineId: target.id, privilege: identity.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "POSTGRES", serviceName: service.name, databaseName: database.database } });
@@ -404,12 +416,11 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const pending = await this.currentMachine(state);
     if (!pending || pending.context !== "AUTHENTICATING" || !pending.serviceName) return this.result(false, "No authentication prompt is active.");
     const source = pending.sourceMachineId ? await prisma.machine.findUnique({ where: { id: pending.sourceMachineId } }) : null;
-    const credential = await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "CREDENTIAL_DISCOVERED", targetMachineId: pending.machineId, userId: pending.user.username } });
-    const reset = await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "RESET_PASSWORD", userId: pending.user.username }, orderBy: { timestamp: "desc" } });
+    const credential = await prisma.credential.findFirst({ where: { scenarioId: this.scenarioId, username: pending.user.username, knownScope: pending.machine.hostname, valid: true, serviceName: pending.serviceName } });
     const port = pending.serviceName === "postgres" ? 5432 : 22;
     const service = pending.machine.services.find((entry) => entry.name === pending.serviceName && entry.status === "RUNNING");
     const reachableTarget = source && await reachable(this.scenarioId, source.id, pending.machineId, [port]);
-    const allowed = Boolean(source && service && credential && !reset && password === pending.user.password && reachableTarget);
+    const allowed = Boolean(source && service && credential && password === credential.secret && reachableTarget);
     const action = pending.serviceName === "postgres" ? allowed ? "POSTGRES_AUTH_SUCCESS" : "POSTGRES_AUTH_FAILED" : allowed ? "AUTH_SUCCESS" : "AUTH_FAILED";
     const events = [await this.emit({ action, category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source?.id, targetMachineId: pending.machineId, userId: pending.user.username, metadata: { service: pending.serviceName, database: pending.databaseName } })];
     if (!allowed || !source) return { ...this.result(false, pending.serviceName === "postgres" ? "psql: password authentication failed" : "Permission denied, please try again.", events), context: { type: "AUTHENTICATING", serviceName: pending.serviceName, username: pending.user.username, host: pending.machine.hostname, databaseName: pending.databaseName ?? undefined } };
@@ -455,8 +466,7 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const [source, target] = await Promise.all([this.currentMachine(state), this.target(host)]);
     if (!source || !target) return this.result(false, "Host not found.");
     const user = target.users.find((entry) => entry.username === username);
-    const credential = await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "CREDENTIAL_DISCOVERED", userId: username, targetMachineId: target.id } });
-    const reset = await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "RESET_PASSWORD", userId: username }, orderBy: { timestamp: "desc" } });
+    const credential = await prisma.credential.findFirst({ where: { scenarioId: this.scenarioId, username, knownScope: target.hostname, valid: true, serviceName: "ssh" } });
     if (source && target && user?.password && !args[1]) {
       const pending = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "AUTHENTICATING", serviceName: "ssh" } });
       return { success: true, output: `${username}@${target.hostname}'s password:`, events: [], sessionUpdated: true, context: { type: "AUTHENTICATING" as const, serviceName: "ssh", username, host: target.hostname }, newSession: { id: pending.id, userId: username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: pending.createdAt, active: true, context: "AUTHENTICATING" as const, serviceName: "ssh" } };
@@ -464,7 +474,7 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     const link = await prisma.networkConnection.findFirst({ where: { sourceMachineId: source.machine.id, targetMachineId: target.id, port: { in: [22, 5432] }, allowed: true } });
     const isolated = await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "HOST_ISOLATED", targetMachineId: { in: [source.machine.id, target.id] } }, orderBy: { timestamp: "desc" } });
     const restored = isolated ? await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "HOST_RESTORED", targetMachineId: isolated.targetMachineId, timestamp: { gt: isolated.timestamp } } }) : null;
-    const allowed = Boolean(user && credential && !reset && (!args[1] || args[1] === user.password) && link && (!isolated || restored) && await reachable(this.scenarioId, source.machine.id, target.id, [22, 5432]));
+    const allowed = Boolean(user && credential && (!args[1] || args[1] === credential.secret) && link && (!isolated || restored) && await reachable(this.scenarioId, source.machine.id, target.id, [22, 5432]));
     const events = [await this.emit({ action: allowed ? "AUTH_SUCCESS" : "AUTH_FAILED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username })];
     if (!allowed || !user) return this.result(false, "Permission denied or route blocked.", events);
     events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username, metadata: { privilege: user.privilege } }));

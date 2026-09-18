@@ -77,23 +77,24 @@ model Scenario {
   startedAt DateTime?
   endedAt   DateTime?
 
-  actors    Actor[]
-  sessions  Session[]
-  events    SecurityEvent[]
-  machines  Machine[]
+  actors      Actor[]
+  sessions    Session[]
+  events      SecurityEvent[]
+  machines    Machine[]
+  credentials Credential[]
 }
 
 // A player/attacker/defender
 model Actor {
-  id        String   @id @default(cuid())
-  name      String
-  role      String   // "red_operator", "blue_operator"
+  id   String @id @default(cuid())
+  name String
+  role String // "red_operator", "blue_operator"
 
-  scenario  Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  scenario   Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
   scenarioId String
 
-  sessions  Session[]
-  events    SecurityEvent[]
+  sessions Session[]
+  events   SecurityEvent[]
 
   @@index([scenarioId])
 }
@@ -126,24 +127,23 @@ model Machine {
 
   @@unique([scenarioId, hostname])
   @@unique([scenarioId, ip])
-
   @@index([scenarioId])
 }
 
 // Users on machines
 model User {
-  id        String      @id @default(cuid())
-  username  String
-  role      String      // "admin", "deploy", "www-data", "finance", etc
+  id       String @id @default(cuid())
+  username String
+  role     String // "admin", "deploy", "www-data", "finance", etc
 
-  machine   Machine     @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
   machineId String
 
-  password  String?     // hashed, for internal sim use
-  groups    String[]    // JSON array
+  password  String? // hashed, for internal sim use
+  groups    String[] // JSON array
   privilege AccessLevel @default(USER)
 
-  sessions  Session[]
+  sessions Session[]
 
   @@unique([machineId, username])
   @@index([machineId])
@@ -151,35 +151,35 @@ model User {
 
 // Services running on machines
 model Service {
-  id              String        @id @default(cuid())
-  name            String
-  port            Int
-  protocol        String        // "tcp", "udp"
-  runningAsUser   String        // username reference
-  status          ServiceStatus @default(RUNNING)
+  id            String        @id @default(cuid())
+  name          String
+  port          Int
+  protocol      String // "tcp", "udp"
+  runningAsUser String // username reference
+  status        ServiceStatus @default(RUNNING)
 
-  machine         Machine       @relation(fields: [machineId], references: [id], onDelete: Cascade)
-  machineId       String
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  machineId String
 
-  exposedZones    String[]      // JSON array of NetworkZone
-  metadata        String?       // JSON
+  exposedZones String[] // JSON array of NetworkZone
+  metadata     String? // JSON
 
   @@index([machineId])
 }
 
 // Files on machines
 model File {
-  id        String   @id @default(cuid())
-  path      String
-  owner     String   // username
-  group     String?
-  contents  String?  // for small files
+  id       String  @id @default(cuid())
+  path     String
+  owner    String // username
+  group    String?
+  contents String? // for small files
 
-  machine   Machine  @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
   machineId String
 
   permissions String // e.g., "644", "755"
-  isSecret  Boolean @default(false)
+  isSecret    Boolean @default(false)
 
   @@unique([machineId, path])
   @@index([machineId])
@@ -187,12 +187,12 @@ model File {
 
 // Running processes
 model Process {
-  id        String   @id @default(cuid())
+  id        String @id @default(cuid())
   name      String
   pid       Int
-  runningAs String   // username
+  runningAs String // username
 
-  machine   Machine  @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
   machineId String
 
   createdAt DateTime @default(now())
@@ -202,27 +202,27 @@ model Process {
 
 // Active sessions (player access to machines)
 model Session {
-  id           String       @id @default(cuid())
-  actor        Actor?       @relation(fields: [actorId], references: [id], onDelete: SetNull)
-  actorId      String?
+  id      String  @id @default(cuid())
+  actor   Actor?  @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actorId String?
 
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
-  machine      Machine      @relation(fields: [machineId], references: [id], onDelete: Cascade)
-  machineId    String
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  machineId String
 
-  privilege    AccessLevel
+  privilege       AccessLevel
   sourceMachineId String?
-  context      SessionContext @default(UNIX)
-  serviceName  String?
-  databaseName String?
+  context         SessionContext @default(UNIX)
+  serviceName     String?
+  databaseName    String?
 
-  scenario     Scenario     @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
-  scenarioId   String
+  scenario   Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  scenarioId String
 
-  createdAt    DateTime     @default(now())
-  active       Boolean      @default(true)
+  createdAt DateTime @default(now())
+  active    Boolean  @default(true)
 
   @@index([machineId])
   @@index([actorId])
@@ -231,16 +231,16 @@ model Session {
 
 // Network connections between machines
 model NetworkConnection {
-  id           String   @id @default(cuid())
-  source       Machine  @relation("source", fields: [sourceMachineId], references: [id], onDelete: Cascade)
+  id              String  @id @default(cuid())
+  source          Machine @relation("source", fields: [sourceMachineId], references: [id], onDelete: Cascade)
   sourceMachineId String
 
-  target       Machine  @relation("target", fields: [targetMachineId], references: [id], onDelete: Cascade)
+  target          Machine @relation("target", fields: [targetMachineId], references: [id], onDelete: Cascade)
   targetMachineId String
 
-  port         Int
-  protocol     String   // "tcp", "udp"
-  allowed      Boolean  @default(true)
+  port     Int
+  protocol String // "tcp", "udp"
+  allowed  Boolean @default(true)
 
   @@unique([sourceMachineId, targetMachineId, port])
   @@index([targetMachineId])
@@ -248,45 +248,45 @@ model NetworkConnection {
 
 // Network firewall rules
 model NetworkRule {
-  id              String   @id @default(cuid())
-  sourceZone      String   // "*" or zone name
-  targetMachine   Machine  @relation(fields: [targetMachineId], references: [id], onDelete: Cascade)
+  id              String  @id @default(cuid())
+  sourceZone      String // "*" or zone name
+  targetMachine   Machine @relation(fields: [targetMachineId], references: [id], onDelete: Cascade)
   targetMachineId String
 
-  port            Int
-  allow           Boolean  @default(true)
+  port  Int
+  allow Boolean @default(true)
 
   @@index([targetMachineId])
 }
 
 // Security events for logging and detection
 model SecurityEvent {
-  id           String                  @id @default(cuid())
-  timestamp    DateTime                @default(now())
+  id        String   @id @default(cuid())
+  timestamp DateTime @default(now())
 
-  actor        Actor?                  @relation(fields: [actorId], references: [id], onDelete: SetNull)
-  actorId      String?
+  actor   Actor?  @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actorId String?
 
-  sourceMachine Machine?               @relation("sourceOf", fields: [sourceMachineId], references: [id], onDelete: SetNull)
+  sourceMachine   Machine? @relation("sourceOf", fields: [sourceMachineId], references: [id], onDelete: SetNull)
   sourceMachineId String?
 
-  targetMachine Machine?               @relation("targetOf", fields: [targetMachineId], references: [id], onDelete: SetNull)
+  targetMachine   Machine? @relation("targetOf", fields: [targetMachineId], references: [id], onDelete: SetNull)
   targetMachineId String?
 
-  userId      String?
+  userId String?
 
-  scenario    Scenario                @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
-  scenarioId  String
+  scenario   Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  scenarioId String
 
-  category    SecurityEventCategory
-  action      String
+  category SecurityEventCategory
+  action   String
 
-  visibleToRed Boolean @default(true)
-  visibleToBlue Boolean @default(true)
+  visibleToRed    Boolean @default(true)
+  visibleToBlue   Boolean @default(true)
   visibleInReplay Boolean @default(true)
 
-  severity    SecurityEventSeverity
-  metadata    String?   // JSON
+  severity SecurityEventSeverity
+  metadata String? // JSON
 
   @@index([scenarioId])
   @@index([sourceMachineId])
@@ -295,19 +295,41 @@ model SecurityEvent {
 
 // Persistence artifacts (agents, backdoors, etc)
 model Persistence {
-  id                  String   @id @default(cuid())
-  machine             Machine  @relation(fields: [machineId], references: [id], onDelete: Cascade)
-  machineId           String
+  id        String  @id @default(cuid())
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  machineId String
 
-  type                String   // "remote_agent"
-  beaconIntervalSeconds Int   @default(30)
-  active              Boolean  @default(true)
+  type                  String // "remote_agent"
+  beaconIntervalSeconds Int     @default(30)
+  active                Boolean @default(true)
 
-  hasProcess          Boolean  @default(true)
-  hasStartupEntry     Boolean  @default(true)
+  hasProcess            Boolean @default(true)
+  hasStartupEntry       Boolean @default(true)
   hasOutboundConnection Boolean @default(true)
 
-  createdAt           DateTime @default(now())
+  createdAt DateTime @default(now())
 
   @@index([machineId])
+}
+
+// A credential is a discovered simulation object, not merely a historical event.
+model Credential {
+  id           String      @id @default(cuid())
+  username     String
+  type         String      @default("Password")
+  origin       String
+  knownScope   String
+  serviceName  String?
+  databaseName String?
+  secret       String?
+  privilege    AccessLevel @default(USER)
+  valid        Boolean     @default(true)
+  discoveredAt DateTime    @default(now())
+
+  scenario   Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  scenarioId String
+
+  @@unique([scenarioId, username, knownScope])
+  @@index([scenarioId])
+  @@index([scenarioId, username, knownScope])
 }

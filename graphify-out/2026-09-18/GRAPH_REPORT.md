@@ -1,16 +1,16 @@
 # Graph Report - root  (2026-09-18)
 
 ## Corpus Check
-- 67 files · ~631,991 words
+- 68 files · ~632,781 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 497 nodes · 969 edges · 32 communities (27 shown, 3 thin omitted)
+- 498 nodes · 980 edges · 31 communities (26 shown, 3 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `92c6c4a3`
+- Built from commit: `6972e05a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -24,7 +24,6 @@
 - index.ts
 - Event Driven Design Docs
 - tools-unix.md
-- red/page.tsx
 - Visual Design System
 - App Layout Fonts
 - Glasshouse Reconstruction
@@ -47,8 +46,8 @@
 - 13. Canonical Recurring Characters
 
 ## God Nodes (most connected - your core abstractions)
-1. `SimulationEngine` - 42 edges
-2. `TerminalState` - 27 edges
+1. `SimulationEngine` - 43 edges
+2. `TerminalState` - 28 edges
 3. `getDefinitionForScenario()` - 16 edges
 4. `compilerOptions` - 16 edges
 5. `ScenarioDefinition` - 15 edges
@@ -56,7 +55,7 @@
 7. `readRuns()` - 10 edges
 8. `businessAvailability()` - 10 edges
 9. `parseMetadata()` - 10 edges
-10. `summarizeReplay()` - 9 edges
+10. `reachable()` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Next.js Wordmark Asset` --conceptually_related_to--> `Next.js Bootstrap Instructions`  [INFERRED]
@@ -77,11 +76,11 @@
 - **Shared Simulation Model** — docs_root_canonical_plan_shared_simulation, docs_root_canonical_plan_everything_leaves_evidence, docs_root_canonical_plan_post_operation_reconstruction [EXTRACTED 1.00]
 - **ROOT Operational UI Reference Set** — docs_ui_chatgpt_image_sep_18_2026_12_05_06_am_1_red_operations_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_09_am_4_blue_soc_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_10_am_5_reconstruction_workspace [INFERRED 0.95]
 
-## Communities (32 total, 3 thin omitted)
+## Communities (31 total, 3 thin omitted)
 
 ### Community 0 - "replay-client.tsx"
-Cohesion: 0.08
-Nodes (37): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), ReplayPageProps, emptySnapshot (+29 more)
+Cohesion: 0.07
+Nodes (39): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), MissionPanel(), NetworkMap() (+31 more)
 
 ### Community 1 - "devDependencies"
 Cohesion: 0.06
@@ -96,11 +95,11 @@ Cohesion: 0.07
 Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules (+20 more)
 
 ### Community 4 - "engine.ts"
-Cohesion: 0.08
-Nodes (43): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+35 more)
+Cohesion: 0.07
+Nodes (52): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+44 more)
 
 ### Community 5 - "SimulationEngine"
-Cohesion: 0.25
+Cohesion: 0.26
 Nodes (6): SimulationEngine, reachable(), parseTerminalInput(), CommandResult, SimulationEvent, TerminalState
 
 ### Community 6 - "index.ts"
@@ -114,10 +113,6 @@ Nodes (12): Repository Agent Rules, Canonical Plan Precedence, Graphify-First Co
 ### Community 8 - "tools-unix.md"
 Cohesion: 0.04
 Nodes (50): 10. Filesystem Simulation, 11. Services as First-Class Simulation Objects, 12. PostgreSQL Simulation, 13. Supported PostgreSQL Commands, 14. Database Simulation Model, 15. Credentials as First-Class Objects, 16. Credential Usage, 17. Credentials Application (+42 more)
-
-### Community 9 - "red/page.tsx"
-Cohesion: 0.16
-Nodes (11): MissionPanel(), NetworkMap(), apps, RedTeamPage(), Line, Props, Terminal(), TerminalState (+3 more)
 
 ### Community 10 - "Visual Design System"
 Cohesion: 0.33
@@ -202,7 +197,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `proficiencyLabel`, `geistSans`, `geistMono` to the rest of the system?**
   _242 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `replay-client.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.07617051013277429 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06502732240437159 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**

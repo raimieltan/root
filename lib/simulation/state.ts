@@ -11,6 +11,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
       actors: true,
       machines: { include: { services: true, files: true, processes: true, persistence: true } },
       sessions: { include: { machine: true, user: true }, orderBy: { createdAt: "asc" } },
+      credentials: { orderBy: { discoveredAt: "asc" } },
       events: { include: { sourceMachine: true, targetMachine: true }, orderBy: { timestamp: "asc" } },
     },
   });
@@ -108,17 +109,16 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     : undefined;
   const lastResponseMetadata = parseMetadata(lastResponseEvent?.metadata);
   const objectiveRetrieved = scenario.events.some((event) => event.action === "OBJECTIVE_RETRIEVED");
-  const credentials = scenario.events
-    .filter((event) => event.action === "CREDENTIAL_DISCOVERED" && event.visibleToRed)
-    .map((event) => {
-      const metadata = parseMetadata(event.metadata);
-      return {
-        username: event.userId ?? "unknown",
-        scope: typeof metadata.scope === "string" ? metadata.scope : event.targetMachine?.hostname ?? "unknown",
-        origin: typeof metadata.origin === "string" ? metadata.origin : "discovered file",
-      };
-    })
-    .filter((credential, index, entries) => entries.findIndex((entry) => entry.username === credential.username && entry.scope === credential.scope) === index);
+  const credentials = scenario.credentials.map((credential) => ({
+    id: credential.id,
+    username: credential.username,
+    type: credential.type,
+    scope: credential.knownScope,
+    origin: credential.origin,
+    serviceName: credential.serviceName,
+    databaseName: credential.databaseName,
+    valid: credential.valid,
+  }));
   const relationships = scenario.events
     .filter((event) => event.action === "SESSION_CREATED" && event.sourceMachine && event.targetMachine)
     .map((event) => `${event.sourceMachine!.hostname} → ${event.targetMachine!.hostname} via ${event.userId ?? "unknown"}`)

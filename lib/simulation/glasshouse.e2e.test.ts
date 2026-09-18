@@ -168,6 +168,10 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
         }
       }
       await respondToAttack({ scenarioId: initialized.scenarioId, actorId: initialized.actorId, action: "RESET_PASSWORD", username: "db_backup" });
+      const credential = await prisma.credential.findFirst({ where: { scenarioId: initialized.scenarioId, username: "db_backup", knownScope: "FIN-DB" } });
+      assert.ok(credential);
+      assert.equal(credential.valid, false);
+      assert.equal(credential.serviceName, "postgres");
       const result = await engine.executeCommand("AtlasBackup-91d2", state);
       assert.equal(result.success, false);
       assert.match(result.output, /authentication prompt is active/i);

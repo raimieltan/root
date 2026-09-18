@@ -686,6 +686,53 @@ textarea:focus-visible {
   color: var(--amber-light);
 }
 
+.credential-list {
+  gap: 8px;
+}
+
+.credential-entry {
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  border: 1px solid var(--border-soft);
+  background: #081014;
+}
+
+.credential-entry small {
+  color: var(--text-muted);
+  font: 8px var(--mono);
+}
+
+.credential-entry .credential-secret {
+  border-left-color: var(--amber);
+  background: #0a1113;
+}
+
+.credential-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.credential-actions button {
+  padding: 4px 7px;
+  border: 1px solid var(--border-strong);
+  border-radius: 1px;
+  background: #0b1519;
+  color: var(--blue-light);
+  font: 9px var(--mono);
+  text-transform: uppercase;
+}
+
+.credential-actions button:hover:not(:disabled) {
+  border-color: var(--blue);
+  color: var(--text);
+}
+
+.credential-actions button:disabled {
+  color: var(--text-muted);
+  opacity: .55;
+}
+
 select,
 textarea,
 .campaign-filters input {
