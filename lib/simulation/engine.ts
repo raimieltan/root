@@ -59,12 +59,9 @@ export class SimulationEngine {
       case "nmap": return this.scan(args, state);
       case "curl": return this.result(false, "Usage: curl [-X METHOD] <url> [--data BODY]");
       case "psql": return this.result(false, psqlUsage);
-      case "msfconsole": return this.result(true, "Metasploit simulation ready. Use: exploit <host>");
-      case "exploit": return this.exploit(args, state);
       case "ssh": return this.ssh(args, state);
       case "john": return this.john(args);
       case "sessions": return this.sessions(args);
-      case "privesc": return this.privesc(args, state);
       case "install-agent": return this.installAgent(state);
       default: return this.result(false, `Command not found: ${cmd}. Type help.`);
     }
@@ -83,7 +80,7 @@ Filesystem:  pwd · cd <path> · ls [-l] [path] · cat <path> · grep TEXT [path
 System:      whoami · id · hostname · env · ps · backup-sync --run-hook
 Web:         curl [-X METHOD] URL [--data BODY]
 Database:    psql -h HOST -U USER -d DATABASE --password SECRET
-Tools:       john <file> · msfconsole · install-agent · clear`;
+Tools:       john <file> · install-agent · clear`;
   }
 
   private async currentMachine(state: TerminalState) {
@@ -439,27 +436,6 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     return { success: true, output: `Connected to ${pending.machine.hostname}.`, events, sessionUpdated: true, context: { type: "SSH" }, newSession: { id: pending.id, userId: pending.user.username, machineId: pending.machine.hostname, privilege: pending.privilege, sourceMachineId: source.id, createdAt: pending.createdAt, active: true, context: "SSH", serviceName: "ssh" } };
   }
 
-  private async exploit(args: string[], state: TerminalState) {
-    const source = await this.currentMachine(state);
-    const target = await this.target(args[0] ?? "");
-    const definition = await this.definition();
-    const profile = definition.exploits.find((entry) => entry.target === target?.hostname);
-    if (!source || !target || !profile) return this.result(false, "Target is not vulnerable.");
-    if (!await reachable(this.scenarioId, source.machine.id, target.id, [80, 443])) return this.result(false, "Exploit cannot reach the target service.");
-    if (profile.prerequisiteAction) {
-      const satisfied = await prisma.securityEvent.count({ where: { scenarioId: this.scenarioId, action: profile.prerequisiteAction, targetMachineId: target.id } });
-      if (!satisfied) return this.result(false, "Exploit profile unknown. Gather service evidence first.");
-    }
-    const user = target.users.find((entry) => entry.username === profile.sessionUser);
-    if (!user) return this.result(false, "Exploit session identity is unavailable.");
-    await prisma.process.create({ data: { machineId: target.id, name: `${profile.module} → interactive-shell`, pid: 3000 + Math.floor(Math.random() * 900), runningAs: user.username } });
-    const events: SimulationEvent[] = [];
-    for (const evidence of profile.evidence) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: evidence.action === "PROCESS_SPAWN" ? user.username : undefined }));
-    events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: user.username, metadata: { privilege: user.privilege } }));
-    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "SSH" } });
-    return { success: true, output: profile.output, events, sessionUpdated: true, context: { type: "SSH" as const }, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "SSH" as const } };
-  }
-
   private async ssh(args: string[], state: TerminalState) {
     if (!args[0]?.includes("@")) return this.result(false, "Usage: ssh <user@host>");
     const [username, host] = args[0].split("@");
@@ -500,19 +476,6 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
       return { ...this.result(true, `Using ${selected.user.username}@${selected.machine.hostname}`), context, newSession: { id: selected.id, machineId: selected.machine.hostname, userId: selected.user.username, privilege: selected.privilege, active: selected.active, createdAt: selected.createdAt, sourceMachineId: selected.sourceMachineId ?? undefined, context: selected.context, serviceName: selected.serviceName ?? undefined, databaseName: selected.databaseName ?? undefined }, sessionUpdated: true };
     }
     return this.result(true, sessions.map((session, index) => `[${index + 1}] ${session.user.username}@${session.machine.hostname} (${session.privilege})`).join("\n") || "No active sessions");
-  }
-
-  private async privesc(args: string[], state: TerminalState) {
-    const current = await this.currentMachine(state);
-    const definition = await this.definition();
-    const escalation = definition.privilegeEscalations.find((entry) => entry.command === args[0] && entry.host === current?.machine.hostname && entry.fromUser === current?.user.username);
-    if (!current || !escalation) return this.result(false, "No matching trusted-service escalation was found in this context.");
-    const elevated = await prisma.user.findFirstOrThrow({ where: { machineId: current.machine.id, username: escalation.toUser } });
-    const events: SimulationEvent[] = [];
-    for (const evidence of escalation.evidence) events.push(await this.emitDefinition(evidence, { targetMachineId: current.machine.id, userId: current.user.username }));
-    events.push(await this.emit({ action: "ROOT_SESSION_CREATED", category: SecurityEventCategory.PRIVILEGE, severity: SecurityEventSeverity.HIGH, targetMachineId: current.machine.id, userId: elevated.username, metadata: { privilege: elevated.privilege } }));
-    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: elevated.id, machineId: current.machine.id, privilege: elevated.privilege, sourceMachineId: current.machine.id, scenarioId: this.scenarioId, context: "SSH" } });
-    return { success: true, output: escalation.output, events, sessionUpdated: true, context: { type: "SSH" as const }, newSession: { id: session.id, userId: elevated.username, machineId: current.machine.hostname, privilege: elevated.privilege, createdAt: session.createdAt, active: true, context: "SSH" as const } };
   }
 
   private async installAgent(state: TerminalState) {

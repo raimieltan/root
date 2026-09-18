@@ -95,22 +95,6 @@ export type ScenarioDefinition = {
     output: string;
     evidence: ScenarioEventDefinition[];
   }>;
-  exploits: Array<{
-    target: string;
-    sessionUser: string;
-    prerequisiteAction?: string;
-    module: string;
-    output: string;
-    evidence: ScenarioEventDefinition[];
-  }>;
-  privilegeEscalations: Array<{
-    command: string;
-    host: string;
-    fromUser: string;
-    toUser: string;
-    output: string;
-    evidence: ScenarioEventDefinition[];
-  }>;
   objectives: Array<{ id: string; type: "retrieve_file"; host: string; path: string; label: string }>;
   detections: Record<string, { id: string; title: string; severity: string; rationale: string }>;
   routes: RouteDefinition[];

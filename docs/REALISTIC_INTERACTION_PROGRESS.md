@@ -62,6 +62,14 @@ Applied local Prisma migrations:
 - The Red Credentials application displays origin, scope, type, validity, and a masked secret. `Reveal` makes the simulated secret visible on demand, `Copy` works after reveal, and `Use` prepares a connection command without placing the secret on the command line. Authentication still happens through the terminal prompt.
 - Blue `RESET_PASSWORD` invalidates discovered credentials as well as active sessions. If Blue resets an identity before Red discovers it, a later discovery is created already invalid; it cannot reactivate that identity accidentally.
 
+### 7. Legacy generic attack shortcuts retired
+
+- Removed the player-facing `exploit`, `privesc`, and `msfconsole` commands and their monolithic engine handlers.
+- Removed the legacy scenario `exploits` and `privilegeEscalations` authoring fields.
+- Migrated every endpoint-style campaign route to a declared, bounded `curl -X POST` web interaction. Each interaction defines its host, method, path, expected payload fragment, prerequisite reconnaissance, resulting identity/session, and evidence.
+- Preserved the corresponding worker-execution, process, authentication, replay, and Blue-detection evidence. Endpoint worker activity now uses the outcome-oriented `WEB_WORKER_EXECUTED` event rather than a generic command-shaped event.
+- Glasshouse remains the reference for declared web interactions and trusted-service operations; the remaining campaign scenarios now follow the same authoring approach.
+
 ## Verification completed
 
 - `yarn tsc --noEmit` passed.
@@ -75,10 +83,6 @@ Applied local Prisma migrations:
 The older `exploit`, `privesc`, and `msfconsole` command paths still exist for campaign content that has not yet been migrated. They are not the intended future authoring interface, but removing them now would break those scenarios. Similarly, some legacy SSH routes retain implicit/compatibility authentication where their scenario data has no password target yet.
 
 ## Remaining work, in recommended order
-
-### Slice 6 — retire generic attack shortcuts
-
-Migrate every remaining campaign route from generic `exploit`/`privesc`/`msfconsole` branches to declared web interactions, service operations, permissions, and resources. Add authoring validation and tests that prevent new scenario content from depending on the retired shortcuts, then remove the handlers.
 
 ### Slice 7 — formalize the tool-adapter layer
 
@@ -103,8 +107,8 @@ The key rule for PvP is that clients may render and submit intent, but only the 
 
 ## Suggested immediate next task
 
-Implement Slice 6: migrate the remaining campaign routes from generic shortcuts to declared interactions, then remove the player-facing generic attack commands behind coverage gates.
+Implement Slice 7: formalize the tool-adapter layer so each tool owns parsing, validation, execution, telemetry, and Blue-detection behavior instead of extending the central engine switch.
 
 ## Session memory
 
-**2026-09-18 decision:** Slice 5 is complete. The next implementation priority is Slice 6, retiring the legacy generic attack shortcuts only after every dependent campaign route has a declared replacement and test coverage. Do not begin PvP authority work before this migration and Red/Blue telemetry parity are complete.
+**2026-09-18 decision:** Slice 5 and Slice 6 are complete. The next implementation priority is Slice 7, formalizing tool adapters. Do not begin PvP authority work before the adapter migration and Red/Blue telemetry parity are complete.

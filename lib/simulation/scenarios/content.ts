@@ -13,7 +13,7 @@ export const link = (source: string, target: string, port = 22, action?: string)
 export const discover = (host: string, value: string, target: string, username: string): ScenarioDefinition["discoveries"][number] => ({ trigger: { kind: "file", host, value }, hosts: [target], credentials: [{ username, scope: target }] });
 export const commonDetections: ScenarioDefinition["detections"] = {
   PORT_SCAN_DETECTED: { id: "NET-PROBE", title: "Concentrated service probing", severity: "LOW", rationale: "Service probes reveal an attempt to map accessible infrastructure." },
-  EXPLOIT_EXECUTED: { id: "ENDPOINT-EXEC", title: "Unexpected endpoint execution", severity: "HIGH", rationale: "A public service spawned an interactive process." },
+  WEB_WORKER_EXECUTED: { id: "ENDPOINT-EXEC", title: "Unexpected endpoint execution", severity: "HIGH", rationale: "A public request caused an unexpected worker process." },
   AGENT_BEACON: { id: "ENDPOINT-BEACON", title: "New periodic outbound process", severity: "HIGH", rationale: "Correlate the process owner and startup artifact with the initiating session." },
   OBJECTIVE_RETRIEVED: { id: "DATA-EXPORT", title: "Protected document exported", severity: "CRITICAL", rationale: "Protected data left the host through an interactive session." },
 };

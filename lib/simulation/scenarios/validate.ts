@@ -20,8 +20,8 @@ export function validateScenario(definition: ScenarioDefinition) {
     discovery.hosts?.forEach(host);
     discovery.credentials?.forEach((c) => user(c.scope, c.username));
   }
-  for (const exploit of definition.exploits) user(exploit.target, exploit.sessionUser);
-  for (const escalation of definition.privilegeEscalations) { user(escalation.host, escalation.fromUser); user(escalation.host, escalation.toUser); }
+  for (const interaction of definition.webInteractions ?? []) user(interaction.host, interaction.sessionUser);
+  for (const operation of definition.trustedServiceOperations ?? []) { user(operation.host, operation.fromUser); user(operation.host, operation.toUser); }
   if (!definition.objectives.length || definition.routes.length < 2) fail("objectives and competing routes required");
   for (const objective of definition.objectives) if (!host(objective.host).files.some((f) => f.path === objective.path)) fail("objective file absent");
   for (const route of definition.routes) {

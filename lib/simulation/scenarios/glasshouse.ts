@@ -174,21 +174,6 @@ export const glasshouse: ScenarioDefinition = {
       event("PRIVILEGE_ESCALATION", SecurityEventCategory.PRIVILEGE, SecurityEventSeverity.CRITICAL),
     ],
   }],
-  exploits: [{
-    target: "WEB-01", sessionUser: "www-data", prerequisiteAction: "PORT_PROBE", module: "legacy_upload", output: "Session opened: www-data@WEB-01",
-    evidence: [
-      event("EXPLOIT_EXECUTED", SecurityEventCategory.WEB, SecurityEventSeverity.HIGH, { metadata: { module: "legacy_upload" } }),
-      event("PROCESS_SPAWN", SecurityEventCategory.PROCESS, SecurityEventSeverity.MEDIUM),
-    ],
-  }],
-  privilegeEscalations: [{
-    command: "backup-sync", host: "DEV-01", fromUser: "deploy", toUser: "root", output: "backup-sync trusted the modified hook. Root session opened.",
-    evidence: [
-      event("PRIVILEGED_CONFIG_MODIFIED", SecurityEventCategory.FILESYSTEM, SecurityEventSeverity.HIGH),
-      event("SERVICE_RESTARTED", SecurityEventCategory.PRIVILEGE, SecurityEventSeverity.HIGH),
-      event("PRIVILEGE_ESCALATION", SecurityEventCategory.PRIVILEGE, SecurityEventSeverity.CRITICAL),
-    ],
-  }],
   objectives: [{ id: "atlas", type: "retrieve_file", host: "FIN-DB", path: "/opt/db/data/PROJECT_ATLAS.pdf", label: "Retrieve PROJECT_ATLAS.pdf" }],
   detections: {
     PORT_SCAN_DETECTED: { id: "NET-SCAN-01", title: "Port scan", severity: "LOW", rationale: "Multiple service probes reached the same host in a short interval." },

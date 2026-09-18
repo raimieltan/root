@@ -1,5 +1,5 @@
 {
-  "0": "red/page.tsx",
+  "0": "replay-client.tsx",
   "1": "devDependencies",
   "2": "dependencies",
   "3": "TypeScript Configuration",
@@ -8,7 +8,6 @@
   "6": "index.ts",
   "7": "Event Driven Design Docs",
   "8": "tools-unix.md",
-  "9": "replay-client.tsx",
   "10": "Visual Design System",
   "11": "App Layout Fonts",
   "12": "Glasshouse Reconstruction",
@@ -31,5 +30,5 @@
   "29": "17. ACT V — ROOT",
   "30": "20. Meaning of the Title",
   "31": "13. Canonical Recurring Characters",
-  "32": "Realistic Interaction Layer — Progress Checkpoint"
+  "32": "Delivered vertical slices"
 }

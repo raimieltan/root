@@ -83,7 +83,7 @@ describe("Canonical campaign", { concurrency: false }, () => {
         const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: run.scenarioId }, include: { events: true } });
         assert.equal(scenario.state, "COMPLETED");
         assert.ok(scenario.events.some((e) => e.action === "OBJECTIVE_RETRIEVED"));
-        assert.equal(scenario.events.some((e) => e.action === "EXPLOIT_EXECUTED"), profile.commands.some((c) => c.startsWith("exploit ")));
+        assert.equal(scenario.events.some((e) => e.action === "WEB_REQUEST"), profile.commands.some((c) => c.startsWith("curl")));
       } finally { await deleteScenario(run.scenarioId); }
     });
     it(`${definition.id}/${profile.id}: Blue AI uses the same route events`, async () => {
@@ -102,9 +102,9 @@ describe("Canonical campaign", { concurrency: false }, () => {
     try {
       const state: TerminalState = { ...run.startingState, activeSessions: [], credentials: new Map() };
       const engine = new SimulationEngine(run.scenarioId, run.actorId);
-      for (const command of ["ssh nobody@EXCHANGE-01", "ssh research_svc@VAULT-01", "nmap VAULT-01", "ping VAULT-01", "curl VAULT-01", "exploit VAULT-01"]) assert.equal((await engine.executeCommand(command, state)).success, false, command);
+      for (const command of ["ssh nobody@EXCHANGE-01", "ssh research_svc@VAULT-01", "nmap VAULT-01", "ping VAULT-01", "curl VAULT-01", "curl -X POST VAULT-01/restore/jobs --data source=external"]) assert.equal((await engine.executeCommand(command, state)).success, false, command);
       await prisma.networkConnection.updateMany({ where: { source: { scenarioId: run.scenarioId }, target: { hostname: "RECOVERY-01" } }, data: { allowed: false } });
-      assert.equal((await engine.executeCommand("exploit RECOVERY-01", state)).success, false);
+      assert.equal((await engine.executeCommand("curl -X POST RECOVERY-01/restore/jobs --data source=external", state)).success, false);
     } finally { await deleteScenario(run.scenarioId); }
   });
   it("one disrupted Dead Drop route leaves the independent recovery approach viable", async () => {

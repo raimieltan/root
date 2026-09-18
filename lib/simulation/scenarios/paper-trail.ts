@@ -35,8 +35,7 @@ export const paperTrail: ScenarioDefinition = {
     discover("VENDOR-01", "/home/lena/reconciliation.txt", "RECORDS-01", "records_svc"),
     discover("GRANT-WEB", "/etc/aster/export.conf", "RECORDS-01", "records_svc"),
   ],
-  exploits: [{ target: "GRANT-WEB", sessionUser: "root", prerequisiteAction: "PORT_PROBE", module: "grant_export_worker", output: "The public export worker accepts an unsigned job request as root. Session opened.", evidence: [{ action: "EXPLOIT_EXECUTED", category: "WEB", severity: "HIGH" }, { action: "PROCESS_SPAWN", category: "PROCESS", severity: "HIGH" }] }],
-  privilegeEscalations: [],
+  webInteractions: [{ host: "GRANT-WEB", method: "POST", path: "/exports/jobs", dataIncludes: "format=award", sessionUser: "root", prerequisiteAction: "PORT_PROBE", output: "The public export worker accepted the unsigned award job as root. Session opened.", evidence: [{ action: "WEB_WORKER_EXECUTED", category: "WEB", severity: "HIGH" }, { action: "PROCESS_SPAWN", category: "PROCESS", severity: "HIGH" }] }],
   objectives: [{ id: "award-roster", type: "retrieve_file", host: "RECORDS-01", path: "/srv/awards/AWARD_ROSTER.csv", label: "Retrieve AWARD_ROSTER.csv" }],
   detections: {
     ...commonDetections,
@@ -49,7 +48,7 @@ export const paperTrail: ScenarioDefinition = {
     route("vendor-reconciliation", "Vendor reconciliation", ["INTERNET", "VENDOR-01", "RECORDS-01"], "A legitimate vendor identity receives a read-only records service credential during reconciliation. The authorization becomes dangerous when its source and purpose diverge.", "Can a valid vendor reconciliation relationship reach records outside its intended business purpose?", false),
   ],
   blueProfiles: [
-    { id: "public-export", routeId: "public-export", commands: ["nmap GRANT-WEB", "exploit GRANT-WEB", "cat /etc/aster/export.conf", "ssh records_svc@RECORDS-01", "retrieve AWARD_ROSTER.csv"] },
+    { id: "public-export", routeId: "public-export", commands: ["nmap GRANT-WEB", "curl -X POST grants.aster.test/exports/jobs --data format=award", "cat /etc/aster/export.conf", "ssh records_svc@RECORDS-01", "retrieve AWARD_ROSTER.csv"] },
     { id: "vendor-reconciliation", routeId: "vendor-reconciliation", commands: ["curl grants.aster.test", "ssh lena@VENDOR-01", "cat /home/lena/reconciliation.txt", "ssh records_svc@RECORDS-01", "retrieve AWARD_ROSTER.csv"] },
   ],
   defaultBlueProfile: "vendor-reconciliation",

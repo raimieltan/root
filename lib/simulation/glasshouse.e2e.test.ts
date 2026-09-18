@@ -133,7 +133,7 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
     assert.ok(detections.includes("AUTH-VPN-01"));
     assert.ok(detections.includes("FIN-BACKUP-01"));
     assert.ok(!detections.includes("WEB-EXEC-01"));
-    assert.ok(!result.events.some((event) => event.action === "EXPLOIT_EXECUTED"));
+    assert.ok(!result.events.some((event) => event.action === "WEB_WORKER_EXECUTED"));
     assert.ok(!result.events.some((event) => event.action === "PRIVILEGE_ESCALATION"));
   });
 
