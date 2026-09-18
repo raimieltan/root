@@ -36,9 +36,9 @@
     "semantic_hash": "60ef4db65c90955768412b52d153b067"
   },
   "app/blue/page.tsx": {
-    "mtime": 1789710760.1158845,
-    "seen": 1789710921.248776,
-    "ast_hash": "a19a6da49e7443baaf096eaf490da903",
+    "mtime": 1789710963.8745291,
+    "seen": 1789711735.952356,
+    "ast_hash": "940a0090a3338f9e2995441d29b72f45",
     "semantic_hash": ""
   },
   "app/layout.tsx": {
@@ -402,9 +402,9 @@
     "semantic_hash": ""
   },
   "tests/browser/campaign.spec.ts": {
-    "mtime": 1789708392.0319974,
-    "seen": 1789708554.370912,
-    "ast_hash": "184d6c9204ed3244dec3072b119f011c",
+    "mtime": 1789711861.7273657,
+    "seen": 1789712023.935064,
+    "ast_hash": "9b66b588cf5809c15788e96c8b1566c6",
     "semantic_hash": ""
   },
   "Screenshot 2026-09-18 at 10.56.08.png": {
@@ -426,9 +426,9 @@
     "semantic_hash": ""
   },
   "test-results/.last-run.json": {
-    "mtime": 1789708636.4253972,
-    "seen": 1789710921.251814,
-    "ast_hash": "f196824657d8858bc7fa44eecbba38b1",
+    "mtime": 1789711932.292554,
+    "seen": 1789712023.935062,
+    "ast_hash": "797819599283668ff156f0095a094c33",
     "semantic_hash": ""
   },
   "image copy 2.png": {
@@ -459,6 +459,12 @@
     "mtime": 1789702148.2007427,
     "seen": 1789703628.104061,
     "ast_hash": "4b29669c0e874a2eba2a46717fde314c",
+    "semantic_hash": ""
+  },
+  "test-results/campaign-Blue-investigatio-09b33-tainment-results-and-replay/error-context.md": {
+    "mtime": 1789711931.7530587,
+    "seen": 1789712023.935272,
+    "ast_hash": "fbf690e6909934c1ca1bb982e68a222a",
     "semantic_hash": ""
   }
 }

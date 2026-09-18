@@ -10708,7 +10708,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/browser/campaign.spec.ts",
-      "source_location": "L107",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -11521,5 +11521,5 @@
       "source_file": "docs/ui/VISUAL_STYLES.md"
     }
   ],
-  "built_at_commit": "9f4e5925d8d8034222afe9688585412434b263f9"
+  "built_at_commit": "5a9f0d28b800eca5f6cfb2f45b4e723864613526"
 }

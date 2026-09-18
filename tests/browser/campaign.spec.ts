@@ -71,11 +71,13 @@ test("Blue investigation, precise containment, results and replay", async ({ pag
   await expect(page.getByRole("button", { name: "Advance one step" })).toBeVisible();
   async function step() { const state = page.waitForResponse((r) => r.url().includes("/api/sim/state") && r.request().method() === "GET"); const response = page.waitForResponse((r) => r.url().includes("/blue/advance")); await page.getByRole("button", { name: "Advance one step" }).click(); expect((await response).ok()).toBe(true); expect((await state).ok()).toBe(true); await expect(page.getByRole("link", { name: "Open reconstruction" }).or(page.locator("button:not([disabled])", { hasText: "Advance one step" }))).toBeVisible(); }
   await step();
+  await expect(page.getByText(/WINDOW \d{2}:\d{2} \/\/ 0\/1 REVIEWED \/\/ 0\/2 CONTAINED/)).toBeVisible();
   await expect(page.getByRole("button", { name: "Investigate and pin" }).first()).toBeVisible();
   const pinResponse = page.waitForResponse((response) => response.url().includes("/blue/respond") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Investigate and pin" }).first().click();
   expect((await pinResponse).ok()).toBe(true);
   await expect(page.getByText("Synchronizing evidence and simulation state…")).toBeHidden();
+  await expect(page.getByText(/WINDOW \d{2}:\d{2} \/\/ 1\/1 REVIEWED \/\/ 0\/2 CONTAINED/)).toBeVisible();
   await page.getByLabel("Finding", { exact: true }).fill("Concentrated probing merits host and identity correlation.");
   const findingResponse = page.waitForResponse((response) => response.url().includes("/blue/respond") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Record finding" }).click();
@@ -88,6 +90,7 @@ test("Blue investigation, precise containment, results and replay", async ({ pag
   await page.getByRole("button", { name: "Isolate host", exact: true }).click();
   expect((await isolateResponse).ok()).toBe(true);
   await expect(page.getByText(/Finance: OFFLINE/).first()).toBeVisible();
+  await expect(page.getByText(/LAST RESPONSE \/\/ HOST ISOLATED · 67% AVAILABILITY/)).toBeVisible();
   for (let i = 0; i < 25; i++) {
     if (await page.getByRole("link", { name: "Open reconstruction" }).count()) break;
     await step();
@@ -96,6 +99,10 @@ test("Blue investigation, precise containment, results and replay", async ({ pag
   await expect(page.getByText("OBJECTIVE PROTECTED", { exact: true })).toBeVisible();
   await page.getByRole("link", { name: "Open reconstruction" }).click();
   await expect(page.getByText("BLUE outcome: SUCCESS", { exact: false })).toBeVisible();
+  for (const lens of ["RED VIEW", "BLUE VIEW", "FULL TRUTH"]) {
+    await page.getByRole("button", { name: new RegExp(lens) }).click();
+  }
+  await expect(page.getByRole("button", { name: /FULL TRUTH/ })).toHaveClass(/active/);
 });
 
 test("Blue analysts correlate evidence and contain every viable route across operations", async ({ page }) => {
