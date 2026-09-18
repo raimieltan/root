@@ -48,14 +48,15 @@ export type SimSession = {
   sourceMachineId?: string;
   createdAt: Date;
   active: boolean;
-  context: "UNIX" | "SSH" | "POSTGRES";
+  context: "UNIX" | "SSH" | "POSTGRES" | "AUTHENTICATING";
   serviceName?: string;
   databaseName?: string;
 };
 
 export type TerminalContext =
   | { type: "UNIX" | "SSH" }
-  | { type: "POSTGRES"; serviceName: string; databaseName: string };
+  | { type: "POSTGRES"; serviceName: string; databaseName: string }
+  | { type: "AUTHENTICATING"; serviceName: string; username: string; host: string; databaseName?: string };
 
 export type SimulationEvent = {
   id: string;

@@ -5,7 +5,8 @@ export type SimulationIntent =
   | { kind: "CURL_REQUEST"; url?: string; method: string; data?: string }
   | { kind: "SERVICE_OPERATION"; service: string; args: string[] }
   | { kind: "PSQL_CONNECT"; host: string; username: string; database: string; password?: string }
-  | { kind: "PSQL_INPUT"; input: string };
+  | { kind: "PSQL_INPUT"; input: string }
+  | { kind: "AUTHENTICATION_INPUT"; password: string };
 
 /**
  * Parses only ROOT's supported syntax. It deliberately never invokes a host
@@ -14,6 +15,7 @@ export type SimulationIntent =
  */
 export function parseTerminalInput(input: string, context: TerminalContext = { type: "UNIX" }): SimulationIntent {
   const trimmed = input.trim();
+  if (context.type === "AUTHENTICATING") return { kind: "AUTHENTICATION_INPUT", password: input };
   if (context.type === "POSTGRES") return { kind: "PSQL_INPUT", input: trimmed };
 
   const [command = "", ...args] = trimmed.split(/\s+/);

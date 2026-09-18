@@ -25,7 +25,9 @@ export async function POST(request: Request) {
     const currentUser = typeof body.currentUser === "string" ? body.currentUser : "attacker";
     const session = await prisma.session.findFirst({ where: { scenarioId, actorId, active: true, ...(currentSessionId ? { id: currentSessionId } : { machine: { hostname: currentMachine }, user: { username: currentUser } }) }, include: { user: true, machine: true } });
     if (!session) return Response.json({ success: false, output: "That session is no longer active." }, { status: 409 });
-    const context: TerminalState["context"] = session.context === "POSTGRES" && session.serviceName && session.databaseName
+    const context: TerminalState["context"] = session.context === "AUTHENTICATING" && session.serviceName
+      ? { type: "AUTHENTICATING", serviceName: session.serviceName, username: session.user.username, host: session.machine.hostname, databaseName: session.databaseName ?? undefined }
+      : session.context === "POSTGRES" && session.serviceName && session.databaseName
       ? { type: "POSTGRES", serviceName: session.serviceName, databaseName: session.databaseName }
       : { type: session.context === "SSH" ? "SSH" : "UNIX" };
     const state: TerminalState = { currentMachine: session.machine.hostname, currentUser: session.user.username, currentSessionId: session.id, currentPrivilege: session.user.privilege ?? AccessLevel.NONE, currentPath: typeof body.currentPath === "string" ? body.currentPath : "/", context, activeSessions: [], discoveredHosts: [], credentials: new Map() };

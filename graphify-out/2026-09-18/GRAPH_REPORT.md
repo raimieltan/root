@@ -1,11 +1,11 @@
 # Graph Report - root  (2026-09-18)
 
 ## Corpus Check
-- 67 files · ~631,657 words
+- 67 files · ~631,991 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 492 nodes · 934 edges · 32 communities (27 shown, 3 thin omitted)
+- 497 nodes · 969 edges · 32 communities (27 shown, 3 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
@@ -15,7 +15,7 @@
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- career/page.tsx
+- replay-client.tsx
 - devDependencies
 - dependencies
 - TypeScript Configuration
@@ -24,7 +24,7 @@
 - index.ts
 - Event Driven Design Docs
 - tools-unix.md
-- replay-client.tsx
+- red/page.tsx
 - Visual Design System
 - App Layout Fonts
 - Glasshouse Reconstruction
@@ -47,8 +47,8 @@
 - 13. Canonical Recurring Characters
 
 ## God Nodes (most connected - your core abstractions)
-1. `SimulationEngine` - 37 edges
-2. `TerminalState` - 23 edges
+1. `SimulationEngine` - 42 edges
+2. `TerminalState` - 27 edges
 3. `getDefinitionForScenario()` - 16 edges
 4. `compilerOptions` - 16 edges
 5. `ScenarioDefinition` - 15 edges
@@ -79,9 +79,9 @@
 
 ## Communities (32 total, 3 thin omitted)
 
-### Community 0 - "career/page.tsx"
+### Community 0 - "replay-client.tsx"
 Cohesion: 0.08
-Nodes (32): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), MissionPanel(), NetworkMap() (+24 more)
+Nodes (37): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), ReplayPageProps, emptySnapshot (+29 more)
 
 ### Community 1 - "devDependencies"
 Cohesion: 0.06
@@ -96,11 +96,11 @@ Cohesion: 0.07
 Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules (+20 more)
 
 ### Community 4 - "engine.ts"
-Cohesion: 0.09
-Nodes (38): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+30 more)
+Cohesion: 0.08
+Nodes (43): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+35 more)
 
 ### Community 5 - "SimulationEngine"
-Cohesion: 0.27
+Cohesion: 0.25
 Nodes (6): SimulationEngine, reachable(), parseTerminalInput(), CommandResult, SimulationEvent, TerminalState
 
 ### Community 6 - "index.ts"
@@ -115,9 +115,9 @@ Nodes (12): Repository Agent Rules, Canonical Plan Precedence, Graphify-First Co
 Cohesion: 0.04
 Nodes (50): 10. Filesystem Simulation, 11. Services as First-Class Simulation Objects, 12. PostgreSQL Simulation, 13. Supported PostgreSQL Commands, 14. Database Simulation Model, 15. Credentials as First-Class Objects, 16. Credential Usage, 17. Credentials Application (+42 more)
 
-### Community 9 - "replay-client.tsx"
-Cohesion: 0.14
-Nodes (21): ReplayPageProps, emptySnapshot, formatElapsed(), ReplayClient(), ReplayPayload, attackPathFromEvents(), identifyRoute(), KeyDecision (+13 more)
+### Community 9 - "red/page.tsx"
+Cohesion: 0.16
+Nodes (11): MissionPanel(), NetworkMap(), apps, RedTeamPage(), Line, Props, Terminal(), TerminalState (+3 more)
 
 ### Community 10 - "Visual Design System"
 Cohesion: 0.33
@@ -196,13 +196,13 @@ Nodes (5): 13. Canonical Recurring Characters, Daniel Kade — Senior Red Operat
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `SimulationEngine` connect `SimulationEngine` to `engine.ts`, `index.ts`?**
-  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+  _High betweenness centrality (0.032) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `devDependencies` to `dependencies`?**
   _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **What connects `proficiencyLabel`, `geistSans`, `geistMono` to the rest of the system?**
   _242 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `career/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.07607843137254902 - nodes in this community are weakly interconnected._
+- **Should `replay-client.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.07617051013277429 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**

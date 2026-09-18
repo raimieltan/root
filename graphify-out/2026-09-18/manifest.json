@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/engine.ts": {
-    "mtime": 1789727082.1650767,
-    "seen": 1789727202.807967,
-    "ast_hash": "18adcd46defc33228bf88fb3e548f6dc",
+    "mtime": 1789727308.7619855,
+    "seen": 1789727397.115268,
+    "ast_hash": "c5256ba1292075df3680b5cd30a9fc1d",
     "semantic_hash": ""
   },
   "lib/simulation/initializer.ts": {
@@ -312,15 +312,15 @@
     "semantic_hash": ""
   },
   "lib/simulation/glasshouse.e2e.test.ts": {
-    "mtime": 1789727065.1180415,
-    "seen": 1789727202.807971,
-    "ast_hash": "c9b77f40572808098d6e789139b190d3",
+    "mtime": 1789727309.0576425,
+    "seen": 1789727397.115273,
+    "ast_hash": "e820fbab96642f3df0af1633ce996432",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/glasshouse.ts": {
-    "mtime": 1789727004.198996,
-    "seen": 1789727202.8088808,
-    "ast_hash": "7391b4e2ff7b1dbba92a40e71acaf9dc",
+    "mtime": 1789727308.9066212,
+    "seen": 1789727397.116019,
+    "ast_hash": "0eaeb3ad28cfee3ca040139744ef10c6",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/index.ts": {

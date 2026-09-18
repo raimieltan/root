@@ -12,9 +12,9 @@
     "semantic_hash": "0585496eeee26234767fdada7b374a18"
   },
   "app/api/sim/command/route.ts": {
-    "mtime": 1789726329.816034,
-    "seen": 1789726577.962532,
-    "ast_hash": "0933db5d2adcf2a616ffaa0ec07c726c",
+    "mtime": 1789727545.1236894,
+    "seen": 1789727904.435936,
+    "ast_hash": "bcdb51b5a37b40607b79e7bed2be59d4",
     "semantic_hash": ""
   },
   "app/api/sim/init/route.ts": {
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "app/red/terminal.tsx": {
-    "mtime": 1789726154.9601512,
-    "seen": 1789726577.9635031,
-    "ast_hash": "771ac389853ee88ce58635af63e7efb9",
+    "mtime": 1789727669.9801948,
+    "seen": 1789727904.437309,
+    "ast_hash": "4b13237a618b17317079e004c3b17f86",
     "semantic_hash": ""
   },
   "app/replay/[scenarioId]/page.tsx": {
@@ -108,15 +108,15 @@
     "semantic_hash": "442ad7c5bbbff2217388a344aa7b9ac1"
   },
   "lib/simulation/blue.ts": {
-    "mtime": 1789726685.266924,
-    "seen": 1789726749.869489,
-    "ast_hash": "b11d3956137d18749214ee864b90cb4e",
+    "mtime": 1789727597.7514324,
+    "seen": 1789727904.438407,
+    "ast_hash": "25e1b64d016737d1c85f202ff954f949",
     "semantic_hash": ""
   },
   "lib/simulation/engine.ts": {
-    "mtime": 1789727308.7619855,
-    "seen": 1789727397.115268,
-    "ast_hash": "c5256ba1292075df3680b5cd30a9fc1d",
+    "mtime": 1789727822.0839677,
+    "seen": 1789727904.438724,
+    "ast_hash": "6dc845eaeafe34de72ef1e64e5db9b6c",
     "semantic_hash": ""
   },
   "lib/simulation/initializer.ts": {
@@ -138,9 +138,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/types.ts": {
-    "mtime": 1789726310.1533551,
-    "seen": 1789726577.965554,
-    "ast_hash": "1ebf6dfa6dfd4312c3549deeaa4ce36a",
+    "mtime": 1789727669.8757248,
+    "seen": 1789727904.4405801,
+    "ast_hash": "1b6bea809ed6d97b9be9f3e3a855418c",
     "semantic_hash": ""
   },
   "next.config.ts": {
@@ -312,15 +312,15 @@
     "semantic_hash": ""
   },
   "lib/simulation/glasshouse.e2e.test.ts": {
-    "mtime": 1789727309.0576425,
-    "seen": 1789727397.115273,
-    "ast_hash": "e820fbab96642f3df0af1633ce996432",
+    "mtime": 1789727766.133778,
+    "seen": 1789727904.4387279,
+    "ast_hash": "e99a86dfcddc5b77c3980446af9c24ce",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/glasshouse.ts": {
-    "mtime": 1789727308.9066212,
-    "seen": 1789727397.116019,
-    "ast_hash": "0eaeb3ad28cfee3ca040139744ef10c6",
+    "mtime": 1789727569.9751427,
+    "seen": 1789727904.4398878,
+    "ast_hash": "aebc26f66dcf680f837cf5d02131f115",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/index.ts": {
@@ -504,9 +504,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/tools.ts": {
-    "mtime": 1789727003.7894287,
-    "seen": 1789727202.8095539,
-    "ast_hash": "27d25959c8724ce157e625d3ea1a1548",
+    "mtime": 1789727484.5394678,
+    "seen": 1789727904.440576,
+    "ast_hash": "3a324a34847ab4dcb9a5b66604823e42",
     "semantic_hash": ""
   },
   "docs/tools/tools-unix.md": {

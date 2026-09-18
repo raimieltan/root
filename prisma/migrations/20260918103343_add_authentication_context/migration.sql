@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "SessionContext" ADD VALUE 'AUTHENTICATING';

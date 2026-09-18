@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 
-export type TerminalState = { currentMachine: string; currentUser: string; currentPrivilege: string; currentPath: string; currentSessionId?: string; context?: { type: "UNIX" | "SSH" } | { type: "POSTGRES"; serviceName: string; databaseName: string }; discoveredHosts: string[] };
+export type TerminalState = { currentMachine: string; currentUser: string; currentPrivilege: string; currentPath: string; currentSessionId?: string; context?: { type: "UNIX" | "SSH" } | { type: "POSTGRES"; serviceName: string; databaseName: string } | { type: "AUTHENTICATING"; serviceName: string; username: string; host: string; databaseName?: string }; discoveredHosts: string[] };
 
 type Props = { scenarioId: string; actorId: string; initialState: TerminalState; onStateChange: (state: TerminalState) => void; onRefresh: () => void };
 type Line = { kind: "command" | "output" | "error"; text: string };
@@ -21,8 +21,9 @@ export default function Terminal({ scenarioId, actorId, initialState, onStateCha
     const command = line.trim();
     if (!command || busy) return;
     setLine(""); setBusy(true);
-    const prompt = state.context?.type === "POSTGRES" ? `${state.context.databaseName}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`;
-    setHistory((items) => [...items, { kind: "command", text: `${prompt} ${command}` }]);
+    const authContext = state.context?.type === "AUTHENTICATING" ? state.context : undefined;
+    const prompt = authContext ? (authContext.serviceName === "postgres" ? `Password for user ${authContext.username}:` : `${authContext.username}@${authContext.host}'s password:`) : state.context?.type === "POSTGRES" ? `${state.context.databaseName}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`;
+    setHistory((items) => [...items, { kind: "command", text: authContext ? `${prompt} ${"•".repeat(command.length)}` : `${prompt} ${command}` }]);
     if (command === "clear") { setHistory([]); setBusy(false); return; }
     try {
       const response = await fetch("/api/sim/command", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ scenarioId, actorId, command, currentSessionId: state.currentSessionId, currentMachine: state.currentMachine, currentUser: state.currentUser, currentPath: state.currentPath, context: state.context }) });
@@ -47,8 +48,8 @@ export default function Terminal({ scenarioId, actorId, initialState, onStateCha
       <div ref={bottomRef} />
     </div>
     <form className="terminal-input" onSubmit={submit}>
-      <label htmlFor="command">{state.context?.type === "POSTGRES" ? `${state.context.databaseName}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`}</label>
-      <input id="command" autoComplete="off" autoFocus value={line} onChange={(event) => setLine(event.target.value)} disabled={busy} />
+      <label htmlFor="command">{state.context?.type === "AUTHENTICATING" ? (state.context.serviceName === "postgres" ? `Password for user ${state.context.username}:` : `${state.context.username}@${state.context.host}'s password:`) : state.context?.type === "POSTGRES" ? `${state.context.databaseName}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`}</label>
+      <input id="command" type={state.context?.type === "AUTHENTICATING" ? "password" : "text"} autoComplete="off" autoFocus value={line} onChange={(event) => setLine(event.target.value)} disabled={busy} />
     </form>
   </section>;
 }

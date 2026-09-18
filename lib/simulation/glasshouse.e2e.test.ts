@@ -15,6 +15,7 @@ const routes = {
     "curl -X POST portal.meridian.test/legacy-upload --data upload=archive",
     "cat /var/www/meridian/app.conf",
     "ssh deploy@DEV-01",
+    "MeridianDeploy2024!Secret",
     "id",
     "ls -l /opt/backup/run.sh",
     "grep RUN_HOOK /etc/backup-sync.conf",
@@ -23,7 +24,8 @@ const routes = {
     "cat /etc/meridian/routes.conf",
     "ssh svc_web@FIN-APP",
     "cat /etc/fin-app/db.conf",
-    "psql -h FIN-DB -U finance_app -d finance --password FinanceApp2026!Secure",
+    "psql -h FIN-DB -U finance_app -d finance",
+    "FinanceApp2026!Secure",
     "SELECT filename, classification FROM documents;",
   ],
   backup: [
@@ -32,8 +34,9 @@ const routes = {
     "cat /etc/vpn/backup-peers.conf",
     "ssh backup_svc@BACKUP-01",
     "cat /etc/backup/finance-db.conf",
-    "ssh db_backup@FIN-DB",
-    "retrieve PROJECT_ATLAS.pdf",
+    "psql -h FIN-DB -U db_backup -d finance",
+    "AtlasBackup-91d2",
+    "SELECT filename, classification FROM documents;",
   ],
   postgres: [
     "curl portal.meridian.test",
@@ -41,7 +44,8 @@ const routes = {
     "cat /etc/vpn/backup-peers.conf",
     "ssh backup_svc@BACKUP-01",
     "cat /etc/backup/finance-db.conf",
-    "psql -h FIN-DB -U db_backup -d finance --password AtlasBackup-91d2",
+    "psql -h FIN-DB -U db_backup -d finance",
+    "AtlasBackup-91d2",
     "\\dt",
     "SELECT filename, classification FROM documents;",
   ],
@@ -152,7 +156,7 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
     };
     try {
       const engine = new SimulationEngine(initialized.scenarioId, initialized.redActorId);
-      for (const command of routes.postgres.slice(0, -2)) {
+      for (const command of routes.postgres.slice(0, -3)) {
         const result = await engine.executeCommand(command, state);
         assert.equal(result.success, true, `${command}: ${result.output}`);
         if (result.newSession) {
@@ -164,9 +168,9 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
         }
       }
       await respondToAttack({ scenarioId: initialized.scenarioId, actorId: initialized.actorId, action: "RESET_PASSWORD", username: "db_backup" });
-      const result = await engine.executeCommand("SELECT filename FROM documents;", state);
+      const result = await engine.executeCommand("AtlasBackup-91d2", state);
       assert.equal(result.success, false);
-      assert.match(result.output, /no longer active/i);
+      assert.match(result.output, /authentication prompt is active/i);
     } finally {
       await deleteScenario(initialized.scenarioId);
     }

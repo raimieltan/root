@@ -40,8 +40,10 @@ export async function advanceBlueScenario(scenarioId: string, blueActorId: strin
     }
   }
   const previousContext = previous.context;
-  const terminalContext = previousContext && typeof previousContext === "object" && "type" in previousContext && (previousContext.type === "UNIX" || previousContext.type === "SSH" || previousContext.type === "POSTGRES")
+  const terminalContext = previousContext && typeof previousContext === "object" && "type" in previousContext && (previousContext.type === "UNIX" || previousContext.type === "SSH" || previousContext.type === "POSTGRES" || previousContext.type === "AUTHENTICATING")
     ? previousContext as TerminalState["context"]
+    : current?.context === "AUTHENTICATING" && current.serviceName
+      ? { type: "AUTHENTICATING" as const, serviceName: current.serviceName, username: current.user.username, host: current.machine.hostname, databaseName: current.databaseName ?? undefined }
     : current?.context === "POSTGRES" && current.serviceName && current.databaseName
       ? { type: "POSTGRES" as const, serviceName: current.serviceName, databaseName: current.databaseName }
       : { type: current?.context === "SSH" ? "SSH" as const : "UNIX" as const };
