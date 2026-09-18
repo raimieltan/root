@@ -6,6 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import RootChrome from "@/app/ui/root-chrome";
 import { useOperation } from "@/app/use-operation";
 
+function formatWindow(seconds: number) {
+  const minutes = Math.floor(seconds / 60);
+  return `${String(minutes).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
 export default function BlueTeamPage() {
   const { ids, view, refresh, error, setError, retry } = useOperation("BLUE");
 
@@ -23,6 +28,7 @@ export default function BlueTeamPage() {
   const [finding, setFinding] = useState("");
   const [findingStatus, setFindingStatus] = useState("HYPOTHESIS");
   const [incidentRouteId, setIncidentRouteId] = useState("");
+  const [now, setNow] = useState(Date.now());
 
   const selected =
     view?.machines.find((machine) => machine.id === hostId) ??
@@ -69,6 +75,12 @@ export default function BlueTeamPage() {
       window.clearInterval(timer);
     };
   }, [running, view?.scenario.state, ids]);
+
+  useEffect(() => {
+    if (view?.scenario.state !== "ACTIVE") return;
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, [view?.scenario.state]);
 
   async function respond(
     action: string,
@@ -156,6 +168,13 @@ export default function BlueTeamPage() {
   const alternateRoutes = view.investigation.filter(
     (route) => route.id !== incidentRoute?.id && route.status !== "CONTAINED",
   );
+  const blueStatus = view.blueStatus;
+  const elapsedSeconds = view.scenario.startedAt
+    ? Math.max(0, Math.floor((now - new Date(view.scenario.startedAt).getTime()) / 1000))
+    : blueStatus?.responseWindow.elapsedSeconds ?? 0;
+  const responseRemaining = blueStatus
+    ? Math.max(0, blueStatus.responseWindow.limitSeconds - elapsedSeconds)
+    : 0;
 
   return (
     <RootChrome
@@ -172,6 +191,12 @@ export default function BlueTeamPage() {
         <span>
           {view.scenario.state} // {view.availability.percent}% AVAILABILITY
         </span>
+
+        {blueStatus && (
+          <span className="response-window" title="Time remaining before the response window closes">
+            WINDOW {formatWindow(responseRemaining)} // {blueStatus.alertsReviewed}/{view.alerts.length} REVIEWED // {blueStatus.containedHypotheses}/{view.investigation.length} CONTAINED
+          </span>
+        )}
 
         <button
           type="button"
@@ -197,6 +222,13 @@ export default function BlueTeamPage() {
       )}
 
       {pending && <p className="workspace-status" role="status">Synchronizing evidence and simulation state…</p>}
+
+      {blueStatus?.lastResponse && (
+        <p className="response-feedback" role="status">
+          LAST RESPONSE // {blueStatus.lastResponse.action.replaceAll("_", " ")} · {blueStatus.lastResponse.availability}% AVAILABILITY
+          {blueStatus.lastResponse.businessImpact.length > 0 && ` · ${blueStatus.lastResponse.businessImpact.join(" ")}`}
+        </p>
+      )}
 
       <fieldset
         className="soc-fieldset"

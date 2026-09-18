@@ -238,7 +238,7 @@
       "file_type": "code",
       "norm_label": "scenarioview",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L148"
+      "source_location": "L187"
     },
     {
       "id": "lib_simulation_types_simfile",
@@ -536,7 +536,7 @@
       "file_type": "code",
       "norm_label": "blueteampage()",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L9"
+      "source_location": "L14"
     },
     {
       "id": "app_blue_page_blueteampage_advance",
@@ -548,7 +548,7 @@
       "file_type": "code",
       "norm_label": "advance()",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L31"
+      "source_location": "L37"
     },
     {
       "id": "app_blue_page_blueteampage_respond",
@@ -560,7 +560,19 @@
       "file_type": "code",
       "norm_label": "respond()",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L73"
+      "source_location": "L85"
+    },
+    {
+      "id": "app_blue_page_formatwindow",
+      "label": "formatWindow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "formatwindow()",
+      "source_file": "app/blue/page.tsx",
+      "source_location": "L9"
     },
     {
       "id": "app_page_home",
@@ -3995,7 +4007,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L10",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "app_blue_page_blueteampage",
+      "target": "app_blue_page_formatwindow",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/blue/page.tsx",
+      "source_location": "L197",
       "weight": 1.0
     },
     {
@@ -5411,19 +5435,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L112",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_state_getscenarioview",
-      "target": "lib_simulation_rules_alertsfromevents",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/state.ts",
-      "source_location": "L122",
+      "source_location": "L129",
       "weight": 1.0
     },
     {
@@ -5435,7 +5447,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L122",
+      "source_location": "L161",
       "weight": 1.0
     },
     {
@@ -5475,6 +5487,18 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_state_getscenarioview",
+      "target": "lib_simulation_rules_alertsfromevents",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/state.ts",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
       "source": "app_blue_page_blueteampage",
       "target": "app_blue_page_blueteampage_advance",
       "relation": "contains",
@@ -5483,7 +5507,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L31",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -5495,7 +5519,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/blue/page.tsx",
-      "source_location": "L73",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -9012,6 +9036,17 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/blue/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "app_blue_page",
+      "target": "app_blue_page_formatwindow",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/blue/page.tsx",
       "source_location": "L9",
       "weight": 1.0
     },
@@ -10079,7 +10114,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L148",
+      "source_location": "L187",
       "weight": 1.0
     },
     {
@@ -11486,5 +11521,5 @@
       "source_file": "docs/ui/VISUAL_STYLES.md"
     }
   ],
-  "built_at_commit": "40d6b295d9f4d18e34c69a2393d2d093d011dee5"
+  "built_at_commit": "9f4e5925d8d8034222afe9688585412434b263f9"
 }

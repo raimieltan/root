@@ -90,6 +90,23 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     };
   });
   const rawEvents = scenario.events.map((event) => ({ ...event, metadata: event.metadata }));
+  const alerts = isBlue ? alertsFromEvents(rawEvents) : [];
+  const reviewedAlertIds = new Set(
+    scenario.events
+      .filter((event) => event.action === "ALERT_REVIEWED")
+      .flatMap((event) => {
+        const evidenceIds = parseMetadata(event.metadata).evidenceIds;
+        return Array.isArray(evidenceIds)
+          ? evidenceIds.filter((id): id is string => typeof id === "string")
+          : [];
+      }),
+  );
+  const lastResponseEvent = isBlue
+    ? scenario.events
+        .filter((event) => event.actorId === actor.id && event.action !== "ALERT_REVIEWED")
+        .at(-1)
+    : undefined;
+  const lastResponseMetadata = parseMetadata(lastResponseEvent?.metadata);
   const objectiveRetrieved = scenario.events.some((event) => event.action === "OBJECTIVE_RETRIEVED");
   const credentials = scenario.events
     .filter((event) => event.action === "CREDENTIAL_DISCOVERED" && event.visibleToRed)
@@ -119,7 +136,29 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     sessions: (isBlue ? scenario.sessions.filter((s) => s.active && s.machine.zone !== "EXTERNAL") : activeSessions).map((session) => ({ id: session.id, machine: session.machine.hostname, user: session.user.username, privilege: session.privilege, createdAt: session.createdAt.toISOString() })),
     discoveredHosts: isBlue ? machines.map((m) => m.hostname) : [...discovered], machines, events,
     investigation,
-    alerts: isBlue ? alertsFromEvents(rawEvents) : [], suspicion: isBlue ? suspicionFromEvents(rawEvents) : 0, objectiveRetrieved,
+    alerts,
+    blueStatus: isBlue
+      ? {
+          responseWindow: {
+            elapsedSeconds: Math.max(0, Math.floor((Date.now() - (scenario.startedAt?.getTime() ?? Date.now())) / 1000)),
+            limitSeconds: definition.conditions.timeLimitMinutes * 60,
+          },
+          alertsReviewed: alerts.filter((alert) => reviewedAlertIds.has(alert.id)).length,
+          activeHypotheses: investigation.filter((route) => route.status !== "CONTAINED").length,
+          containedHypotheses: investigation.filter((route) => route.status === "CONTAINED").length,
+          lastResponse: lastResponseEvent
+            ? {
+                action: lastResponseEvent.action,
+                timestamp: lastResponseEvent.timestamp.toISOString(),
+                availability: typeof lastResponseMetadata.availability === "number" ? lastResponseMetadata.availability : availability.percent,
+                businessImpact: Array.isArray(lastResponseMetadata.businessImpact)
+                  ? lastResponseMetadata.businessImpact.filter((impact): impact is string => typeof impact === "string")
+                  : [],
+              }
+            : undefined,
+        }
+      : undefined,
+    suspicion: isBlue ? suspicionFromEvents(rawEvents) : 0, objectiveRetrieved,
     credentials: isBlue ? [] : credentials,
     intel: { hosts: isBlue ? machines.map((m) => m.hostname) : [...discovered], relationships: isBlue ? [] : relationships },
     opsec: {

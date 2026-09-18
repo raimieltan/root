@@ -1,16 +1,16 @@
 # Graph Report - root  (2026-09-18)
 
 ## Corpus Check
-- 57 files · ~609,205 words
+- 57 files · ~609,439 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 321 nodes · 652 edges · 20 communities (15 shown, 3 thin omitted)
+- 322 nodes · 654 edges · 20 communities (15 shown, 3 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `40d6b295`
+- Built from commit: `9f4e5925`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -69,7 +69,7 @@
 
 ### Community 0 - "red/page.tsx"
 Cohesion: 0.10
-Nodes (22): BlueTeamPage(), Home(), MissionPanel(), NetworkMap(), apps, RedTeamPage(), Line, Props (+14 more)
+Nodes (23): BlueTeamPage(), formatWindow(), Home(), MissionPanel(), NetworkMap(), apps, RedTeamPage(), Line (+15 more)
 
 ### Community 1 - "Build Toolchain Dependencies"
 Cohesion: 0.06
@@ -144,7 +144,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `geistSans`, `geistMono`, `metadata` to the rest of the system?**
   _111 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `red/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09759759759759759 - nodes in this community are weakly interconnected._
 - **Should `Build Toolchain Dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `Runtime App Dependencies` be split into smaller, more focused modules?**

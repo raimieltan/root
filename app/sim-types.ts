@@ -21,6 +21,13 @@ export type ScenarioView = {
   sessions: Array<{ id: string; machine: string; user: string; privilege: string; createdAt: string }>;
   discoveredHosts: string[]; machines: MachineView[]; events: EventView[];
   alerts: Array<{ id: string; ruleId: string; title: string; severity: string; summary: string; timestamp: string; rationale: string; evidenceEventId?: string }>;
+  blueStatus?: {
+    responseWindow: { elapsedSeconds: number; limitSeconds: number };
+    alertsReviewed: number;
+    activeHypotheses: number;
+    containedHypotheses: number;
+    lastResponse?: { action: string; timestamp: string; availability: number; businessImpact: string[] };
+  };
   suspicion: number; objectiveRetrieved: boolean;
   credentials: Array<{ username: string; scope: string; origin: string }>;
   intel: { hosts: string[]; relationships: string[] };
