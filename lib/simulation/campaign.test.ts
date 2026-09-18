@@ -11,6 +11,17 @@ import { campaignProgress, type LocalRun } from "../campaign";
 import type { TerminalState } from "./types";
 
 describe("Canonical campaign", { concurrency: false }, () => {
+  it("expands the content alpha campaign to six organizations and eight linked operations", () => {
+    assert.equal(campaign.length, 8);
+    assert.equal(new Set(campaign.map((definition) => definition.organization)).size, 6);
+    const incidentPack = campaign.filter((definition) => ["strange-login", "something-calling-home", "ghost-account", "no-one-knows"].includes(definition.id));
+    assert.deepEqual(incidentPack.map((definition) => definition.presentation.prerequisite), ["paper-trail", "strange-login", "something-calling-home", "ghost-account"]);
+    for (const definition of incidentPack) {
+      assert.equal(definition.routes.length, 2);
+      assert.equal(definition.blueProfiles.length, 2);
+      assert.ok(definition.knowledgeRewards.some((reward) => reward.concept === "Incident response"));
+    }
+  });
   for (const definition of campaign) for (const profile of definition.blueProfiles) {
     it(`${definition.id}/${profile.id}: Red completes and leaves route evidence`, async () => {
       const run = await initializeScenario("RED", definition.id);
@@ -84,6 +95,25 @@ describe("Canonical campaign", { concurrency: false }, () => {
       assert.equal(scenario.state, "COMPLETED");
       assert.equal(await prisma.securityEvent.count({ where: { scenarioId: run.scenarioId, action: "OBJECTIVE_RETRIEVED" } }), 0);
     } finally { await deleteScenario(run.scenarioId); }
+  });
+  it("precise containment stops every Incident Response expansion route while preserving its protected service", async () => {
+    const cases = [
+      { id: "strange-login", objective: "RESULTS-01", routes: ["CARE-PORTAL", "LOCUM-ACCESS"] },
+      { id: "something-calling-home", objective: "SCHEDULE-01", routes: ["OUTAGE-WEB", "CONTRACTOR-01"] },
+      { id: "ghost-account", objective: "RECOVERY-01", routes: ["INTAKE-WEB", "PROVISION-01"] },
+      { id: "no-one-knows", objective: "PLAN-01", routes: ["STATUS-WEB", "VENDOR-DIAG"] },
+    ];
+    for (const entry of cases) {
+      const run = await initializeScenario("BLUE", entry.id);
+      try {
+        const links = await prisma.networkConnection.findMany({ where: { source: { scenarioId: run.scenarioId, hostname: { in: entry.routes } }, target: { hostname: entry.objective } }, include: { source: true } });
+        assert.equal(links.length, 2, entry.id);
+        for (const connection of links) await respondToAttack({ ...run, action: "BLOCK_CONNECTION", connectionId: connection.id });
+        assert.ok((await businessAvailability(run.scenarioId)).percent >= 60, entry.id);
+        for (let step = 0; step < 14; step++) await advanceBlueScenario(run.scenarioId, run.actorId);
+        assert.equal((await prisma.scenario.findUniqueOrThrow({ where: { id: run.scenarioId } })).state, "COMPLETED", entry.id);
+      } finally { await deleteScenario(run.scenarioId); }
+    }
   });
   it("an agent survives session revocation, but removal and isolation have consequences", async () => {
     const run = await initializeScenario("BLUE", "nightshift", "persistent-worker");

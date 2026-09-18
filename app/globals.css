@@ -3619,17 +3619,17 @@ button.operation-row.selected {
     minmax(0, 1fr)
   );
 
-  gap: 6px;
+  grid-auto-rows: minmax(88px, auto);
 
-  max-height: 134px;
+  gap: 9px;
 
-  padding: 8px;
+  padding: 10px;
 
   overflow: visible;
 }
 
 .operations-panel button.operation-row {
-  min-height: 0;
+  min-height: 88px;
 
   margin: 0;
 
@@ -3637,6 +3637,8 @@ button.operation-row.selected {
 
   border: 1px solid var(--border);
   border-left: 3px solid var(--border-strong);
+
+  overflow: hidden;
 }
 
 .operations-panel button.operation-row.selected {
@@ -3648,17 +3650,19 @@ button.operation-row.selected {
 .operations-panel .operation-content {
   display: block;
 
-  padding: 8px 9px;
+  padding: 11px 12px 10px;
 }
 
 .operations-panel .operation-content header {
   height: auto;
 
-  min-height: 17px;
+  min-height: 20px;
 
   border: 0;
 
-  align-items: center;
+  align-items: flex-start;
+
+  gap: 10px;
 }
 
 .operations-panel .operation-content h2 {
@@ -3678,12 +3682,12 @@ button.operation-row.selected {
 .operations-panel .operation-content small {
   display: block;
 
-  margin-top: 3px;
+  margin-top: 4px;
 
   color: #69848f;
 
   font-size: 7px;
-  line-height: 1.35;
+  line-height: 1.45;
 }
 
 .operations-panel > .data-list {

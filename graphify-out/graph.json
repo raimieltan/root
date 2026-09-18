@@ -241,6 +241,19 @@
       "source_location": "L1"
     },
     {
+      "id": "lib_simulation_scenarios_index_operationpresentation",
+      "label": "OperationPresentation",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "campaign.test.ts",
+      "file_type": "code",
+      "norm_label": "operationpresentation",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L18"
+    },
+    {
       "id": "lib_simulation_state_scenarioview",
       "label": "ScenarioView",
       "_callable": true,
@@ -527,19 +540,6 @@
       "source_location": "L36"
     },
     {
-      "id": "lib_simulation_scenarios_index_operationpresentation",
-      "label": "OperationPresentation",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "operationpresentation",
-      "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L14"
-    },
-    {
       "id": "lib_simulation_scenarios_types_routedefinition",
       "label": "RouteDefinition",
       "_callable": true,
@@ -551,6 +551,18 @@
       "norm_label": "routedefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
       "source_location": "L20"
+    },
+    {
+      "id": "app_api_operations_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "career/page.tsx",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "app/api/operations/route.ts",
+      "source_location": "L2"
     },
     {
       "id": "app_blue_page_blueteampage",
@@ -742,7 +754,7 @@
       "file_type": "code",
       "norm_label": "campaignprogress()",
       "source_file": "lib/campaign.ts",
-      "source_location": "L48"
+      "source_location": "L64"
     },
     {
       "id": "lib_campaign_readruns",
@@ -754,7 +766,7 @@
       "file_type": "code",
       "norm_label": "readruns()",
       "source_file": "lib/campaign.ts",
-      "source_location": "L33"
+      "source_location": "L49"
     },
     {
       "id": "lib_campaign_readtraining",
@@ -766,7 +778,7 @@
       "file_type": "code",
       "norm_label": "readtraining()",
       "source_file": "lib/campaign.ts",
-      "source_location": "L41"
+      "source_location": "L57"
     },
     {
       "id": "lib_campaign_saverun",
@@ -778,7 +790,7 @@
       "file_type": "code",
       "norm_label": "saverun()",
       "source_file": "lib/campaign.ts",
-      "source_location": "L36"
+      "source_location": "L52"
     },
     {
       "id": "lib_campaign_savetraining",
@@ -790,7 +802,19 @@
       "file_type": "code",
       "norm_label": "savetraining()",
       "source_file": "lib/campaign.ts",
-      "source_location": "L44"
+      "source_location": "L60"
+    },
+    {
+      "id": "tests_browser_campaign_spec_step",
+      "label": "step()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "career/page.tsx",
+      "file_type": "code",
+      "norm_label": "step()",
+      "source_file": "tests/browser/campaign.spec.ts",
+      "source_location": "L73"
     },
     {
       "id": "app_layout_rootlayout",
@@ -851,6 +875,18 @@
       "norm_label": "post()",
       "source_file": "app/api/sim/init/route.ts",
       "source_location": "L4"
+    },
+    {
+      "id": "app_api_sim_replay_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "campaign.test.ts",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "app/api/sim/replay/route.ts",
+      "source_location": "L7"
     },
     {
       "id": "app_api_sim_state_route_get",
@@ -973,6 +1009,18 @@
       "source_location": "L7"
     },
     {
+      "id": "lib_simulation_replay_normalizereplayevent",
+      "label": "normalizeReplayEvent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "campaign.test.ts",
+      "file_type": "code",
+      "norm_label": "normalizereplayevent()",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L201"
+    },
+    {
       "id": "lib_simulation_rules_alertsfromevents",
       "label": "alertsFromEvents()",
       "_callable": true,
@@ -983,6 +1031,18 @@
       "norm_label": "alertsfromevents()",
       "source_file": "lib/simulation/rules.ts",
       "source_location": "L45"
+    },
+    {
+      "id": "lib_simulation_rules_detectionforaction",
+      "label": "detectionForAction()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "campaign.test.ts",
+      "file_type": "code",
+      "norm_label": "detectionforaction()",
+      "source_file": "lib/simulation/rules.ts",
+      "source_location": "L41"
     },
     {
       "id": "lib_simulation_rules_parsemetadata",
@@ -1018,7 +1078,7 @@
       "file_type": "code",
       "norm_label": "getscenariodefinition()",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L16"
+      "source_location": "L20"
     },
     {
       "id": "lib_simulation_state_getscenarioview",
@@ -1441,42 +1501,6 @@
       "source_location": "L3"
     },
     {
-      "id": "tests_browser_campaign_spec_step",
-      "label": "step()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "index.ts",
-      "file_type": "code",
-      "norm_label": "step()",
-      "source_file": "tests/browser/campaign.spec.ts",
-      "source_location": "L73"
-    },
-    {
-      "id": "app_api_operations_route_get",
-      "label": "GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "app/api/operations/route.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "app_api_sim_replay_route_get",
-      "label": "GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "app/api/sim/replay/route.ts",
-      "source_location": "L7"
-    },
-    {
       "id": "app_replay_scenarioid_page_replaypage",
       "label": "ReplayPage()",
       "_callable": true,
@@ -1535,18 +1559,6 @@
       "norm_label": "identifyroute()",
       "source_file": "lib/simulation/replay.ts",
       "source_location": "L129"
-    },
-    {
-      "id": "lib_simulation_replay_normalizereplayevent",
-      "label": "normalizeReplayEvent()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "normalizereplayevent()",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L201"
     },
     {
       "id": "lib_simulation_replay_selectkeydecision",
@@ -1621,16 +1633,15 @@
       "source_location": "L62"
     },
     {
-      "id": "lib_simulation_rules_detectionforaction",
-      "label": "detectionForAction()",
-      "_callable": true,
+      "id": "app_api_operations_route",
+      "label": "operations/route.ts",
       "_origin": "ast",
-      "community": 9,
-      "community_name": "replay-client.tsx",
+      "community": 0,
+      "community_name": "career/page.tsx",
       "file_type": "code",
-      "norm_label": "detectionforaction()",
-      "source_file": "lib/simulation/rules.ts",
-      "source_location": "L41"
+      "norm_label": "operations/route.ts",
+      "source_file": "app/api/operations/route.ts",
+      "source_location": "L1"
     },
     {
       "id": "app_blue_page",
@@ -1806,7 +1817,29 @@
       "file_type": "code",
       "norm_label": "campaign",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L8"
+      "source_location": "L12"
+    },
+    {
+      "id": "tests_browser_campaign_spec",
+      "label": "campaign.spec.ts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "career/page.tsx",
+      "file_type": "code",
+      "norm_label": "campaign.spec.ts",
+      "source_file": "tests/browser/campaign.spec.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "package",
+      "label": "package.json",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "package.json",
+      "source_file": "package.json",
+      "source_location": "L1"
     },
     {
       "id": "package_devdependencies",
@@ -1983,6 +2016,116 @@
       "norm_label": "@vitest/coverage-v8",
       "source_file": "package.json",
       "source_location": "L36"
+    },
+    {
+      "id": "package_name",
+      "label": "name",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "name",
+      "source_file": "package.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "package_packagemanager",
+      "label": "packageManager",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "packagemanager",
+      "source_file": "package.json",
+      "source_location": "L46"
+    },
+    {
+      "id": "package_private",
+      "label": "private",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "private",
+      "source_file": "package.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "package_scripts_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "package_scripts_lint",
+      "label": "lint",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "lint",
+      "source_file": "package.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "package_scripts_start",
+      "label": "start",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "start",
+      "source_file": "package.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "package_scripts_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "package.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "package_version",
+      "label": "version",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "version",
+      "source_file": "package.json",
+      "source_location": "L3"
     },
     {
       "id": "concurrently",
@@ -2282,17 +2425,6 @@
       "source_location": "L1"
     },
     {
-      "id": "package",
-      "label": "package.json",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "package.json",
-      "source_file": "package.json",
-      "source_location": "L1"
-    },
-    {
       "id": "package_dependencies",
       "label": "dependencies",
       "_origin": "ast",
@@ -2467,116 +2599,6 @@
       "norm_label": "zustand",
       "source_file": "package.json",
       "source_location": "L27"
-    },
-    {
-      "id": "package_name",
-      "label": "name",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "name",
-      "source_file": "package.json",
-      "source_location": "L2"
-    },
-    {
-      "id": "package_packagemanager",
-      "label": "packageManager",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "packagemanager",
-      "source_file": "package.json",
-      "source_location": "L46"
-    },
-    {
-      "id": "package_private",
-      "label": "private",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "private",
-      "source_file": "package.json",
-      "source_location": "L4"
-    },
-    {
-      "id": "package_scripts",
-      "label": "scripts",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "package.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "package_scripts_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "package.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "package_scripts_dev",
-      "label": "dev",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "package.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "package_scripts_lint",
-      "label": "lint",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "lint",
-      "source_file": "package.json",
-      "source_location": "L9"
-    },
-    {
-      "id": "package_scripts_start",
-      "label": "start",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "start",
-      "source_file": "package.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "package_scripts_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "package.json",
-      "source_location": "L10"
-    },
-    {
-      "id": "package_version",
-      "label": "version",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "version",
-      "source_file": "package.json",
-      "source_location": "L3"
     },
     {
       "id": "dotenv",
@@ -3107,6 +3129,17 @@
       "source_location": "L1"
     },
     {
+      "id": "app_api_sim_replay_route",
+      "label": "replay/route.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "campaign.test.ts",
+      "file_type": "code",
+      "norm_label": "replay/route.ts",
+      "source_file": "app/api/sim/replay/route.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "app_api_sim_state_route",
       "label": "state/route.ts",
       "_origin": "ast",
@@ -3338,6 +3371,28 @@
       "source_location": "L4"
     },
     {
+      "id": "lib_simulation_scenarios_ghost_account",
+      "label": "ghost-account.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "ghost-account.ts",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_ghost_account_ghostaccount",
+      "label": "ghostAccount",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "ghostaccount",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L4"
+    },
+    {
       "id": "lib_simulation_scenarios_glasshouse",
       "label": "glasshouse.ts",
       "_origin": "ast",
@@ -3379,7 +3434,7 @@
       "file_type": "code",
       "norm_label": "scenarios",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L9"
+      "source_location": "L13"
     },
     {
       "id": "lib_simulation_scenarios_nightshift",
@@ -3401,6 +3456,28 @@
       "file_type": "code",
       "norm_label": "nightshift",
       "source_file": "lib/simulation/scenarios/nightshift.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "lib_simulation_scenarios_no_one_knows",
+      "label": "no-one-knows.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "no-one-knows.ts",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_no_one_knows_nooneknows",
+      "label": "noOneKnows",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "nooneknows",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
       "source_location": "L4"
     },
     {
@@ -3426,6 +3503,50 @@
       "source_location": "L4"
     },
     {
+      "id": "lib_simulation_scenarios_something_calling_home",
+      "label": "something-calling-home.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "something-calling-home.ts",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_something_calling_home_somethingcallinghome",
+      "label": "somethingCallingHome",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "somethingcallinghome",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "lib_simulation_scenarios_strange_login",
+      "label": "strange-login.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "strange-login.ts",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_strange_login_strangelogin",
+      "label": "strangeLogin",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "strangelogin",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L4"
+    },
+    {
       "id": "lib_simulation_scenarios_types",
       "label": "scenarios/types.ts",
       "_origin": "ast",
@@ -3445,39 +3566,6 @@
       "file_type": "code",
       "norm_label": "validate.ts",
       "source_file": "lib/simulation/scenarios/validate.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_browser_campaign_spec",
-      "label": "campaign.spec.ts",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "index.ts",
-      "file_type": "code",
-      "norm_label": "campaign.spec.ts",
-      "source_file": "tests/browser/campaign.spec.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_api_operations_route",
-      "label": "operations/route.ts",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "operations/route.ts",
-      "source_file": "app/api/operations/route.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_api_sim_replay_route",
-      "label": "replay/route.ts",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "replay/route.ts",
-      "source_file": "app/api/sim/replay/route.ts",
       "source_location": "L1"
     },
     {
@@ -4340,7 +4428,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/campaign.ts",
-      "source_location": "L37",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -4352,7 +4440,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/campaign.ts",
-      "source_location": "L45",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -5744,7 +5832,7 @@
       "confidence_score": 1.0,
       "context": "export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L22",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -5756,7 +5844,7 @@
       "confidence_score": 1.0,
       "context": "export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L23",
+      "source_location": "L27",
       "type_only": true,
       "weight": 1.0
     },
@@ -7381,6 +7469,114 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_commondetections",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_discover",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_external",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_file",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_host",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_identity",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_link",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_route",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_glasshouse",
       "target": "lib_simulation_scenarios_types_scenariodefinition",
       "relation": "imports",
@@ -7441,6 +7637,54 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_strange_login_strangelogin",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_something_calling_home_somethingcallinghome",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_ghost_account_ghostaccount",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_no_one_knows_nooneknows",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_nightshift",
       "target": "lib_simulation_scenarios_types_scenariodefinition",
       "relation": "imports",
@@ -7549,6 +7793,114 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_commondetections",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_discover",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_external",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_file",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_host",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_identity",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_link",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_route",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_paper_trail",
       "target": "lib_simulation_scenarios_types_scenariodefinition",
       "relation": "imports",
@@ -7653,6 +8005,222 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "lib/simulation/scenarios/paper-trail.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_commondetections",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_discover",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_external",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_file",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_host",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_identity",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_link",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_route",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_commondetections",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_discover",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_external",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_file",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_host",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_identity",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_link",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_route",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
       "source_location": "L2",
       "weight": 1.0
     },
@@ -9051,6 +9619,31 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_glasshouse",
       "target": "lib_simulation_scenarios_types",
       "relation": "imports_from",
@@ -9061,6 +9654,18 @@
       "source_file": "lib/simulation/scenarios/glasshouse.ts",
       "source_location": "L2",
       "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_validate",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -9101,7 +9706,7 @@
     },
     {
       "source": "lib_simulation_scenarios_index",
-      "target": "lib_simulation_scenarios_validate",
+      "target": "lib_simulation_scenarios_strange_login",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -9109,6 +9714,42 @@
       "context": "import",
       "source_file": "lib/simulation/scenarios/index.ts",
       "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_something_calling_home",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_ghost_account",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_no_one_knows",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -9137,6 +9778,31 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_paper_trail",
       "target": "lib_simulation_scenarios_types",
       "relation": "imports_from",
@@ -9158,6 +9824,56 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "lib/simulation/scenarios/paper-trail.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
       "source_location": "L2",
       "weight": 1.0
     },
@@ -9447,7 +10163,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L23",
+      "source_location": "L27",
       "type_only": true,
       "weight": 1.0
     },
@@ -9460,7 +10176,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L23",
+      "source_location": "L27",
       "type_only": true,
       "weight": 1.0
     },
@@ -9473,7 +10189,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L23",
+      "source_location": "L27",
       "type_only": true,
       "weight": 1.0
     },
@@ -9981,7 +10697,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/campaign.ts",
-      "source_location": "L33",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -9992,7 +10708,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/campaign.ts",
-      "source_location": "L36",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -10003,7 +10719,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/campaign.ts",
-      "source_location": "L41",
+      "source_location": "L57",
       "weight": 1.0
     },
     {
@@ -10014,7 +10730,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/campaign.ts",
-      "source_location": "L44",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -10025,7 +10741,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/campaign.ts",
-      "source_location": "L48",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -10590,6 +11306,17 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_ghost_account_ghostaccount",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_glasshouse",
       "target": "lib_simulation_scenarios_glasshouse_glasshouse",
       "relation": "contains",
@@ -10613,35 +11340,13 @@
     },
     {
       "source": "lib_simulation_scenarios_index",
-      "target": "lib_simulation_scenarios_index_operationpresentation",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L14",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_index",
-      "target": "lib_simulation_scenarios_index_getscenariodefinition",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L16",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_index",
       "target": "lib_simulation_scenarios_index_campaign",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L8",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -10652,7 +11357,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L9",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_index_operationpresentation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_index_getscenariodefinition",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -10667,6 +11394,17 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_no_one_knows_nooneknows",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_paper_trail",
       "target": "lib_simulation_scenarios_paper_trail_papertrail",
       "relation": "contains",
@@ -10674,6 +11412,28 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/paper-trail.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_something_calling_home_somethingcallinghome",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_strange_login_strangelogin",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
       "source_location": "L4",
       "weight": 1.0
     },
@@ -11840,7 +12600,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L8",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -12147,5 +12907,5 @@
       "source_file": "docs/ui/VISUAL_STYLES.md"
     }
   ],
-  "built_at_commit": "ad580217d4e718eec0dab7114636bdf77a3f84f6"
+  "built_at_commit": "da4c15ace2b08db4188dada9cce264801c0bf74c"
 }

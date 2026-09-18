@@ -29,6 +29,22 @@ export const trainingModules: TrainingModule[] = [
     correctChoice: 0,
     debrief: "Containment is a hypothesis test with consequences: interrupt the evidence-backed path, assess alternatives, and preserve the business service where possible.",
   },
+  {
+    id: "beacon-correlation", concept: "Persistence", title: "A process that calls home",
+    caseFile: "OUTAGE-WEB // A new root-owned process communicates every 30 seconds after a public reconciliation request.",
+    prompt: "What evidence best supports removing persistence rather than only revoking a session?",
+    choices: ["The process cadence and owner connect a startup artifact to recurring outbound activity.", "The dashboard is publicly reachable.", "A session was created during the operation."],
+    correctChoice: 0,
+    debrief: "A persistent process can reconnect after session revocation. Correlate its owner, startup artifact, and periodic network behavior before removing it.",
+  },
+  {
+    id: "authorization-lifecycle", concept: "Authorization", title: "Valid is not authorized",
+    caseFile: "PROVISION-01 // emergency_admin authenticated successfully, but the account was retired after a migration.",
+    prompt: "What makes the login an incident signal?",
+    choices: ["The account has a password.", "Directory validity does not override the account's retired lifecycle state and current business purpose.", "Every emergency account is malicious."],
+    correctChoice: 1,
+    debrief: "Authorization includes lifecycle and purpose. An identity can authenticate successfully while no longer being permitted to use a relationship.",
+  },
 ];
 export function readRuns(): LocalRun[] {
   try { const value = JSON.parse(localStorage.getItem(key) ?? "[]"); return Array.isArray(value) ? value.filter((r) => typeof r.scenarioId === "string" && typeof r.definitionId === "string") : []; } catch { return []; }

@@ -48,9 +48,9 @@
     "semantic_hash": "4a0e0f8914b7b23788e48de392f8d8ca"
   },
   "app/page.tsx": {
-    "mtime": 1789723232.7146664,
-    "seen": 1789723307.0316951,
-    "ast_hash": "1afdbd7d5f5cbf6ebf64c6161430cfa0",
+    "mtime": 1789723461.7881007,
+    "seen": 1789723598.4113102,
+    "ast_hash": "ec87805890de0541a3774274f9631aca",
     "semantic_hash": ""
   },
   "app/red/mission-panel.tsx": {
@@ -348,9 +348,9 @@
     "semantic_hash": ""
   },
   "lib/campaign.ts": {
-    "mtime": 1789723232.6107414,
-    "seen": 1789723307.031968,
-    "ast_hash": "03fea9f34aafd6f78d37e0f97c6d287b",
+    "mtime": 1789723471.3913307,
+    "seen": 1789723598.412029,
+    "ast_hash": "aca602b11a5260aec7ec1e402f0002d0",
     "semantic_hash": ""
   },
   "lib/simulation/availability.ts": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/campaign.test.ts": {
-    "mtime": 1789723233.01921,
-    "seen": 1789723307.03205,
-    "ast_hash": "32d6a60df01046526e09d0fe6b94fe44",
+    "mtime": 1789723462.3116915,
+    "seen": 1789723598.4122639,
+    "ast_hash": "5b345d30a19f9a999bc85dff128308dd",
     "semantic_hash": ""
   },
   "lib/simulation/network.ts": {
@@ -402,9 +402,9 @@
     "semantic_hash": ""
   },
   "tests/browser/campaign.spec.ts": {
-    "mtime": 1789723233.1548362,
-    "seen": 1789723307.032654,
-    "ast_hash": "83bd91290c70c28a9206859362ab0380",
+    "mtime": 1789723462.527376,
+    "seen": 1789723598.413854,
+    "ast_hash": "80964e001d38d994aa4b8ecc41e26792",
     "semantic_hash": ""
   },
   "Screenshot 2026-09-18 at 10.56.08.png": {
@@ -423,12 +423,6 @@
     "mtime": 1789700201.4241142,
     "seen": 1789700830.166659,
     "ast_hash": "b62190f1bc8805c65860328849d6d8d2",
-    "semantic_hash": ""
-  },
-  "test-results/.last-run.json": {
-    "mtime": 1789723298.650118,
-    "seen": 1789723307.0326521,
-    "ast_hash": "f196824657d8858bc7fa44eecbba38b1",
     "semantic_hash": ""
   },
   "image copy 2.png": {
@@ -462,9 +456,9 @@
     "semantic_hash": ""
   },
   "app/career/page.tsx": {
-    "mtime": 1789723232.8126817,
-    "seen": 1789723307.031668,
-    "ast_hash": "1ed05b2673e59c8c9650987fb6f001b2",
+    "mtime": 1789723462.0492804,
+    "seen": 1789723598.4111948,
+    "ast_hash": "5fb1b5d0f50dcf8572b517ef371b1063",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/paper-trail.ts": {

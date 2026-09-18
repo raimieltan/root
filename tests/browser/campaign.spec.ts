@@ -29,7 +29,7 @@ test("operation selection → all Red campaign results → reconstruction → un
   await expect(page.getByText("MVP CAMPAIGN COMPLETE")).toBeVisible();
   await page.reload();
   await expect(page.getByText("MVP CAMPAIGN COMPLETE")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Open reconstruction" })).toHaveCount(4);
+  await expect(page.getByRole("link", { name: "Open reconstruction" })).toHaveCount(campaign.length);
   expect(errors).toEqual([]);
   await page.screenshot({ path: "/tmp/root-campaign-browser.png", fullPage: true });
 });

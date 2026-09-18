@@ -324,9 +324,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/index.ts": {
-    "mtime": 1789716530.3888412,
-    "seen": 1789722938.9626088,
-    "ast_hash": "f04bd325f1a3fa53be43a5713ad5b0ef",
+    "mtime": 1789724505.4266121,
+    "seen": 1789724690.106283,
+    "ast_hash": "d894e27e8e3150d67a615b841b6d2b0f",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/types.ts": {
@@ -348,9 +348,9 @@
     "semantic_hash": ""
   },
   "lib/campaign.ts": {
-    "mtime": 1789723471.3913307,
-    "seen": 1789723598.412029,
-    "ast_hash": "aca602b11a5260aec7ec1e402f0002d0",
+    "mtime": 1789724505.7315435,
+    "seen": 1789724690.1057532,
+    "ast_hash": "b36968f09ac941246d011673bf62b66d",
     "semantic_hash": ""
   },
   "lib/simulation/availability.ts": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/campaign.test.ts": {
-    "mtime": 1789723462.3116915,
-    "seen": 1789723598.4122639,
-    "ast_hash": "5b345d30a19f9a999bc85dff128308dd",
+    "mtime": 1789724549.6273508,
+    "seen": 1789724690.1058738,
+    "ast_hash": "c02e12fc10071228b73945dbd6e4a7ef",
     "semantic_hash": ""
   },
   "lib/simulation/network.ts": {
@@ -402,9 +402,9 @@
     "semantic_hash": ""
   },
   "tests/browser/campaign.spec.ts": {
-    "mtime": 1789723462.527376,
-    "seen": 1789723598.413854,
-    "ast_hash": "80964e001d38d994aa4b8ecc41e26792",
+    "mtime": 1789724626.3194187,
+    "seen": 1789724690.106712,
+    "ast_hash": "e8e5eb25c2202cc079d17838d97139d1",
     "semantic_hash": ""
   },
   "Screenshot 2026-09-18 at 10.56.08.png": {
@@ -465,6 +465,36 @@
     "mtime": 1789716530.3090932,
     "seen": 1789722938.962633,
     "ast_hash": "976458c8003b9425c2acccdd39a834b1",
+    "semantic_hash": ""
+  },
+  "lib/simulation/scenarios/ghost-account.ts": {
+    "mtime": 1789724505.1565845,
+    "seen": 1789724690.106242,
+    "ast_hash": "b12f338e1df62751eaf4c2dd7f3d576f",
+    "semantic_hash": ""
+  },
+  "lib/simulation/scenarios/no-one-knows.ts": {
+    "mtime": 1789724505.275708,
+    "seen": 1789724690.1063318,
+    "ast_hash": "6389d73fee4181f3dfbc6ae746427e06",
+    "semantic_hash": ""
+  },
+  "lib/simulation/scenarios/something-calling-home.ts": {
+    "mtime": 1789724505.0398283,
+    "seen": 1789724690.106377,
+    "ast_hash": "839725f45154fd51d8d8c38d38b6572d",
+    "semantic_hash": ""
+  },
+  "lib/simulation/scenarios/strange-login.ts": {
+    "mtime": 1789724504.9481068,
+    "seen": 1789724690.106378,
+    "ast_hash": "38778a9de300766214349acbd0268bb5",
+    "semantic_hash": ""
+  },
+  "test-results/.last-run.json": {
+    "mtime": 1789723616.9635847,
+    "seen": 1789724690.1067111,
+    "ast_hash": "abd263702df5ba47279e53ebba8c73a8",
     "semantic_hash": ""
   }
 }
