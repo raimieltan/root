@@ -99,7 +99,7 @@ export default function RootChrome({
       <aside className="root-sidebar" aria-label="Workstation navigation">
         <nav>
           {navigation.map(([id, label, Icon]) => (
-            <Link key={id} href={id === "operations" || id === "career" ? "/" : "#"} className={active === id ? "active" : ""} aria-current={active === id ? "page" : undefined}>
+            <Link key={id} href={id === "operations" ? "/" : id === "career" ? "/career" : id === "training" ? "/career#training" : "#"} className={active === id ? "active" : ""} aria-current={active === id ? "page" : undefined}>
               <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
               <span>{label}</span>
             </Link>

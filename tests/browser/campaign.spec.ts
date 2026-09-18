@@ -154,3 +154,19 @@ test("Blue analysts correlate evidence and contain every viable route across ope
     await page.goto("/");
   }
 });
+
+test("Career Hub records evidence review but reserves Operator Mode for demonstrated knowledge", async ({ page }) => {
+  await page.goto("/career");
+  await expect(page.getByText(/OPERATOR RECORD/)).toBeVisible();
+  await page.getByRole("button", { name: /Trusted input review/ }).click();
+  await page.getByRole("button", { name: /B \/\/ A deploy-controlled input is consumed by a root-owned service/ }).click();
+  await expect(page.getByText(/REVIEW RECORDED/)).toBeVisible();
+  await expect(page.getByText("GUIDED MODE REQUIRED", { exact: true })).toBeVisible();
+
+  await page.addInitScript(() => localStorage.setItem("root:campaign:v1", JSON.stringify([
+    { scenarioId: "career-glasshouse", actorId: "operator", definitionId: "glasshouse", name: "Operation Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: ["Trust relationships", "Privilege escalation"], availability: 100 } },
+  ])));
+  await page.goto("/career");
+  await expect(page.getByText("Junior Operator", { exact: true })).toBeVisible();
+  await expect(page.getByText("OPERATOR MODE CLEARED", { exact: true })).toBeVisible();
+});

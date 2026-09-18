@@ -93,4 +93,13 @@ describe("Canonical campaign", { concurrency: false }, () => {
     assert.equal(campaignProgress([run, { ...run, scenarioId: "two" }]).xp, campaignProgress([run]).xp);
     assert.deepEqual(campaignProgress([run]).completed, ["glasshouse"]);
   });
+  it("earns Operator Mode clearance from demonstrated knowledge, not training review alone", () => {
+    const run: LocalRun = { scenarioId: "one", actorId: "actor", definitionId: "glasshouse", name: "Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: ["Trust relationships", "Privilege escalation"], availability: 100 } };
+    const trainingOnly = campaignProgress([], [{ moduleId: "trust-boundary", completedAt: "now" }]);
+    const demonstrated = campaignProgress([run], [{ moduleId: "trust-boundary", completedAt: "now" }]);
+    assert.equal(trainingOnly.designation, "Recruit");
+    assert.equal(trainingOnly.operatorModeUnlocked, false);
+    assert.equal(demonstrated.designation, "Junior Operator");
+    assert.equal(demonstrated.operatorModeUnlocked, true);
+  });
 });

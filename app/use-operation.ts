@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ScenarioView } from "./sim-types";
-import { readRuns, saveRun } from "@/lib/campaign";
+import { campaignProgress, readRuns, saveRun } from "@/lib/campaign";
 
 export function useOperation(mode: "RED" | "BLUE") {
   const [ids, setIds] = useState<{ scenarioId: string; actorId: string }>();
@@ -29,7 +29,8 @@ export function useOperation(mode: "RED" | "BLUE") {
       const existing = readRuns().find((r) => r.scenarioId === params.get("run"));
       if (existing) { const current = { scenarioId: existing.scenarioId, actorId: existing.actorId }; setIds(current); await refresh(current); return; }
       const definitionId = params.get("operation") ?? "glasshouse";
-      const assistance = params.get("assistance") === "OPERATOR" ? "OPERATOR" : "GUIDED";
+      const requestedAssistance = params.get("assistance") === "OPERATOR" ? "OPERATOR" : "GUIDED";
+      const assistance = requestedAssistance === "OPERATOR" && campaignProgress(readRuns()).operatorModeUnlocked ? "OPERATOR" : "GUIDED";
       const response = await fetch("/api/sim/init", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ mode, definitionId, assistance }) });
       const data = await response.json();
       if (!response.ok || !data.success) throw new Error(data.error ?? "Unable to launch operation");
