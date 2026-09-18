@@ -58,9 +58,22 @@ export function campaignProgress(runs: LocalRun[], training: TrainingRecord[] = 
     : completed.length >= 1 && demonstratedConcepts >= 2
       ? "Junior Operator"
       : "Recruit";
+  const trainingCompleted = [...new Set(training.map((record) => record.moduleId))];
+  const nroEarned = designation !== "Recruit" && trainingCompleted.includes("trust-boundary") && wins.some((run) =>
+    run.definitionId === "paper-trail" &&
+    run.assistance === "OPERATOR" &&
+    run.result?.concepts.includes("Trust relationships"),
+  );
+  const nirEarned = designation !== "Recruit" && trainingCompleted.includes("identity-context") && wins.some((run) =>
+    run.definitionId === "paper-trail" &&
+    run.mode === "BLUE" &&
+    run.assistance === "OPERATOR" &&
+    run.result?.concepts.includes("Incident response"),
+  );
   return {
     completed, proficiency, xp, level: 1 + Math.floor(xp / 250), designation,
-    trainingCompleted: [...new Set(training.map((record) => record.moduleId))],
+    trainingCompleted,
+    certifications: [nroEarned ? "NRO-1" : null, nirEarned ? "NIR-1" : null].filter((certification): certification is string => Boolean(certification)),
     operatorModeUnlocked: designation !== "Recruit",
   };
 }

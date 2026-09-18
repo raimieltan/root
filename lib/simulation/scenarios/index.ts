@@ -2,9 +2,10 @@ import { glasshouse } from "./glasshouse";
 import type { ScenarioDefinition } from "./types";
 import { nightshift } from "./nightshift";
 import { deadDrop } from "./dead-drop";
+import { paperTrail } from "./paper-trail";
 import { validateScenario } from "./validate";
 
-export const campaign = [glasshouse, nightshift, deadDrop].map(validateScenario);
+export const campaign = [glasshouse, nightshift, deadDrop, paperTrail].map(validateScenario);
 const scenarios: Record<string, ScenarioDefinition> = Object.fromEntries(campaign.map((definition) => [definition.id, definition]));
 
 export function operationPresentation(definition: ScenarioDefinition) {

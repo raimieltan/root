@@ -69,6 +69,22 @@ describe("Canonical campaign", { concurrency: false }, () => {
       assert.equal(await prisma.securityEvent.count({ where: { scenarioId: run.scenarioId, action: "OBJECTIVE_RETRIEVED" } }), 0);
     } finally { await deleteScenario(run.scenarioId); }
   });
+  it("precise Paper Trail containment stops both record-access paths without taking records offline", async () => {
+    const run = await initializeScenario("BLUE", "paper-trail");
+    try {
+      const links = await prisma.networkConnection.findMany({ where: { source: { scenarioId: run.scenarioId }, target: { hostname: "RECORDS-01" } }, include: { source: true } });
+      assert.equal(links.length, 3);
+      for (const connection of links.filter((link) => ["GRANT-WEB", "VENDOR-01"].includes(link.source.hostname))) {
+        await respondToAttack({ ...run, action: "BLOCK_CONNECTION", connectionId: connection.id });
+      }
+      const availability = await businessAvailability(run.scenarioId);
+      assert.ok(availability.percent >= 60);
+      for (let step = 0; step < 12; step++) await advanceBlueScenario(run.scenarioId, run.actorId);
+      const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: run.scenarioId } });
+      assert.equal(scenario.state, "COMPLETED");
+      assert.equal(await prisma.securityEvent.count({ where: { scenarioId: run.scenarioId, action: "OBJECTIVE_RETRIEVED" } }), 0);
+    } finally { await deleteScenario(run.scenarioId); }
+  });
   it("an agent survives session revocation, but removal and isolation have consequences", async () => {
     const run = await initializeScenario("BLUE", "nightshift", "persistent-worker");
     try {
@@ -101,5 +117,21 @@ describe("Canonical campaign", { concurrency: false }, () => {
     assert.equal(trainingOnly.operatorModeUnlocked, false);
     assert.equal(demonstrated.designation, "Junior Operator");
     assert.equal(demonstrated.operatorModeUnlocked, true);
+  });
+  it("awards NRO-1 only from Operator Mode Paper Trail evidence", () => {
+    const juniorRun: LocalRun = { scenarioId: "one", actorId: "actor", definitionId: "glasshouse", name: "Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: ["Trust relationships", "Privilege escalation"], availability: 100 } };
+    const evaluationRun: LocalRun = { ...juniorRun, scenarioId: "two", definitionId: "paper-trail", name: "Paper Trail", assistance: "OPERATOR", result: { ...juniorRun.result!, route: "vendor-reconciliation", concepts: ["Trust relationships", "Identity correlation"] } };
+    const withoutTraining = campaignProgress([juniorRun, evaluationRun]);
+    const certified = campaignProgress([juniorRun, evaluationRun], [{ moduleId: "trust-boundary", completedAt: "now" }]);
+    assert.deepEqual(withoutTraining.certifications, []);
+    assert.deepEqual(certified.certifications, ["NRO-1"]);
+  });
+  it("awards NIR-1 only from Blue Operator containment evidence", () => {
+    const juniorRun: LocalRun = { scenarioId: "one", actorId: "actor", definitionId: "glasshouse", name: "Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: ["Trust relationships", "Privilege escalation"], availability: 100 } };
+    const evaluationRun: LocalRun = { ...juniorRun, scenarioId: "two", definitionId: "paper-trail", name: "Paper Trail", mode: "BLUE", assistance: "OPERATOR", result: { ...juniorRun.result!, route: "vendor-reconciliation", concepts: ["Incident response", "Identity correlation"] } };
+    const withoutReview = campaignProgress([juniorRun, evaluationRun]);
+    const certified = campaignProgress([juniorRun, evaluationRun], [{ moduleId: "identity-context", completedAt: "now" }]);
+    assert.deepEqual(withoutReview.certifications, []);
+    assert.deepEqual(certified.certifications, ["NIR-1"]);
   });
 });

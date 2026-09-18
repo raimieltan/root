@@ -1,23 +1,23 @@
 # Graph Report - root  (2026-09-18)
 
 ## Corpus Check
-- 58 files · ~610,693 words
+- 58 files · ~612,141 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 331 nodes · 680 edges · 19 communities (14 shown, 3 thin omitted)
+- 333 nodes · 696 edges · 19 communities (14 shown, 3 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `df971025`
+- Built from commit: `ad580217`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- red/page.tsx
+- career/page.tsx
 - devDependencies
-- Runtime App Dependencies
+- dependencies
 - TypeScript Configuration
 - campaign.test.ts
 - SimulationEngine
@@ -39,10 +39,10 @@
 3. `getDefinitionForScenario()` - 16 edges
 4. `compilerOptions` - 16 edges
 5. `prisma` - 11 edges
-6. `readRuns()` - 10 edges
-7. `businessAvailability()` - 10 edges
-8. `parseMetadata()` - 10 edges
-9. `ScenarioDefinition` - 10 edges
+6. `ScenarioDefinition` - 11 edges
+7. `readRuns()` - 10 edges
+8. `businessAvailability()` - 10 edges
+9. `parseMetadata()` - 10 edges
 10. `summarizeReplay()` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -66,17 +66,17 @@
 
 ## Communities (19 total, 3 thin omitted)
 
-### Community 0 - "red/page.tsx"
+### Community 0 - "career/page.tsx"
 Cohesion: 0.09
-Nodes (31): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), MissionPanel(), NetworkMap() (+23 more)
+Nodes (32): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), MissionPanel(), NetworkMap() (+24 more)
 
 ### Community 1 - "devDependencies"
-Cohesion: 0.05
-Nodes (41): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+33 more)
-
-### Community 2 - "Runtime App Dependencies"
 Cohesion: 0.06
-Nodes (31): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+23 more)
+Nodes (31): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+23 more)
+
+### Community 2 - "dependencies"
+Cohesion: 0.05
+Nodes (41): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+33 more)
 
 ### Community 3 - "TypeScript Configuration"
 Cohesion: 0.07
@@ -91,16 +91,16 @@ Cohesion: 0.28
 Nodes (5): SimulationEngine, reachable(), CommandResult, SimulationEvent, TerminalState
 
 ### Community 6 - "index.ts"
-Cohesion: 0.14
-Nodes (19): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+11 more)
+Cohesion: 0.18
+Nodes (18): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+10 more)
 
 ### Community 7 - "Event Driven Design Docs"
 Cohesion: 0.18
 Nodes (12): Repository Agent Rules, Canonical Plan Precedence, Graphify-First Codebase Navigation, Claude Agent Rules Reference, Local PostgreSQL Service, Action to Replay Pipeline, Everything Leaves Evidence, Shared Authoritative Simulation (+4 more)
 
 ### Community 9 - "replay-client.tsx"
-Cohesion: 0.14
-Nodes (24): GET(), ReplayPageProps, emptySnapshot, formatElapsed(), ReplayClient(), ReplayPayload, attackPathFromEvents(), identifyRoute() (+16 more)
+Cohesion: 0.12
+Nodes (25): GET(), ReplayPageProps, emptySnapshot, formatElapsed(), ReplayClient(), ReplayPayload, attackPathFromEvents(), identifyRoute() (+17 more)
 
 ### Community 10 - "Visual Design System"
 Cohesion: 0.33
@@ -132,15 +132,15 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `SimulationEngine` connect `SimulationEngine` to `campaign.test.ts`, `index.ts`?**
   _High betweenness centrality (0.052) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `Runtime App Dependencies` to `devDependencies`?**
+- **Why does `devDependencies` connect `devDependencies` to `dependencies`?**
   _High betweenness centrality (0.031) - this node is a cross-community bridge._
 - **What connects `proficiencyLabel`, `geistSans`, `geistMono` to the rest of the system?**
   _112 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `red/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.08792270531400966 - nodes in this community are weakly interconnected._
+- **Should `career/page.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.08603145235892692 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
-- **Should `Runtime App Dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
 - **Should `TypeScript Configuration` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._

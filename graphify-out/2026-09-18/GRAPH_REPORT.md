@@ -1,29 +1,28 @@
 # Graph Report - root  (2026-09-18)
 
 ## Corpus Check
-- 57 files · ~609,534 words
+- 59 files · ~611,861 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 322 nodes · 654 edges · 20 communities (15 shown, 3 thin omitted)
+- 333 nodes · 696 edges · 19 communities (14 shown, 3 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5a9f0d28`
+- Built from commit: `ad580217`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- red/page.tsx
-- Build Toolchain Dependencies
-- Runtime App Dependencies
+- career/page.tsx
+- devDependencies
+- dependencies
 - TypeScript Configuration
 - campaign.test.ts
 - SimulationEngine
 - index.ts
 - Event Driven Design Docs
-- Package Scripts
 - replay-client.tsx
 - Visual Design System
 - App Layout Fonts
@@ -40,11 +39,11 @@
 3. `getDefinitionForScenario()` - 16 edges
 4. `compilerOptions` - 16 edges
 5. `prisma` - 11 edges
-6. `businessAvailability()` - 10 edges
-7. `parseMetadata()` - 10 edges
-8. `ScenarioDefinition` - 10 edges
-9. `summarizeReplay()` - 9 edges
-10. `getScenarioView()` - 9 edges
+6. `ScenarioDefinition` - 11 edges
+7. `readRuns()` - 10 edges
+8. `businessAvailability()` - 10 edges
+9. `parseMetadata()` - 10 edges
+10. `summarizeReplay()` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Next.js Wordmark Asset` --conceptually_related_to--> `Next.js Bootstrap Instructions`  [INFERRED]
@@ -65,19 +64,19 @@
 - **Shared Simulation Model** — docs_root_canonical_plan_shared_simulation, docs_root_canonical_plan_everything_leaves_evidence, docs_root_canonical_plan_post_operation_reconstruction [EXTRACTED 1.00]
 - **ROOT Operational UI Reference Set** — docs_ui_chatgpt_image_sep_18_2026_12_05_06_am_1_red_operations_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_09_am_4_blue_soc_workspace, docs_ui_chatgpt_image_sep_18_2026_12_05_10_am_5_reconstruction_workspace [INFERRED 0.95]
 
-## Communities (20 total, 3 thin omitted)
+## Communities (19 total, 3 thin omitted)
 
-### Community 0 - "red/page.tsx"
-Cohesion: 0.10
-Nodes (23): BlueTeamPage(), formatWindow(), Home(), MissionPanel(), NetworkMap(), apps, RedTeamPage(), Line (+15 more)
+### Community 0 - "career/page.tsx"
+Cohesion: 0.09
+Nodes (32): BlueTeamPage(), formatWindow(), CareerPage(), completeExercise(), proficiencyLabel, Home(), MissionPanel(), NetworkMap() (+24 more)
 
-### Community 1 - "Build Toolchain Dependencies"
+### Community 1 - "devDependencies"
 Cohesion: 0.06
 Nodes (31): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+23 more)
 
-### Community 2 - "Runtime App Dependencies"
-Cohesion: 0.06
-Nodes (31): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+23 more)
+### Community 2 - "dependencies"
+Cohesion: 0.05
+Nodes (41): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+33 more)
 
 ### Community 3 - "TypeScript Configuration"
 Cohesion: 0.07
@@ -85,27 +84,23 @@ Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-e
 
 ### Community 4 - "campaign.test.ts"
 Cohesion: 0.10
-Nodes (35): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+27 more)
+Nodes (32): POST(), POST(), POST(), POST(), GET(), globalForPrisma, prisma, businessAvailability() (+24 more)
 
 ### Community 5 - "SimulationEngine"
 Cohesion: 0.28
 Nodes (5): SimulationEngine, reachable(), CommandResult, SimulationEvent, TerminalState
 
 ### Community 6 - "index.ts"
-Cohesion: 0.14
-Nodes (19): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+11 more)
+Cohesion: 0.18
+Nodes (18): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+10 more)
 
 ### Community 7 - "Event Driven Design Docs"
 Cohesion: 0.18
 Nodes (12): Repository Agent Rules, Canonical Plan Precedence, Graphify-First Codebase Navigation, Claude Agent Rules Reference, Local PostgreSQL Service, Action to Replay Pipeline, Everything Leaves Evidence, Shared Authoritative Simulation (+4 more)
 
-### Community 8 - "Package Scripts"
-Cohesion: 0.18
-Nodes (10): name, packageManager, private, scripts, build, dev, lint, start (+2 more)
-
 ### Community 9 - "replay-client.tsx"
-Cohesion: 0.14
-Nodes (21): ReplayPageProps, emptySnapshot, formatElapsed(), ReplayClient(), ReplayPayload, attackPathFromEvents(), identifyRoute(), KeyDecision (+13 more)
+Cohesion: 0.12
+Nodes (25): GET(), ReplayPageProps, emptySnapshot, formatElapsed(), ReplayClient(), ReplayPayload, attackPathFromEvents(), identifyRoute() (+17 more)
 
 ### Community 10 - "Visual Design System"
 Cohesion: 0.33
@@ -128,24 +123,24 @@ Cohesion: 0.67
 Nodes (3): Next.js Wordmark Asset, Vercel Mark Asset, Next.js Bootstrap Instructions
 
 ## Knowledge Gaps
-- **111 isolated node(s):** `geistSans`, `geistMono`, `metadata`, `apps`, `Props` (+106 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 130 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **112 isolated node(s):** `proficiencyLabel`, `geistSans`, `geistMono`, `metadata`, `apps` (+107 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 131 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `SimulationEngine` connect `SimulationEngine` to `campaign.test.ts`, `index.ts`?**
-  _High betweenness centrality (0.051) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `Runtime App Dependencies` to `Package Scripts`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **Why does `devDependencies` connect `Build Toolchain Dependencies` to `Package Scripts`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **What connects `geistSans`, `geistMono`, `metadata` to the rest of the system?**
-  _111 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `red/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.09759759759759759 - nodes in this community are weakly interconnected._
-- **Should `Build Toolchain Dependencies` be split into smaller, more focused modules?**
+  _High betweenness centrality (0.052) - this node is a cross-community bridge._
+- **Why does `devDependencies` connect `devDependencies` to `dependencies`?**
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
+- **What connects `proficiencyLabel`, `geistSans`, `geistMono` to the rest of the system?**
+  _112 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `career/page.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.08603145235892692 - nodes in this community are weakly interconnected._
+- **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
-- **Should `Runtime App Dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
+- **Should `TypeScript Configuration` be split into smaller, more focused modules?**
+  _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._

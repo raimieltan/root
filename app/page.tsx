@@ -11,13 +11,21 @@ export default function Home() {
   const [selected, setSelected] = useState("glasshouse");
   const [mode, setMode] = useState<"RED" | "BLUE">("RED");
   const [assistance, setAssistance] = useState("GUIDED");
-  useEffect(() => { setRuns(readRuns()); }, []);
+  useEffect(() => {
+    const savedRuns = readRuns();
+    const params = new URLSearchParams(location.search);
+    const requestedOperation = params.get("operation");
+    if (requestedOperation && operations.some((operation) => operation.id === requestedOperation)) setSelected(requestedOperation);
+    if (params.get("team") === "BLUE") setMode("BLUE");
+    if (params.get("assistance") === "OPERATOR" && campaignProgress(savedRuns).operatorModeUnlocked) setAssistance("OPERATOR");
+    setRuns(savedRuns);
+  }, [operations]);
   const progress = campaignProgress(runs);
   const operation = operations.find((o) => o.id === selected);
   const unlocked = !operation?.presentation.prerequisite || progress.completed.includes(operation.presentation.prerequisite);
   return <RootChrome context="career" active="operations" title="CAMPAIGN // SECURITY OPERATIONS" operator="local.operator@nodeline" network="TRAINING ENVIRONMENT">
     <div className="career-grid">
-      <section className="panel operator-panel campaign-profile"><header className="panel-title">LOCAL OPERATOR PROFILE <Link href="/career">Open Career Hub →</Link></header><div className="data-list"><h1>{progress.designation} // Level {progress.level}</h1><p>{progress.xp} experience · {progress.completed.length}/3 operations completed</p><p>Operator Mode: <b>{progress.operatorModeUnlocked ? "CLEARED" : "REQUIRES JUNIOR OPERATOR"}</b></p><p>Knowledge demonstrations and distinct outcomes earn experience. Training reinforces evidence reading but cannot award a designation.</p><h2>Proficiency</h2>{Object.entries(progress.proficiency).map(([concept, value]) => <p key={concept}>{concept} <b>{["Introduced", "Practiced", "Demonstrated", "Proficient", "Mastered"][value - 1]}</b></p>)}{!Object.keys(progress.proficiency).length && <p className="muted">Complete an operation to record demonstrated knowledge.</p>}{progress.completed.length === 3 && <strong className="green-text">MVP CAMPAIGN COMPLETE</strong>}</div></section>
+      <section className="panel operator-panel campaign-profile"><header className="panel-title">LOCAL OPERATOR PROFILE <Link href="/career">Open Career Hub →</Link></header><div className="data-list"><h1>{progress.designation} // Level {progress.level}</h1><p>{progress.xp} experience · {progress.completed.length}/{operations.length} operations completed</p><p>Operator Mode: <b>{progress.operatorModeUnlocked ? "CLEARED" : "REQUIRES JUNIOR OPERATOR"}</b></p><p>Knowledge demonstrations and distinct outcomes earn experience. Training reinforces evidence reading but cannot award a designation.</p><h2>Proficiency</h2>{Object.entries(progress.proficiency).map(([concept, value]) => <p key={concept}>{concept} <b>{["Introduced", "Practiced", "Demonstrated", "Proficient", "Mastered"][value - 1]}</b></p>)}{!Object.keys(progress.proficiency).length && <p className="muted">Complete an operation to record demonstrated knowledge.</p>}{progress.completed.length === operations.length && <strong className="green-text">MVP CAMPAIGN COMPLETE</strong>}</div></section>
       <section className="panel operations-panel"><header className="panel-title">OPERATIONS // CAMPAIGN ARC</header>
         <div className="operation-list">{operations.map((entry) => {
           const locked = entry.presentation.prerequisite && !progress.completed.includes(entry.presentation.prerequisite);

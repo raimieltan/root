@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 import RootChrome from "@/app/ui/root-chrome";
+import { campaign } from "@/lib/simulation/scenarios";
 import {
   campaignProgress,
   readRuns,
@@ -32,7 +33,11 @@ export default function CareerPage() {
   const selected = trainingModules.find((module) => module.id === selectedId) ?? trainingModules[0];
   const completed = useMemo(() => new Set(progress.trainingCompleted), [progress.trainingCompleted]);
   const trustDemonstrated = (progress.proficiency["Trust relationships"] ?? 0) > 0;
-  const nroEligible = trustDemonstrated && completed.has("trust-boundary");
+  const nroAwarded = progress.certifications.includes("NRO-1");
+  const nroEvaluationReady = !nroAwarded && progress.operatorModeUnlocked && trustDemonstrated && completed.has("trust-boundary");
+  const incidentDemonstrated = (progress.proficiency["Incident response"] ?? 0) > 0;
+  const nirAwarded = progress.certifications.includes("NIR-1");
+  const nirEvaluationReady = !nirAwarded && progress.operatorModeUnlocked && incidentDemonstrated && completed.has("identity-context");
 
   function completeExercise(module: TrainingModule, answer: number) {
     if (answer !== module.correctChoice) {
@@ -61,7 +66,7 @@ export default function CareerPage() {
             <dl>
               <dt>LEVEL</dt><dd>{progress.level}</dd>
               <dt>XP</dt><dd>{progress.xp}</dd>
-              <dt>OPERATIONS</dt><dd>{progress.completed.length}/3</dd>
+              <dt>OPERATIONS</dt><dd>{progress.completed.length}/{campaign.length}</dd>
             </dl>
           </div>
 
@@ -113,8 +118,8 @@ export default function CareerPage() {
             <Link className="primary-button" href="/">Open operations</Link>
           </div></section>
           <section className="panel"><header className="panel-title">CERTIFICATION TRACK</header><div className="data-list">
-            <article className={nroEligible ? "cert-ready" : ""}><b>NRO-1 // NETWORK RECONNAISSANCE OPERATOR</b><p>{nroEligible ? "ELIGIBLE — trust relationships have been reviewed and demonstrated in an operation." : "Requires the Trusted input review and an operation demonstrating Trust relationships."}</p></article>
-            <article><b>NIR-1 // INCIDENT RESPONDER</b><p>Locked — build an evidence record and demonstrate incident response during a completed Blue operation.</p></article>
+            <article className={nroAwarded || nroEvaluationReady ? "cert-ready" : ""}><b>{nroAwarded ? "NRO-1 // AWARDED" : "NRO-1 // NETWORK RECONNAISSANCE OPERATOR"}</b><p>{nroAwarded ? "Awarded from a successful Operator Mode Paper Trail run with recorded trust-relationship evidence." : nroEvaluationReady ? "EVALUATION READY — complete Paper Trail in Operator Mode. The evidence must show a trust relationship crossing into award records." : "Requires the Trusted input review, Junior Operator clearance, and demonstrated Trust relationships."}</p>{nroEvaluationReady && <Link className="primary-button" href="/?operation=paper-trail&team=RED&assistance=OPERATOR">Begin NRO-1 evaluation</Link>}</article>
+            <article className={nirAwarded || nirEvaluationReady ? "cert-ready" : ""}><b>{nirAwarded ? "NIR-1 // AWARDED" : "NIR-1 // INCIDENT RESPONDER"}</b><p>{nirAwarded ? "Awarded from a successful Blue Operator Paper Trail defense with recorded incident-response evidence." : nirEvaluationReady ? "EVALUATION READY — contain both Paper Trail record-access paths in Blue Operator Mode while preserving availability." : "Requires the Identity is not intent review, Junior Operator clearance, and demonstrated incident response."}</p>{nirEvaluationReady && <Link className="primary-button" href="/?operation=paper-trail&team=BLUE&assistance=OPERATOR">Begin NIR-1 evaluation</Link>}</article>
           </div></section>
           <section className="panel"><header className="panel-title">NEXT RECOMMENDATION</header><div className="data-list"><p>{trainingModules.find((module) => !completed.has(module.id)) ? `Review ${trainingModules.find((module) => !completed.has(module.id))!.title}, then apply that relationship in your next operation.` : "Return to Operations and demonstrate a reviewed concept under live constraints."}</p></div></section>
         </aside>

@@ -1,7 +1,7 @@
 {
-  "0": "red/page.tsx",
+  "0": "career/page.tsx",
   "1": "devDependencies",
-  "2": "Runtime App Dependencies",
+  "2": "dependencies",
   "3": "TypeScript Configuration",
   "4": "campaign.test.ts",
   "5": "SimulationEngine",

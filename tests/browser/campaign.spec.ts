@@ -29,7 +29,7 @@ test("operation selection → all Red campaign results → reconstruction → un
   await expect(page.getByText("MVP CAMPAIGN COMPLETE")).toBeVisible();
   await page.reload();
   await expect(page.getByText("MVP CAMPAIGN COMPLETE")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Open reconstruction" })).toHaveCount(3);
+  await expect(page.getByRole("link", { name: "Open reconstruction" })).toHaveCount(4);
   expect(errors).toEqual([]);
   await page.screenshot({ path: "/tmp/root-campaign-browser.png", fullPage: true });
 });
@@ -38,6 +38,7 @@ test("every Blue operation resolves and opens its reconstruction", async ({ page
   await page.addInitScript(() => localStorage.setItem("root:campaign:v1", JSON.stringify([
     { scenarioId: "prior-glasshouse", actorId: "prior", definitionId: "glasshouse", name: "Operation Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: [], availability: 100 } },
     { scenarioId: "prior-nightshift", actorId: "prior", definitionId: "nightshift", name: "Operation Nightshift", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "endpoint-agent", detected: true, concepts: [], availability: 100 } },
+    { scenarioId: "prior-dead-drop", actorId: "prior", definitionId: "dead-drop", name: "Operation Dead Drop", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "partner-pivot", detected: true, concepts: [], availability: 100 } },
   ])));
   await page.goto("/");
   for (const operation of campaign) {
@@ -109,6 +110,7 @@ test("Blue analysts correlate evidence and contain every viable route across ope
   await page.addInitScript(() => localStorage.setItem("root:campaign:v1", JSON.stringify([
     { scenarioId: "prior-glasshouse", actorId: "prior", definitionId: "glasshouse", name: "Operation Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: [], availability: 100 } },
     { scenarioId: "prior-nightshift", actorId: "prior", definitionId: "nightshift", name: "Operation Nightshift", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "endpoint-agent", detected: true, concepts: [], availability: 100 } },
+    { scenarioId: "prior-dead-drop", actorId: "prior", definitionId: "dead-drop", name: "Operation Dead Drop", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "partner-pivot", detected: true, concepts: [], availability: 100 } },
   ])));
 
   async function step() {
@@ -161,12 +163,19 @@ test("Career Hub records evidence review but reserves Operator Mode for demonstr
   await page.getByRole("button", { name: /Trusted input review/ }).click();
   await page.getByRole("button", { name: /B \/\/ A deploy-controlled input is consumed by a root-owned service/ }).click();
   await expect(page.getByText(/REVIEW RECORDED/)).toBeVisible();
+  await page.getByRole("button", { name: /Identity is not intent/ }).click();
+  await page.getByRole("button", { name: /B \/\/ The source, timing, and destination are abnormal/ }).click();
+  await expect(page.getByText(/REVIEW RECORDED/)).toBeVisible();
   await expect(page.getByText("GUIDED MODE REQUIRED", { exact: true })).toBeVisible();
 
   await page.addInitScript(() => localStorage.setItem("root:campaign:v1", JSON.stringify([
     { scenarioId: "career-glasshouse", actorId: "operator", definitionId: "glasshouse", name: "Operation Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: ["Trust relationships", "Privilege escalation"], availability: 100 } },
+    { scenarioId: "career-paper-trail", actorId: "operator", definitionId: "paper-trail", name: "Operation Paper Trail", mode: "RED", assistance: "OPERATOR", startedAt: "", result: { won: true, route: "vendor-reconciliation", detected: true, concepts: ["Trust relationships", "Identity correlation"], availability: 100 } },
+    { scenarioId: "career-paper-trail-blue", actorId: "operator", definitionId: "paper-trail", name: "Operation Paper Trail", mode: "BLUE", assistance: "OPERATOR", startedAt: "", result: { won: true, route: "vendor-reconciliation", detected: true, concepts: ["Incident response", "Identity correlation"], availability: 67 } },
   ])));
   await page.goto("/career");
   await expect(page.getByText("Junior Operator", { exact: true })).toBeVisible();
   await expect(page.getByText("OPERATOR MODE CLEARED", { exact: true })).toBeVisible();
+  await expect(page.getByText("NRO-1 // AWARDED", { exact: true })).toBeVisible();
+  await expect(page.getByText("NIR-1 // AWARDED", { exact: true })).toBeVisible();
 });
