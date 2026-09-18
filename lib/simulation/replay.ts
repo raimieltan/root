@@ -121,7 +121,7 @@ export function snapshotAt(events: ReplayEvent[], lens: ReplayLens, throughEvent
 export function attackPathFromEvents(events: ReplayEvent[]) {
   const path: string[] = ["INTERNET"];
   for (const event of events) {
-    if (event.action === "SESSION_CREATED" && event.target && path.at(-1) !== event.target) path.push(event.target);
+    if (["SESSION_CREATED", "DATABASE_SESSION_CREATED"].includes(event.action) && event.target && path.at(-1) !== event.target) path.push(event.target);
   }
   return path;
 }

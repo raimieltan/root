@@ -35,6 +35,8 @@ export class SimulationEngine {
     const intent = parseTerminalInput(command, state.context);
     if (intent.kind === "PSQL_CONNECT") return this.connectPostgres(intent, state);
     if (intent.kind === "PSQL_INPUT") return this.postgresInput(intent.input, state);
+    if (intent.kind === "CURL_REQUEST") return this.curl(intent, state);
+    if (intent.kind === "SERVICE_OPERATION") return this.serviceOperation(intent, state);
     const { command: cmd, args } = intent;
     switch (cmd) {
       case "help": return this.result(true, this.help());
@@ -50,7 +52,7 @@ export class SimulationEngine {
       case "ip": return this.ip(state);
       case "ping": return this.ping(args, state);
       case "nmap": return this.scan(args, state);
-      case "curl": return this.curl(args, state);
+      case "curl": return this.result(false, "Usage: curl [-X METHOD] <url> [--data BODY]");
       case "psql": return this.result(false, psqlUsage);
       case "msfconsole": return this.result(true, "Metasploit simulation ready. Use: exploit <host>");
       case "exploit": return this.exploit(args, state);
@@ -71,9 +73,10 @@ export class SimulationEngine {
     return `ROOT/OS commands
 
 Recon:       nmap <host> · ping <host> · curl <url> · ip
-Access:      exploit <host> · ssh <user@host> · sessions
+Access:      ssh <user@host> · sessions
 Filesystem:  pwd · cd <path> · ls [path] · cat <path> · retrieve <file>
-System:      whoami · hostname · ps · privesc <trusted-service>
+System:      whoami · hostname · ps · backup-sync --run-hook
+Web:         curl [-X METHOD] URL [--data BODY]
 Database:    psql -h HOST -U USER -d DATABASE --password SECRET
 Tools:       john <file> · msfconsole · install-agent · clear`;
   }
@@ -236,17 +239,45 @@ Tools:       john <file> · msfconsole · install-agent · clear`;
     return { success: true, output: `Nmap scan report for ${target.hostname} (${target.ip})\nPORT     STATE  SERVICE\n${target.services.map((service) => `${service.port}/tcp`.padEnd(9) + `open   ${service.name}`).join("\n")}`, events, discoveredHosts: await this.discoveredHosts() };
   }
 
-  private async curl(args: string[], state: TerminalState) {
-    if (!args[0]) return this.result(false, "Usage: curl <url>");
+  private async curl(intent: Extract<ReturnType<typeof parseTerminalInput>, { kind: "CURL_REQUEST" }>, state: TerminalState) {
+    if (!intent.url) return this.result(false, "Usage: curl [-X METHOD] <url> [--data BODY]");
     const source = await this.currentMachine(state);
     if (!source) return this.result(false, "No active session.");
-    const target = await this.target(args[0]);
+    const target = await this.target(intent.url);
     if (!target?.services.some((service) => service.name === "http" || service.name === "https")) return this.result(false, "curl: connection failed");
     if (!await reachable(this.scenarioId, source.machine.id, target.id, [80, 443])) return this.result(false, "curl: route blocked");
-    const events = [await this.emit({ action: "WEB_REQUEST", category: SecurityEventCategory.WEB, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { path: args[0] } })];
-    const discovery = await this.applyDiscovery("web", target.hostname, args[0], source.machine.id);
+    const path = new URL(`http://${intent.url.replace(/^https?:\/\//, "")}`).pathname;
+    const events = [await this.emit({ action: "WEB_REQUEST", category: SecurityEventCategory.WEB, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { method: intent.method, path, data: intent.data } })];
+    const interaction = (await this.definition()).webInteractions?.find((entry) => entry.host === target.hostname && entry.method === intent.method && entry.path === path && (!entry.dataIncludes || intent.data?.includes(entry.dataIncludes)));
+    if (interaction) {
+      if (interaction.prerequisiteAction && !await prisma.securityEvent.count({ where: { scenarioId: this.scenarioId, action: interaction.prerequisiteAction, targetMachineId: target.id } })) return this.result(false, "Application behavior is not understood yet. Gather service evidence first.", events);
+      const user = target.users.find((entry) => entry.username === interaction.sessionUser);
+      if (!user) return this.result(false, "Application session identity is unavailable.", events);
+      await prisma.process.create({ data: { machineId: target.id, name: `http ${intent.method} ${path} → interactive-worker`, pid: 3000 + Math.floor(Math.random() * 900), runningAs: user.username } });
+      for (const evidence of interaction.evidence) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: evidence.action === "PROCESS_SPAWN" ? user.username : undefined }));
+      events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: user.username, metadata: { privilege: user.privilege, interface: "http" } }));
+      const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "UNIX", serviceName: "http" } });
+      return { success: true, output: interaction.output, events, sessionUpdated: true, context: { type: "UNIX" as const }, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "UNIX" as const, serviceName: "http" } };
+    }
+    const discovery = await this.applyDiscovery("web", target.hostname, intent.url, source.machine.id);
     events.push(...discovery.events);
     return { success: true, output: discovery.output ?? `${target.hostname} responded.`, events, discoveredHosts: await this.discoveredHosts() };
+  }
+
+  private async serviceOperation(intent: Extract<ReturnType<typeof parseTerminalInput>, { kind: "SERVICE_OPERATION" }>, state: TerminalState) {
+    const [current, definition] = await Promise.all([this.currentMachine(state), this.definition()]);
+    const operation = definition.trustedServiceOperations?.find((entry) => entry.host === current?.machine.hostname && entry.service === intent.service && entry.fromUser === current?.user.username && entry.arguments.every((argument) => intent.args.includes(argument)));
+    const service = current?.machine.services.find((entry) => entry.name === intent.service && entry.status === "RUNNING");
+    const hook = current?.machine.files.find((entry) => entry.path === "/opt/backup/run.sh");
+    const hookWritable = Boolean(hook && current?.user.groups.includes(hook.group ?? "") && (Number(hook.permissions[1]) & 2));
+    if (!current || !operation || !service || !current.user.groups.includes(operation.requiredGroup) || !hookWritable) return this.result(false, `${intent.service}: no permitted trusted-service operation in this context.`);
+    const elevated = await prisma.user.findFirst({ where: { machineId: current.machine.id, username: operation.toUser } });
+    if (!elevated) return this.result(false, `${intent.service}: privileged service identity unavailable.`);
+    const events: SimulationEvent[] = [];
+    for (const evidence of operation.evidence) events.push(await this.emitDefinition(evidence, { targetMachineId: current.machine.id, userId: current.user.username, metadata: { service: service.name, hook: hook?.path } }));
+    events.push(await this.emit({ action: "ROOT_SESSION_CREATED", category: SecurityEventCategory.PRIVILEGE, severity: SecurityEventSeverity.HIGH, targetMachineId: current.machine.id, userId: elevated.username, metadata: { privilege: elevated.privilege, service: service.name } }));
+    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: elevated.id, machineId: current.machine.id, privilege: elevated.privilege, sourceMachineId: current.machine.id, scenarioId: this.scenarioId, context: "SSH", serviceName: service.name } });
+    return { success: true, output: operation.output, events, sessionUpdated: true, context: { type: "SSH" as const }, newSession: { id: session.id, userId: elevated.username, machineId: current.machine.hostname, privilege: elevated.privilege, sourceMachineId: current.machine.id, createdAt: session.createdAt, active: true, context: "SSH" as const, serviceName: service.name } };
   }
 
   private async connectPostgres(intent: Extract<ReturnType<typeof parseTerminalInput>, { kind: "PSQL_CONNECT" }>, state: TerminalState) {

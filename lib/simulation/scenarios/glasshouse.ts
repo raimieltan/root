@@ -71,7 +71,7 @@ export const glasshouse: ScenarioDefinition = {
     {
       hostname: "DEV-01", ip: "10.20.10.20", zone: NetworkZone.INTERNAL, os: "linux",
       users: [
-        { username: "deploy", role: "developer", privilege: AccessLevel.USER, groups: ["deploy", "developers"], password: "MeridianDeploy2024!Secret" },
+        { username: "deploy", role: "developer", privilege: AccessLevel.USER, groups: ["deploy", "developers", "backup"], password: "MeridianDeploy2024!Secret" },
         { username: "root", role: "admin", privilege: AccessLevel.ROOT, groups: ["root"] },
       ],
       services: [
@@ -79,7 +79,8 @@ export const glasshouse: ScenarioDefinition = {
         { name: "backup-sync", port: 8080, runningAsUser: "root", exposedZones: [NetworkZone.INTERNAL] },
       ],
       files: [
-        { path: "/etc/backup-sync.conf", owner: "root", group: "deploy", permissions: "660", isSecret: true, contents: "BACKUP_TARGET=/backup\nRUN_HOOK=verify\nVERIFY_SIGNATURE=true" },
+        { path: "/etc/backup-sync.conf", owner: "root", group: "deploy", permissions: "660", isSecret: true, contents: "BACKUP_TARGET=/backup\nRUN_HOOK=/opt/backup/run.sh\nRUN_AS=root\nVERIFY_SIGNATURE=true" },
+        { path: "/opt/backup/run.sh", owner: "root", group: "backup", permissions: "770", isSecret: true, contents: "#!/bin/sh\n# Deploy-maintained verification hook\nverify_backup" },
         { path: "/etc/meridian/routes.conf", owner: "root", group: "root", permissions: "600", isSecret: true, contents: "FINANCE_API=10.30.10.20:443\nFIN_SERVICE_USER=svc_web\nFIN_SERVICE_TOKEN=svc-meridian-2026" },
       ],
       processes: [{ name: "backup-sync", pid: 731, runningAs: "root" }],
@@ -156,6 +157,23 @@ export const glasshouse: ScenarioDefinition = {
       { username: "db_backup", tables: [{ name: "documents", columns: ["filename", "classification"], rows: [{ filename: "PROJECT_ATLAS.pdf", classification: "CONFIDENTIAL" }] }] },
     ],
   }],
+  webInteractions: [{
+    host: "WEB-01", method: "POST", path: "/legacy-upload", dataIncludes: "upload=",
+    sessionUser: "www-data", prerequisiteAction: "PORT_PROBE", output: "Legacy upload worker accepted the request. Interactive web-service session opened: www-data@WEB-01",
+    evidence: [
+      event("EXPLOIT_VULNERABILITY", SecurityEventCategory.WEB, SecurityEventSeverity.HIGH, { metadata: { interface: "legacy-upload", method: "POST" } }),
+      event("PROCESS_SPAWN", SecurityEventCategory.PROCESS, SecurityEventSeverity.MEDIUM),
+    ],
+  }],
+  trustedServiceOperations: [{
+    host: "DEV-01", service: "backup-sync", arguments: ["--run-hook"], fromUser: "deploy", requiredGroup: "backup", toUser: "root",
+    output: "backup-sync executed its deploy-maintained hook as root. Root session opened.",
+    evidence: [
+      event("PRIVILEGED_CONFIG_MODIFIED", SecurityEventCategory.FILESYSTEM, SecurityEventSeverity.HIGH),
+      event("SERVICE_RESTARTED", SecurityEventCategory.PRIVILEGE, SecurityEventSeverity.HIGH),
+      event("PRIVILEGE_ESCALATION", SecurityEventCategory.PRIVILEGE, SecurityEventSeverity.CRITICAL),
+    ],
+  }],
   exploits: [{
     target: "WEB-01", sessionUser: "www-data", prerequisiteAction: "PORT_PROBE", module: "legacy_upload", output: "Session opened: www-data@WEB-01",
     evidence: [
@@ -174,7 +192,7 @@ export const glasshouse: ScenarioDefinition = {
   objectives: [{ id: "atlas", type: "retrieve_file", host: "FIN-DB", path: "/opt/db/data/PROJECT_ATLAS.pdf", label: "Retrieve PROJECT_ATLAS.pdf" }],
   detections: {
     PORT_SCAN_DETECTED: { id: "NET-SCAN-01", title: "Port scan", severity: "LOW", rationale: "Multiple service probes reached the same host in a short interval." },
-    EXPLOIT_EXECUTED: { id: "WEB-EXEC-01", title: "Suspicious web activity", severity: "MEDIUM", rationale: "An unusual web request was followed by server-side process execution." },
+    EXPLOIT_VULNERABILITY: { id: "WEB-EXEC-01", title: "Suspicious web activity", severity: "MEDIUM", rationale: "An unusual web request was followed by server-side process execution." },
     PRIVILEGED_CONFIG_MODIFIED: { id: "PRIV-SVC-CONFIG-01", title: "Privileged configuration changed", severity: "HIGH", rationale: "A non-root identity modified input trusted by a privileged service." },
     PRIVILEGE_ESCALATION: { id: "PRIV-ESC-01", title: "Privilege escalation", severity: "HIGH", rationale: "A user session was followed by a new root-level session on the same host." },
     LATERAL_MOVEMENT: { id: "AUTH-LATERAL-01", title: "Unusual internal login", severity: "MEDIUM", rationale: "A valid identity authenticated from a machine relationship not seen in normal activity." },
@@ -207,7 +225,7 @@ export const glasshouse: ScenarioDefinition = {
     },
   ],
   blueProfiles: [
-    { id: "noisy-application", routeId: "application-chain", commands: ["nmap WEB-01", "exploit WEB-01", "cat /var/www/meridian/app.conf", "ssh deploy@DEV-01", "privesc backup-sync", "cat /etc/meridian/routes.conf", "ssh svc_web@FIN-APP", "cat /etc/fin-app/db.conf", "ssh finance_app@FIN-DB", "retrieve PROJECT_ATLAS.pdf"] },
+    { id: "noisy-application", routeId: "application-chain", commands: ["nmap WEB-01", "curl -X POST portal.meridian.test/legacy-upload --data upload=archive", "cat /var/www/meridian/app.conf", "ssh deploy@DEV-01", "cat /etc/backup-sync.conf", "backup-sync --run-hook", "cat /etc/meridian/routes.conf", "ssh svc_web@FIN-APP", "cat /etc/fin-app/db.conf", "psql -h FIN-DB -U finance_app -d finance --password FinanceApp2026!Secure", "SELECT filename, classification FROM documents;"] },
     { id: "trusted-backup", routeId: "backup-trust", commands: ["curl portal.meridian.test", "ssh fieldops@VPN-01", "cat /etc/vpn/backup-peers.conf", "ssh backup_svc@BACKUP-01", "cat /etc/backup/finance-db.conf", "psql -h FIN-DB -U db_backup -d finance --password AtlasBackup-91d2", "\\dt", "SELECT filename, classification FROM documents;"] },
   ],
   defaultBlueProfile: "noisy-application",

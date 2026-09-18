@@ -2,6 +2,8 @@ import type { TerminalContext } from "./types";
 
 export type SimulationIntent =
   | { kind: "SHELL"; command: string; args: string[] }
+  | { kind: "CURL_REQUEST"; url?: string; method: string; data?: string }
+  | { kind: "SERVICE_OPERATION"; service: string; args: string[] }
   | { kind: "PSQL_CONNECT"; host: string; username: string; database: string; password?: string }
   | { kind: "PSQL_INPUT"; input: string };
 
@@ -15,6 +17,19 @@ export function parseTerminalInput(input: string, context: TerminalContext = { t
   if (context.type === "POSTGRES") return { kind: "PSQL_INPUT", input: trimmed };
 
   const [command = "", ...args] = trimmed.split(/\s+/);
+  if (command.toLowerCase() === "curl") {
+    let method = "GET";
+    let data: string | undefined;
+    let url: string | undefined;
+    for (let index = 0; index < args.length; index += 1) {
+      const value = args[index];
+      if (value === "-X" || value === "--request") method = (args[++index] ?? "GET").toUpperCase();
+      else if (value === "-d" || value === "--data") data = args[++index];
+      else if (!value.startsWith("-")) url ??= value;
+    }
+    return { kind: "CURL_REQUEST", url, method, data };
+  }
+  if (command.toLowerCase() === "backup-sync") return { kind: "SERVICE_OPERATION", service: "backup-sync", args };
   if (command.toLowerCase() !== "psql") return { kind: "SHELL", command: command.toLowerCase(), args };
 
   let host: string | undefined;

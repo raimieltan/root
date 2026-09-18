@@ -12,15 +12,16 @@ import type { TerminalState } from "./types";
 const routes = {
   application: [
     "nmap WEB-01",
-    "exploit WEB-01",
+    "curl -X POST portal.meridian.test/legacy-upload --data upload=archive",
     "cat /var/www/meridian/app.conf",
     "ssh deploy@DEV-01",
-    "privesc backup-sync",
+    "cat /etc/backup-sync.conf",
+    "backup-sync --run-hook",
     "cat /etc/meridian/routes.conf",
     "ssh svc_web@FIN-APP",
     "cat /etc/fin-app/db.conf",
-    "ssh finance_app@FIN-DB",
-    "retrieve PROJECT_ATLAS.pdf",
+    "psql -h FIN-DB -U finance_app -d finance --password FinanceApp2026!Secure",
+    "SELECT filename, classification FROM documents;",
   ],
   backup: [
     "curl portal.meridian.test",
@@ -104,7 +105,7 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
     assert.equal(result.summary.route?.id, "application-chain");
     assert.equal(result.events.find((event) => event.action === "OBJECTIVE_RETRIEVED")?.metadata.objectiveId, "atlas");
     assert.deepEqual(result.summary.attackPath, ["INTERNET", "WEB-01", "DEV-01", "FIN-APP", "FIN-DB"]);
-    assert.ok(result.events.some((event) => event.action === "EXPLOIT_EXECUTED"));
+    assert.ok(result.events.some((event) => event.action === "EXPLOIT_VULNERABILITY"));
     assert.ok(result.events.some((event) => event.action === "PRIVILEGE_ESCALATION"));
     assert.ok(detections.includes("WEB-EXEC-01"));
     assert.ok(detections.includes("PRIV-ESC-01"));

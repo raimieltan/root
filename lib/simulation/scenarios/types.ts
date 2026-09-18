@@ -75,6 +75,26 @@ export type ScenarioDefinition = {
       tables: Array<{ name: string; columns: string[]; rows: Array<Record<string, string>> }>;
     }>;
   }>;
+  webInteractions?: Array<{
+    host: string;
+    method: string;
+    path: string;
+    dataIncludes?: string;
+    sessionUser: string;
+    prerequisiteAction?: string;
+    output: string;
+    evidence: ScenarioEventDefinition[];
+  }>;
+  trustedServiceOperations?: Array<{
+    host: string;
+    service: string;
+    arguments: string[];
+    fromUser: string;
+    requiredGroup: string;
+    toUser: string;
+    output: string;
+    evidence: ScenarioEventDefinition[];
+  }>;
   exploits: Array<{
     target: string;
     sessionUser: string;
