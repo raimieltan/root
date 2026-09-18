@@ -21,14 +21,16 @@ export function parseTerminalInput(input: string, context: TerminalContext = { t
   const [command = "", ...args] = trimmed.split(/\s+/);
   if (command.toLowerCase() === "curl") {
     let method = "GET";
+    let explicitMethod = false;
     let data: string | undefined;
     let url: string | undefined;
     for (let index = 0; index < args.length; index += 1) {
       const value = args[index];
-      if (value === "-X" || value === "--request") method = (args[++index] ?? "GET").toUpperCase();
-      else if (value === "-d" || value === "--data") data = args[++index];
+      if (value === "-X" || value === "--request") { method = (args[++index] ?? "GET").toUpperCase(); explicitMethod = true; }
+      else if (value === "-d" || value === "--data") data = (args[++index] ?? "").replace(/^([\"'])(.*)\1$/, "$2");
       else if (!value.startsWith("-")) url ??= value;
     }
+    if (data !== undefined && !explicitMethod) method = "POST";
     return { kind: "CURL_REQUEST", url, method, data };
   }
   if (command.toLowerCase() === "backup-sync") return { kind: "SERVICE_OPERATION", service: "backup-sync", args };

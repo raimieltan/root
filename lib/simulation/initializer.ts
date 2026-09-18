@@ -44,6 +44,7 @@ export async function initializeScenario(mode: ScenarioMode = ScenarioMode.RED, 
 
     const redActor = await tx.actor.create({ data: { name: mode === ScenarioMode.BLUE ? "Scripted Red" : "Red Team Operator", role: mode === ScenarioMode.BLUE ? "red_ai" : "red_operator", scenarioId: scenario.id } });
     const blueActor = mode === ScenarioMode.BLUE ? await tx.actor.create({ data: { name: "Blue Team Operator", role: "blue_operator", scenarioId: scenario.id } }) : null;
+    if (mode === ScenarioMode.RED) await tx.actor.create({ data: { name: "Baseline Blue", role: "blue_ai", scenarioId: scenario.id } });
     const startHost = definition.startingKnowledge.knownHosts[0];
     const attacker = users.get(`${startHost}:attacker`);
     if (!attacker) throw new Error("Scenario must define its starting attacker identity");

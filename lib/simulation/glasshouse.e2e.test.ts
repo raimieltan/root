@@ -5,14 +5,17 @@ import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "./engine";
 import { deleteScenario, initializeScenario } from "./initializer";
 import { normalizeReplayEvent, summarizeReplay } from "./replay";
-import { respondToAttack } from "./blue";
+import { advanceAutonomousBlueDefense, respondToAttack } from "./blue";
 import { glasshouse } from "./scenarios";
+import { getScenarioView } from "./state";
 import type { TerminalState } from "./types";
 
 const routes = {
   application: [
-    "nmap WEB-01",
-    "curl -X POST portal.meridian.test/legacy-upload --data upload=archive",
+    "nmap 10.10.10.10",
+    "curl -i http://10.10.10.10",
+    "curl portal.meridian.test",
+    "curl --data upload=archive portal.meridian.test/legacy-upload",
     "cat /var/www/meridian/app.conf",
     "ssh deploy@DEV-01",
     "MeridianDeploy2024!Secret",
@@ -23,34 +26,46 @@ const routes = {
     "backup-sync --run-hook",
     "cat /etc/meridian/routes.conf",
     "ssh svc_web@FIN-APP",
+    "svc-meridian-2026",
     "cat /etc/fin-app/db.conf",
     "psql -h FIN-DB -U finance_app -d finance",
     "FinanceApp2026!Secure",
     "SELECT filename, classification FROM documents;",
   ],
   backup: [
+    "curl -i http://10.10.10.10",
     "curl portal.meridian.test",
+    "curl portal.meridian.test/api/profile",
     "ssh fieldops@VPN-01",
+    "FieldOps-ReadOnly",
+    "ls -l /",
     "cat /etc/vpn/backup-peers.conf",
     "ssh backup_svc@BACKUP-01",
+    "BackupTransit-6f0a",
+    "ls -l /",
     "cat /etc/backup/finance-db.conf",
     "psql -h FIN-DB -U db_backup -d finance",
     "AtlasBackup-91d2",
     "SELECT filename, classification FROM documents;",
   ],
   organicDiscovery: [
-    "nmap WEB-01",
+    "nmap 10.10.10.10",
+    "curl -i http://10.10.10.10",
     "curl portal.meridian.test",
-    "curl -X POST portal.meridian.test/legacy-upload --data upload=archive",
-    "cat /var/www/meridian/app.conf",
+    "curl --data upload=archive portal.meridian.test/legacy-upload",
+    "ls -l /",
+    "less /var/www/meridian/app.conf",
     "ssh deploy@DEV-01",
     "MeridianDeploy2024!Secret",
     "ps",
-    "cat /etc/backup-sync.conf",
+    "grep HOOK /etc/backup-sync.conf",
+    "less /etc/backup-sync.conf",
     "backup-sync --run-hook",
-    "cat /etc/meridian/routes.conf",
+    "less /etc/meridian/routes.conf",
     "ssh svc_web@FIN-APP",
-    "cat /etc/fin-app/db.conf",
+    "svc-meridian-2026",
+    "ps",
+    "less /etc/fin-app/db.conf",
     "psql -h FIN-DB -U finance_app",
     "FinanceApp2026!Secure",
     "\\l",
@@ -60,10 +75,16 @@ const routes = {
     "SELECT filename, classification FROM documents;",
   ],
   postgres: [
+    "curl -i http://10.10.10.10",
     "curl portal.meridian.test",
+    "curl portal.meridian.test/api/profile",
     "ssh fieldops@VPN-01",
+    "FieldOps-ReadOnly",
+    "ls -l /",
     "cat /etc/vpn/backup-peers.conf",
     "ssh backup_svc@BACKUP-01",
+    "BackupTransit-6f0a",
+    "ls -l /",
     "cat /etc/backup/finance-db.conf",
     "psql -h FIN-DB -U db_backup -d finance",
     "AtlasBackup-91d2",
@@ -85,9 +106,11 @@ async function runRoute(commands: string[]) {
   };
   try {
     const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+    const transcript: Array<{ command: string; output: string }> = [];
     for (const command of commands) {
       const result = await engine.executeCommand(command, state);
       assert.equal(result.success, true, `${command}: ${result.output}`);
+      transcript.push({ command, output: result.output });
       if (result.newSession) {
         state.currentMachine = result.newSession.machineId;
         state.currentUser = result.newSession.userId;
@@ -117,6 +140,7 @@ async function runRoute(commands: string[]) {
     return {
       state: scenario.state,
       events,
+      transcript,
       summary: summarizeReplay(events, { state: scenario.state, startedAt: scenario.startedAt?.toISOString(), endedAt: scenario.endedAt?.toISOString() }, glasshouse.routes),
     };
   } finally {
@@ -125,6 +149,42 @@ async function runRoute(commands: string[]) {
 }
 
 describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () => {
+  it("starts with the scoped IP but keeps the hostname and services unknown until investigation", async () => {
+    const initialized = await initializeScenario(ScenarioMode.RED);
+    try {
+      assert.deepEqual(glasshouse.startingKnowledge.knownAssets, []);
+      const before = await getScenarioView(initialized.scenarioId, initialized.actorId);
+      assert.ok(before);
+      assert.deepEqual(before.machines.find((machine) => machine.hostname === "WEB-01")?.services, []);
+      assert.ok(before.guidance.knowledge.unknown.includes("Application hostname"));
+      const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+      const state: TerminalState = { currentMachine: "INTERNET", currentUser: "attacker", currentPrivilege: AccessLevel.NONE, activeSessions: [], discoveredHosts: ["WEB-01"], credentials: new Map(), currentPath: "/" };
+      const redirect = await engine.executeCommand("curl -i http://10.10.10.10", state);
+      assert.match(redirect.output, /Location: http:\/\/portal\.meridian\.test\//);
+      const after = await getScenarioView(initialized.scenarioId, initialized.actorId);
+      assert.ok(after?.guidance.knowledge.known.some((fact) => fact.id === "portal.hostname"));
+    } finally {
+      await deleteScenario(initialized.scenarioId);
+    }
+  });
+
+  it("matches the legacy form semantically and rejects a different field or value", async () => {
+    const initialized = await initializeScenario(ScenarioMode.RED);
+    const state: TerminalState = { currentMachine: "INTERNET", currentUser: "attacker", currentPrivilege: AccessLevel.NONE, activeSessions: [], discoveredHosts: ["WEB-01"], credentials: new Map(), currentPath: "/" };
+    try {
+      const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+      await engine.executeCommand("nmap 10.10.10.10", state);
+      const invalid = await engine.executeCommand("curl --data report=archive portal.meridian.test/legacy-upload", state);
+      assert.equal(invalid.success, false);
+      assert.match(invalid.output, /422/);
+      const valid = await engine.executeCommand("curl --data \"upload=archive\" portal.meridian.test/legacy-upload", state);
+      assert.equal(valid.success, true);
+      assert.equal(valid.newSession?.userId, "www-data");
+    } finally {
+      await deleteScenario(initialized.scenarioId);
+    }
+  });
+
   it("retrieves PROJECT_ATLAS through the noisy application chain", async () => {
     const result = await runRoute(routes.application);
     const detections = result.events.filter((event) => event.action === "DETECTION_TRIGGERED").map((event) => event.metadata.ruleId);
@@ -173,6 +233,22 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
     const result = await runRoute(routes.organicDiscovery);
     assert.equal(result.state, "COMPLETED");
     assert.equal(result.events.find((event) => event.action === "OBJECTIVE_RETRIEVED")?.metadata.via, "postgres");
+    const outputFor = (command: string) => result.transcript.find((entry) => entry.command === command)?.output ?? "";
+    assert.match(outputFor("nmap 10.10.10.10"), /80\/tcp\s+open\s+http/);
+    assert.match(outputFor("curl -i http://10.10.10.10"), /Location: http:\/\/portal\.meridian\.test\//);
+    assert.match(outputFor("curl portal.meridian.test"), /method="POST" action="\/legacy-upload"/);
+    assert.match(outputFor("curl portal.meridian.test"), /select name="upload"/);
+    assert.match(outputFor("curl portal.meridian.test"), /option value="archive"/);
+    assert.match(outputFor("ls -l /"), /\/var\/www\/meridian\/app\.conf/);
+    assert.match(outputFor("ps"), /backup-sync --config \/etc\/backup-sync\.conf/);
+    assert.match(outputFor("less /etc/backup-sync.conf"), /MANUAL_TRIGGER=backup-sync --run-hook/);
+    assert.match(outputFor("less /etc/backup-sync.conf"), /ROUTES_CONFIG=\/etc\/meridian\/routes\.conf/);
+    assert.match(outputFor("less /etc/fin-app/db.conf"), /DB_NAME=finance/);
+    assert.match(outputFor("\\l"), /finance/);
+    assert.match(outputFor("\\dt"), /documents/);
+    assert.match(outputFor("\\d documents"), /filename/);
+    const facts = result.events.filter((event) => event.action === "FACT_DISCOVERED").map((event) => event.metadata.factId);
+    for (const required of ["portal.hostname", "portal.uploadEndpoint", "portal.uploadMethod", "portal.uploadField", "portal.uploadArchive", "backupSync.configPath", "backupSync.runHook", "finance.database", "finance.documentsTable", "finance.documentColumns"]) assert.ok(facts.includes(required), `missing semantic discovery ${required}`);
   });
 
   it("invalidates an active PostgreSQL context when Blue resets its identity", async () => {
@@ -202,6 +278,34 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
       const result = await engine.executeCommand("AtlasBackup-91d2", state);
       assert.equal(result.success, false);
       assert.match(result.output, /authentication prompt is active/i);
+    } finally {
+      await deleteScenario(initialized.scenarioId);
+    }
+  });
+
+  it("baseline Blue escalates repeated authentication failures and changes shared credential state", async () => {
+    const initialized = await initializeScenario(ScenarioMode.RED);
+    const state: TerminalState = { currentMachine: "INTERNET", currentUser: "attacker", currentPrivilege: AccessLevel.NONE, activeSessions: [], discoveredHosts: ["WEB-01"], credentials: new Map(), currentPath: "/" };
+    try {
+      const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+      await engine.executeCommand("curl portal.meridian.test/api/profile", state);
+      const prompt = await engine.executeCommand("ssh fieldops@VPN-01", state);
+      assert.ok(prompt.newSession);
+      state.currentSessionId = prompt.newSession.id;
+      state.currentMachine = prompt.newSession.machineId;
+      state.currentUser = prompt.newSession.userId;
+      state.context = prompt.context;
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        const failed = await engine.executeCommand("incorrect-password", state);
+        assert.equal(failed.success, false);
+        await advanceAutonomousBlueDefense(initialized.scenarioId);
+      }
+      const credential = await prisma.credential.findFirstOrThrow({ where: { scenarioId: initialized.scenarioId, username: "fieldops" } });
+      assert.equal(credential.valid, false);
+      const actions = (await prisma.securityEvent.findMany({ where: { scenarioId: initialized.scenarioId } })).map((event) => event.action);
+      assert.ok(actions.includes("BLUE_OBSERVE"));
+      assert.ok(actions.includes("BLUE_INVESTIGATE"));
+      assert.ok(actions.includes("BLUE_RESTRICT_ACCOUNT"));
     } finally {
       await deleteScenario(initialized.scenarioId);
     }

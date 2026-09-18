@@ -7,6 +7,11 @@ export default function MissionPanel({ view, assistance }: { view: ScenarioView;
     <h2>{view.guidance.objective}</h2>
     <p className="muted">{view.operation.briefing.red}</p>
     {assistance === "GUIDED" && view.operation.assistance.guided.map((hint) => <p key={hint}>{hint}</p>)}
+    <div className="knowledge-state">
+      <div><b>KNOWN</b>{view.guidance.knowledge.known.map((fact) => <span key={fact.id}><small>{fact.category}</small>{fact.value}</span>)}</div>
+      <div><b>UNKNOWN</b>{view.guidance.knowledge.unknown.map((unknown) => <span key={unknown}>{unknown}</span>)}</div>
+    </div>
+    {assistance === "GUIDED" && view.guidance.knowledge.lastRevealed && <div className="mission-suggestion"><b>LAST ACTION REVEALED</b><span>{view.guidance.knowledge.lastRevealed}</span>{view.guidance.knowledge.contextual && <small>{view.guidance.knowledge.contextual}</small>}</div>}
     {assistance === "GUIDED" && <div className="hypothesis-list">
       <div className="hypothesis-intro"><b>WORKING HYPOTHESES</b><span>Review available evidence before selecting an approach.</span></div>
       {view.guidance.hypotheses.map((hypothesis) => <article key={hypothesis.id} className={hypothesis.status.toLowerCase()}>

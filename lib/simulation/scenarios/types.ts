@@ -10,11 +10,25 @@ export type ScenarioEventDefinition = {
 };
 
 export type ScenarioDiscovery = {
-  trigger: { kind: "file" | "web"; host: string; value: string };
+  trigger: { kind: "file" | "web" | "scan" | "process" | "postgres"; host: string; value: string };
   output?: string;
   hosts?: string[];
   credentials?: Array<{ username: string; scope: string }>;
+  facts?: string[];
+  factPatterns?: Record<string, string>;
   evidence?: ScenarioEventDefinition[];
+};
+
+export type ScenarioFact = {
+  id: string;
+  category: "NETWORK" | "APPLICATION" | "HOST" | "IDENTITY" | "DATABASE" | "OBJECTIVE";
+  known: string;
+  unknown: string;
+  knownAtStart?: boolean;
+  guidance?: string;
+  discoverableFrom: string;
+  alternative?: string;
+  requiredFor: string;
 };
 
 export type RouteDefinition = {
@@ -49,6 +63,7 @@ export type ScenarioDefinition = {
   backgroundActivity: Array<{ host: string; user: string; source?: string; action: string; context: string }>;
   aliases: Record<string, string>;
   startingKnowledge: { knownHosts: string[]; knownAssets: string[] };
+  facts?: ScenarioFact[];
   machines: Array<{
     hostname: string;
     ip: string;
@@ -80,6 +95,8 @@ export type ScenarioDefinition = {
     method: string;
     path: string;
     dataIncludes?: string;
+    formField?: string;
+    formValue?: string;
     sessionUser: string;
     prerequisiteAction?: string;
     output: string;

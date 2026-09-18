@@ -19,7 +19,10 @@ export function validateScenario(definition: ScenarioDefinition) {
     if (discovery.trigger.kind === "file" && !machine.files.some((f) => f.path === discovery.trigger.value)) fail("discovery file absent");
     discovery.hosts?.forEach(host);
     discovery.credentials?.forEach((c) => user(c.scope, c.username));
+    for (const fact of discovery.facts ?? []) if (!definition.facts?.some((entry) => entry.id === fact)) fail(`unknown discovery fact ${fact}`);
   }
+  const factIds = definition.facts?.map((fact) => fact.id) ?? [];
+  if (new Set(factIds).size !== factIds.length) fail("duplicate fact id");
   for (const interaction of definition.webInteractions ?? []) user(interaction.host, interaction.sessionUser);
   for (const operation of definition.trustedServiceOperations ?? []) { user(operation.host, operation.fromUser); user(operation.host, operation.toUser); }
   if (!definition.objectives.length || definition.routes.length < 2) fail("objectives and competing routes required");

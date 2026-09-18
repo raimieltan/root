@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "@/lib/simulation/engine";
 import type { TerminalState } from "@/lib/simulation/types";
 import { getDefinitionForScenario } from "@/lib/simulation/initializer";
+import { advanceAutonomousBlueDefense } from "@/lib/simulation/blue";
 
 export async function POST(request: Request) {
   try {
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
       : { type: session.context === "SSH" ? "SSH" : "UNIX" };
     const state: TerminalState = { currentMachine: session.machine.hostname, currentUser: session.user.username, currentSessionId: session.id, currentPrivilege: session.user.privilege ?? AccessLevel.NONE, currentPath: typeof body.currentPath === "string" ? body.currentPath : "/", context, activeSessions: [], discoveredHosts: [], credentials: new Map() };
     const result = await new SimulationEngine(scenarioId, actorId).executeCommand(command, state);
+    await advanceAutonomousBlueDefense(scenarioId);
     return Response.json(result, { status: result.success ? 200 : 422 });
   } catch (error) {
     console.error("Command execution error", error);

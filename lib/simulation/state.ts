@@ -42,10 +42,11 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
       const accessed = actorSessions.some((session) => session.machineId === machine.id);
       const compromised = actorSessions.some((session) => session.machineId === machine.id && session.privilege === "ROOT");
       const suspicious = scenario.events.some((event) => event.targetMachineId === machine.id && event.visibleToBlue && ["HIGH", "CRITICAL"].includes(event.severity));
+      const servicesInspected = isBlue || scenario.events.some((event) => event.action === "PORT_PROBE" && event.targetMachineId === machine.id && event.actorId === redActor?.id);
       return {
         id: machine.id, hostname: machine.hostname, ip: machine.ip, zone: machine.zone, os: machine.os,
         state: isolated.has(machine.id) ? "ISOLATED" : isBlue ? (suspicious ? "SUSPICIOUS" : "HEALTHY") : compromised ? "COMPROMISED" : accessed ? "ACCESSED" : "DISCOVERED",
-        services: machine.services.map((service) => ({ name: service.name, port: service.port, status: service.status })),
+        services: servicesInspected ? machine.services.map((service) => ({ name: service.name, port: service.port, status: service.status })) : [],
         processes: (isBlue || current?.machineId === machine.id) ? machine.processes : [],
         files: current?.machineId === machine.id && !isBlue ? machine.files.map((file) => ({ path: file.path, owner: file.owner, permissions: file.permissions, isSecret: file.isSecret })) : [],
         persistence: isBlue && !scenario.events.some((e) => e.action === "INSPECT_HOST" && e.targetMachineId === machine.id) ? [] : machine.persistence.filter((artifact) => artifact.active),
@@ -109,6 +110,14 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     : undefined;
   const lastResponseMetadata = parseMetadata(lastResponseEvent?.metadata);
   const objectiveRetrieved = scenario.events.some((event) => event.action === "OBJECTIVE_RETRIEVED");
+  const factEvents = scenario.events
+    .filter((event) => event.action === "FACT_DISCOVERED")
+    .map((event) => ({ event, metadata: parseMetadata(event.metadata) }));
+  const discoveredFactIds = new Set(factEvents.map(({ metadata }) => metadata.factId).filter((id): id is string => typeof id === "string"));
+  const knownFacts = (definition.facts ?? []).filter((fact) => fact.knownAtStart || discoveredFactIds.has(fact.id));
+  const unknownFacts = [...new Set((definition.facts ?? []).filter((fact) => !fact.knownAtStart && !discoveredFactIds.has(fact.id)).map((fact) => fact.unknown))];
+  const latestFactEvent = factEvents.at(-1);
+  const latestFact = definition.facts?.find((fact) => fact.id === latestFactEvent?.metadata.factId);
   const credentials = scenario.credentials.map((credential) => ({
     id: credential.id,
     username: credential.username,
@@ -168,6 +177,12 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     },
     guidance: {
       objective: definition.objectives[0]?.label ?? "Complete the objective",
+      knowledge: {
+        known: knownFacts.map((fact) => ({ id: fact.id, category: fact.category, value: fact.known })),
+        unknown: unknownFacts.slice(0, 6),
+        lastRevealed: latestFact ? latestFact.known : undefined,
+        contextual: mission.assistance === "OPERATOR" ? undefined : latestFact?.guidance,
+      },
       hypotheses: isBlue || mission.assistance === "OPERATOR" ? [] : definition.routes.map((route) => {
         const reached = route.hosts.filter((host) => host !== "INTERNET" && actorSessions.some((session) => session.machine.hostname === host));
         const observed = route.hosts.filter((host) => discovered.has(host));

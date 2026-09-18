@@ -5,6 +5,43 @@ import { getDefinitionForScenario } from "./initializer";
 import { parseMetadata } from "./rules";
 import { businessAvailability } from "./availability";
 
+export async function advanceAutonomousBlueDefense(scenarioId: string) {
+  const scenario = await prisma.scenario.findFirst({ where: { id: scenarioId, mode: "RED", state: "ACTIVE" }, include: { actors: true } });
+  const blue = scenario?.actors.find((actor) => actor.role === "blue_ai");
+  const red = scenario?.actors.find((actor) => actor.role === "red_operator");
+  if (!scenario || !blue || !red) return;
+  const events = await prisma.securityEvent.findMany({ where: { scenarioId }, orderBy: { timestamp: "asc" } });
+  const evidence = events.filter((event) => event.actorId === red.id && event.visibleToBlue && event.action !== "DETECTION_TRIGGERED");
+  const detections = events.filter((event) => event.action === "DETECTION_TRIGGERED" && event.visibleToBlue);
+  const existing = new Set(events.filter((event) => event.actorId === blue.id).map((event) => event.action));
+  const categories = new Set(evidence.map((event) => event.category));
+  const emitStage = async (action: string, confidence: number, rationale: string) => {
+    if (existing.has(action)) return;
+    await prisma.securityEvent.create({ data: { scenarioId, actorId: blue.id, action, category: "SYSTEM", severity: confidence >= 70 ? "HIGH" : confidence >= 40 ? "MEDIUM" : "LOW", visibleToRed: false, visibleToBlue: true, metadata: JSON.stringify({ confidence, rationale, evidenceIds: evidence.slice(-8).map((event) => event.id) }) } });
+    existing.add(action);
+  };
+  if (evidence.length) await emitStage("BLUE_OBSERVE", 15, "New monitored activity entered the baseline telemetry stream.");
+  if (evidence.length >= 3) await emitStage("BLUE_INVESTIGATE", 30, "Several related events warrant host and identity review.");
+  if (categories.size >= 2 && evidence.some((event) => event.severity === "HIGH" || event.severity === "CRITICAL")) await emitStage("BLUE_CORRELATE", 55, "Activity crosses telemetry categories and includes a high-confidence signal.");
+  if (detections.length >= 2) await emitStage("BLUE_ALERT", 70, "Multiple independent detection rules now support escalation.");
+
+  const failed = evidence.filter((event) => event.action === "AUTH_FAILED" || event.action === "POSTGRES_AUTH_FAILED");
+  const repeatedIdentity = failed.map((event) => event.userId).find((username) => username && failed.filter((event) => event.userId === username).length >= 3);
+  if (repeatedIdentity && !existing.has("BLUE_RESTRICT_ACCOUNT")) {
+    const invalidated = await prisma.credential.updateMany({ where: { scenarioId, username: repeatedIdentity, valid: true }, data: { valid: false } });
+    const closed = await prisma.session.updateMany({ where: { scenarioId, active: true, user: { username: repeatedIdentity } }, data: { active: false } });
+    await prisma.securityEvent.create({ data: { scenarioId, actorId: blue.id, action: "BLUE_RESTRICT_ACCOUNT", category: "SYSTEM", severity: "HIGH", userId: repeatedIdentity, visibleToRed: true, visibleToBlue: true, metadata: JSON.stringify({ confidence: 85, affected: invalidated.count + closed.count, reason: "Repeated authentication failures" }) } });
+  }
+
+  const beacon = evidence.find((event) => event.action === "AGENT_BEACON" && event.sourceMachineId);
+  if (beacon?.sourceMachineId && !existing.has("BLUE_ISOLATE_HOST")) {
+    const services = await prisma.service.updateMany({ where: { machineId: beacon.sourceMachineId }, data: { status: "STOPPED" } });
+    await prisma.session.updateMany({ where: { scenarioId, machineId: beacon.sourceMachineId, active: true }, data: { active: false } });
+    await prisma.securityEvent.create({ data: { scenarioId, actorId: blue.id, action: "HOST_ISOLATED", category: "SYSTEM", severity: "HIGH", targetMachineId: beacon.sourceMachineId, visibleToRed: true, visibleToBlue: true, metadata: JSON.stringify({ confidence: 95, affected: services.count, reason: "Correlated persistent beacon" }) } });
+    await prisma.securityEvent.create({ data: { scenarioId, actorId: blue.id, action: "BLUE_ISOLATE_HOST", category: "SYSTEM", severity: "HIGH", targetMachineId: beacon.sourceMachineId, visibleToRed: false, visibleToBlue: true } });
+  }
+}
+
 export async function advanceBlueScenario(scenarioId: string, blueActorId: string) {
   const scenario = await prisma.scenario.findFirst({ where: { id: scenarioId, mode: "BLUE" }, include: { actors: true } });
   if (!scenario || !scenario.actors.some((a) => a.id === blueActorId && a.role === "blue_operator")) throw new Error("Scenario not found");

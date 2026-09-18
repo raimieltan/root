@@ -34,6 +34,12 @@ export type ScenarioView = {
   opsec: { network: string; authentication: string; endpoint: string };
   guidance: {
     objective: string;
+    knowledge: {
+      known: Array<{ id: string; category: string; value: string }>;
+      unknown: string[];
+      lastRevealed?: string;
+      contextual?: string;
+    };
     hypotheses: Array<{ id: string; title: string; question: string; status: "OPEN" | "SUPPORTED" | "VALIDATED"; evidence: string[] }>;
   };
 };

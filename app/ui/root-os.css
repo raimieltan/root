@@ -65,7 +65,7 @@ button, input, select, textarea { font: inherit; }
 .os-shortcut-icon { width: 34px; height: 34px; display: grid; place-content: center; color: #b9c7d0; background: linear-gradient(#52616c, #303a42); border: 1px solid #a1aeb6; box-shadow: inset 1px 1px #c6d1d633, 1px 1px #050708; }
 .os-shortcut span:last-child { padding: 1px 3px; }
 
-.root-shell { position: absolute; inset: 0 0 34px; z-index: 3; padding: 10px 10px 8px; background: transparent; display: block; }
+.root-shell { position: absolute; inset: 0 0 34px; height: auto; z-index: 3; padding: 10px 10px 8px; background: transparent; display: block; }
 .root-workspace { height: 100%; min-height: 0; }
 .root-shell .root-topbar, .root-shell .root-sidebar, .root-shell > .root-statusbar { display: none !important; }
 
@@ -186,8 +186,8 @@ input:focus, select:focus, textarea:focus { outline: 1px solid var(--blue); outl
 .engagement-grid { min-height: 0; display: grid; grid-template-columns: minmax(420px, 1.15fr) minmax(340px, .85fr); grid-template-rows: minmax(280px, 62%) minmax(160px, 38%); gap: 5px; padding: 5px; }
 .engagement-grid .terminal-shell { min-width: 0; min-height: 0; height: auto; grid-column: 1; grid-row: 1; border: 1px solid #101214; }
 .engagement-grid .network-panel { min-width: 0; min-height: 0; grid-column: 2; grid-row: 1; }
-.engagement-lower { min-height: 0; grid-column: 1 / -1; grid-row: 2; }
-.engagement-lower > * { height: 100%; }
+.engagement-lower { min-height: 0; overflow: hidden; grid-column: 1 / -1; grid-row: 2; }
+.engagement-lower > * { height: 100%; min-height: 0; overflow-x: hidden; overflow-y: auto; }
 .engagement-lower .data-list { max-height: none; height: calc(100% - 25px); overflow: auto; }
 .terminal-bar { min-height: 26px; background: linear-gradient(#35424c, #28343d) !important; text-transform: none !important; letter-spacing: 0 !important; }
 .terminal-output { background: #060708 !important; color: #cdd2d5 !important; }

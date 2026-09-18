@@ -50,6 +50,7 @@ export class SimulationEngine {
       case "cd": return this.changeDirectory(args, state);
       case "ls": return this.listFiles(args, state);
       case "cat": return this.readFile(args, state, false);
+      case "less": return this.readFile(args, state, false);
       case "grep": return this.grep(args, state);
       case "find": return this.find(args, state);
       case "retrieve": return this.readFile(args, state, true);
@@ -80,6 +81,7 @@ export class SimulationEngine {
       psql: "psql -h HOST -U USER [-d DATABASE] [--password SECRET]\n  Connects to a PostgreSQL service. Omit -d to connect without selecting a database,\n  then use \\l to list databases and \\c <database> to select one.\n  Once connected: \\dt lists tables, \\d <table> describes its columns,\n  SELECT <columns> FROM <table>; reads rows, \\q disconnects.\n  Example: psql -h 10.30.10.21 -U someuser",
       ls: "ls [-l] [path]\n  Lists files visible to your current session. -l shows owner and permissions.\n  Example: ls -l /etc",
       cat: "cat <path>\n  Prints a file's contents if your session has permission to read it.",
+      less: "less <path>\n  Opens a readable file for inspection. ROOT prints the bounded simulated file contents.\n  Example: less /etc/example.conf",
       grep: "grep <text> [path]\n  Searches file contents (or all readable files if no path given) for a case-insensitive match.\n  Example: grep password /etc/app.conf",
       find: "find [path] -name <name>\n  Searches a directory tree for a file by exact filename.\n  Example: find /etc -name app.conf",
       ps: "ps\n  Lists running processes on the current host, including their full command line.\n  Command lines often reveal configuration file paths worth inspecting.",
@@ -94,7 +96,7 @@ export class SimulationEngine {
 
 Recon:       nmap <host> · ping <host> · curl <url> · ip
 Access:      ssh <user@host> · sessions
-Filesystem:  pwd · cd <path> · ls [-l] [path] · cat <path> · grep TEXT [path] · find [path] -name NAME
+Filesystem:  pwd · cd <path> · ls [-l] [path] · cat <path> · less <path> · grep TEXT [path] · find [path] -name NAME
 System:      whoami · id · hostname · env · ps · backup-sync --run-hook
 Web:         curl [-X METHOD] URL [--data BODY]
 Database:    psql -h HOST -U USER [-d DATABASE] --password SECRET
@@ -170,35 +172,52 @@ Type 'help <command>' for details, e.g. help curl`;
     return this.emit({ ...context, ...definition, metadata: { ...context.metadata, ...definition.metadata } });
   }
 
-  private async applyDiscovery(kind: "file" | "web", host: string, value: string, sourceMachineId?: string) {
+  private async applyDiscovery(kind: "file" | "web" | "scan" | "process" | "postgres", host: string, value: string, sourceMachineId?: string, visibleContent?: string) {
     const definition = await this.definition();
-    const discovery = definition.discoveries.find((entry) => entry.trigger.kind === kind && entry.trigger.host === host && (kind === "file" ? entry.trigger.value === value : value.includes(entry.trigger.value)));
-    if (!discovery) return { events: [] as SimulationEvent[], output: undefined as string | undefined };
+    const matches = definition.discoveries
+      .filter((entry) => {
+        if (entry.trigger.kind !== kind || entry.trigger.host !== host) return false;
+        if (kind !== "web") return entry.trigger.value === value;
+        const normalize = (input: string) => input.replace(/^https?:\/\//, "").replace(/\/$/, "").toLowerCase();
+        return normalize(value) === normalize(entry.trigger.value);
+      })
+      .sort((a, b) => b.trigger.value.length - a.trigger.value.length);
+    const discoveries = kind === "web" ? matches.slice(0, 1) : matches;
+    if (!discoveries.length) return { events: [] as SimulationEvent[], output: undefined as string | undefined };
     const events: SimulationEvent[] = [];
     const discoveryHost = await this.target(host);
-    for (const hostname of discovery.hosts ?? []) {
-      const machine = await this.target(hostname);
-      events.push(await this.emit({ action: "HOST_DISCOVERED", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.INFO, sourceMachineId, targetMachineId: machine?.id, visibleToBlue: false }));
-    }
-    for (const credential of discovery.credentials ?? []) {
-      const machine = await this.target(credential.scope);
-      const identity = machine?.users.find((user) => user.username === credential.username);
-      const database = definition.databases?.find((entry) => entry.host === machine?.hostname && entry.identities.some((entry) => entry.username === credential.username));
-      const reset = await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "RESET_PASSWORD", userId: credential.username } });
-      if (machine && identity) {
-        await prisma.credential.upsert({
-          where: { scenarioId_username_knownScope: { scenarioId: this.scenarioId, username: credential.username, knownScope: credential.scope } },
-          create: {
-            scenarioId: this.scenarioId, username: credential.username, origin: `${host}:${value}`, knownScope: credential.scope,
-            secret: identity.password, privilege: identity.privilege, valid: !reset, serviceName: database ? "postgres" : "ssh", databaseName: database?.database,
-          },
-          update: { origin: `${host}:${value}`, secret: identity.password, privilege: identity.privilege, valid: !reset, serviceName: database ? "postgres" : "ssh", databaseName: database?.database },
-        });
+    for (const discovery of discoveries) {
+      for (const hostname of discovery.hosts ?? []) {
+        const machine = await this.target(hostname);
+        events.push(await this.emit({ action: "HOST_DISCOVERED", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.INFO, sourceMachineId, targetMachineId: machine?.id, visibleToBlue: false }));
       }
-      events.push(await this.emit({ action: "CREDENTIAL_DISCOVERED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId, targetMachineId: machine?.id, userId: credential.username, visibleToBlue: false, metadata: { scope: credential.scope, origin: `${host}:${value}` } }));
+      for (const credential of discovery.credentials ?? []) {
+        const machine = await this.target(credential.scope);
+        const identity = machine?.users.find((user) => user.username === credential.username);
+        const database = definition.databases?.find((entry) => entry.host === machine?.hostname && entry.identities.some((entry) => entry.username === credential.username));
+        const reset = await prisma.securityEvent.findFirst({ where: { scenarioId: this.scenarioId, action: "RESET_PASSWORD", userId: credential.username } });
+        if (machine && identity) {
+          await prisma.credential.upsert({
+            where: { scenarioId_username_knownScope: { scenarioId: this.scenarioId, username: credential.username, knownScope: credential.scope } },
+            create: {
+              scenarioId: this.scenarioId, username: credential.username, origin: `${host}:${value}`, knownScope: credential.scope,
+              secret: identity.password, privilege: identity.privilege, valid: !reset, serviceName: database ? "postgres" : "ssh", databaseName: database?.database,
+            },
+            update: { origin: `${host}:${value}`, secret: identity.password, privilege: identity.privilege, valid: !reset, serviceName: database ? "postgres" : "ssh", databaseName: database?.database },
+          });
+        }
+        events.push(await this.emit({ action: "CREDENTIAL_DISCOVERED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId, targetMachineId: machine?.id, userId: credential.username, visibleToBlue: false, metadata: { scope: credential.scope, origin: `${host}:${value}` } }));
+      }
+      for (const factId of discovery.facts ?? []) {
+        const fact = definition.facts?.find((entry) => entry.id === factId);
+        const pattern = discovery.factPatterns?.[factId];
+        if (pattern && !visibleContent?.toLowerCase().includes(pattern.toLowerCase())) continue;
+        if (!fact || await prisma.securityEvent.count({ where: { scenarioId: this.scenarioId, action: "FACT_DISCOVERED", metadata: { contains: `\"factId\":\"${factId}\"` } } })) continue;
+        events.push(await this.emit({ action: "FACT_DISCOVERED", category: SecurityEventCategory.SYSTEM, severity: SecurityEventSeverity.INFO, sourceMachineId, targetMachineId: discoveryHost?.id, visibleToBlue: false, metadata: { factId, fact: fact.known, category: fact.category, source: `${kind}:${host}:${value}` } }));
+      }
+      for (const evidence of discovery.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId, targetMachineId: discoveryHost?.id, metadata: { origin: `${host}:${value}` } }));
     }
-    for (const evidence of discovery.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId, targetMachineId: discoveryHost?.id, metadata: { origin: `${host}:${value}` } }));
-    return { events, output: discovery.output };
+    return { events, output: discoveries.find((entry) => entry.output)?.output };
   }
 
   private changeDirectory(args: string[], state: TerminalState) {
@@ -250,7 +269,7 @@ Type 'help <command>' for details, e.g. help curl`;
     const events: SimulationEvent[] = [];
     events.push(await this.emit({ action: file.isSecret ? "SENSITIVE_FILE_READ" : "FILE_READ", category: SecurityEventCategory.FILESYSTEM, severity: file.isSecret ? SecurityEventSeverity.HIGH : SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: file.isSecret, metadata: { path: file.path } }));
 
-    const discovery = await this.applyDiscovery("file", session.machine.hostname, file.path, session.machine.id);
+    const discovery = await this.applyDiscovery("file", session.machine.hostname, file.path, session.machine.id, file.contents ?? "");
     events.push(...discovery.events);
     const definition = await this.definition();
     const objective = definition.objectives.find((entry) => entry.type === "retrieve_file" && entry.host === session.machine.hostname && entry.path === file.path);
@@ -271,8 +290,15 @@ Type 'help <command>' for details, e.g. help curl`;
     if (!session) return this.result(false, "No active session for this host.");
     const path = args[1];
     const files = session.machine.files.filter((file) => (!path || file.path === path || file.path.endsWith(`/${path}`)) && this.canReadFile(file, session.user));
-    const lines = files.flatMap((file) => (file.contents ?? "").split("\n").flatMap((line, index) => line.toLowerCase().includes(pattern.toLowerCase()) ? [`${file.path}:${index + 1}:${line}`] : []));
-    return this.result(true, lines.join("\n") || "");
+    const matchedFiles = files.filter((file) => (file.contents ?? "").toLowerCase().includes(pattern.toLowerCase()));
+    const lines = matchedFiles.flatMap((file) => (file.contents ?? "").split("\n").flatMap((line, index) => line.toLowerCase().includes(pattern.toLowerCase()) ? [`${file.path}:${index + 1}:${line}`] : []));
+    const events: SimulationEvent[] = [];
+    for (const file of matchedFiles) {
+      events.push(await this.emit({ action: file.isSecret ? "SENSITIVE_FILE_READ" : "FILE_READ", category: SecurityEventCategory.FILESYSTEM, severity: file.isSecret ? SecurityEventSeverity.HIGH : SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: file.isSecret, metadata: { path: file.path, via: "grep" } }));
+      const visibleLines = (file.contents ?? "").split("\n").filter((line) => line.toLowerCase().includes(pattern.toLowerCase())).join("\n");
+      events.push(...(await this.applyDiscovery("file", session.machine.hostname, file.path, session.machine.id, visibleLines)).events);
+    }
+    return this.result(true, lines.join("\n") || "", events);
   }
 
   private async find(args: string[], state: TerminalState) {
@@ -290,7 +316,9 @@ Type 'help <command>' for details, e.g. help curl`;
     const session = await this.currentMachine(state);
     if (!session) return this.result(false, "No active session for this host.");
     const lines = session.machine.processes.map((process) => `${process.pid.toString().padEnd(7)} ${process.runningAs.padEnd(12)} ${process.commandLine ?? process.name}`);
-    return this.result(true, `PID     USER         COMMAND\n1       root         init\n${lines.join("\n")}`);
+    const events: SimulationEvent[] = [];
+    for (const process of session.machine.processes) events.push(...(await this.applyDiscovery("process", session.machine.hostname, process.name, session.machine.id, process.commandLine ?? process.name)).events);
+    return this.result(true, `PID     USER         COMMAND\n1       root         init\n${lines.join("\n")}`, events);
   }
 
   private async ip(state: TerminalState) {
@@ -314,6 +342,7 @@ Type 'help <command>' for details, e.g. help curl`;
     if (!await reachable(this.scenarioId, source.machine.id, target.id)) return this.result(false, "Host unreachable from this session.");
     const events: SimulationEvent[] = [];
     for (const service of target.services) events.push(await this.emit({ action: "PORT_PROBE", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.LOW, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { port: service.port, service: service.name } }));
+    for (const service of target.services) events.push(...(await this.applyDiscovery("scan", target.hostname, service.name, source.machine.id)).events);
     events.push(await this.emit({ action: "HOST_DISCOVERED", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, visibleToBlue: false }));
     events.push(await this.emit({ action: "PORT_SCAN_DETECTED", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.LOW, sourceMachineId: source.machine.id, targetMachineId: target.id, visibleToRed: false }));
     return { success: true, output: `Nmap scan report for ${target.hostname} (${target.ip})\nPORT     STATE  SERVICE\n${target.services.map((service) => `${service.port}/tcp`.padEnd(9) + `open   ${service.name}`).join("\n")}`, events, discoveredHosts: await this.discoveredHosts() };
@@ -328,7 +357,10 @@ Type 'help <command>' for details, e.g. help curl`;
     if (!await reachable(this.scenarioId, source.machine.id, target.id, [80, 443])) return this.result(false, "curl: route blocked");
     const path = new URL(`http://${intent.url.replace(/^https?:\/\//, "")}`).pathname;
     const events = [await this.emit({ action: "WEB_REQUEST", category: SecurityEventCategory.WEB, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { method: intent.method, path, data: intent.data } })];
-    const interaction = (await this.definition()).webInteractions?.find((entry) => entry.host === target.hostname && entry.method === intent.method && entry.path === path && (!entry.dataIncludes || intent.data?.includes(entry.dataIncludes)));
+    const form = new URLSearchParams(intent.data ?? "");
+    const webInteractions = (await this.definition()).webInteractions ?? [];
+    const publishedInterface = webInteractions.find((entry) => entry.host === target.hostname && entry.path === path);
+    const interaction = webInteractions.find((entry) => entry.host === target.hostname && entry.method === intent.method && entry.path === path && (!entry.dataIncludes || intent.data?.includes(entry.dataIncludes)) && (!entry.formField || form.get(entry.formField) === entry.formValue));
     if (interaction) {
       if (interaction.prerequisiteAction && !await prisma.securityEvent.count({ where: { scenarioId: this.scenarioId, action: interaction.prerequisiteAction, targetMachineId: target.id } })) return this.result(false, "Application behavior is not understood yet. Gather service evidence first.", events);
       const user = target.users.find((entry) => entry.username === interaction.sessionUser);
@@ -339,6 +371,8 @@ Type 'help <command>' for details, e.g. help curl`;
       const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "UNIX", serviceName: "http" } });
       return { success: true, output: interaction.output, events, sessionUpdated: true, context: { type: "UNIX" as const }, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "UNIX" as const, serviceName: "http" } };
     }
+    if (publishedInterface && publishedInterface.method !== intent.method) return this.result(false, `HTTP/1.1 405 Method Not Allowed\nAllow: ${publishedInterface.method}`, events);
+    if (publishedInterface) return this.result(false, "HTTP/1.1 422 Unprocessable Content\nThe submitted form fields or values are not accepted by this interface.", events);
     const discovery = await this.applyDiscovery("web", target.hostname, intent.url, source.machine.id);
     events.push(...discovery.events);
     return { success: true, output: discovery.output ?? `${target.hostname} responded.`, events, discoveredHosts: await this.discoveredHosts() };
@@ -393,7 +427,8 @@ Type 'help <command>' for details, e.g. help curl`;
     const hostDatabases = definition.databases?.filter((entry) => entry.host === session.machine.hostname && entry.service === session.serviceName) ?? [];
     if (input === "\\l") {
       if (!hostDatabases.length) return this.result(true, "No databases visible on this server.");
-      return this.result(true, ` Name       | Accessible as\n------------+----------------\n${hostDatabases.map((entry) => ` ${entry.database.padEnd(10)} | ${entry.identities.map((identity) => identity.username).join(", ")}`).join("\n")}`);
+      const discovery = await this.applyDiscovery("postgres", session.machine.hostname, "databases", session.machine.id);
+      return this.result(true, ` Name       | Accessible as\n------------+----------------\n${hostDatabases.map((entry) => ` ${entry.database.padEnd(10)} | ${entry.identities.map((identity) => identity.username).join(", ")}`).join("\n")}`, discovery.events);
     }
     if (input.startsWith("\\c")) {
       const requested = input.slice(2).trim();
@@ -433,12 +468,16 @@ Type 'help <command>' for details, e.g. help curl`;
     const database = hostDatabases.find((entry) => entry.database === session.databaseName);
     const access = database?.identities.find((entry) => entry.username === session.user.username);
     if (!database || !access) return this.result(false, "ERROR: permission denied for database");
-    if (input === "\\dt") return this.result(true, ` Schema | Name\n--------+-----------------\n${access.tables.map((table) => ` public | ${table.name}`).join("\n")}`);
+    if (input === "\\dt") {
+      const discovery = await this.applyDiscovery("postgres", session.machine.hostname, `tables:${database.database}`, session.machine.id);
+      return this.result(true, ` Schema | Name\n--------+-----------------\n${access.tables.map((table) => ` public | ${table.name}`).join("\n")}`, discovery.events);
+    }
     if (input.startsWith("\\d ")) {
       const tableName = input.slice(3).trim();
       const table = access.tables.find((entry) => entry.name.toLowerCase() === tableName.toLowerCase());
       if (!table) return this.result(false, `ERROR: relation "${tableName}" does not exist`);
-      return this.result(true, ` Column        | Type\n---------------+---------\n${table.columns.map((column) => ` ${column.padEnd(13)} | text`).join("\n")}`);
+      const discovery = await this.applyDiscovery("postgres", session.machine.hostname, `schema:${database.database}.${table.name}`, session.machine.id);
+      return this.result(true, ` Column        | Type\n---------------+---------\n${table.columns.map((column) => ` ${column.padEnd(13)} | text`).join("\n")}`, discovery.events);
     }
     const match = input.match(/^SELECT\s+([\w\s,*]+)\s+FROM\s+(\w+)\s*;?$/i);
     if (!match) return this.result(false, "ERROR: ROOT psql supports bounded SELECT queries only.");
