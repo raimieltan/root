@@ -181,10 +181,23 @@ export default function BlueTeamPage() {
       context="blue"
       active="soc"
       tone="blue"
-      title={`${view.operation.organization} // SECURITY OPERATIONS`}
-      operator="analyst@nodeline"
-      privilege="ANALYST"
+      title={`${view.operation.organization} · ${view.operation.presentation.caseId}`}
+      operator="stan.tan"
+      privilege="SOC ANALYST"
     >
+      <div className="soc-application">
+      <nav className="soc-nav" aria-label="Security Operations Center sections">
+        <button type="button" className="active">Dashboard</button>
+        <button type="button">Alert Queue</button>
+        <button type="button">Incidents</button>
+        <button type="button">Hosts</button>
+        <button type="button">Network</button>
+        <button type="button">Authentication</button>
+        <button type="button">Services</button>
+        <button type="button">Playbooks</button>
+        <button type="button">Reports</button>
+      </nav>
+      <div className="soc-main">
       <div className="workspace-toolbar">
         <strong>{view.operation.name}</strong>
 
@@ -203,7 +216,7 @@ export default function BlueTeamPage() {
           disabled={!active || pending}
           onClick={() => setRunning((current) => !current)}
         >
-          {running ? "Pause simulation" : "Run simulation"}
+          {running ? "Pause monitoring" : "Start monitoring"}
         </button>
 
         <button
@@ -211,7 +224,7 @@ export default function BlueTeamPage() {
           disabled={!active || pending}
           onClick={() => void advance()}
         >
-          Advance one step
+          Poll now
         </button>
       </div>
 
@@ -236,10 +249,10 @@ export default function BlueTeamPage() {
         aria-busy={pending}
       >
         <div className="soc-grid campaign-soc">
-          {/* MISSION */}
+          {/* ENGAGEMENT */}
           <section className="panel soc-mission">
             <header className="panel-title">
-              MISSION // RESPONSE WINDOW
+              ASSIGNED INCIDENT // RESPONSE WINDOW
             </header>
 
             <div className="data-list">
@@ -307,7 +320,7 @@ export default function BlueTeamPage() {
           {/* EVENT TIMELINE */}
           <section className="panel soc-events">
             <header className="panel-title">
-              EVENT TIMELINE // SHARED TELEMETRY
+              EVENT SEARCH // AVAILABLE TELEMETRY
             </header>
 
             <div className="campaign-filters">
@@ -456,7 +469,7 @@ export default function BlueTeamPage() {
 
               {selected?.processes.map((process) => (
                 <code key={process.id}>
-                  {process.pid} {process.runningAs} {process.name}
+                  {process.pid} {process.runningAs} {process.commandLine ?? process.name}
                 </code>
               ))}
 
@@ -781,9 +794,9 @@ export default function BlueTeamPage() {
         <div className="operation-result">
           <strong>
             {view.scenario.state === "COMPLETED"
-              ? "OBJECTIVE PROTECTED"
+              ? "INCIDENT CONTAINED"
               : view.objectiveRetrieved
-                ? "OBJECTIVE LOST"
+                ? "PROTECTED ASSET ACCESSED"
                 : "AVAILABILITY REQUIREMENT MISSED"}
           </strong>
 
@@ -791,10 +804,12 @@ export default function BlueTeamPage() {
             className="primary-button"
             href={`/replay/${ids.scenarioId}?actor=${ids.actorId}`}
           >
-            Open reconstruction
+            Open After-Action Review
           </Link>
         </div>
       )}
+      </div>
+      </div>
     </RootChrome>
   );
 }

@@ -1,123 +1,69 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Activity,
-  Bell,
-  BookOpen,
-  BriefcaseBusiness,
-  CircleDot,
-  Files,
-  FolderKanban,
-  GraduationCap,
-  Network,
-  Radar,
-  ScrollText,
-  Settings,
-  ShieldCheck,
-  TerminalSquare,
-  UserRound,
-} from "lucide-react";
-import type { ReactNode } from "react";
+import { Archive, BookOpen, BriefcaseBusiness, Building2, FileText, FolderLock, HardDrive, Monitor, Network, RadioTower, Settings, ShieldCheck, Trash2, UserRound } from "lucide-react";
+import { FormEvent, type ReactNode, useEffect, useState } from "react";
+import { RootWindow } from "./root-os";
 
 type Section = "career" | "operations" | "terminal" | "network" | "soc" | "alerts" | "replay";
 type Tone = "neutral" | "red" | "blue" | "truth";
 
-const navByContext = {
-  career: [
-    ["career", "Career", UserRound],
-    ["operations", "Operations", BriefcaseBusiness],
-    ["intel", "Intel", BookOpen],
-    ["training", "Training", GraduationCap],
-    ["files", "Files", Files],
-    ["settings", "Settings", Settings],
-  ],
-  red: [
-    ["terminal", "Terminal", TerminalSquare],
-    ["network", "Network", Network],
-    ["files", "Files", Files],
-    ["intel", "Intel", BookOpen],
-    ["sessions", "Sessions", Activity],
-    ["logs", "Logs", ScrollText],
-    ["operations", "Mission", CircleDot],
-  ],
-  blue: [
-    ["terminal", "Terminal", TerminalSquare],
-    ["soc", "SOC", Radar],
-    ["alerts", "Alerts", Bell],
-    ["cases", "Cases", FolderKanban],
-    ["network", "Assets", Network],
-    ["intel", "Intel", BookOpen],
-    ["settings", "Settings", Settings],
-  ],
-  replay: [
-    ["terminal", "Terminal", TerminalSquare],
-    ["network", "Network", Network],
-    ["files", "Files", Files],
-    ["intel", "Intel", BookOpen],
-    ["logs", "Logs", ScrollText],
-    ["replay", "Operations", CircleDot],
-  ],
+const appInfo = {
+  operations: { title: "Operations Desk - ROOT/OS", menu: ["File", "View", "Engagement", "Tools", "Help"] },
+  career: { title: "Employee Portal - Nodeline Security", menu: ["File", "View", "HR", "Learning", "Help"] },
+  red: { title: "Engagement Workspace - ROOT/OS", menu: ["File", "Edit", "View", "Tools", "Window", "Help"] },
+  blue: { title: "Security Operations Center - ROOT/OS", menu: ["File", "View", "Alerts", "Investigation", "Response", "Help"] },
+  replay: { title: "After-Action Review - ROOT/OS", menu: ["File", "View", "Timeline", "Evidence", "Export", "Help"] },
 } as const;
 
-export default function RootChrome({
-  context,
-  active,
-  tone = "neutral",
-  title,
-  operator = "deploy@DEV-01",
-  privilege = "USER",
-  network = "INTERNAL (10.20.0.0/16)",
-  children,
-}: {
-  context: keyof typeof navByContext;
-  active: Section;
-  tone?: Tone;
-  title: string;
-  operator?: string;
-  privilege?: string;
-  network?: string;
-  children: ReactNode;
+const shortcuts = [
+  ["/", "Computer", Monitor], ["/", "Operations Desk", BriefcaseBusiness],
+  ["/red", "Engagement Tools", FolderLock], ["/blue", "SOC Console", RadioTower],
+  ["/career", "Employee Portal", UserRound], ["/", "Case Archive", Archive],
+  ["/", "Documentation", BookOpen], ["/", "Trash", Trash2],
+] as const;
+
+function Clock() {
+  const [now, setNow] = useState<Date>();
+  useEffect(() => { const update = () => setNow(new Date()); update(); const timer = window.setInterval(update, 30_000); return () => window.clearInterval(timer); }, []);
+  return <time suppressHydrationWarning>{now ? now.toLocaleDateString(undefined, { month: "short", day: "2-digit" }) : "—"} &nbsp; {now ? now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "--:--"}</time>;
+}
+
+function LoginScreen({ onLogin }: { onLogin: () => void }) {
+  const [username, setUsername] = useState("stan.tan");
+  const [password, setPassword] = useState("");
+  const submit = (event: FormEvent) => { event.preventDefault(); if (!username.trim() || !password) return; sessionStorage.setItem("root:workstation-authenticated", "true"); onLogin(); };
+  return <div className="os-login"><section className="os-login-dialog" aria-labelledby="login-title">
+    <header className="os-login-head"><div className="os-login-mark">N</div><strong>NODELINE SECURITY</strong><h1 id="login-title">ROOT/OS</h1><p>Secure Operations Workstation</p></header>
+    <form onSubmit={submit}><label>Username<input autoFocus value={username} autoComplete="username" onChange={(event) => setUsername(event.target.value)} /></label><label>Password<input type="password" value={password} autoComplete="current-password" onChange={(event) => setPassword(event.target.value)} /></label><button type="submit">Log In</button></form>
+    <footer className="os-login-foot"><span>Version 1.4.7</span><span>Authorized Use Only</span></footer>
+  </section></div>;
+}
+
+export default function RootChrome({ context, tone = "neutral", title, operator = "stan.tan", privilege = "OPERATOR", network = "NODELINE", children }: {
+  context: keyof typeof appInfo; active: Section; tone?: Tone; title: string; operator?: string; privilege?: string; network?: string; children: ReactNode;
 }) {
-  const navigation = navByContext[context];
+  const [startOpen, setStartOpen] = useState(false);
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  useEffect(() => setAuthenticated(sessionStorage.getItem("root:workstation-authenticated") === "true"), []);
+  const info = appInfo[context];
+  const appTitle = context === "red" && title ? `${info.title.replace(" - ROOT/OS", "")} - ${title}` : info.title;
 
-  return (
-    <main className={`root-shell tone-${tone}`}>
-      <header className="root-topbar">
-        <Link href="/" className="root-brand" aria-label="ROOT OS home">
-          <span className="root-mark" aria-hidden="true"><i /><i /></span>
-          <strong>ROOT/OS</strong>
-          <small>v1.4.7</small>
-        </Link>
-        <div className="root-context">NODELINE <b>{"//"}</b> {title}</div>
-        <div className="root-top-status">
-          <span>UTC&nbsp;&nbsp;2026-09-18&nbsp;&nbsp;03:14:22</span>
-          <strong><ShieldCheck size={13} /> SECURE</strong>
-        </div>
-      </header>
+  return <div className={`os-desktop tone-${tone}`} onClick={() => startOpen && setStartOpen(false)}>
+    <div className="os-wallpaper-brand" aria-hidden="true"><b>N</b><strong>NODELINE SECURITY</strong><small>PEOPLE. INFORMATION. RESILIENCE.</small></div>
+    <dl className="os-machine-meta"><dt>Host</dt><dd>ROOT-WS-27</dd><dt>User</dt><dd>stan.tan</dd><dt>Domain</dt><dd>NODELINE</dd><dt>IP</dt><dd>10.20.14.27</dd></dl>
+    <div className="os-shortcuts" aria-label="Desktop shortcuts">{shortcuts.map(([href, label, Icon]) => <Link className="os-shortcut" href={href} key={label}><span className="os-shortcut-icon"><Icon size={22} strokeWidth={1.5} /></span><span>{label}</span></Link>)}</div>
+    <main className={`root-shell tone-${tone}`}><section className="root-workspace"><RootWindow title={appTitle} menu={[...info.menu]} status={<><span>{title}</span><span>Session: {operator}</span><span>Privilege: {privilege}</span><span>Network: {network}</span></>}>{children}</RootWindow></section></main>
 
-      <aside className="root-sidebar" aria-label="Workstation navigation">
-        <nav>
-          {navigation.map(([id, label, Icon]) => (
-            <Link key={id} href={id === "operations" ? "/" : id === "career" ? "/career" : id === "training" ? "/career#training" : "#"} className={active === id ? "active" : ""} aria-current={active === id ? "page" : undefined}>
-              <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
-              <span>{label}</span>
-            </Link>
-          ))}
-        </nav>
-        <p>DISCIPLINE<br />CREATES<br />ACCESS.</p>
-      </aside>
+    {startOpen && <section className="os-start-menu" onClick={(event) => event.stopPropagation()}><header><strong>ROOT/OS</strong><span>stan.tan · NODELINE</span></header><nav>
+      <Link href="/"><BriefcaseBusiness size={16} />Operations Desk</Link><Link href="/red"><FolderLock size={16} />Engagement Workspace</Link><Link href="/blue"><RadioTower size={16} />Security Operations Center</Link><hr />
+      <Link href="/career"><UserRound size={16} />Employee Portal</Link><Link href="/"><Archive size={16} />After-Action Review</Link><hr />
+      <button className="submenu" type="button"><Network size={16} />System Tools</button><button className="submenu" type="button"><ShieldCheck size={16} />Administration</button><button className="submenu" type="button"><HardDrive size={16} />Accessories</button><hr />
+      <button type="button"><Settings size={16} />Settings</button><button type="button"><BookOpen size={16} />Help &amp; Documentation</button><hr />
+      <button type="button" onClick={() => setAuthenticated(false)}><Building2 size={16} />Lock Workstation</button><button type="button" onClick={() => { sessionStorage.removeItem("root:workstation-authenticated"); setAuthenticated(false); }}><FileText size={16} />Log Out...</button>
+    </nav></section>}
 
-      <section className="root-workspace">{children}</section>
-
-      <footer className="root-statusbar">
-        <div><span>SESSION</span><i /> <b>{operator}</b></div>
-        <div><span>PRIVILEGE</span><b>{privilege}</b></div>
-        <div><span>NETWORK</span><b>{network}</b></div>
-        <div className="root-statusbar-fill"><span>OPSEC</span><b>NOMINAL</b></div>
-        <div className="root-signal" aria-label="System signal nominal"><i /></div>
-        <p>{"// NO EVIDENCE. JUST RESULTS."}</p>
-      </footer>
-    </main>
-  );
+    <footer className="os-taskbar"><button className="os-start-button" type="button" aria-expanded={startOpen} onClick={(event) => { event.stopPropagation(); setStartOpen((value) => !value); }}><span aria-hidden="true">N</span> ROOT</button><button className="os-task-button" type="button"><span className="os-title-icon">N</span>{info.title.split(" - ")[0]}</button><div className="os-task-tray"><span className="os-tray-led" /><span>LAN</span><ShieldCheck size={14} /><Clock /></div></footer>
+    {authenticated === false && <LoginScreen onLogin={() => setAuthenticated(true)} />}
+  </div>;
 }

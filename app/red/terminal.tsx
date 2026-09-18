@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 
-export type TerminalState = { currentMachine: string; currentUser: string; currentPrivilege: string; currentPath: string; currentSessionId?: string; context?: { type: "UNIX" | "SSH" } | { type: "POSTGRES"; serviceName: string; databaseName: string } | { type: "AUTHENTICATING"; serviceName: string; username: string; host: string; databaseName?: string }; discoveredHosts: string[] };
+export type TerminalState = { currentMachine: string; currentUser: string; currentPrivilege: string; currentPath: string; currentSessionId?: string; context?: { type: "UNIX" | "SSH" } | { type: "POSTGRES"; serviceName: string; databaseName?: string } | { type: "AUTHENTICATING"; serviceName: string; username: string; host: string; databaseName?: string }; discoveredHosts: string[] };
 
 type Props = { scenarioId: string; actorId: string; initialState: TerminalState; prefill?: string; onStateChange: (state: TerminalState) => void; onRefresh: () => void };
 type Line = { kind: "command" | "output" | "error"; text: string };
@@ -23,7 +23,7 @@ export default function Terminal({ scenarioId, actorId, initialState, prefill, o
     if (!command || busy) return;
     setLine(""); setBusy(true);
     const authContext = state.context?.type === "AUTHENTICATING" ? state.context : undefined;
-    const prompt = authContext ? (authContext.serviceName === "postgres" ? `Password for user ${authContext.username}:` : `${authContext.username}@${authContext.host}'s password:`) : state.context?.type === "POSTGRES" ? `${state.context.databaseName}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`;
+    const prompt = authContext ? (authContext.serviceName === "postgres" ? `Password for user ${authContext.username}:` : `${authContext.username}@${authContext.host}'s password:`) : state.context?.type === "POSTGRES" ? `${state.context.databaseName ?? "(none)"}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`;
     setHistory((items) => [...items, { kind: "command", text: authContext ? `${prompt} ${"•".repeat(command.length)}` : `${prompt} ${command}` }]);
     if (command === "clear") { setHistory([]); setBusy(false); return; }
     try {
@@ -42,14 +42,14 @@ export default function Terminal({ scenarioId, actorId, initialState, prefill, o
     } finally { setBusy(false); }
   }
 
-  return <section className="terminal-shell" aria-label="ROOT OS terminal">
-    <div className="terminal-bar"><span>TERMINAL&nbsp;&nbsp;–&nbsp;&nbsp;{state.currentUser}@{state.currentMachine}</span><span>×</span></div>
+  return <section className="terminal-shell" aria-label="ROOT OS operator console">
+    <div className="terminal-bar"><span>Operator Console 1&nbsp;&nbsp;–&nbsp;&nbsp;{state.currentUser}@{state.currentMachine}</span><span>×</span></div>
     <div className="terminal-output">
       {history.map((item, index) => <pre key={`${index}-${item.text}`} className={`terminal-${item.kind}`}>{item.text}</pre>)}
       <div ref={bottomRef} />
     </div>
     <form className="terminal-input" onSubmit={submit}>
-      <label htmlFor="command">{state.context?.type === "AUTHENTICATING" ? (state.context.serviceName === "postgres" ? `Password for user ${state.context.username}:` : `${state.context.username}@${state.context.host}'s password:`) : state.context?.type === "POSTGRES" ? `${state.context.databaseName}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`}</label>
+      <label htmlFor="command">{state.context?.type === "AUTHENTICATING" ? (state.context.serviceName === "postgres" ? `Password for user ${state.context.username}:` : `${state.context.username}@${state.context.host}'s password:`) : state.context?.type === "POSTGRES" ? `${state.context.databaseName ?? "(none)"}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`}</label>
       <input id="command" type={state.context?.type === "AUTHENTICATING" ? "password" : "text"} autoComplete="off" autoFocus value={line} onChange={(event) => setLine(event.target.value)} disabled={busy} />
     </form>
   </section>;

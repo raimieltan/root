@@ -5,7 +5,7 @@ import { Globe2, Server } from "lucide-react";
 
 export default function NetworkMap({ machines, current, organization = "INFRASTRUCTURE" }: { machines: MachineView[]; current?: string; organization?: string }) {
   return <section className="panel network-panel">
-    <div className="panel-title"><span>NETWORK MAP <b>{organization}</b></span><span>VIEW: INFRASTRUCTURE</span></div>
+    <div className="panel-title"><span>Network Map <b>{organization}</b></span><span>Infrastructure</span></div>
     <div className="network-grid">
       <div className="internet-node"><Globe2 /><span>INTERNET</span></div>
       {machines.filter((machine) => machine.hostname !== "INTERNET").map((machine) => <article key={machine.id} className={`host-card ${machine.state.toLowerCase()} ${current === machine.hostname ? "current" : ""}`}>

@@ -38,6 +38,27 @@ const routes = {
     "AtlasBackup-91d2",
     "SELECT filename, classification FROM documents;",
   ],
+  organicDiscovery: [
+    "nmap WEB-01",
+    "curl portal.meridian.test",
+    "curl -X POST portal.meridian.test/legacy-upload --data upload=archive",
+    "cat /var/www/meridian/app.conf",
+    "ssh deploy@DEV-01",
+    "MeridianDeploy2024!Secret",
+    "ps",
+    "cat /etc/backup-sync.conf",
+    "backup-sync --run-hook",
+    "cat /etc/meridian/routes.conf",
+    "ssh svc_web@FIN-APP",
+    "cat /etc/fin-app/db.conf",
+    "psql -h FIN-DB -U finance_app",
+    "FinanceApp2026!Secure",
+    "\\l",
+    "\\c finance",
+    "\\dt",
+    "\\d documents",
+    "SELECT filename, classification FROM documents;",
+  ],
   postgres: [
     "curl portal.meridian.test",
     "ssh fieldops@VPN-01",
@@ -145,6 +166,12 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
     assert.ok(actions.includes("POSTGRES_AUTH_SUCCESS"));
     assert.ok(actions.includes("DATABASE_SESSION_CREATED"));
     assert.ok(actions.includes("DATABASE_QUERY"));
+    assert.equal(result.events.find((event) => event.action === "OBJECTIVE_RETRIEVED")?.metadata.via, "postgres");
+  });
+
+  it("completes using only facts discoverable in-game: page source, process command line, and \\l/\\c/\\d", async () => {
+    const result = await runRoute(routes.organicDiscovery);
+    assert.equal(result.state, "COMPLETED");
     assert.equal(result.events.find((event) => event.action === "OBJECTIVE_RETRIEVED")?.metadata.via, "postgres");
   });
 

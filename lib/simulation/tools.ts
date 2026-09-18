@@ -4,7 +4,7 @@ export type SimulationIntent =
   | { kind: "SHELL"; command: string; args: string[] }
   | { kind: "CURL_REQUEST"; url?: string; method: string; data?: string }
   | { kind: "SERVICE_OPERATION"; service: string; args: string[] }
-  | { kind: "PSQL_CONNECT"; host: string; username: string; database: string; password?: string }
+  | { kind: "PSQL_CONNECT"; host: string; username: string; database?: string; password?: string }
   | { kind: "PSQL_INPUT"; input: string }
   | { kind: "AUTHENTICATION_INPUT"; password: string };
 
@@ -46,8 +46,8 @@ export function parseTerminalInput(input: string, context: TerminalContext = { t
     else if (value.startsWith("--password=")) password = value.slice("--password=".length);
     else if (value === "--password") password = args[++index];
   }
-  if (!host || !username || !database) return { kind: "SHELL", command: "psql", args };
+  if (!host || !username) return { kind: "SHELL", command: "psql", args };
   return { kind: "PSQL_CONNECT", host, username, database, password };
 }
 
-export const psqlUsage = "Usage: psql -h HOST -U USER -d DATABASE --password SECRET";
+export const psqlUsage = "Usage: psql -h HOST -U USER [-d DATABASE] [--password SECRET]\n  Omit -d to connect and list databases with \\l once authenticated.";

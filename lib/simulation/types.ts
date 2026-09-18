@@ -55,7 +55,7 @@ export type SimSession = {
 
 export type TerminalContext =
   | { type: "UNIX" | "SSH" }
-  | { type: "POSTGRES"; serviceName: string; databaseName: string }
+  | { type: "POSTGRES"; serviceName: string; databaseName?: string }
   | { type: "AUTHENTICATING"; serviceName: string; username: string; host: string; databaseName?: string };
 
 export type SimulationEvent = {

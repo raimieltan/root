@@ -27,8 +27,8 @@ export async function POST(request: Request) {
     if (!session) return Response.json({ success: false, output: "That session is no longer active." }, { status: 409 });
     const context: TerminalState["context"] = session.context === "AUTHENTICATING" && session.serviceName
       ? { type: "AUTHENTICATING", serviceName: session.serviceName, username: session.user.username, host: session.machine.hostname, databaseName: session.databaseName ?? undefined }
-      : session.context === "POSTGRES" && session.serviceName && session.databaseName
-      ? { type: "POSTGRES", serviceName: session.serviceName, databaseName: session.databaseName }
+      : session.context === "POSTGRES" && session.serviceName
+      ? { type: "POSTGRES", serviceName: session.serviceName, databaseName: session.databaseName ?? undefined }
       : { type: session.context === "SSH" ? "SSH" : "UNIX" };
     const state: TerminalState = { currentMachine: session.machine.hostname, currentUser: session.user.username, currentSessionId: session.id, currentPrivilege: session.user.privilege ?? AccessLevel.NONE, currentPath: typeof body.currentPath === "string" ? body.currentPath : "/", context, activeSessions: [], discoveredHosts: [], credentials: new Map() };
     const result = await new SimulationEngine(scenarioId, actorId).executeCommand(command, state);

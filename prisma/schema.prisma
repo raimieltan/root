@@ -187,10 +187,11 @@ model File {
 
 // Running processes
 model Process {
-  id        String @id @default(cuid())
-  name      String
-  pid       Int
-  runningAs String // username
+  id          String  @id @default(cuid())
+  name        String
+  pid         Int
+  runningAs   String // username
+  commandLine String? // full argv, as an operator would see it in `ps aux`
 
   machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
   machineId String

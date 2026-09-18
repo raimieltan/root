@@ -40,7 +40,7 @@ export class SimulationEngine {
     if (intent.kind === "SERVICE_OPERATION") return this.serviceOperation(intent, state);
     const { command: cmd, args } = intent;
     switch (cmd) {
-      case "help": return this.result(true, this.help());
+      case "help": return this.result(true, this.help(args[0]));
       case "clear": return this.result(true, "");
       case "whoami": return this.result(true, state.currentUser);
       case "id": return this.identity(state);
@@ -71,7 +71,25 @@ export class SimulationEngine {
     return { success, output, events };
   }
 
-  private help() {
+  private help(topic?: string) {
+    const topics: Record<string, string> = {
+      nmap: "nmap <host>\n  Scans a reachable host and reports open ports and the service listening on each.\n  Example: nmap 10.10.10.10\n  Use it after discovering a host, before assuming what it runs.",
+      ping: "ping <host>\n  Checks whether a host is reachable over the network.\n  Example: ping 10.10.10.10",
+      curl: "curl [-X METHOD] <url> [--data BODY]\n  curl <url>                     performs a GET request and prints the response.\n  curl -X POST <url> --data \"field=value\"   sends form data, usually as a POST.\n  Inspect a page's response for forms, links, or comments before guessing an endpoint.\n  Example: curl portal.example.test",
+      ssh: "ssh <user@host>\n  Opens a remote shell session if you hold valid credentials for that user on that host.\n  You'll be prompted for a password if one is required.\n  Example: ssh deploy@10.20.10.20",
+      psql: "psql -h HOST -U USER [-d DATABASE] [--password SECRET]\n  Connects to a PostgreSQL service. Omit -d to connect without selecting a database,\n  then use \\l to list databases and \\c <database> to select one.\n  Once connected: \\dt lists tables, \\d <table> describes its columns,\n  SELECT <columns> FROM <table>; reads rows, \\q disconnects.\n  Example: psql -h 10.30.10.21 -U someuser",
+      ls: "ls [-l] [path]\n  Lists files visible to your current session. -l shows owner and permissions.\n  Example: ls -l /etc",
+      cat: "cat <path>\n  Prints a file's contents if your session has permission to read it.",
+      grep: "grep <text> [path]\n  Searches file contents (or all readable files if no path given) for a case-insensitive match.\n  Example: grep password /etc/app.conf",
+      find: "find [path] -name <name>\n  Searches a directory tree for a file by exact filename.\n  Example: find /etc -name app.conf",
+      ps: "ps\n  Lists running processes on the current host, including their full command line.\n  Command lines often reveal configuration file paths worth inspecting.",
+      "backup-sync": "backup-sync --run-hook\n  Manually triggers a service's maintained hook, if your session has the required group\n  membership and the hook script is writable by your group.",
+      "install-agent": "install-agent\n  Installs a persistent access agent. Requires root privilege on the current host.",
+      sessions: "sessions [number]\n  Lists your active sessions across hosts, or switches to one by number.",
+      john: "john <file>\n  Attempts to crack a hash file, if one has been discovered.",
+    };
+    if (topic && topics[topic.toLowerCase()]) return topics[topic.toLowerCase()];
+    if (topic) return `No detailed help for '${topic}'. Type help for the command list.`;
     return `ROOT/OS commands
 
 Recon:       nmap <host> · ping <host> · curl <url> · ip
@@ -79,8 +97,10 @@ Access:      ssh <user@host> · sessions
 Filesystem:  pwd · cd <path> · ls [-l] [path] · cat <path> · grep TEXT [path] · find [path] -name NAME
 System:      whoami · id · hostname · env · ps · backup-sync --run-hook
 Web:         curl [-X METHOD] URL [--data BODY]
-Database:    psql -h HOST -U USER -d DATABASE --password SECRET
-Tools:       john <file> · install-agent · clear`;
+Database:    psql -h HOST -U USER [-d DATABASE] --password SECRET
+Tools:       john <file> · install-agent · clear
+
+Type 'help <command>' for details, e.g. help curl`;
   }
 
   private async currentMachine(state: TerminalState) {
@@ -269,7 +289,7 @@ Tools:       john <file> · install-agent · clear`;
   private async processes(state: TerminalState) {
     const session = await this.currentMachine(state);
     if (!session) return this.result(false, "No active session for this host.");
-    const lines = session.machine.processes.map((process) => `${process.pid.toString().padEnd(7)} ${process.runningAs.padEnd(12)} ${process.name}`);
+    const lines = session.machine.processes.map((process) => `${process.pid.toString().padEnd(7)} ${process.runningAs.padEnd(12)} ${process.commandLine ?? process.name}`);
     return this.result(true, `PID     USER         COMMAND\n1       root         init\n${lines.join("\n")}`);
   }
 
@@ -342,37 +362,55 @@ Tools:       john <file> · install-agent · clear`;
 
   private async connectPostgres(intent: Extract<ReturnType<typeof parseTerminalInput>, { kind: "PSQL_CONNECT" }>, state: TerminalState) {
     const [source, target, definition] = await Promise.all([this.currentMachine(state), this.target(intent.host), this.definition()]);
-    const database = definition.databases?.find((entry) => entry.host === target?.hostname && entry.service === "postgres" && entry.database === intent.database);
     const service = target?.services.find((entry) => entry.name === "postgres" && entry.status === "RUNNING");
     const identity = target?.users.find((entry) => entry.username === intent.username);
+    const database = intent.database ? definition.databases?.find((entry) => entry.host === target?.hostname && entry.service === "postgres" && entry.database === intent.database) : undefined;
+    if (intent.database && !database) return this.result(false, `psql: FATAL: database "${intent.database}" does not exist`);
     const credential = target && identity ? await prisma.credential.findFirst({ where: { scenarioId: this.scenarioId, username: intent.username, knownScope: target.hostname, valid: true, serviceName: "postgres" } }) : null;
-    if (source && target && service && database && identity && !intent.password) {
-      const pending = await prisma.session.create({ data: { actorId: this.actorId, userId: identity.id, machineId: target.id, privilege: identity.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "AUTHENTICATING", serviceName: "postgres", databaseName: database.database } });
-      return { success: true, output: `Password for user ${identity.username}:`, events: [], sessionUpdated: true, context: { type: "AUTHENTICATING" as const, serviceName: "postgres", username: identity.username, host: target.hostname, databaseName: database.database }, newSession: { id: pending.id, userId: identity.username, machineId: target.hostname, privilege: identity.privilege, sourceMachineId: source.machine.id, createdAt: pending.createdAt, active: true, context: "AUTHENTICATING" as const, serviceName: "postgres", databaseName: database.database } };
+    if (source && target && service && identity && !intent.password) {
+      const pending = await prisma.session.create({ data: { actorId: this.actorId, userId: identity.id, machineId: target.id, privilege: identity.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "AUTHENTICATING", serviceName: "postgres", databaseName: database?.database } });
+      return { success: true, output: `Password for user ${identity.username}:`, events: [], sessionUpdated: true, context: { type: "AUTHENTICATING" as const, serviceName: "postgres", username: identity.username, host: target.hostname, databaseName: database?.database }, newSession: { id: pending.id, userId: identity.username, machineId: target.hostname, privilege: identity.privilege, sourceMachineId: source.machine.id, createdAt: pending.createdAt, active: true, context: "AUTHENTICATING" as const, serviceName: "postgres", databaseName: database?.database } };
     }
-    const allowed = Boolean(source && target && service && database && identity && credential && intent.password === credential.secret && await reachable(this.scenarioId, source.machine.id, target.id, [5432]));
+    const allowed = Boolean(source && target && service && identity && credential && intent.password === credential.secret && await reachable(this.scenarioId, source.machine.id, target.id, [5432]));
     const events = source && target ? [await this.emit({ action: allowed ? "POSTGRES_AUTH_SUCCESS" : "POSTGRES_AUTH_FAILED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: intent.username, metadata: { database: intent.database, service: "postgres" } })] : [];
-    if (!allowed || !source || !target || !identity || !service || !database) return this.result(false, "psql: connection or authentication failed", events);
-    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: identity.id, machineId: target.id, privilege: identity.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "POSTGRES", serviceName: service.name, databaseName: database.database } });
-    events.push(await this.emit({ action: "DATABASE_SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: identity.username, metadata: { sessionId: session.id, database: database.database } }));
+    if (!allowed || !source || !target || !identity || !service) return this.result(false, "psql: connection or authentication failed", events);
+    const session = await prisma.session.create({ data: { actorId: this.actorId, userId: identity.id, machineId: target.id, privilege: identity.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "POSTGRES", serviceName: service.name, databaseName: database?.database } });
+    events.push(await this.emit({ action: "DATABASE_SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: identity.username, metadata: { sessionId: session.id, database: database?.database } }));
     return {
       success: true,
-      output: `psql (ROOT simulated PostgreSQL)\nSSL connection established.\n\nType "\\?" for help.`,
+      output: `psql (ROOT simulated PostgreSQL)\nSSL connection established.\n\nType "\\?" for help.${database ? "" : "\nNot connected to a database. Type \\l to list databases, then \\c <database>."}`,
       events,
       sessionUpdated: true,
-      context: { type: "POSTGRES" as const, serviceName: service.name, databaseName: database.database },
-      newSession: { id: session.id, userId: identity.username, machineId: target.hostname, privilege: identity.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "POSTGRES" as const, serviceName: service.name, databaseName: database.database },
+      context: { type: "POSTGRES" as const, serviceName: service.name, databaseName: database?.database },
+      newSession: { id: session.id, userId: identity.username, machineId: target.hostname, privilege: identity.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "POSTGRES" as const, serviceName: service.name, databaseName: database?.database },
     };
   }
 
   private async postgresInput(input: string, state: TerminalState) {
     const session = await this.currentMachine(state);
-    if (!session || session.context !== "POSTGRES" || !session.databaseName || !session.serviceName) return this.result(false, "PostgreSQL session is no longer active.");
-    const database = (await this.definition()).databases?.find((entry) => entry.host === session.machine.hostname && entry.service === session.serviceName && entry.database === session.databaseName);
-    const access = database?.identities.find((entry) => entry.username === session.user.username);
-    if (!database || !access) return this.result(false, "ERROR: permission denied for database");
-    if (input === "\\dt") return this.result(true, ` Schema | Name\n--------+-----------------\n${access.tables.map((table) => ` public | ${table.name}`).join("\n")}`);
-    if (input === "\\?") return this.result(true, "ROOT psql supports: \\dt, SELECT <columns> FROM <table>;, \\q");
+    if (!session || session.context !== "POSTGRES" || !session.serviceName) return this.result(false, "PostgreSQL session is no longer active.");
+    const definition = await this.definition();
+    const hostDatabases = definition.databases?.filter((entry) => entry.host === session.machine.hostname && entry.service === session.serviceName) ?? [];
+    if (input === "\\l") {
+      if (!hostDatabases.length) return this.result(true, "No databases visible on this server.");
+      return this.result(true, ` Name       | Accessible as\n------------+----------------\n${hostDatabases.map((entry) => ` ${entry.database.padEnd(10)} | ${entry.identities.map((identity) => identity.username).join(", ")}`).join("\n")}`);
+    }
+    if (input.startsWith("\\c")) {
+      const requested = input.slice(2).trim();
+      if (!requested) return this.result(false, "Usage: \\c <database>");
+      const target = hostDatabases.find((entry) => entry.database === requested);
+      if (!target) return this.result(false, `psql: FATAL: database "${requested}" does not exist`);
+      const access = target.identities.find((entry) => entry.username === session.user.username);
+      if (!access) return this.result(false, `psql: FATAL: permission denied for database "${requested}"`);
+      await prisma.session.update({ where: { id: session.id }, data: { databaseName: target.database } });
+      return {
+        ...this.result(true, `You are now connected to database "${target.database}" as user "${session.user.username}".`),
+        context: { type: "POSTGRES" as const, serviceName: session.serviceName, databaseName: target.database },
+        sessionUpdated: true,
+        newSession: { id: session.id, userId: session.user.username, machineId: session.machine.hostname, privilege: session.privilege, sourceMachineId: session.sourceMachineId ?? undefined, createdAt: session.createdAt, active: true, context: "POSTGRES" as const, serviceName: session.serviceName, databaseName: target.database },
+      };
+    }
+    if (input === "\\?") return this.result(true, "ROOT psql supports:\n  \\l           list databases\n  \\c DATABASE  connect to a database\n  \\dt          list tables in the current database\n  \\d TABLE     describe a table's columns\n  SELECT <columns> FROM <table>;\n  \\q           quit");
     if (input === "\\q") {
       await prisma.session.update({ where: { id: session.id }, data: { active: false } });
       const parent = await prisma.session.findFirst({
@@ -381,8 +419,8 @@ Tools:       john <file> · install-agent · clear`;
         orderBy: { createdAt: "desc" },
       });
       if (!parent) return { ...this.result(true, "PostgreSQL session closed."), context: { type: "UNIX" as const } };
-      const context = parent.context === "POSTGRES" && parent.serviceName && parent.databaseName
-        ? { type: "POSTGRES" as const, serviceName: parent.serviceName, databaseName: parent.databaseName }
+      const context = parent.context === "POSTGRES" && parent.serviceName
+        ? { type: "POSTGRES" as const, serviceName: parent.serviceName, databaseName: parent.databaseName ?? undefined }
         : { type: parent.context === "SSH" ? "SSH" as const : "UNIX" as const };
       return {
         ...this.result(true, "PostgreSQL session closed."),
@@ -390,6 +428,17 @@ Tools:       john <file> · install-agent · clear`;
         sessionUpdated: true,
         newSession: { id: parent.id, userId: parent.user.username, machineId: parent.machine.hostname, privilege: parent.privilege, sourceMachineId: parent.sourceMachineId ?? undefined, createdAt: parent.createdAt, active: parent.active, context: parent.context, serviceName: parent.serviceName ?? undefined, databaseName: parent.databaseName ?? undefined },
       };
+    }
+    if (!session.databaseName) return this.result(false, "You are not connected to a database. Type \\l to list databases, then \\c <database>.");
+    const database = hostDatabases.find((entry) => entry.database === session.databaseName);
+    const access = database?.identities.find((entry) => entry.username === session.user.username);
+    if (!database || !access) return this.result(false, "ERROR: permission denied for database");
+    if (input === "\\dt") return this.result(true, ` Schema | Name\n--------+-----------------\n${access.tables.map((table) => ` public | ${table.name}`).join("\n")}`);
+    if (input.startsWith("\\d ")) {
+      const tableName = input.slice(3).trim();
+      const table = access.tables.find((entry) => entry.name.toLowerCase() === tableName.toLowerCase());
+      if (!table) return this.result(false, `ERROR: relation "${tableName}" does not exist`);
+      return this.result(true, ` Column        | Type\n---------------+---------\n${table.columns.map((column) => ` ${column.padEnd(13)} | text`).join("\n")}`);
     }
     const match = input.match(/^SELECT\s+([\w\s,*]+)\s+FROM\s+(\w+)\s*;?$/i);
     if (!match) return this.result(false, "ERROR: ROOT psql supports bounded SELECT queries only.");
@@ -426,7 +475,7 @@ Tools:       john <file> · install-agent · clear`;
       events.push(await this.emit({ action: "DATABASE_SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.id, targetMachineId: pending.machineId, userId: pending.user.username, metadata: { sessionId: pending.id, database: pending.databaseName } }));
       const connection = (await this.definition()).connections.find((entry) => entry.source === source.hostname && entry.target === pending.machine.hostname && entry.port === 5432);
       if (connection?.accessEvent) events.push(await this.emitDefinition(connection.accessEvent, { sourceMachineId: source.id, targetMachineId: pending.machineId, userId: pending.user.username, metadata: { connectionPort: 5432 } }));
-      return { success: true, output: `psql (ROOT simulated PostgreSQL)\nSSL connection established.\n\nType "\\?" for help.`, events, sessionUpdated: true, context: { type: "POSTGRES", serviceName: "postgres", databaseName: pending.databaseName ?? "postgres" }, newSession: { id: pending.id, userId: pending.user.username, machineId: pending.machine.hostname, privilege: pending.privilege, sourceMachineId: source.id, createdAt: pending.createdAt, active: true, context: "POSTGRES", serviceName: "postgres", databaseName: pending.databaseName ?? undefined } };
+      return { success: true, output: `psql (ROOT simulated PostgreSQL)\nSSL connection established.\n\nType "\\?" for help.${pending.databaseName ? "" : "\nNot connected to a database. Type \\l to list databases, then \\c <database>."}`, events, sessionUpdated: true, context: { type: "POSTGRES", serviceName: "postgres", databaseName: pending.databaseName ?? undefined }, newSession: { id: pending.id, userId: pending.user.username, machineId: pending.machine.hostname, privilege: pending.privilege, sourceMachineId: source.id, createdAt: pending.createdAt, active: true, context: "POSTGRES", serviceName: "postgres", databaseName: pending.databaseName ?? undefined } };
     }
     await prisma.session.update({ where: { id: pending.id }, data: { context: "SSH" } });
     events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.id, targetMachineId: pending.machineId, userId: pending.user.username, metadata: { privilege: pending.privilege } }));
@@ -470,8 +519,8 @@ Tools:       john <file> · install-agent · clear`;
     if (args[0]) {
       const selected = sessions[Number(args[0]) - 1];
       if (!selected) return this.result(false, "Unknown session number. Use sessions to list active sessions.");
-      const context = selected.context === "POSTGRES" && selected.serviceName && selected.databaseName
-        ? { type: "POSTGRES" as const, serviceName: selected.serviceName, databaseName: selected.databaseName }
+      const context = selected.context === "POSTGRES" && selected.serviceName
+        ? { type: "POSTGRES" as const, serviceName: selected.serviceName, databaseName: selected.databaseName ?? undefined }
         : { type: selected.context === "SSH" ? "SSH" as const : "UNIX" as const };
       return { ...this.result(true, `Using ${selected.user.username}@${selected.machine.hostname}`), context, newSession: { id: selected.id, machineId: selected.machine.hostname, userId: selected.user.username, privilege: selected.privilege, active: selected.active, createdAt: selected.createdAt, sourceMachineId: selected.sourceMachineId ?? undefined, context: selected.context, serviceName: selected.serviceName ?? undefined, databaseName: selected.databaseName ?? undefined }, sessionUpdated: true };
     }

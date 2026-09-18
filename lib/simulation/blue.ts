@@ -44,8 +44,8 @@ export async function advanceBlueScenario(scenarioId: string, blueActorId: strin
     ? previousContext as TerminalState["context"]
     : current?.context === "AUTHENTICATING" && current.serviceName
       ? { type: "AUTHENTICATING" as const, serviceName: current.serviceName, username: current.user.username, host: current.machine.hostname, databaseName: current.databaseName ?? undefined }
-    : current?.context === "POSTGRES" && current.serviceName && current.databaseName
-      ? { type: "POSTGRES" as const, serviceName: current.serviceName, databaseName: current.databaseName }
+    : current?.context === "POSTGRES" && current.serviceName
+      ? { type: "POSTGRES" as const, serviceName: current.serviceName, databaseName: current.databaseName ?? undefined }
       : { type: current?.context === "SSH" ? "SSH" as const : "UNIX" as const };
   const state: TerminalState | undefined = current ? { currentMachine: current.machine.hostname, currentUser: current.user.username, currentSessionId: current.id, currentPrivilege: current.privilege, currentPath: "/", context: terminalContext, activeSessions: [], discoveredHosts: [], credentials: new Map() } : undefined;
   const command = profile.commands[step];

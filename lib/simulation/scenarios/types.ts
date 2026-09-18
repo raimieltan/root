@@ -57,7 +57,7 @@ export type ScenarioDefinition = {
     users: Array<{ username: string; role: string; privilege: AccessLevel; groups: string[]; password?: string }>;
     services: Array<{ name: string; port: number; runningAsUser: string; exposedZones: NetworkZone[] }>;
     files: Array<{ path: string; owner: string; group?: string; permissions: string; isSecret: boolean; contents: string }>;
-    processes?: Array<{ name: string; pid: number; runningAs: string }>;
+    processes?: Array<{ name: string; pid: number; runningAs: string; commandLine?: string }>;
   }>;
   connections: Array<{
     source: string;
