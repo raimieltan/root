@@ -250,7 +250,7 @@ export default function BlueTeamPage() {
       >
         <div className="soc-grid campaign-soc">
           {/* ENGAGEMENT */}
-          <section className="panel soc-mission">
+          <section className="panel soc-mission min-h-22">
             <header className="panel-title">
               ASSIGNED INCIDENT // RESPONSE WINDOW
             </header>
@@ -274,8 +274,9 @@ export default function BlueTeamPage() {
             </div>
           </section>
 
+          <div className="soc-col-left">
           {/* ALERTS */}
-          <section className="panel soc-alerts">
+          <section className="panel soc-alerts min-h-26">
             <header className="panel-title">ALERT QUEUE</header>
 
             <div className="data-list">
@@ -318,7 +319,7 @@ export default function BlueTeamPage() {
           </section>
 
           {/* EVENT TIMELINE */}
-          <section className="panel soc-events">
+          <section className="panel soc-events min-h-60">
             <header className="panel-title">
               EVENT SEARCH // AVAILABLE TELEMETRY
             </header>
@@ -416,9 +417,11 @@ export default function BlueTeamPage() {
               </table>
             </div>
           </section>
+          </div>
 
+          <div className="soc-col-right">
           {/* HOST INSPECTION */}
-          <section className="panel soc-host">
+          <section className="panel soc-host min-h-28">
             <header className="panel-title">
               HOST / PROCESS INSPECTION
             </header>
@@ -495,7 +498,7 @@ export default function BlueTeamPage() {
           </section>
 
           {/* AUTHENTICATION */}
-          <section className="panel soc-auth">
+          <section className="panel soc-auth min-h-24">
             <header className="panel-title">
               AUTHENTICATION / SESSIONS
             </header>
@@ -575,7 +578,7 @@ export default function BlueTeamPage() {
           </section>
 
           {/* NETWORK */}
-          <section className="panel soc-network">
+          <section className="panel soc-network min-h-24">
             <header className="panel-title">
               NETWORK RESPONSE
             </header>
@@ -613,8 +616,26 @@ export default function BlueTeamPage() {
             </div>
           </section>
 
+          {/* AVAILABILITY */}
+          <section className="panel soc-availability min-h-28">
+            <header className="panel-title">
+              SERVICE AVAILABILITY
+            </header>
+
+            <div className="data-list">
+              {view.availability.services.map((service) => (
+                <p key={service.name}>
+                  {service.name}:{" "}
+                  <b>{service.state}</b>{" "}
+                  {service.state !== "HEALTHY" &&
+                    service.impact}
+                </p>
+              ))}
+            </div>
+          </section>
+
           {/* INCIDENT */}
-          <section className="panel soc-incident">
+          <section className="panel soc-incident min-h-50">
             <header className="panel-title">
               INCIDENT WORKSPACE // EVIDENCE CHAIN
             </header>
@@ -769,24 +790,7 @@ export default function BlueTeamPage() {
                 })}
             </div>
           </section>
-
-          {/* AVAILABILITY */}
-          <section className="panel soc-availability">
-            <header className="panel-title">
-              SERVICE AVAILABILITY
-            </header>
-
-            <div className="data-list">
-              {view.availability.services.map((service) => (
-                <p key={service.name}>
-                  {service.name}:{" "}
-                  <b>{service.state}</b>{" "}
-                  {service.state !== "HEALTHY" &&
-                    service.impact}
-                </p>
-              ))}
-            </div>
-          </section>
+          </div>
         </div>
       </fieldset>
 

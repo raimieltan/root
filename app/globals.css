@@ -2498,112 +2498,16 @@ button.operation-row.selected {
    CAMPAIGN BLUE SOC
    ========================================================= */
 
-.soc-fieldset {
-  width: 100%;
-  height: calc(100% - 44px);
-
-  min-width: 0;
-  min-height: 0;
-  min-inline-size: 0;
-
-  margin: 0;
-  padding: 0;
-
-  border: 0;
-
-  overflow: hidden;
-}
-
-.campaign-soc.soc-grid {
-  width: 100%;
-  height: 100%;
-
-  min-width: 0;
-  min-height: 0;
-
-  padding: 8px;
-
-  display: grid;
-
-  grid-template-columns:
-    minmax(240px, 0.85fr)
-    minmax(360px, 1.3fr)
-    minmax(290px, 0.95fr);
-
-  /*
-   * IMPORTANT:
-   * Every named area below is rectangular.
-   */
-  grid-template-rows:
-    160px
-    minmax(190px, 1fr)
-    150px
-    106px;
-
-  grid-template-areas:
-    "mission  alerts   auth"
-    "timeline timeline host"
-    "timeline timeline incident"
-    "network  network  availability";
-
-  gap: 8px;
-
-  overflow: auto;
-
-  align-items: stretch;
-}
-
-/* ---------------------------------------------------------
-   PANEL PLACEMENT
-   --------------------------------------------------------- */
-
-.campaign-soc > section {
-  width: 100%;
-
-  min-width: 0;
-  min-height: 0;
-
-  overflow: hidden;
-}
-
-.campaign-soc .soc-mission {
-  grid-area: mission;
-}
-
-.campaign-soc .soc-alerts {
-  grid-area: alerts;
-}
-
-.campaign-soc .soc-events {
-  grid-area: timeline;
-
-  display: grid;
-
-  grid-template-rows:
-    36px
-    auto
-    minmax(0, 1fr);
-}
-
-.campaign-soc .soc-host {
-  grid-area: host;
-}
-
-.campaign-soc .soc-auth {
-  grid-area: auth;
-}
-
-.campaign-soc .soc-network {
-  grid-area: network;
-}
-
-.campaign-soc .soc-incident {
-  grid-area: incident;
-}
-
-.campaign-soc .soc-availability {
-  grid-area: availability;
-}
+/*
+ * Layout/placement (grid container sizing, .soc-fieldset, per-panel
+ * grid-area placement) lives solely in app/ui/root-os.css, which is
+ * imported after this file. This file previously duplicated that layout
+ * with a competing, more specific 3-column `.campaign-soc.soc-grid`
+ * ruleset (`.campaign-soc .soc-x { grid-area: ... }` selectors, at 2
+ * classes of specificity, beat root-os.css's 1-class equivalents and
+ * silently took over the grid regardless of import order). Only
+ * content/cosmetic rules for Blue Team panel internals remain here.
+ */
 
 /* ---------------------------------------------------------
    PANEL CONTENT
@@ -2898,66 +2802,8 @@ button.operation-row.selected {
   color: var(--amber-light);
 }
 
-/* ---------------------------------------------------------
-   RESPONSIVE SOC
-   --------------------------------------------------------- */
-
-@media (max-width: 1400px), (max-height: 760px) {
-  .soc-fieldset {
-    overflow: hidden;
-  }
-
-  .campaign-soc.soc-grid {
-    display: flex;
-    flex-wrap: wrap;
-
-    align-content: flex-start;
-
-    width: 100%;
-    height: 100%;
-
-    padding: 8px;
-
-    gap: 8px;
-
-    overflow: auto;
-  }
-
-  .campaign-soc > section {
-    flex: 1 1 calc(50% - 4px);
-
-    width: auto;
-
-    min-width: 280px;
-    min-height: 138px;
-  }
-
-  .campaign-soc .soc-events {
-    display: grid;
-
-    flex-basis: 100%;
-
-    height: 250px;
-    min-height: 250px;
-
-    grid-template-rows:
-      36px
-      auto
-      minmax(0, 1fr);
-  }
-
-  .campaign-soc .soc-network {
-    min-height: 120px;
-  }
-
-  .campaign-soc .soc-incident {
-    min-height: 175px;
-  }
-
-  .campaign-soc .soc-availability {
-    min-height: 96px;
-  }
-}
+/* Narrow/short-viewport layout is handled by the single `@media
+ * (max-width: 1180px)` rule in app/ui/root-os.css. */
 
 /* =========================================================
    REPLAY
@@ -3983,69 +3829,8 @@ button.operation-row.selected {
   }
 }
 
-/*
- * Either insufficient WIDTH or insufficient HEIGHT
- * switches the SOC to a scrolling stacked/flex layout.
- *
- * This prevents ultrawide-but-short windows from breaking.
- */
-@media (max-width: 1400px), (max-height: 760px) {
-  .campaign-soc.soc-grid {
-    display: flex;
-    flex-wrap: wrap;
-
-    align-content: flex-start;
-
-    width: 100%;
-    height: 100%;
-
-    min-width: 0;
-    min-height: 0;
-
-    padding: 8px;
-
-    gap: 8px;
-
-    overflow: auto;
-  }
-
-  .campaign-soc > section {
-    display: block !important;
-
-    flex:
-      1
-      1
-      calc(50% - 4px);
-
-    width: auto;
-
-    min-width: 280px;
-    min-height: 138px;
-  }
-
-  .campaign-soc .soc-events {
-    display: grid !important;
-
-    flex-basis: 100%;
-
-    height: 250px;
-
-    min-height: 250px;
-
-    grid-template-rows:
-      36px
-      auto
-      minmax(0, 1fr);
-  }
-
-  .campaign-soc .soc-incident {
-    min-height: 175px;
-  }
-
-  .campaign-soc .soc-availability {
-    min-height: 96px;
-  }
-}
+/* Narrow/short-viewport SOC layout is handled by the single
+ * `@media (max-width: 1180px)` rule in app/ui/root-os.css. */
 
 @media (max-width: 1100px) {
   .replay-layout {

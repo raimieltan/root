@@ -197,28 +197,183 @@ input:focus, select:focus, textarea:focus { outline: 1px solid var(--blue); outl
 .mission-panel h2 { font-size: 14px; }
 .mission-panel > p, .hypothesis-list p { font-family: var(--font-geist-sans), Tahoma, sans-serif; }
 
-.soc-application { height: 100%; min-height: 0; display: grid; grid-template-columns: 190px minmax(0, 1fr); }
-.soc-nav { display: flex; flex-direction: column; padding-top: 7px; background: #22292e; border-right: 1px solid #101214; box-shadow: inset -1px 0 #465058; }
-.soc-nav button { min-height: 31px !important; padding: 6px 12px !important; text-align: left; border: 0 !important; background: transparent !important; box-shadow: none !important; }
-.soc-nav button.active { background: linear-gradient(90deg, #31536d, #263c4d) !important; box-shadow: inset 0 1px #456c89, inset 0 -1px #1a2b37 !important; }
-.soc-main { min-width: 0; min-height: 0; overflow: auto; background: #1b2024; }
-.soc-fieldset { min-width: 980px; margin: 0; padding: 5px; border: 0; }
-.campaign-soc { display: grid !important; grid-template-columns: minmax(420px, 1.35fr) minmax(330px, .8fr) !important; grid-template-areas: "mission mission" "alerts host" "events host" "events auth" "incident network" "incident availability" !important; gap: 5px !important; }
-.campaign-soc > .panel { margin: 0 !important; border-radius: 0 !important; }
-.soc-mission { grid-area: mission !important; }
-.soc-alerts { grid-area: alerts !important; max-height: 240px; }
-.soc-events { grid-area: events !important; min-height: 330px; }
-.soc-host { grid-area: host !important; }
-.soc-auth { grid-area: auth !important; }
-.soc-network { grid-area: network !important; }
-.soc-incident { grid-area: incident !important; }
-.soc-availability { grid-area: availability !important; }
-.campaign-filters { display: flex; gap: 8px; padding: 6px; background: #242b30; border-bottom: 1px solid #101214; }
-.campaign-filters label { display: flex; align-items: center; gap: 5px; }
-.soc-grid .data-list { padding: 7px; }
-.soc-grid .data-list article { border-radius: 0 !important; background: #242a2e !important; border: 1px solid #3a4247 !important; }
-.response-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-.response-feedback, .workspace-error, .workspace-status { margin: 4px 6px; padding: 5px 8px; border: 1px solid #4b555c; background: #252c31; }
+.soc-application {
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+}
+
+.soc-nav {
+  display: flex;
+  flex-direction: column;
+  padding-top: 7px;
+  background: #22292e;
+  border-right: 1px solid #101214;
+  box-shadow: inset -1px 0 #465058;
+}
+
+.soc-nav button {
+  min-height: 31px !important;
+  padding: 6px 12px !important;
+  text-align: left;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.soc-nav button.active {
+  background: linear-gradient(90deg, #31536d, #263c4d) !important;
+  box-shadow: inset 0 1px #456c89, inset 0 -1px #1a2b37 !important;
+}
+
+/*
+ * The SOC content area is the scroll container.
+ * Panels themselves should not be squeezed into the viewport.
+ */
+.soc-main {
+  min-width: 0;
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: auto;
+  background: #1b2024;
+}
+
+.soc-fieldset {
+  min-width: 1020px;
+  margin: 0;
+  padding: 5px;
+  border: 0;
+}
+
+/*
+ * Single authoritative layout: a two-column grid whose columns are two
+ * independent vertical flex stacks (.soc-col-left / .soc-col-right).
+ *
+ * A previous version made Incident Workspace span the Network + Availability
+ * grid rows. CSS grid auto-row sizing must grow shared tracks to fit the
+ * tallest spanning item, so once Incident Workspace's content (a long
+ * containment plan) grew past a few hundred px, Network Response and
+ * Service Availability — sharing those same rows — were stretched into
+ * mostly-empty boxes. Independent flex columns avoid this entirely: each
+ * panel's height depends only on its own content, never a sibling's.
+ */
+.campaign-soc {
+  display: grid;
+  grid-template-columns: minmax(560px, 1.35fr) minmax(380px, .8fr);
+  align-items: start;
+  gap: 5px;
+}
+
+.soc-mission {
+  grid-column: 1 / -1;
+}
+
+.soc-col-left,
+.soc-col-right {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Blue-specific override: the global .panel rule collapses spanning panels
+ * via min-height: 0 + overflow: hidden. Let panel height follow content;
+ * per-panel minimums live as Tailwind `min-h-*` classes in app/blue/page.tsx
+ * so there is a single source of truth for sizing. */
+.campaign-soc > .panel,
+.soc-col-left > .panel,
+.soc-col-right > .panel {
+  min-height: 0;
+  margin: 0;
+  overflow: visible;
+  border-radius: 0;
+}
+
+/*
+ * Let ordinary panel content make the panel taller.
+ * Avoid tiny nested scroll boxes for normal investigation content.
+ */
+.soc-grid .panel > .data-list {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding: 8px;
+}
+
+.soc-grid .data-list article {
+  border-radius: 0 !important;
+  background: #242a2e !important;
+  border: 1px solid #3a4247 !important;
+}
+
+/* Telemetry is the one place where an internal scroll area is useful.
+ * No min-height here: a handful of event rows should stay compact rather
+ * than padding out to a fixed floor of blank space. */
+.soc-events .campaign-table {
+  max-height: 430px;
+  overflow: auto;
+}
+
+/* Keep headers visible while scrolling a long event table. */
+.soc-events .campaign-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Slightly less cramped rows without losing the old SOC aesthetic. */
+.soc-events .campaign-table td {
+  height: 31px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.campaign-filters {
+  display: flex;
+  gap: 8px;
+  padding: 7px;
+  background: #242b30;
+  border-bottom: 1px solid #101214;
+}
+
+.campaign-filters label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.response-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 4px;
+}
+
+.response-feedback,
+.workspace-error,
+.workspace-status {
+  margin: 4px 6px;
+  padding: 5px 8px;
+  border: 1px solid #4b555c;
+  background: #252c31;
+}
+
+/* If the viewport gets narrow, keep the app usable by stacking every panel
+ * into a single column, in reading order. */
+@media (max-width: 1180px) {
+  .soc-fieldset {
+    min-width: 760px;
+  }
+
+  .campaign-soc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .soc-col-left,
+  .soc-col-right {
+    grid-column: 1;
+  }
+}
 
 .employee-main { min-width: 0; min-height: 0; display: grid; grid-template-rows: 165px 30px minmax(0, 1fr); padding: 5px; background: #1c2226; }
 .employee-header { min-width: 0; display: grid; grid-template-columns: 112px minmax(330px, 1fr) minmax(360px, .9fr); align-items: center; background: #20272c; border: 1px solid #101214; box-shadow: inset 0 0 0 1px #3b444a; }
