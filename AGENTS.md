@@ -48,3 +48,12 @@ Rules:
 - If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
 - Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
 - After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
+
+
+## Skills
+
+For any UI, UX, layout, styling, responsive, accessibility, or visual design task, read and follow:
+
+/skills/frontend-design/SKILL.md
+
+Use it before planning, reviewing, or implementing frontend changes. Keep decisions aligned with the skill and the project's existing visual rules. If the user explicitly requests a deviation, follow the request.

@@ -1,11 +1,11 @@
 # Graph Report - root  (2026-09-19)
 
 ## Corpus Check
-- 84 files · ~609,098 words
+- 80 files · ~603,891 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 828 nodes · 1414 edges · 51 communities (41 shown, 7 thin omitted)
+- 724 nodes · 1266 edges · 46 communities (37 shown, 6 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 15 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
@@ -46,35 +46,30 @@
 - 20. Meaning of the Title
 - 13. Canonical Recurring Characters
 - Delivered vertical slices
-- blue/page.tsx
-- AUDIO_DESIGN.md
+- modules.tsx
+- replay-client.tsx
 - 92. Canonical Taxonomy
 - 109. Canonical Page Copy
 - 66. Page Mapping
 - 6. Canonical Application Names
 - Broken Unstyled Career Page Screenshot
-- replay-client.tsx
+- career/page.tsx
 - Operation Glasshouse — Discovery Graph
-- 16. SIEM / Log Viewer
-- 40. Audio Production Priority
-- 6. Desktop UI Audio
-- 8. Authentication Audio
-- 23. Post-Operation Reconstruction
-- 3. Core Audio Principles
-- 7. Terminal Audio
-- ROOT — Audio Design Document
+- root-os.tsx
+- root-chrome.tsx
+- layout.tsx
 
 ## God Nodes (most connected - your core abstractions)
 1. `SimulationEngine` - 41 edges
 2. `TerminalState` - 26 edges
 3. `getDefinitionForScenario()` - 16 edges
 4. `compilerOptions` - 16 edges
-5. `playAudio()` - 15 edges
-6. `ScenarioDefinition` - 15 edges
-7. `BlueTeamPage()` - 13 edges
-8. `prisma` - 12 edges
-9. `RootAudioSystem` - 11 edges
-10. `readRuns()` - 10 edges
+5. `ScenarioDefinition` - 15 edges
+6. `prisma` - 12 edges
+7. `BlueTeamPage()` - 11 edges
+8. `readRuns()` - 10 edges
+9. `businessAvailability()` - 10 edges
+10. `parseMetadata()` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Next.js Wordmark Asset` --conceptually_related_to--> `Next.js Bootstrap Instructions`  [INFERRED]
@@ -94,11 +89,11 @@
 ## Hyperedges (group relationships)
 - **Shared Simulation Model** — docs_root_canonical_plan_shared_simulation, docs_root_canonical_plan_everything_leaves_evidence, docs_root_canonical_plan_post_operation_reconstruction [EXTRACTED 1.00]
 
-## Communities (51 total, 7 thin omitted)
+## Communities (46 total, 6 thin omitted)
 
 ### Community 0 - "red/page.tsx"
-Cohesion: 0.06
-Nodes (40): MissionPanel(), NetworkMap(), apps, Credential, navItems, RedTeamPage(), Line, Props (+32 more)
+Cohesion: 0.15
+Nodes (12): MissionPanel(), NetworkMap(), apps, Credential, navItems, Line, Props, Terminal() (+4 more)
 
 ### Community 1 - "devDependencies"
 Cohesion: 0.06
@@ -114,7 +109,7 @@ Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-e
 
 ### Community 4 - "engine.ts"
 Cohesion: 0.08
-Nodes (49): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+41 more)
+Nodes (44): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+36 more)
 
 ### Community 5 - "SimulationEngine"
 Cohesion: 0.26
@@ -122,7 +117,7 @@ Nodes (6): SimulationEngine, reachable(), parseTerminalInput(), CommandResult, S
 
 ### Community 6 - "index.ts"
 Cohesion: 0.16
-Nodes (25): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+17 more)
+Nodes (24): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+16 more)
 
 ### Community 7 - "Repository Agent Rules"
 Cohesion: 0.20
@@ -208,13 +203,13 @@ Nodes (5): 13. Canonical Recurring Characters, Daniel Kade — Senior Red Operat
 Cohesion: 0.11
 Nodes (17): 1. Structured tool intents and terminal context, 2. Declarative Glasshouse application route, 3. Unix investigation commands, 4. Prompted SSH and PostgreSQL authentication, 5. Scenario content and migrations, 6. First-class credentials and Credentials application, 7. Legacy generic attack shortcuts retired, Deliberately still present (+9 more)
 
-### Community 34 - "blue/page.tsx"
+### Community 34 - "modules.tsx"
 Cohesion: 0.08
-Nodes (39): HostInspector(), Inspector(), ProcessInspector(), relatedAlerts(), RespondFn, alertEndpoints(), AlertQueue(), Authentication() (+31 more)
+Nodes (38): HostInspector(), Inspector(), ProcessInspector(), relatedAlerts(), RespondFn, alertEndpoints(), AlertQueue(), Authentication() (+30 more)
 
-### Community 35 - "AUDIO_DESIGN.md"
-Cohesion: 0.06
-Nodes (34): 10. Network Map, 11. Browser Audio, 12. Mail Application, 13. Files Application, 14. Database Audio, 15. Packet Viewer, 17. Blue Team Audio, 18. Red Team Audio (+26 more)
+### Community 35 - "replay-client.tsx"
+Cohesion: 0.16
+Nodes (17): ReplayPageProps, emptySnapshot, formatElapsed(), ReplayClient(), ReplayPayload, KeyDecision, ReplayEvent, ReplayLens (+9 more)
 
 ### Community 36 - "92. Canonical Taxonomy"
 Cohesion: 0.25
@@ -224,61 +219,45 @@ Nodes (8): 92. Canonical Taxonomy, Artifact, Engagement, Evidence, Exercise, Fin
 Cohesion: 0.33
 Nodes (6): 109. Canonical Page Copy, After-Action Review, Employee Portal, Engagement Workspace, Operations Desk, Security Operations Center
 
-### Community 41 - "replay-client.tsx"
-Cohesion: 0.07
-Nodes (33): CareerPage(), completeExercise(), proficiencyLabel, geistMono, geistSans, metadata, engagementId(), Home() (+25 more)
+### Community 41 - "career/page.tsx"
+Cohesion: 0.26
+Nodes (14): CareerPage(), completeExercise(), proficiencyLabel, RedTeamPage(), useOperation(), campaignProgress(), LocalRun, readRuns() (+6 more)
 
 ### Community 42 - "Operation Glasshouse — Discovery Graph"
 Cohesion: 0.29
 Nodes (6): Application chain, Backup-trust chain, Operation Glasshouse — Discovery Graph, PostgreSQL and objective, Public boundary, Semantic event graph
 
-### Community 43 - "16. SIEM / Log Viewer"
-Cohesion: 0.33
-Nodes (6): 16. SIEM / Log Viewer, Critical, High Severity, Informational, Low Severity, Medium Severity
+### Community 43 - "root-os.tsx"
+Cohesion: 0.17
+Nodes (6): engagementId(), Home(), RootPane(), RootTable(), RootTabs(), RootTree()
 
-### Community 44 - "40. Audio Production Priority"
-Cohesion: 0.33
-Nodes (6): 40. Audio Production Priority, Phase 1 — Core Interaction, Phase 2 — Gameplay Systems, Phase 3 — Environmental Audio, Phase 4 — Music, Phase 5 — Narrative Audio
+### Community 44 - "root-chrome.tsx"
+Cohesion: 0.22
+Nodes (6): appInfo, RootChrome(), Section, shortcuts, Tone, RootWindow()
 
-### Community 45 - "6. Desktop UI Audio"
-Cohesion: 0.33
-Nodes (6): 6. Desktop UI Audio, Application Launch, Maximize, Minimize, Window Close, Window Open
-
-### Community 46 - "8. Authentication Audio"
+### Community 45 - "layout.tsx"
 Cohesion: 0.40
-Nodes (5): 8. Authentication Audio, Authentication Request, Failed Authentication, Privilege Change, Successful Authentication
-
-### Community 47 - "23. Post-Operation Reconstruction"
-Cohesion: 0.50
-Nodes (4): 23. Post-Operation Reconstruction, Blue View, Full Truth, Red View
-
-### Community 48 - "3. Core Audio Principles"
-Cohesion: 0.50
-Nodes (4): 3. Core Audio Principles, Consistency, Functional Before Cinematic, Low Audio Density
-
-### Community 49 - "7. Terminal Audio"
-Cohesion: 0.67
-Nodes (3): 7. Terminal Audio, Command Execution, Typing
+Nodes (3): geistMono, geistSans, metadata
 
 ## Knowledge Gaps
-- **467 isolated node(s):** `RespondFn`, `RespondFn`, `ModuleProps`, `FindingState`, `NAV` (+462 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 511 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **398 isolated node(s):** `RespondFn`, `RespondFn`, `ModuleProps`, `FindingState`, `NAV` (+393 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 441 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `SimulationEngine` connect `SimulationEngine` to `engine.ts`, `index.ts`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **Why does `campaignProgress()` connect `replay-client.tsx` to `engine.ts`?**
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **Why does `TerminalState` connect `SimulationEngine` to `engine.ts`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `campaignProgress()` connect `career/page.tsx` to `root-os.tsx`, `engine.ts`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **What connects `RespondFn`, `RespondFn`, `ModuleProps` to the rest of the system?**
-  _467 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _398 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `red/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.05817028027498678 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14736842105263157 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
-- **Should `TypeScript Configuration` be split into smaller, more focused modules?**
-  _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._

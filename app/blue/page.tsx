@@ -5,6 +5,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import RootChrome from "@/app/ui/root-chrome";
 import { useOperation } from "@/app/use-operation";
+import { alertEventForSeverity } from "@/lib/audio/catalog";
+import { playAudio } from "@/lib/audio/audio-system";
 import Inspector from "./inspector";
 import {
   AlertQueue,
@@ -52,6 +54,8 @@ export default function BlueTeamPage() {
   const [selection, setSelection] = useState<Selection>(undefined);
   const [pinnedEvidence, setPinnedEvidence] = useState<string[]>([]);
   const [now, setNow] = useState(0);
+  const knownAlerts = useRef<Set<string> | undefined>(undefined);
+  const priorScenarioState = useRef<string | undefined>(undefined);
 
   const { status, markSeen, markReviewed } = useReadState(ids?.scenarioId);
 
@@ -103,6 +107,22 @@ export default function BlueTeamPage() {
     setNow(Date.now());
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(timer);
+  }, [view?.scenario.state]);
+
+  useEffect(() => {
+    if (!view) return;
+    const nextIds = new Set(view.alerts.map((alert) => alert.id));
+    if (knownAlerts.current) {
+      const newest = [...view.alerts].reverse().find((alert) => !knownAlerts.current?.has(alert.id));
+      if (newest) void playAudio(alertEventForSeverity(newest.severity));
+    }
+    knownAlerts.current = nextIds;
+  }, [view]);
+
+  useEffect(() => {
+    const nextState = view?.scenario.state;
+    if (priorScenarioState.current === "ACTIVE" && nextState && nextState !== "ACTIVE") void playAudio(nextState === "COMPLETED" ? "mission.completed" : "mission.failed");
+    priorScenarioState.current = nextState;
   }, [view?.scenario.state]);
 
   async function respond(action: string, extras: Record<string, unknown> = {}) {
@@ -178,7 +198,7 @@ export default function BlueTeamPage() {
   const responseRemaining = blueStatus ? Math.max(0, blueStatus.responseWindow.limitSeconds - elapsedSeconds) : 0;
 
   const moduleProps = {
-    view, active, respond, onSelect, onNavigate, reviewed, dismissed,
+    view, active, respond, onSelect, onNavigate, selection, reviewed, dismissed,
     pinnedEvidence, onPinEvidence, status, markSeen, markReviewed, now,
   };
 
@@ -239,7 +259,7 @@ export default function BlueTeamPage() {
             </p>
           )}
 
-          <div className="soc-workspace">
+          <div className={`soc-workspace${module === "dashboard" ? " soc-workspace-dashboard" : ""}`}>
             <fieldset className="soc-fieldset" disabled={pending} aria-busy={pending}>
               <div className="soc-grid campaign-soc">
                 {module === "dashboard" && <Dashboard {...moduleProps} />}

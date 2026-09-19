@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import type { ScenarioView } from "../sim-types";
-import { processRisk, type ReadStatus, type Selection } from "./soc-state";
+import { hostNeedsAttention, processRisk, type ReadStatus, type Selection } from "./soc-state";
 
 type RespondFn = (action: string, extras?: Record<string, unknown>) => void | Promise<void>;
 
@@ -27,11 +27,58 @@ export default function Inspector({
   markReviewed: (token: string) => void;
 }) {
   if (!selection) {
+    const attentionHosts = view.machines.filter((machine) => machine.zone !== "EXTERNAL" && hostNeedsAttention(machine));
+    const activeRoutes = view.investigation.filter((route) => route.status !== "CONTAINED");
+    const activeIdentities = [...new Set(activeRoutes.flatMap((route) => route.evidence.identities))];
+    const recentEvidence = view.events.slice(-5).reverse();
+    const priorityAlerts = view.alerts
+      .filter((alert) => alert.severity === "HIGH" || alert.severity === "CRITICAL")
+      .slice(0, 5);
+
     return (
       <aside className="soc-inspector panel">
         <header className="panel-title">CONTEXTUAL INSPECTOR</header>
         <div className="data-list">
-          <p>Select an alert, host, process, connection, identity, service, or evidence item to inspect it here.</p>
+          <p className="eyebrow">CURRENT INCIDENT</p>
+          <dl className="inspector-fields">
+            <div><dt>Operation</dt><dd>{view.operation.name}</dd></div>
+            <div><dt>State</dt><dd>{view.scenario.state}</dd></div>
+            <div><dt>Open routes</dt><dd>{activeRoutes.length} of {view.investigation.length}</dd></div>
+          </dl>
+
+          <p className="eyebrow">AFFECTED ASSETS</p>
+          {attentionHosts.map((host) => (
+            <p key={host.id}>
+              <button type="button" className="link-button" onClick={() => onSelect({ kind: "host", id: host.id })}>{host.hostname}</button>{" "}
+              <span className={`state-pill state-${host.state.toLowerCase()}`}>{host.state}</span>
+            </p>
+          ))}
+          {!attentionHosts.length && <p>No assets currently require attention.</p>}
+
+          <p className="eyebrow">ACTIVE IDENTITIES</p>
+          {activeIdentities.map((id) => (
+            <p key={id}><button type="button" className="link-button" onClick={() => onSelect({ kind: "identity", id })}>{id}</button></p>
+          ))}
+          {!activeIdentities.length && <p>No identities implicated in open routes.</p>}
+
+          <p className="eyebrow">LATEST EVIDENCE</p>
+          {recentEvidence.map((event) => (
+            <p key={event.id}>
+              <button type="button" className="link-button" onClick={() => onSelect({ kind: "evidence", id: event.id })}>
+                {event.timestamp.slice(11, 19)} {event.action.replaceAll("_", " ")}
+              </button>
+            </p>
+          ))}
+          {!recentEvidence.length && <p>No telemetry recorded yet.</p>}
+
+          <p className="eyebrow">RECOMMENDED TARGETS</p>
+          {priorityAlerts.map((alert) => (
+            <p key={alert.id}>
+              <button type="button" className="link-button" onClick={() => onSelect({ kind: "alert", id: alert.id })}>{alert.title}</button>{" "}
+              <span className={`sev-pill sev-${alert.severity.toLowerCase()}`}>{alert.severity}</span>
+            </p>
+          ))}
+          {!priorityAlerts.length && <p>No high-priority alerts pending review.</p>}
         </div>
       </aside>
     );

@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { playAudio } from "@/lib/audio/audio-system";
 
 export type TerminalState = { currentMachine: string; currentUser: string; currentPrivilege: string; currentPath: string; currentSessionId?: string; context?: { type: "UNIX" | "SSH" } | { type: "POSTGRES"; serviceName: string; databaseName?: string } | { type: "AUTHENTICATING"; serviceName: string; username: string; host: string; databaseName?: string }; discoveredHosts: string[] };
 
@@ -21,6 +22,7 @@ export default function Terminal({ scenarioId, actorId, initialState, prefill, o
     event.preventDefault();
     const command = line.trim();
     if (!command || busy) return;
+    void playAudio("terminal.command.submit");
     setLine(""); setBusy(true);
     const authContext = state.context?.type === "AUTHENTICATING" ? state.context : undefined;
     const prompt = authContext ? (authContext.serviceName === "postgres" ? `Password for user ${authContext.username}:` : `${authContext.username}@${authContext.host}'s password:`) : state.context?.type === "POSTGRES" ? `${state.context.databaseName ?? "(none)"}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`;
@@ -34,10 +36,16 @@ export default function Terminal({ scenarioId, actorId, initialState, prefill, o
       if (data.context) next.context = data.context;
       if (data.currentPath) next.currentPath = data.currentPath;
       if (data.discoveredHosts) next.discoveredHosts = data.discoveredHosts;
+      if (!response.ok) void playAudio(authContext ? "auth.failure" : "terminal.command.error");
+      else if (authContext) void playAudio(data.newSession || data.context?.type === "POSTGRES" ? "auth.success" : "auth.failure");
+      else if (data.context?.type === "AUTHENTICATING") void playAudio("auth.prompt");
+      if (data.newSession?.privilege && data.newSession.privilege !== state.currentPrivilege) void playAudio("auth.privilege.changed");
+      if ((data.discoveredHosts?.length ?? 0) > state.discoveredHosts.length) void playAudio("network.host.discovered");
       setState(next); onStateChange(next);
       setHistory((items) => [...items, { kind: response.ok ? "output" : "error", text: data.output ?? data.error ?? "Command failed" }]);
       onRefresh();
     } catch {
+      void playAudio("terminal.command.error");
       setHistory((items) => [...items, { kind: "error", text: "Simulation server unavailable." }]);
     } finally { setBusy(false); }
   }
@@ -50,7 +58,7 @@ export default function Terminal({ scenarioId, actorId, initialState, prefill, o
     </div>
     <form className="terminal-input" onSubmit={submit}>
       <label htmlFor="command">{state.context?.type === "AUTHENTICATING" ? (state.context.serviceName === "postgres" ? `Password for user ${state.context.username}:` : `${state.context.username}@${state.context.host}'s password:`) : state.context?.type === "POSTGRES" ? `${state.context.databaseName ?? "(none)"}=>` : `${state.currentUser}@${state.currentMachine}:${state.currentPath}$`}</label>
-      <input id="command" type={state.context?.type === "AUTHENTICATING" ? "password" : "text"} autoComplete="off" autoFocus value={line} onChange={(event) => setLine(event.target.value)} disabled={busy} />
+      <input id="command" type={state.context?.type === "AUTHENTICATING" ? "password" : "text"} autoComplete="off" autoFocus value={line} onChange={(event) => { if (event.target.value !== line) void playAudio("terminal.key"); setLine(event.target.value); }} disabled={busy} />
     </form>
   </section>;
 }

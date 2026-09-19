@@ -82,7 +82,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
         hosts: [...observedHosts],
         identities: observedIdentities,
         processes: observedProcesses,
-        connections: routeConnections.map((connection) => ({ id: connection.id, source: connection.source.hostname, target: connection.target.hostname, port: connection.port, allowed: connection.allowed })),
+        connections: routeConnections.map((connection) => ({ id: connection.id, source: connection.source.hostname, target: connection.target.hostname, protocol: connection.protocol, port: connection.port, allowed: connection.allowed })),
         timeline: routeEvents.map((event) => ({ id: event.id, timestamp: event.timestamp, action: event.action, source: event.source, target: event.target, identity: event.userId })),
       },
       uncertainty: unobservedHosts.length
@@ -138,7 +138,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     operation: operationPresentation(definition),
     assistance: mission.assistance === "OPERATOR" ? "OPERATOR" : "GUIDED",
     availability,
-    connections: connections.map((c) => ({ id: c.id, source: c.source.hostname, target: c.target.hostname, port: c.port, allowed: c.allowed })),
+    connections: connections.map((c) => ({ id: c.id, source: c.source.hostname, target: c.target.hostname, protocol: c.protocol, port: c.port, allowed: c.allowed })),
     scenario: { id: scenario.id, mode: scenario.mode, state: scenario.state, startedAt: scenario.startedAt?.toISOString(), endedAt: scenario.endedAt?.toISOString() },
     actor: { id: actor.id, role: actor.role },
     currentSession: !isBlue && current ? { id: current.id, machine: current.machine.hostname, user: current.user.username, privilege: current.privilege } : null,

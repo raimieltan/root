@@ -4,12 +4,12 @@ export type ScenarioView = {
   operation: import("@/lib/simulation/scenarios").OperationPresentation;
   assistance: "GUIDED" | "OPERATOR";
   availability: { percent: number; services: Array<{ name: string; hosts: string[]; impact: string; state: string }> };
-  connections: Array<{ id: string; source: string; target: string; port: number; allowed: boolean }>;
+  connections: Array<{ id: string; source: string; target: string; protocol: string; port: number; allowed: boolean }>;
   investigation: Array<{
     id: string; name: string; hypothesis: string; status: "OPEN" | "SUPPORTED" | "CONTAINED";
     evidence: {
       hosts: string[]; identities: string[]; processes: string[];
-      connections: Array<{ id: string; source: string; target: string; port: number; allowed: boolean }>;
+      connections: Array<{ id: string; source: string; target: string; protocol: string; port: number; allowed: boolean }>;
       timeline: Array<{ id: string; timestamp: string; action: string; source: string | null; target: string | null; identity: string | null }>;
     };
     uncertainty: string;

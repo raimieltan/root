@@ -11,6 +11,7 @@ export type ModuleProps = {
   respond: RespondFn;
   onSelect: (selection: Selection) => void;
   onNavigate: (module: ModuleId, selection?: Selection) => void;
+  selection: Selection;
   reviewed: Set<string>;
   dismissed: Set<string>;
   pinnedEvidence: string[];
@@ -25,95 +26,260 @@ function DISMISS_REASONS() {
   return ["False positive", "Expected behavior", "Duplicate", "Benign administrative activity", "Other"];
 }
 
+type FindingState = "UNKNOWN" | "SUSPECTED" | "SUPPORTED" | "CONFIRMED" | "REFUTED";
+
+function eventAuthMethod(event: ScenarioView["events"][number]) {
+  const method = event.metadata.authMethod ?? event.metadata.method ?? event.metadata.protocol;
+  if (typeof method === "string") return method.toUpperCase();
+  if (event.action.includes("TOKEN")) return "TOKEN";
+  if (event.action.includes("SESSION")) return "SESSION";
+  return "PASSWORD";
+}
+
+function eventSucceeded(event: ScenarioView["events"][number]) {
+  return !event.action.includes("FAIL") && !event.action.includes("DENIED");
+}
+
+function alertEndpoints(summary: string) {
+  const [source = "—", targetWithIdentity = "—"] = summary.split(" → ");
+  return { source, target: targetWithIdentity.split(" as ")[0] ?? targetWithIdentity };
+}
+
+function hostRole(machine: ScenarioView["machines"][number]) {
+  const services = machine.services.map((service) => service.name);
+  return services.length ? services.slice(0, 2).join(", ") : machine.zone;
+}
+
+function findingState(hasEvidence: boolean, confirmed: boolean, suspected = false): FindingState {
+  if (confirmed) return "CONFIRMED";
+  if (hasEvidence) return "SUPPORTED";
+  if (suspected) return "SUSPECTED";
+  return "UNKNOWN";
+}
+
 // ---------------------------------------------------------------- Dashboard
-export function Dashboard({ view, onSelect, onNavigate, reviewed, dismissed, now }: ModuleProps) {
+export function Dashboard({ view, onSelect, onNavigate, selection, reviewed, dismissed, now }: ModuleProps) {
+  const [expandedEventId, setExpandedEventId] = useState<string>();
   const blueStatus = view.blueStatus;
   const elapsedSeconds = view.scenario.startedAt ? Math.max(0, Math.floor((now - new Date(view.scenario.startedAt).getTime()) / 1000)) : blueStatus?.responseWindow.elapsedSeconds ?? 0;
   const priorityAlerts = view.alerts.slice().sort((a, b) => b.timestamp.localeCompare(a.timestamp)).slice(0, 8);
-  const timeline = view.events.slice(-14).reverse();
-  const degraded = view.availability.services.filter((service) => service.state !== "HEALTHY");
+  const timeline = view.events.slice(-60).reverse();
+  const hosts = view.machines.filter((m) => m.zone !== "EXTERNAL");
+  const authEvents = view.events.filter((e) => e.category === "AUTH").slice(-25).reverse();
+  const suspiciousConnectionIds = new Set(
+    view.investigation.filter((route) => route.status !== "CONTAINED").flatMap((route) => route.evidence.connections.map((c) => c.id)),
+  );
+  const investigationEvents = view.events.filter((event) => !["SYSTEM", "SIMULATION"].includes(event.category));
+  const routeEvidence = view.investigation.flatMap((route) => [
+    ...route.evidence.hosts,
+    ...route.evidence.identities,
+    ...route.evidence.processes,
+    ...route.evidence.connections.map((connection) => connection.id),
+  ]);
+  const activePersistence = hosts.flatMap((host) => host.persistence.filter((artifact) => artifact.active));
+  const databaseEvents = investigationEvents.filter((event) => event.category === "DATABASE" || event.action.includes("DATABASE") || event.target?.includes("DB"));
+  const exfiltrationEvents = investigationEvents.filter((event) => event.action.includes("OBJECTIVE") || event.action.includes("EXFIL") || event.action.includes("SENSITIVE_DATA"));
+  const backupHosts = hosts.filter((host) => host.hostname.includes("BACKUP") || host.services.some((service) => service.name.toLowerCase().includes("backup")));
+  const findings: Array<{ id: string; label: string; state: FindingState; detail: string }> = [
+    { id: "application-chain", label: "Suspicious application chain", state: findingState(view.investigation.some((route) => route.evidence.processes.length > 0), view.investigation.some((route) => route.status === "SUPPORTED" && route.evidence.processes.length > 0), view.alerts.length > 0), detail: `${view.investigation.reduce((count, route) => count + route.evidence.processes.length, 0)} processes linked` },
+    { id: "compromised-identity", label: "Compromised identity", state: findingState(view.investigation.some((route) => route.evidence.identities.length > 0), view.investigation.some((route) => route.status === "SUPPORTED" && route.evidence.identities.length > 0)), detail: `${new Set(view.investigation.flatMap((route) => route.evidence.identities)).size} identities implicated` },
+    { id: "persistence", label: "Persistence mechanism", state: findingState(activePersistence.length > 0, activePersistence.length > 0), detail: `${activePersistence.length} active artifacts` },
+    { id: "lateral-movement", label: "Lateral movement", state: findingState(suspiciousConnectionIds.size > 0, view.events.some((event) => event.action === "LATERAL_MOVEMENT"), view.connections.length > 0), detail: `${suspiciousConnectionIds.size} relevant connections` },
+    { id: "database-access", label: "Database access", state: findingState(databaseEvents.length > 0, databaseEvents.some((event) => ["HIGH", "CRITICAL"].includes(event.severity))), detail: `${databaseEvents.length} database events` },
+    { id: "exfiltration", label: "Exfiltration evidence", state: findingState(exfiltrationEvents.length > 0, view.objectiveRetrieved), detail: view.objectiveRetrieved ? "Protected objective accessed" : `${exfiltrationEvents.length} transfer indicators` },
+    { id: "backup-trust", label: "Backup trust", state: backupHosts.length === 0 ? "REFUTED" : findingState(backupHosts.some(hostNeedsAttention), backupHosts.some((host) => host.state === "COMPROMISED"), backupHosts.length > 0), detail: backupHosts.length ? `${backupHosts.length} backup assets mapped` : "No backup dependency mapped" },
+  ];
 
   return (
-    <>
-      <section className="panel soc-mission min-h-22">
-        <header className="panel-title">INCIDENT SUMMARY</header>
-        <div className="data-list">
-          <dl className="inspector-fields">
-            <div><dt>Operation</dt><dd>{view.operation.name}</dd></div>
-            <div><dt>Status</dt><dd>{view.scenario.state}</dd></div>
-            <div><dt>Elapsed</dt><dd>{formatWindow(elapsedSeconds)}</dd></div>
-            <div><dt>Objective</dt><dd>{view.operation.briefing.blue}</dd></div>
-          </dl>
-          {degraded.length > 0 && (
-            <p className="impact-preview">
-              <b>BUSINESS IMPACT //</b>{" "}
-              {degraded.map((service) => (
-                <button key={service.name} type="button" className="link-button" onClick={() => onNavigate("services", { kind: "service", id: service.name })}>
-                  {service.name}: {service.state}
-                </button>
-              )).reduce((acc, el, i) => i === 0 ? [el] : [...acc, " · ", el], [] as React.ReactNode[])}
-            </p>
-          )}
-        </div>
-      </section>
+    <div className="soc-dashboard" style={{ gridColumn: "1 / -1" }}>
+      <div className="soc-dash-col soc-dash-left">
+        <section className="panel soc-mission">
+          <header className="panel-title">INCIDENT SUMMARY</header>
+          <div className="data-list">
+            <dl className="inspector-fields">
+              <div><dt>Operation</dt><dd>{view.operation.name}</dd></div>
+              <div><dt>Status</dt><dd>{view.scenario.state}</dd></div>
+              <div><dt>Elapsed</dt><dd>{formatWindow(elapsedSeconds)}</dd></div>
+              <div><dt>Objective</dt><dd>{view.operation.briefing.blue}</dd></div>
+            </dl>
+          </div>
+        </section>
 
-      <div className="soc-col-left">
-        <section className="panel soc-alerts min-h-26">
+        <section className="panel soc-alerts">
           <header className="panel-title">PRIORITY ALERTS <button type="button" className="link-button" onClick={() => onNavigate("alerts")}>View all alerts →</button></header>
           <div className="campaign-table">
             <table>
-              <thead><tr><th>Time</th><th>Sev</th><th>Alert</th><th>Source → Target</th><th>Status</th></tr></thead>
+              <thead><tr><th>Time</th><th>Sev</th><th>Detection</th><th>Source</th><th>Target</th><th>Status</th></tr></thead>
               <tbody>
-                {priorityAlerts.map((alert) => (
-                  <tr key={alert.id} onClick={() => onSelect({ kind: "alert", id: alert.id })} onDoubleClick={() => onNavigate("alerts", { kind: "alert", id: alert.id })}>
-                    <td>{alert.timestamp.slice(11, 19)}</td>
-                    <td><span className={`sev-pill sev-${alert.severity.toLowerCase()}`}>{alert.severity}</span></td>
-                    <td>{alert.title}</td>
-                    <td>{alert.summary}</td>
-                    <td>{dismissed.has(alert.id) ? "DISMISSED" : reviewed.has(alert.id) ? "REVIEWED" : "NEW"}</td>
-                  </tr>
-                ))}
-                {!priorityAlerts.length && <tr><td colSpan={5}>No detection rules have fired.</td></tr>}
+                {priorityAlerts.map((alert) => {
+                  const state = dismissed.has(alert.id) ? "DISMISSED" : reviewed.has(alert.id) ? "REVIEWED" : "NEW";
+                  const endpoints = alertEndpoints(alert.summary);
+                  return (
+                    <tr key={alert.id} aria-selected={selection?.kind === "alert" && selection.id === alert.id} className={`${state === "NEW" ? "row-suspicious " : ""}${selection?.kind === "alert" && selection.id === alert.id ? "selected" : ""}`} onClick={() => onSelect({ kind: "alert", id: alert.id })} onDoubleClick={() => onNavigate("alerts", { kind: "alert", id: alert.id })}>
+                      <td>{alert.timestamp.slice(11, 19)}</td>
+                      <td><span className={`sev-pill sev-${alert.severity.toLowerCase()}`}>{alert.severity}</span></td>
+                      <td>{alert.title}<small className="table-subline">{alert.ruleId}</small></td>
+                      <td>{endpoints.source}</td>
+                      <td>{endpoints.target}</td>
+                      <td>{state}</td>
+                    </tr>
+                  );
+                })}
+                {!priorityAlerts.length && <tr><td colSpan={6}>No detection rules have fired.</td></tr>}
               </tbody>
             </table>
           </div>
         </section>
 
-        <section className="panel min-h-40">
+        <section className="panel soc-dash-fill">
           <header className="panel-title">INCIDENT TIMELINE <button type="button" className="link-button" onClick={() => onNavigate("reports")}>View full timeline →</button></header>
-          <div className="data-list">
-            {timeline.map((event) => (
-              <p key={event.id}>{event.timestamp.slice(11, 19)} <b>{event.action}</b> {event.source ?? "—"} → {event.target ?? "—"}</p>
-            ))}
-            {!timeline.length && <p>No telemetry recorded yet.</p>}
+          <div className="campaign-table">
+            <table>
+              <thead><tr><th>Time</th><th>Type / Event</th><th>Source</th><th>Target</th><th>Severity</th></tr></thead>
+              <tbody>
+                {timeline.map((event) => {
+                  const expanded = expandedEventId === event.id;
+                  const selected = selection?.kind === "evidence" && selection.id === event.id;
+                  return [
+                    <tr key={event.id} aria-selected={selected} aria-expanded={expanded} className={selected ? "selected" : undefined} onClick={() => { onSelect({ kind: "evidence", id: event.id }); setExpandedEventId(expanded ? undefined : event.id); }}>
+                      <td>{event.timestamp.slice(11, 19)}</td>
+                      <td><span className="row-expander">{expanded ? "−" : "+"}</span> {event.category} / {event.action.replaceAll("_", " ")}</td>
+                      <td>{event.source ?? "—"}</td>
+                      <td>{event.target ?? "—"}</td>
+                      <td><span className={`sev-pill sev-${event.severity.toLowerCase()}`}>{event.severity}</span></td>
+                    </tr>,
+                    expanded && (
+                      <tr key={`${event.id}-detail`} className="timeline-detail">
+                        <td colSpan={5}>Identity: {event.userId ?? "—"} · Event ID: {event.id} · {Object.keys(event.metadata).length ? Object.entries(event.metadata).slice(0, 4).map(([key, value]) => `${key}=${String(value)}`).join(" · ") : "No additional metadata"}</td>
+                      </tr>
+                    ),
+                  ];
+                })}
+                {!timeline.length && <tr><td colSpan={5}>No telemetry recorded yet.</td></tr>}
+              </tbody>
+            </table>
           </div>
         </section>
       </div>
 
-      <div className="soc-col-right">
-        <section className="panel min-h-24">
+      <div className="soc-dash-col soc-dash-center">
+        <section className="panel">
           <header className="panel-title">BUSINESS IMPACT <button type="button" className="link-button" onClick={() => onNavigate("services")}>Open Services →</button></header>
           <div className="data-list">
-            {view.availability.services.map((service) => (
-              <p key={service.name}>
-                <button type="button" className="link-button" onClick={() => onNavigate("services", { kind: "service", id: service.name })}>{service.name}</button>{" "}
-                <b>{service.state}</b>
-              </p>
+            {view.availability.services.map((service) => {
+              const sessions = view.sessions.filter((s) => service.hosts.includes(s.machine)).length;
+              const connections = view.connections.filter((connection) => service.hosts.includes(connection.source) || service.hosts.includes(connection.target)).length;
+              const containmentImpact = view.investigation.flatMap((route) => route.businessImpact).find((impact) => impact.name === service.name)?.impact;
+              return (
+                <div key={service.name} className="soc-impact-row">
+                  <div>
+                    <button type="button" className="link-button" onClick={() => onNavigate("services", { kind: "service", id: service.name })}>{service.name}</button>
+                    <small>DEP: {service.hosts.join(", ") || "No mapped hosts"}</small>
+                    <small title={containmentImpact}>{containmentImpact ? "CONTAINMENT AFFECTS SERVICE" : "NO MODELED CONTAINMENT IMPACT"}</small>
+                  </div>
+                  <div style={{ textAlign: "right" }}>
+                    <span className={`state-pill state-${service.state.toLowerCase()}`}>{service.state}</span>
+                    <small>{sessions} sess · {connections} conn</small>
+                  </div>
+                </div>
+              );
+            })}
+            {!view.availability.services.length && <p>No business services mapped for this operation.</p>}
+          </div>
+        </section>
+
+        <section className="panel">
+          <header className="panel-title">INVESTIGATION PROGRESS</header>
+          <div className="data-list soc-checklist">
+            {findings.map((finding) => (
+              <div key={finding.id} className="soc-checklist-row" title={finding.detail} onClick={() => onNavigate("incidents")}>
+                <span><b>{finding.label}</b><small>{finding.detail}</small></span>
+                <span className={`soc-checklist-status ${finding.state.toLowerCase()}`}>{finding.state}</span>
+              </div>
             ))}
           </div>
         </section>
 
-        <section className="panel min-h-30">
-          <header className="panel-title">INVESTIGATION PROGRESS</header>
-          <div className="data-list">
-            {view.investigation.map((route) => (
-              <p key={route.id}>{route.name} <b>{route.status}</b></p>
-            ))}
-            {!view.investigation.length && <p>No attack routes modeled for this operation.</p>}
+        <section className="panel">
+          <header className="panel-title">ACTIVE HOSTS <button type="button" className="link-button" onClick={() => onNavigate("hosts")}>Open Hosts →</button></header>
+          <div className="campaign-table">
+            <table>
+              <thead><tr><th>Host</th><th>Role</th><th>IP</th><th>Status</th><th>Alerts</th><th>Contain</th></tr></thead>
+              <tbody>
+                {hosts.map((machine) => {
+                  const alertCount = view.alerts.filter((alert) => alert.summary.includes(machine.hostname)).length;
+                  return (
+                    <tr key={machine.id} aria-selected={selection?.kind === "host" && selection.id === machine.id} className={`${hostNeedsAttention(machine) ? "row-suspicious " : ""}${selection?.kind === "host" && selection.id === machine.id ? "selected" : ""}`} onClick={() => onSelect({ kind: "host", id: machine.id })}>
+                      <td>{machine.hostname}</td>
+                      <td title={machine.services.map((service) => service.name).join(", ")}>{hostRole(machine)}</td>
+                      <td>{machine.ip}</td>
+                      <td><span className={`state-pill state-${machine.state.toLowerCase()}`}>{machine.state}</span></td>
+                      <td>{alertCount || "—"}</td>
+                      <td>{machine.state === "ISOLATED" ? "ISOLATED" : "OPEN"}</td>
+                    </tr>
+                  );
+                })}
+                {!hosts.length && <tr><td colSpan={6}>No internal hosts discovered.</td></tr>}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="panel soc-dash-fill">
+          <header className="panel-title">AUTHENTICATION ACTIVITY <button type="button" className="link-button" onClick={() => onNavigate("auth")}>Open Authentication →</button></header>
+          <div className="campaign-table">
+            <table>
+              <thead><tr><th>Time</th><th>Identity</th><th>Source</th><th>Destination</th><th>Method</th><th>Result</th><th>Flag</th></tr></thead>
+              <tbody>
+                {authEvents.map((event) => {
+                  const success = eventSucceeded(event);
+                  const suspicious = !success || ["HIGH", "CRITICAL"].includes(event.severity) || routeEvidence.includes(event.userId ?? "");
+                  return (
+                    <tr
+                      key={event.id}
+                      aria-selected={selection?.kind === "identity" && selection.id === event.userId}
+                      className={`${suspicious ? "row-suspicious " : ""}${selection?.kind === "identity" && selection.id === event.userId ? "selected" : ""}`}
+                      onClick={() => { if (event.userId) onSelect({ kind: "identity", id: event.userId }); }}
+                    >
+                      <td>{event.timestamp.slice(11, 19)}</td>
+                      <td>{event.userId ?? "—"}</td>
+                      <td>{event.source ?? "—"}</td>
+                      <td>{event.target ?? "—"}</td>
+                      <td>{eventAuthMethod(event)}</td>
+                      <td className={!success ? "red-text" : undefined}>{success ? "SUCCESS" : "FAILURE"}</td>
+                      <td>{suspicious ? "SUSP" : "—"}</td>
+                    </tr>
+                  );
+                })}
+                {!authEvents.length && <tr><td colSpan={7}>No authentication telemetry yet.</td></tr>}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="panel soc-dash-fill">
+          <header className="panel-title">NETWORK ACTIVITY <button type="button" className="link-button" onClick={() => onNavigate("network")}>Open Network →</button></header>
+          <div className="campaign-table">
+            <table>
+              <thead><tr><th>Source</th><th>Destination</th><th>Protocol</th><th>Port</th><th>State</th><th>Flag</th></tr></thead>
+              <tbody>
+                {view.connections.map((connection) => (
+                  <tr key={connection.id} aria-selected={selection?.kind === "connection" && selection.id === connection.id} className={`${suspiciousConnectionIds.has(connection.id) ? "row-suspicious " : ""}${selection?.kind === "connection" && selection.id === connection.id ? "selected" : ""}`} onClick={() => onSelect({ kind: "connection", id: connection.id })}>
+                    <td>{connection.source}</td>
+                    <td>{connection.target}</td>
+                    <td>{connection.protocol.toUpperCase()}</td>
+                    <td>{connection.port}</td>
+                    <td className={connection.allowed ? undefined : "red-text"}>{connection.allowed ? "ALLOWED" : "BLOCKED"}</td>
+                    <td>{suspiciousConnectionIds.has(connection.id) ? "SUSP" : "—"}</td>
+                  </tr>
+                ))}
+                {!view.connections.length && <tr><td colSpan={6}>No observed connections.</td></tr>}
+              </tbody>
+            </table>
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }
 

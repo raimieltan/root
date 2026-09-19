@@ -36,9 +36,9 @@
     "semantic_hash": "60ef4db65c90955768412b52d153b067"
   },
   "app/blue/page.tsx": {
-    "mtime": 1789781582.594009,
-    "seen": 1789781894.63329,
-    "ast_hash": "adc6533a0b12074387aa28746c91133a",
+    "mtime": 1789780503.8463666,
+    "seen": 1789780667.9989262,
+    "ast_hash": "8f2a8921df047d5ce7c5e72c7e435c44",
     "semantic_hash": ""
   },
   "app/layout.tsx": {
@@ -66,15 +66,15 @@
     "semantic_hash": ""
   },
   "app/red/page.tsx": {
-    "mtime": 1789781514.4512603,
-    "seen": 1789781894.633945,
-    "ast_hash": "c1b87838158ddfc526d349bac0a156aa",
+    "mtime": 1789741681.1820922,
+    "seen": 1789742928.2424252,
+    "ast_hash": "52a102aafc2ad72c09f007af3443f2fe",
     "semantic_hash": ""
   },
   "app/red/terminal.tsx": {
-    "mtime": 1789781431.15131,
-    "seen": 1789781894.633949,
-    "ast_hash": "4b4bcde4340fe8356706694c3c86d235",
+    "mtime": 1789741697.683184,
+    "seen": 1789742928.2424269,
+    "ast_hash": "2732dc6c5d9fb3749068d616b94d78aa",
     "semantic_hash": ""
   },
   "app/replay/[scenarioId]/page.tsx": {
@@ -90,9 +90,9 @@
     "semantic_hash": ""
   },
   "app/ui/root-chrome.tsx": {
-    "mtime": 1789781582.4972875,
-    "seen": 1789781894.634348,
-    "ast_hash": "2456040ec85f57c59e2459a54a7cbf2e",
+    "mtime": 1789742058.8460822,
+    "seen": 1789742928.242508,
+    "ast_hash": "f16275ed21052f227c048e01725f21e5",
     "semantic_hash": ""
   },
   "eslint.config.mjs": {
@@ -603,30 +603,6 @@
     "mtime": 1789778452.0903125,
     "seen": 1789780668.000292,
     "ast_hash": "dcc1ad0f90c11c48f6cbbffac455de32",
-    "semantic_hash": ""
-  },
-  "app/ui/audio-control.tsx": {
-    "mtime": 1789781582.3423252,
-    "seen": 1789781894.634343,
-    "ast_hash": "ee9f11bec3b90e2316d08edf96bfadc2",
-    "semantic_hash": ""
-  },
-  "lib/audio/audio-system.ts": {
-    "mtime": 1789781582.2387815,
-    "seen": 1789781894.634884,
-    "ast_hash": "cf1b6783ccbf87848cdaefa4dc5a563f",
-    "semantic_hash": ""
-  },
-  "lib/audio/catalog.ts": {
-    "mtime": 1789781334.8363013,
-    "seen": 1789781894.634887,
-    "ast_hash": "5e31918fdf53de86cd31aeb581bc28a6",
-    "semantic_hash": ""
-  },
-  "docs/audio/AUDIO_DESIGN.md": {
-    "mtime": 1789781087.8111262,
-    "seen": 1789781894.638394,
-    "ast_hash": "f29ebcda145faf38a71b4e13946d13b6",
     "semantic_hash": ""
   }
 }

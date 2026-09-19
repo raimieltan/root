@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { BookOpen, FileKey2, FileText, FolderOpen, ListTree, Network, ScrollText, Server, SquareTerminal } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useOperation } from "@/app/use-operation";
 import type { ScenarioView } from "@/app/sim-types";
 import RootChrome from "@/app/ui/root-chrome";
 import { RootTree } from "@/app/ui/root-os";
+import { playAudio } from "@/lib/audio/audio-system";
 import MissionPanel from "./mission-panel";
 import NetworkMap from "./network-map";
 import Terminal, { type TerminalState } from "./terminal";
@@ -24,6 +25,13 @@ export default function RedTeamPage() {
   const assistance = view?.assistance;
   const [terminalPrefill, setTerminalPrefill] = useState("");
   const [terminalState, setTerminalState] = useState<TerminalState>({ currentMachine: "INTERNET", currentUser: "attacker", currentPrivilege: "NONE", currentPath: "/", context: { type: "UNIX" }, discoveredHosts: [] });
+  const priorScenarioState = useRef<string | undefined>(undefined);
+
+  useEffect(() => {
+    const nextState = view?.scenario.state;
+    if (priorScenarioState.current === "ACTIVE" && nextState && nextState !== "ACTIVE") void playAudio(view?.objectiveRetrieved ? "mission.completed" : "mission.failed");
+    priorScenarioState.current = nextState;
+  }, [view?.scenario.state, view?.objectiveRetrieved]);
 
   if (!ids || !view) return <main className="loading-screen"><div className="boot-mark">ROOT<span>/OS</span></div><p role={error ? "alert" : undefined}>{error || "Provisioning operation…"}</p>{error && <button type="button" onClick={retry}>Retry connection</button>}<Link href="/">Return to operations</Link></main>;
   const currentMachine = view.machines.find((machine) => machine.hostname === terminalState.currentMachine);
