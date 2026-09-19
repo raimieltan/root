@@ -690,6 +690,35 @@ textarea:focus-visible {
   gap: 8px;
 }
 
+.intel-sections {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  padding: 10px;
+  overflow: auto;
+  height: calc(100% - 25px);
+}
+
+.intel-section {
+  border: 1px solid var(--border-soft);
+}
+
+.intel-section-title {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border-soft);
+  background: #0b1519;
+  color: var(--blue-light);
+  font: 9px var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.intel-section .data-list {
+  padding: 6px;
+}
+
 .credential-entry {
   display: grid;
   gap: 4px;

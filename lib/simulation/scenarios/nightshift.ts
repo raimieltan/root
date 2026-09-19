@@ -1,5 +1,5 @@
 import type { ScenarioDefinition } from "./types";
-import { commonDetections, discover, external, file, host, identity, link, route } from "./content";
+import { commonDetections, discover, dns, external, file, host, identity, link, route } from "./content";
 
 export const nightshift: ScenarioDefinition = {
   id: "nightshift", name: "Operation Nightshift", organization: "Kronos Logistics",
@@ -8,7 +8,7 @@ export const nightshift: ScenarioDefinition = {
   availableModes: ["RED", "BLUE"],
   assistance: { guided: ["curl shift.kronos.test exposes a support handover. Compare the human identity with the service identity it can reach.", "After nmap, submit a bounded maintenance job to the portal's documented worker endpoint.", "Use ls to find the handover or worker configuration. install-agent preserves privileged access but produces a beacon."], operator: "Separate user identity, service credentials, active sessions, and persistent access." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },
-  aliases: { "shift.kronos.test": "SHIFT-WEB" }, startingKnowledge: { knownHosts: ["INTERNET", "SHIFT-WEB"], knownAssets: ["shift.kronos.test"] },
+  dnsRecords: dns({ "shift.kronos.test": "SHIFT-WEB" }), startingKnowledge: { knownHosts: ["INTERNET", "SHIFT-WEB"], knownAssets: ["shift.kronos.test"] },
   machines: [external,
     host("SHIFT-WEB", "10.40.1.10", "DMZ", [identity("root", "ROOT")], [file("/etc/shift/worker.conf", "root", "DISPATCH_HOST=DISPATCH-01\nSERVICE=dispatch_svc\nTOKEN=dispatch-night-token")], true),
     host("ACCESS-01", "10.40.1.20", "DMZ", [identity("morgan")], [file("/home/morgan/handover.txt", "morgan", "The shift handover token is reused by dispatch_svc on DISPATCH-01. Read access includes /srv/dispatch/NIGHT_MANIFEST.csv.")]),

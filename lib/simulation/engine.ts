@@ -81,6 +81,8 @@ export class SimulationEngine {
         ip: (_args, state) => this.ip(state),
         ping: (args, state) => this.ping(args, state),
         nmap: (args, state) => this.scan(args, state),
+        dig: (args, state) => this.dig(args, state, "dig"),
+        nslookup: (args, state) => this.dig(args, state, "nslookup"),
         ssh: (args, state) => this.ssh(args, state),
         john: (args) => this.john(args),
         sessions: (args) => this.sessions(args),
@@ -173,6 +175,8 @@ export class SimulationEngine {
     const topics: Record<string, string> = {
       nmap: "nmap <host>\n  Scans a reachable host and reports open ports and the service listening on each.\n  Example: nmap 10.10.10.10\n  Use it after discovering a host, before assuming what it runs.",
       ping: "ping <host>\n  Checks whether a host is reachable over the network.\n  Example: ping 10.10.10.10",
+      dig: "dig <name>\n  Queries the DNS record for a hostname and prints its answer section.\n  Use it to see exactly what a name currently resolves to, including a stale record.\n  Example: dig intranet.nodeline.test",
+      nslookup: "nslookup <name>\n  Queries the DNS record for a hostname in nslookup's resolver-style format.\n  Example: nslookup intranet.nodeline.test",
       curl: "curl [-X METHOD] <url> [--data BODY]\n  curl <url>                     performs a GET request and prints the response.\n  curl -X POST <url> --data \"field=value\"   sends form data, usually as a POST.\n  Inspect a page's response for forms, links, or comments before guessing an endpoint.\n  Example: curl portal.example.test",
       ssh: "ssh <user@host>\n  Opens a remote shell session if you hold valid credentials for that user on that host.\n  You'll be prompted for a password if one is required.\n  Example: ssh deploy@10.20.10.20",
       psql: "psql -h HOST -U USER [-d DATABASE] [--password SECRET]\n  Connects to a PostgreSQL service. Omit -d to connect without selecting a database,\n  then use \\l to list databases and \\c <database> to select one.\n  Once connected: \\dt lists tables, \\d <table> describes its columns,\n  SELECT <columns> FROM <table>; reads rows, \\q disconnects.\n  Example: psql -h 10.30.10.21 -U someuser",
@@ -191,7 +195,7 @@ export class SimulationEngine {
     if (topic) return `No detailed help for '${topic}'. Type help for the command list.`;
     return `ROOT/OS commands
 
-Recon:       nmap <host> · ping <host> · curl <url> · ip
+Recon:       nmap <host> · ping <host> · curl <url> · ip · dig <name> · nslookup <name>
 Access:      ssh <user@host> · sessions
 Filesystem:  pwd · cd <path> · ls [-l] [path] · cat <path> · less <path> · grep TEXT [path] · find [path] -name NAME
 System:      whoami · id · hostname · env · ps · backup-sync --run-hook
@@ -216,10 +220,46 @@ Type 'help <command>' for details, e.g. help curl`;
   }
 
   private async target(value: string) {
-    const definition = await this.definition();
     const normalized = value.replace(/^https?:\/\//, "").split("/")[0].toLowerCase();
-    const resolved = definition.aliases[normalized] ?? normalized;
+    const resolution = await this.resolveDns(normalized);
+    const resolved = resolution.hostname ?? normalized;
     return prisma.machine.findFirst({ where: { scenarioId: this.scenarioId, OR: [{ hostname: resolved.toUpperCase() }, { ip: resolved }] }, include: { services: true, users: true } });
+  }
+
+  // Walks the scenario's declared DNS records (following CNAME chains) to the final A record's target hostname.
+  private async resolveDns(name: string, depth = 0): Promise<{ hostname?: string; chain: ScenarioDefinition["dnsRecords"] }> {
+    if (depth > 5) return { chain: [] };
+    const definition = await this.definition();
+    const record = definition.dnsRecords.find((entry) => entry.name.toLowerCase() === name.toLowerCase());
+    if (!record) return { chain: [] };
+    if (record.type === "A") return { hostname: record.value, chain: [record] };
+    const rest = await this.resolveDns(record.value, depth + 1);
+    return { hostname: rest.hostname, chain: [record, ...rest.chain] };
+  }
+
+  private async dig(args: string[], state: TerminalState, style: "dig" | "nslookup" = "dig") {
+    const name = args.find((arg) => !arg.startsWith("-"));
+    if (!name) return this.result(false, `Usage: ${style} <name>`);
+    const source = await this.currentMachine(state);
+    if (!source) return this.result(false, "No active session.");
+    const resolution = await this.resolveDns(name);
+    const events: SimulationEvent[] = [];
+    events.push(await this.emit({ action: "DNS_QUERY", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.LOW, sourceMachineId: source.machine.id, metadata: { name, resolved: resolution.hostname } }));
+    if (!resolution.chain.length) {
+      return { success: true, output: style === "dig" ? `\n; <<>> ROOT/OS dig <<>> ${name}\n;; ->>HEADER<<- status: NXDOMAIN\n\n;; ANSWER SECTION: (none)` : `Server:\t\tdns.resolver.local\nAddress:\t127.0.0.53#53\n\n** server can't find ${name}: NXDOMAIN`, events };
+    }
+    const target = resolution.hostname ? await this.target(resolution.hostname) : null;
+    const discovery = target ? await this.applyDiscovery("dns", name, resolution.hostname ?? target.hostname, source.machine.id) : { events: [] as SimulationEvent[] };
+    events.push(...discovery.events);
+    const answers = resolution.chain.map((record) => record.type === "A"
+      ? `${record.name}.\t${record.ttlSeconds ?? 3600}\tIN\tA\t${target?.ip ?? record.value}`
+      : `${record.name}.\t${record.ttlSeconds ?? 3600}\tIN\tCNAME\t${record.value}.`);
+    if (style === "nslookup") {
+      const output = [`Server:\t\tdns.resolver.local`, `Address:\t127.0.0.53#53`, "", `Name:\t${resolution.hostname ? resolution.chain[resolution.chain.length - 1].name : name}`, `Address:\t${target?.ip ?? resolution.hostname ?? ""}`].join("\n");
+      return { success: true, output, events, discoveredHosts: await this.discoveredHosts() };
+    }
+    const output = [`\n; <<>> ROOT/OS dig <<>> ${name}`, ";; ANSWER SECTION:", ...answers, "", `;; Query time: 4 msec`].join("\n");
+    return { success: true, output, events, discoveredHosts: await this.discoveredHosts() };
   }
 
   private async emit(input: EventInput): Promise<SimulationEvent> {
@@ -269,7 +309,7 @@ Type 'help <command>' for details, e.g. help curl`;
     return this.emit({ ...context, ...definition, metadata: { ...context.metadata, ...definition.metadata } });
   }
 
-  private async applyDiscovery(kind: "file" | "web" | "scan" | "process" | "postgres", host: string, value: string, sourceMachineId?: string, visibleContent?: string) {
+  private async applyDiscovery(kind: "file" | "web" | "scan" | "process" | "postgres" | "dns", host: string, value: string, sourceMachineId?: string, visibleContent?: string) {
     const definition = await this.definition();
     const matches = definition.discoveries
       .filter((entry) => {

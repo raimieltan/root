@@ -1,5 +1,5 @@
 import type { ScenarioDefinition } from "./types";
-import { commonDetections, discover, external, file, host, identity, link, route } from "./content";
+import { commonDetections, discover, dns, external, file, host, identity, link, route } from "./content";
 
 export const strangeLogin: ScenarioDefinition = {
   id: "strange-login", name: "Operation The Strange Login", organization: "Northline Health",
@@ -7,7 +7,7 @@ export const strangeLogin: ScenarioDefinition = {
   briefing: { red: "Northline's patient-results system is reachable through a maintenance portal and a legitimate locum-access workflow. Retrieve ON_CALL_ROSTER.csv without interrupting clinical results.", blue: "An unfamiliar source used a valid clinical identity shortly after maintenance activity. Determine whether it is a real on-call workflow or misuse, and stop disclosure without taking results offline.", constraints: ["A valid clinician identity is not proof of legitimate intent", "Clinical results must remain available"] },
   availableModes: ["RED", "BLUE"],
   assistance: { guided: ["Compare the source and follow-on behavior of the locum identity with the results service.", "The maintenance portal and remote-clinician path use the same service identity for different business reasons.", "For Blue, disrupt the observed path and verify the alternate source cannot continue."], operator: "Correlate a valid identity with source, timing, target, and business purpose before choosing containment." },
-  conditions: { timeLimitMinutes: 90, minimumAvailability: 60 }, aliases: { "care.northline.test": "CARE-PORTAL" }, startingKnowledge: { knownHosts: ["INTERNET", "CARE-PORTAL"], knownAssets: ["care.northline.test"] },
+  conditions: { timeLimitMinutes: 90, minimumAvailability: 60 }, dnsRecords: dns({ "care.northline.test": "CARE-PORTAL" }), startingKnowledge: { knownHosts: ["INTERNET", "CARE-PORTAL"], knownAssets: ["care.northline.test"] },
   machines: [external,
     host("CARE-PORTAL", "10.80.1.10", "DMZ", [identity("root", "ROOT")], [file("/etc/northline/maintenance.conf", "root", "RESULTS_HOST=RESULTS-01\nUSER=results_svc\nTOKEN=northline-results")], true),
     host("LOCUM-ACCESS", "10.80.1.30", "DMZ", [identity("dana")], [file("/home/dana/on-call.txt", "dana", "Locum access reaches RESULTS-01 as results_svc for approved coverage. Export path: /srv/clinical/ON_CALL_ROSTER.csv")]),

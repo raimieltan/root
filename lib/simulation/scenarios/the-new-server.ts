@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { service } from "./content";
+import { dns, service } from "./content";
 
 const learning = (
   concepts: string[],
@@ -40,7 +40,7 @@ export const theNewServer: ScenarioDefinition = {
   persistencePolicy: { process: "helpdesk-agent", requiredPrivilege: AccessLevel.ROOT, beaconSeconds: 60 },
   knowledgeRewards: [],
   backgroundActivity: [],
-  aliases: { "helpdesk-01.nodeline.test": "HELPDESK-01", "newapp.nodeline.test": "NEW-APP-01" },
+  dnsRecords: dns({ "helpdesk-01.nodeline.test": "HELPDESK-01", "newapp.nodeline.test": "NEW-APP-01" }),
   startingKnowledge: { knownHosts: ["HELPDESK-01"], knownAssets: [] },
   startingSession: { host: "HELPDESK-01", user: "trainee", path: "/home/trainee" },
   facts: [

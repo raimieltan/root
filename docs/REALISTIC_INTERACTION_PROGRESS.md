@@ -1,6 +1,6 @@
 # Realistic Interaction Layer — Progress Checkpoint
 
-**Status:** Realistic interaction Slices 1–8 complete; Act 0 and Act I content built; canonical pre-multiplayer gaps remain, 2026-09-19
+**Status:** Realistic interaction Slices 1–8 complete; Act 0 and Act I content built; first-class DNS and full Intel auto-recording (Milestone 3 close-out) built; canonical pre-multiplayer gaps remain, 2026-09-20
 **Source direction:** `docs/tools/tools-unix.md` and `docs/ROOT_CANONICAL_PLAN.md`
 
 This document records the state of the realistic Red-team interaction work before the PvP build begins. ROOT remains a fully simulated environment: terminal commands, services, credentials, events, and Blue-team consequences are modeled by the application; no live network targets are contacted.
@@ -96,10 +96,20 @@ Applied local Prisma migrations:
 
 - Built `First Shift`, `The Printer`, and `Locked Out` (Act 0), closing Milestone 2's short orientation requirement with reusable event/fact-based objectives (not `retrieve_file`-only), Guided/Operator presentations, learning-event annotations, and beginner exit questions.
 - Built the Act I "Networks and Helpdesk" arc — `Where Did the Website Go?` (NET-01), `Service Unavailable` (NET-02), `Wrong Network` (NET-03), `The New Server` (NET-04) — closing Milestone 2's short network/service operation requirement and Milestone 3's exit condition (a tester can determine what hosts exist, what is reachable, what services are exposed, and which discovered information is useful) for a beginner-scoped network.
-- DNS staleness/migration is modeled through the existing scenario-level `aliases` map (a name resolving to a decommissioned vs. live host) rather than a first-class DNS record store; this is intentionally the minimal mechanic needed for these missions and is **not** the "first-class DNS simulation" Milestone 3 calls for (see gaps below).
+- DNS staleness/migration was initially modeled through the scenario-level `aliases` map (a name resolving to a decommissioned vs. live host); Slice 11 below replaces `aliases` with a first-class, queryable DNS record model.
 - Added optional per-service `status` (`RUNNING`/`STOPPED`) to `ScenarioServiceDefinition`/`service()` so a mission can model a stopped service on an otherwise-reachable host; fixed `nmap` to report `closed` for stopped services instead of always `open`.
 - Campaign order is now `first-shift → the-printer → locked-out → website-down → service-unavailable → wrong-network → the-new-server → glasshouse → nightshift → dead-drop → paper-trail → strange-login → something-calling-home → ghost-account → no-one-knows` (15 scenarios total).
 - Each mission has full acceptance-test coverage (`*.acceptance.test.ts`) driving it end to end to `COMPLETED` with every objective satisfied.
+
+### 11. First-class DNS and full Intel auto-recording (Milestone 3 close-out)
+
+- Replaced the static `aliases: Record<string, string>` map with a first-class, scenario-declared `dnsRecords` model (`name`/`type`/`value`, `A` and `CNAME`, with CNAME chain resolution) in `lib/simulation/scenarios/types.ts`. `lib/simulation/scenarios/content.ts` exposes a `dns()` helper that converts a simple `name -> hostname` map into A records for scenarios with no staleness/chaining to model. Every campaign scenario, including Glasshouse, now declares `dnsRecords` instead of `aliases`; the old field and mechanism are fully retired, not kept alongside the new one.
+- Added `dig`/`nslookup` terminal commands (`lib/simulation/engine.ts`, registered in `lib/simulation/tools.ts`) that resolve a queried name through the declared DNS records and print a resolver-style answer section (or NXDOMAIN), rather than resolution only happening implicitly inside `ping`/`curl`/`nmap`/`ssh` targeting. `target()` now resolves through the same `resolveDns()` chain walk.
+- Added a `dns` discovery trigger kind (`ScenarioDiscovery.trigger.kind`) so a scenario can gate a fact/credential/host reveal on an explicit DNS query of a given name resolving to a given host, distinct from the existing `file`/`web`/`scan`/`process`/`postgres` triggers.
+- `Where Did the Website Go?` (NET-01) now requires an explicit `dig intranet.nodeline.test` query (new `query-dns-record` objective, `website.dnsRecordStale` fact) before the rest of the investigation, so the mission exercises a real DNS lookup rather than resolution happening silently inside `ping`.
+- Built the canonical-plan §40 Intel panel as its own Red-side app tab (`app/red/page.tsx`, `IntelPanel`) showing HOSTS / CREDENTIALS / NETWORKS / RELATIONSHIPS, auto-populated in `lib/simulation/state.ts` from the same discovery/credential/session data the engine already records (`applyDiscovery`, `Credential`, `SESSION_CREATED`/`DATABASE_SESSION_CREATED`/`ROOT_SESSION_CREATED` events) — no new per-scenario Intel wiring. The existing partial `intel.hosts`/`intel.relationships` view inside the Network Map tab is unchanged and still present alongside the new dedicated tab.
+- Added acceptance coverage: `website-down.acceptance.test.ts` now asserts the DNS answer section and that completion requires the `dig` step; a new `lib/simulation/intel.test.ts` drives Glasshouse's application route through the engine and asserts `view.intel` populates HOSTS/CREDENTIALS/NETWORKS/RELATIONSHIPS from that activity alone.
+- Re-validated: `yarn tsc --noEmit`, `yarn test` (76 tests; the 2 failures are pre-existing on `main`, unrelated to this slice — confirmed via `git stash`), and `yarn build` all pass.
 
 ## Canonical roadmap alignment
 
@@ -110,7 +120,7 @@ The expanded canonical roadmap places Multiplayer Alpha at Milestone 11. Milesto
 ### Fundamentals, network, and application gaps
 
 - Act 0 orientation and the Act I network/service operations are built (see Slice 10 above). Milestone 2's content requirement is satisfied; its exit condition still needs validation with human playtesting, not just automated acceptance tests.
-- Add a first-class DNS simulation (a queryable record store the player can inspect, not only static scenario aliases) and complete Intel auto-recording (a dedicated HOSTS/CREDENTIALS/NETWORKS/RELATIONSHIPS panel per canonical plan §40, beyond the current partial `intel.hosts`/`intel.relationships` shown only in the Network Map) for Milestone 3.
+- First-class DNS and full Intel auto-recording are built (see Slice 11 above), closing Milestone 3's content requirement. Milestone 3's exit condition (a tester can independently determine what hosts exist, what is reachable, what services are exposed, and which discovered information is useful) is supported by the new `dig`/`nslookup` and Intel surfaces, but — like Milestone 2 — still needs a human playtest pass, not just automated acceptance tests.
 - Add the Browser interface and persistent HTTP cookie/application-session behavior for Milestone 4.
 
 ### Milestone 8 — ROOT MVP gaps

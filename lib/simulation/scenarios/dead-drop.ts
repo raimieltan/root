@@ -1,5 +1,5 @@
 import type { ScenarioDefinition } from "./types";
-import { commonDetections, discover, external, file, host, identity, link, route } from "./content";
+import { commonDetections, discover, dns, external, file, host, identity, link, route } from "./content";
 
 export const deadDrop: ScenarioDefinition = {
   id: "dead-drop", name: "Operation Dead Drop", organization: "Collective Research",
@@ -7,7 +7,7 @@ export const deadDrop: ScenarioDefinition = {
   briefing: { red: "Retrieve DROP_ARCHIVE.enc from the research vault or its recovery replica. The perimeter cannot reach either objective directly. Find a permitted pivot and assess what each route exposes.", blue: "Research exchange and recovery traffic share a restricted environment. Investigate competing routes, prevent archive extraction, and protect research availability.", constraints: ["Public archive is a decoy, not the objective", "Blocking one pivot does not block the independent recovery route"] },
   availableModes: ["RED", "BLUE"], assistance: { guided: ["curl exchange.collective.test reveals a partner credential and a recovery relationship.", "Use ls and cat on each pivot to discover the next permitted connection. Direct perimeter-to-vault access is blocked.", "The public archive is irrelevant. Compare the exchange path with the recovery path and the evidence each leaves."], operator: "Find authorized network relationships across the restricted zones and choose an objective copy." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },
-  aliases: { "exchange.collective.test": "EXCHANGE-01" }, startingKnowledge: { knownHosts: ["INTERNET", "EXCHANGE-01"], knownAssets: ["exchange.collective.test"] },
+  dnsRecords: dns({ "exchange.collective.test": "EXCHANGE-01" }), startingKnowledge: { knownHosts: ["INTERNET", "EXCHANGE-01"], knownAssets: ["exchange.collective.test"] },
   machines: [external,
     host("EXCHANGE-01", "10.60.1.10", "DMZ", [identity("partner")], [file("/home/partner/routes.conf", "partner", "PIVOT=RELAY-01\nUSER=relay_svc\nTOKEN=research-relay")], true),
     host("RELAY-01", "10.60.2.10", "INTERNAL", [identity("relay_svc", "SERVICE")], [file("/etc/relay/vault.conf", "relay_svc", "VAULT=VAULT-01\nUSER=research_svc\nTOKEN=read-vault")]),

@@ -1,5 +1,5 @@
 import type { ScenarioDefinition } from "./types";
-import { commonDetections, discover, external, file, host, identity, link, route } from "./content";
+import { commonDetections, discover, dns, external, file, host, identity, link, route } from "./content";
 
 export const paperTrail: ScenarioDefinition = {
   id: "paper-trail", name: "Operation Paper Trail", organization: "Aster Civic Systems",
@@ -15,7 +15,7 @@ export const paperTrail: ScenarioDefinition = {
     operator: "Separate a legitimate vendor authorization from the source and purpose that make it suspicious.",
   },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },
-  aliases: { "grants.aster.test": "GRANT-WEB" },
+  dnsRecords: dns({ "grants.aster.test": "GRANT-WEB" }),
   startingKnowledge: { knownHosts: ["INTERNET", "GRANT-WEB"], knownAssets: ["grants.aster.test"] },
   machines: [external,
     host("GRANT-WEB", "10.70.1.10", "DMZ", [identity("root", "ROOT")], [file("/etc/aster/export.conf", "root", "RECORDS_HOST=RECORDS-01\nRECORDS_USER=records_svc\nRECORDS_TOKEN=aster-records-2026")], true),

@@ -10,7 +10,7 @@ export type ScenarioEventDefinition = {
 };
 
 export type ScenarioDiscovery = {
-  trigger: { kind: "file" | "web" | "scan" | "process" | "postgres"; host: string; value: string };
+  trigger: { kind: "file" | "web" | "scan" | "process" | "postgres" | "dns"; host: string; value: string };
   output?: string;
   hosts?: string[];
   credentials?: Array<{ username: string; scope: string }>;
@@ -18,6 +18,9 @@ export type ScenarioDiscovery = {
   factPatterns?: Record<string, string>;
   evidence?: ScenarioEventDefinition[];
 };
+
+// A record's value is a machine hostname; a CNAME's value is another DNS name in this map (chained on lookup).
+export type ScenarioDnsRecordDefinition = { name: string; type: "A" | "CNAME"; value: string; ttlSeconds?: number };
 
 export type ScenarioFact = {
   id: string;
@@ -136,7 +139,7 @@ export type ScenarioDefinition = {
   persistencePolicy: { process: string; requiredPrivilege: AccessLevel; beaconSeconds: number };
   knowledgeRewards: Array<{ concept: string; actions: string[] }>;
   backgroundActivity: Array<{ host: string; user: string; source?: string; action: string; context: string }>;
-  aliases: Record<string, string>;
+  dnsRecords: ScenarioDnsRecordDefinition[];
   startingKnowledge: { knownHosts: string[]; knownAssets: string[] };
   startingSession?: { host: string; user: string; path?: string };
   facts?: ScenarioFact[];

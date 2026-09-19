@@ -1,4 +1,4 @@
-import type { ScenarioDefinition, RouteDefinition, ScenarioServiceDefinition } from "./types";
+import type { ScenarioDefinition, RouteDefinition, ScenarioDnsRecordDefinition, ScenarioServiceDefinition } from "./types";
 
 type Machine = ScenarioDefinition["machines"][number];
 export const identity = (username: string, privilege: "USER" | "SERVICE" | "ROOT" = "USER") => ({ username, role: privilege === "SERVICE" ? "service" : "human", privilege, groups: [username] });
@@ -39,6 +39,8 @@ export function host(hostname: string, ip: string, zone: Machine["zone"], users:
 export const external: Machine = { hostname: "INTERNET", ip: "0.0.0.0", zone: "EXTERNAL", os: "appliance", users: [{ username: "attacker", role: "operator", privilege: "NONE", groups: [] }], services: [], files: [] };
 export const link = (source: string, target: string, port = 22, action?: string) => ({ source, target, port, ...(action ? { accessEvent: { action, category: "AUTH" as const, severity: "MEDIUM" as const } } : {}) });
 export const discover = (host: string, value: string, target: string, username: string): ScenarioDefinition["discoveries"][number] => ({ trigger: { kind: "file", host, value }, hosts: [target], credentials: [{ username, scope: target }] });
+// Simple name -> hostname A records, for scenarios with no DNS staleness/chaining to model.
+export const dns = (records: Record<string, string>): ScenarioDnsRecordDefinition[] => Object.entries(records).map(([name, value]) => ({ name, type: "A", value }));
 export const commonDetections: ScenarioDefinition["detections"] = {
   PORT_SCAN_DETECTED: { id: "NET-PROBE", title: "Concentrated service probing", severity: "LOW", rationale: "Service probes reveal an attempt to map accessible infrastructure." },
   WEB_WORKER_EXECUTED: { id: "ENDPOINT-EXEC", title: "Unexpected endpoint execution", severity: "HIGH", rationale: "A public request caused an unexpected worker process." },

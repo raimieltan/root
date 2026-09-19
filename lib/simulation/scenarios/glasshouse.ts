@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone, SecurityEventCategory, SecurityEventSeverity } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { service } from "./content";
+import { dns, service } from "./content";
 
 const event = (
   action: string,
@@ -23,11 +23,11 @@ export const glasshouse: ScenarioDefinition = {
   persistencePolicy: { process: "root-agent", requiredPrivilege: AccessLevel.ROOT, beaconSeconds: 30 },
   knowledgeRewards: [{ concept: "Trust relationships", actions: ["LATERAL_MOVEMENT", "BACKUP_TRUST_LOGIN"] }, { concept: "Privilege escalation", actions: ["PRIVILEGE_ESCALATION"] }, { concept: "Incident response", actions: ["ATTACK_CONTAINED"] }],
   backgroundActivity: [{ host: "FIN-APP", user: "svc_web", action: "AUTH_SUCCESS", context: "Approved invoice application service account; scheduled processing." }],
-  aliases: {
+  dnsRecords: dns({
     "portal.meridian.test": "WEB-01",
     "vpn.meridian.test": "VPN-01",
     "fin-app.internal": "FIN-APP",
-  },
+  }),
   startingKnowledge: {
     knownHosts: ["INTERNET", "WEB-01"],
     knownAssets: [],

@@ -30,7 +30,7 @@ export type ScenarioView = {
   };
   suspicion: number; objectiveRetrieved: boolean;
   credentials: Array<{ id: string; username: string; type: string; scope: string; origin: string; serviceName: string | null; databaseName: string | null; valid: boolean }>;
-  intel: { hosts: string[]; relationships: string[] };
+  intel: { hosts: string[]; credentials: string[]; networks: string[]; relationships: string[] };
   opsec: { network: string; authentication: string; endpoint: string };
   guidance: {
     objective: string;

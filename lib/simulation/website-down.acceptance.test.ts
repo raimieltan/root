@@ -37,6 +37,9 @@ describe("Act I Where Did the Website Go?", { concurrency: false }, () => {
       await run("env");
       await run("cat TICKET-5102.txt");
 
+      // Query the DNS record directly rather than assuming what the hostname resolves to.
+      assert.match(await run("dig intranet.nodeline.test"), /ANSWER SECTION[\s\S]*A\s+10\.0\.0\.55/);
+
       // The hostname's current target is up, but runs no web service.
       await run("ping intranet.nodeline.test");
       assert.match(await run("nmap intranet.nodeline.test"), /22\/tcp\s+open\s+ssh/);

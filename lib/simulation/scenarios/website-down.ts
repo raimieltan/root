@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { service } from "./content";
+import { dns, service } from "./content";
 
 const learning = (
   concepts: string[],
@@ -20,7 +20,7 @@ export const websiteDown: ScenarioDefinition = {
   briefing: {
     red: "The internal employee intranet has stopped loading for Floor 2. Determine whether the site is actually down or whether something else is wrong, and reach the real site using only evidence you find.",
     blue: "This orientation assignment has no defensive role.",
-    constraints: ["Use the bounded ROOT/OS terminal", "Treat command output and local documentation as evidence", "Confirm a host is actually unreachable before assuming a hostname is broken"],
+    constraints: ["Use the bounded ROOT/OS terminal", "Treat command output and local documentation as evidence", "Confirm a host is actually unreachable before assuming a hostname is broken", "Query the DNS record itself rather than assuming what a hostname resolves to"],
   },
   objectiveSummary: "Diagnose a stale hostname record and reach the intranet's current host",
   presentation: { caseId: "NET-01", focus: ["IP addresses and hosts", "DNS", "HTTP basics"], order: 3, prerequisite: "locked-out" },
@@ -28,6 +28,7 @@ export const websiteDown: ScenarioDefinition = {
   assistance: {
     guided: [
       "Read the ticket, then try reaching the intranet by its usual name before assuming the server itself is broken.",
+      "Query the DNS record for the reported hostname directly with dig or nslookup, rather than assuming what it resolves to.",
       "A host answering ping is not the same as a host running a website. Scan it before deciding what's actually wrong.",
       "Read the migration notice in your home directory for where the site actually lives now, then reach it directly.",
     ],
@@ -40,11 +41,11 @@ export const websiteDown: ScenarioDefinition = {
   persistencePolicy: { process: "helpdesk-agent", requiredPrivilege: AccessLevel.ROOT, beaconSeconds: 60 },
   knowledgeRewards: [],
   backgroundActivity: [],
-  aliases: {
+  dnsRecords: dns({
     "helpdesk-01.nodeline.test": "HELPDESK-01",
     "intranet.nodeline.test": "OLD-INTRANET-01",
     "intranet-new.nodeline.test": "INTRANET-02",
-  },
+  }),
   startingKnowledge: { knownHosts: ["HELPDESK-01"], knownAssets: [] },
   startingSession: { host: "HELPDESK-01", user: "trainee", path: "/home/trainee" },
   facts: [
@@ -56,6 +57,15 @@ export const websiteDown: ScenarioDefinition = {
       guidance: "Read the trouble ticket before touching the network.",
       discoverableFrom: "/home/trainee/TICKET-5102.txt",
       requiredFor: "Scoping the investigation to the reported hostname",
+    },
+    {
+      id: "website.dnsRecordStale",
+      category: "NETWORK",
+      known: "The DNS record for intranet.nodeline.test is an A record currently pointing at OLD-INTRANET-01 (10.0.0.55).",
+      unknown: "Whether that record actually reflects the intranet's current location",
+      guidance: "Query the DNS record for intranet.nodeline.test directly with dig or nslookup instead of assuming where it resolves.",
+      discoverableFrom: "dig output for intranet.nodeline.test",
+      requiredFor: "Confirming exactly what host the hostname currently resolves to before investigating that host",
     },
     {
       id: "website.hostUpNoSite",
@@ -162,6 +172,7 @@ export const websiteDown: ScenarioDefinition = {
   ],
   discoveries: [
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/home/trainee/TICKET-5102.txt" }, facts: ["website.ticket"] },
+    { trigger: { kind: "dns", host: "intranet.nodeline.test", value: "OLD-INTRANET-01" }, facts: ["website.dnsRecordStale"] },
     { trigger: { kind: "scan", host: "OLD-INTRANET-01", value: "ssh" }, facts: ["website.hostUpNoSite"] },
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/home/trainee/DNS_MIGRATION_NOTICE.txt" }, hosts: ["INTRANET-02"], facts: ["website.migrationNotice"] },
     { trigger: { kind: "web", host: "INTRANET-02", value: "intranet-new.nodeline.test" }, output: "HTTP/1.1 200 OK\n\nNodeline Intranet — Home\nAnnouncements, forms, and directory.", facts: ["website.confirmedLive"] },
@@ -172,6 +183,7 @@ export const websiteDown: ScenarioDefinition = {
     { id: "inspect-groups", type: "event", label: "Inspect identity and group membership", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "IDENTITY_GROUPS" } }, learning: learning(["Users and groups"], "Observed identity, privilege, and group membership with id.", "COMPUTING_OS") },
     { id: "inspect-environment", type: "event", label: "Inspect the session environment", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "ENVIRONMENT" } }, learning: learning(["Environment variables", "Current host"], "Observed host and session context through environment variables.", "COMPUTING_OS") },
     { id: "review-ticket", type: "fact", factId: "website.ticket", label: "Read the trouble ticket", learning: learning(["Documentation", "Evidence versus assumptions"], "Read the trouble ticket and scoped the investigation to the reported hostname.", "SECURITY_REASONING") },
+    { id: "query-dns-record", type: "fact", factId: "website.dnsRecordStale", label: "Query the DNS record for the reported hostname", learning: learning(["DNS", "Hosts"], "Queried the DNS record for intranet.nodeline.test directly and saw exactly what it currently resolves to.") },
     { id: "confirm-old-host-up", type: "event", label: "Confirm the current hostname target is reachable", event: { action: "PING", targetHost: "OLD-INTRANET-01" }, learning: learning(["Hosts", "IP addresses", "Reachability"], "Pinged the host that intranet.nodeline.test currently resolves to and confirmed it is up.") },
     { id: "scan-old-host", type: "fact", factId: "website.hostUpNoSite", label: "Scan the host and rule out a total outage", learning: learning(["Ports", "Services"], "Scanned the reachable host and found no web service running, ruling out a full outage.", "SECURITY_REASONING") },
     { id: "discover-migration-notice", type: "fact", factId: "website.migrationNotice", label: "Find the hostname migration notice", learning: learning(["DNS", "Hosts"], "Read the migration notice explaining the stale hostname record and the site's current location.", "SECURITY_REASONING") },
@@ -180,6 +192,7 @@ export const websiteDown: ScenarioDefinition = {
   objectiveCompletion: "ALL",
   beginnerExitQuestions: [
     { id: "current-host", prompt: "What host are you operating, and what evidence establishes it?", evidenceObjectives: ["inspect-environment"] },
+    { id: "dns-lookup", prompt: "What did querying the DNS record directly show you that assuming a resolution wouldn't have?", evidenceObjectives: ["query-dns-record"] },
     { id: "reachable-vs-serving", prompt: "The old hostname's target answered ping. Why didn't that mean the intranet was working?", evidenceObjectives: ["confirm-old-host-up", "scan-old-host"] },
     { id: "stale-record", prompt: "What evidence explained why intranet.nodeline.test pointed at the wrong host?", evidenceObjectives: ["discover-migration-notice"] },
     { id: "resolution", prompt: "How did you confirm the real intranet was working, rather than assuming it once you had a new hostname?", evidenceObjectives: ["reach-live-site"] },

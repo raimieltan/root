@@ -134,10 +134,18 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     databaseName: credential.databaseName,
     valid: credential.valid,
   }));
+  const relationshipActions = new Set(["SESSION_CREATED", "DATABASE_SESSION_CREATED", "ROOT_SESSION_CREATED"]);
   const relationships = scenario.events
-    .filter((event) => event.action === "SESSION_CREATED" && event.sourceMachine && event.targetMachine)
+    .filter((event) => relationshipActions.has(event.action) && event.sourceMachine && event.targetMachine)
     .map((event) => `${event.sourceMachine!.hostname} → ${event.targetMachine!.hostname} via ${event.userId ?? "unknown"}`)
     .filter((relationship, index, entries) => entries.indexOf(relationship) === index);
+  const intelHosts = isBlue ? machines.map((m) => m.hostname) : [...discovered];
+  const intelNetworks = [...new Set(
+    scenario.machines
+      .filter((machine) => intelHosts.includes(machine.hostname) && machine.hostname !== "INTERNET")
+      .map((machine) => `${machine.ip.split(".").slice(0, 3).join(".")}.0/24 (${machine.zone})`),
+  )].sort();
+  const intelCredentials = (isBlue ? [] : credentials).map((credential) => `${credential.username}@${credential.scope}`);
   const redFootprint = scenario.events.filter((event) => event.actorId === redActor?.id && event.visibleToRed && event.action !== "DETECTION_TRIGGERED");
   const level = (count: number) => count >= 8 ? "ELEVATED" : count >= 3 ? "MODERATE" : "LOW";
   return {
@@ -175,7 +183,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
       : undefined,
     suspicion: isBlue ? suspicionFromEvents(rawEvents) : 0, objectiveRetrieved,
     credentials: isBlue ? [] : credentials,
-    intel: { hosts: isBlue ? machines.map((m) => m.hostname) : [...discovered], relationships: isBlue ? [] : relationships },
+    intel: { hosts: intelHosts, credentials: intelCredentials, networks: intelNetworks, relationships: isBlue ? [] : relationships },
     opsec: {
       network: level(redFootprint.filter((event) => event.category === "NETWORK" || event.category === "WEB").length),
       authentication: level(redFootprint.filter((event) => event.category === "AUTH").length),

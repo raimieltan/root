@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { service } from "./content";
+import { dns, service } from "./content";
 
 const learning = (
   concepts: string[],
@@ -40,7 +40,7 @@ export const lockedOut: ScenarioDefinition = {
   persistencePolicy: { process: "reg-agent", requiredPrivilege: AccessLevel.ROOT, beaconSeconds: 60 },
   knowledgeRewards: [],
   backgroundActivity: [],
-  aliases: { "reg-01.nodeline.test": "REG-01", "archive-01.nodeline.test": "ARCHIVE-01" },
+  dnsRecords: dns({ "reg-01.nodeline.test": "REG-01", "archive-01.nodeline.test": "ARCHIVE-01" }),
   startingKnowledge: { knownHosts: ["REG-01"], knownAssets: [] },
   startingSession: { host: "REG-01", user: "trainee", path: "/home/trainee" },
   facts: [

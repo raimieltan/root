@@ -13,7 +13,11 @@ export function validateScenario(definition: ScenarioDefinition) {
   user(startingHost, definition.startingSession?.user ?? "attacker");
   if (!definition.startingKnowledge.knownHosts.includes(startingHost)) fail("starting session host must be known");
   definition.startingKnowledge.knownHosts.forEach(host);
-  Object.values(definition.aliases).forEach(host);
+  unique(definition.dnsRecords.map((record) => record.name), "dns record name");
+  for (const record of definition.dnsRecords) {
+    if (record.type === "A") host(record.value);
+    else if (!definition.dnsRecords.some((other) => other.name === record.value)) fail(`dangling CNAME ${record.name} -> ${record.value}`);
+  }
   for (const machine of definition.machines) {
     unique(machine.users.map((u) => u.username), "identity"); unique(machine.files.map((f) => f.path), "file"); unique(machine.services.map((service) => `${service.name}:${service.port}`), "service");
     for (const service of machine.services) {
@@ -25,6 +29,13 @@ export function validateScenario(definition: ScenarioDefinition) {
   }
   for (const connection of definition.connections) { host(connection.source); host(connection.target); if (!Number.isInteger(connection.port) || connection.port < 1 || connection.port > 65535) fail("invalid port"); }
   for (const discovery of definition.discoveries) {
+    if (discovery.trigger.kind === "dns") {
+      if (!definition.dnsRecords.some((record) => record.name === discovery.trigger.host)) fail(`dns discovery references unknown record ${discovery.trigger.host}`);
+      discovery.hosts?.forEach(host);
+      discovery.credentials?.forEach((c) => user(c.scope, c.username));
+      for (const fact of discovery.facts ?? []) if (!definition.facts?.some((entry) => entry.id === fact)) fail(`unknown discovery fact ${fact}`);
+      continue;
+    }
     const machine = host(discovery.trigger.host);
     if (discovery.trigger.kind === "file" && !machine.files.some((f) => f.path === discovery.trigger.value)) fail("discovery file absent");
     discovery.hosts?.forEach(host);
