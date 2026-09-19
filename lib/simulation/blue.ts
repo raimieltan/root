@@ -95,18 +95,19 @@ export async function advanceBlueScenario(scenarioId: string, blueActorId: strin
   return { advanced: true, step, objectiveRetrieved: result.objectiveRetrieved };
 }
 
-export type ResponseInput = { scenarioId: string; actorId: string; action: string; targetId?: string; sessionId?: string; username?: string; connectionId?: string; evidenceIds?: string[]; finding?: string; status?: string };
+export type ResponseInput = { scenarioId: string; actorId: string; action: string; targetId?: string; sessionId?: string; username?: string; connectionId?: string; processId?: string; reason?: string; evidenceIds?: string[]; finding?: string; status?: string };
 export async function respondToAttack(input: ResponseInput) {
   const actor = await prisma.actor.findFirst({ where: { id: input.actorId, scenarioId: input.scenarioId, role: "blue_operator" }, include: { scenario: true } });
   if (!actor || actor.scenario.state !== "ACTIVE") throw new Error("No active authorized operation");
   const definition = await getDefinitionForScenario(input.scenarioId);
-  const allowed = ["INSPECT_HOST", "INSPECT_USER", "INSPECT_PROCESS", "REVOKE_SESSION", "RESET_PASSWORD", "BLOCK_CONNECTION", "ISOLATE_HOST", "RESTORE_HOST", "INCREASE_MONITORING", "REMOVE_PERSISTENCE", "INCIDENT_FINDING", "ALERT_REVIEWED"];
+  const allowed = ["INSPECT_HOST", "INSPECT_USER", "INSPECT_PROCESS", "REVOKE_SESSION", "RESET_PASSWORD", "DISABLE_ACCOUNT", "BLOCK_CONNECTION", "UNBLOCK_CONNECTION", "ISOLATE_HOST", "RESTORE_HOST", "INCREASE_MONITORING", "REMOVE_PERSISTENCE", "TERMINATE_PROCESS", "DISMISS_ALERT", "INCIDENT_FINDING", "ALERT_REVIEWED"];
   if (!allowed.includes(input.action)) throw new Error("Unsupported response action");
   const target = input.targetId ? await prisma.machine.findFirst({ where: { id: input.targetId, scenarioId: input.scenarioId } }) : null;
-  if (["INSPECT_HOST", "INSPECT_PROCESS", "ISOLATE_HOST", "RESTORE_HOST", "REMOVE_PERSISTENCE", "INCREASE_MONITORING"].includes(input.action) && !target) throw new Error("Select a valid host");
+  if (["INSPECT_HOST", "INSPECT_PROCESS", "ISOLATE_HOST", "RESTORE_HOST", "REMOVE_PERSISTENCE", "INCREASE_MONITORING", "TERMINATE_PROCESS"].includes(input.action) && !target) throw new Error("Select a valid host");
   const evidenceIds = input.evidenceIds ?? [];
   if (evidenceIds.length > 50 || await prisma.securityEvent.count({ where: { scenarioId: input.scenarioId, id: { in: evidenceIds }, visibleToBlue: true } }) !== new Set(evidenceIds).size) throw new Error("Invalid evidence");
   if (input.action === "INCIDENT_FINDING" && (!input.finding?.trim() || input.finding.length > 2000 || !evidenceIds.length)) throw new Error("A finding needs text and visible evidence");
+  if (input.action === "DISMISS_ALERT" && (!input.reason?.trim() || !evidenceIds.length)) throw new Error("A dismissal needs a reason and the alert evidence");
   let affected = 0;
   let resolvedTarget = target?.id;
   if (input.action === "REVOKE_SESSION") {
@@ -115,18 +116,18 @@ export async function respondToAttack(input: ResponseInput) {
     resolvedTarget = session.machineId;
     await prisma.session.update({ where: { id: session.id }, data: { active: false } }); affected = 1;
   }
-  if (["RESET_PASSWORD", "INSPECT_USER"].includes(input.action)) {
+  if (["RESET_PASSWORD", "INSPECT_USER", "DISABLE_ACCOUNT"].includes(input.action)) {
     if (!input.username || !await prisma.user.count({ where: { username: input.username, machine: { scenarioId: input.scenarioId } } })) throw new Error("Select a valid identity");
-    if (input.action === "RESET_PASSWORD") {
+    if (input.action === "RESET_PASSWORD" || input.action === "DISABLE_ACCOUNT") {
       const closed = await prisma.session.updateMany({ where: { scenarioId: input.scenarioId, active: true, user: { username: input.username } }, data: { active: false } });
       const invalidated = await prisma.credential.updateMany({ where: { scenarioId: input.scenarioId, username: input.username, valid: true }, data: { valid: false } });
       affected = closed.count + invalidated.count + 1;
     }
   }
-  if (input.action === "BLOCK_CONNECTION") {
+  if (["BLOCK_CONNECTION", "UNBLOCK_CONNECTION"].includes(input.action)) {
     const connection = await prisma.networkConnection.findFirst({ where: { id: input.connectionId ?? "", source: { scenarioId: input.scenarioId }, target: { scenarioId: input.scenarioId } } });
     if (!connection) throw new Error("Select a connection");
-    await prisma.networkConnection.update({ where: { id: connection.id }, data: { allowed: false } }); resolvedTarget = connection.targetMachineId; affected = 1;
+    await prisma.networkConnection.update({ where: { id: connection.id }, data: { allowed: input.action === "UNBLOCK_CONNECTION" } }); resolvedTarget = connection.targetMachineId; affected = 1;
   }
   if (input.action === "ISOLATE_HOST" && target) {
     affected = (await prisma.service.updateMany({ where: { machineId: target.id }, data: { status: "STOPPED" } })).count;
@@ -140,9 +141,21 @@ export async function respondToAttack(input: ResponseInput) {
     affected = (await prisma.persistence.updateMany({ where: { machineId: target.id, active: true }, data: { active: false } })).count;
     await prisma.process.deleteMany({ where: { machineId: target.id, name: definition.persistencePolicy.process } });
   }
+  if (input.action === "TERMINATE_PROCESS" && target) {
+    const process = await prisma.process.findFirst({ where: { id: input.processId ?? "", machineId: target.id } });
+    if (!process) throw new Error("Select a valid process");
+    await prisma.process.delete({ where: { id: process.id } });
+    affected = 1;
+  }
   const availability = await businessAvailability(input.scenarioId);
   const businessImpact = definition.businessServices.filter((service) => service.hosts.includes(target?.hostname ?? "")).map((service) => service.impact);
-  const action = input.action === "ISOLATE_HOST" ? "HOST_ISOLATED" : input.action === "RESTORE_HOST" ? "HOST_RESTORED" : input.action;
-  await prisma.securityEvent.create({ data: { scenarioId: input.scenarioId, actorId: input.actorId, action, targetMachineId: resolvedTarget, userId: input.username, category: "SYSTEM", severity: "INFO", visibleToRed: false, visibleToBlue: true, metadata: JSON.stringify({ affected, sessionId: input.sessionId, connectionId: input.connectionId, evidenceIds, finding: input.finding, status: input.status, availability: availability.percent, businessImpact }) } });
+  const action = input.action === "ISOLATE_HOST" ? "HOST_ISOLATED"
+    : input.action === "RESTORE_HOST" ? "HOST_RESTORED"
+    : input.action === "TERMINATE_PROCESS" ? "PROCESS_TERMINATED"
+    : input.action === "DISABLE_ACCOUNT" ? "ACCOUNT_DISABLED"
+    : input.action === "DISMISS_ALERT" ? "ALERT_DISMISSED"
+    : input.action === "UNBLOCK_CONNECTION" ? "CONNECTION_UNBLOCKED"
+    : input.action;
+  await prisma.securityEvent.create({ data: { scenarioId: input.scenarioId, actorId: input.actorId, action, targetMachineId: resolvedTarget, userId: input.username, category: "SYSTEM", severity: "INFO", visibleToRed: false, visibleToBlue: true, metadata: JSON.stringify({ affected, sessionId: input.sessionId, connectionId: input.connectionId, processId: input.processId, reason: input.reason, evidenceIds, finding: input.finding, status: input.status, availability: availability.percent, businessImpact }) } });
   return { success: true, affected, availability };
 }

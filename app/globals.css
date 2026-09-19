@@ -1600,14 +1600,6 @@ button.operation-row.selected {
 }
 
 .response-feedback {
-  position: absolute;
-  z-index: 40;
-  top: 52px;
-  left: 12px;
-  max-width: calc(100% - 24px);
-  margin: 0;
-  padding: 5px 8px;
-  border: 1px solid var(--border-strong);
   background: #0a1519;
   color: #9ec2d0;
   font-size: 8px;
@@ -2804,6 +2796,216 @@ button.operation-row.selected {
 
 /* Narrow/short-viewport layout is handled by the single `@media
  * (max-width: 1180px)` rule in app/ui/root-os.css. */
+
+/* =========================================================
+   SOC MODULE SHELL (nav badges, incident header, inspector)
+   ========================================================= */
+
+.soc-nav button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.nav-badge {
+  min-width: 14px;
+  padding: 0 4px;
+  border-radius: 0;
+  background: #4a545b;
+  color: #e2e6e8;
+  font-size: 9px;
+  line-height: 15px;
+  text-align: center;
+}
+
+.nav-badge-amber { background: var(--amber, #a9822f); color: #1c1204; }
+.nav-badge-red { background: var(--red, #a03d3d); color: #fff; }
+.nav-badge-gray { background: #4a545b; }
+
+.incident-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-height: 33px;
+  padding: 4px 8px;
+  background: #252c31;
+  border-bottom: 1px solid #101214;
+  box-shadow: inset 0 1px #454e54;
+  font-size: 11px;
+}
+
+.incident-header .incident-name {
+  font-weight: 700;
+  color: #eef3f5;
+}
+
+.incident-badge {
+  margin-left: 6px;
+  padding: 1px 5px;
+  border: 1px solid var(--amber-light, #d8ab52);
+  color: var(--amber-light, #d8ab52);
+  font-size: 9px;
+}
+
+.incident-header b { color: #dce1e3; }
+.incident-header .avail-good { color: var(--green, #4c9a5a); }
+.incident-header .avail-degraded { color: var(--amber-light, #d8ab52); }
+.incident-header .avail-bad { color: var(--red, #a03d3d); }
+
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #7fb3d5;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
+.soc-workspace {
+  display: grid;
+  grid-template-columns: minmax(600px, 1fr) clamp(320px, 26vw, 430px);
+  align-items: start;
+  gap: 5px;
+  padding: 0 5px 5px;
+}
+
+.soc-fieldset {
+  min-width: 0;
+}
+
+.soc-inspector {
+  position: sticky;
+  top: 0;
+}
+
+.soc-inspector .panel-title span {
+  font-size: 9px;
+  padding: 1px 5px;
+  border: 1px solid var(--border-soft);
+}
+
+.inspector-tabs {
+  display: flex;
+  border-bottom: 1px solid #101214;
+  background: #20272c;
+}
+
+.inspector-tabs button {
+  flex: 1;
+  padding: 5px 4px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #8ea0a9;
+  font-size: 9px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.inspector-tabs button.active {
+  border-color: var(--team-accent, #3d8fb8);
+  color: #eef3f5;
+}
+
+.inspector-fields {
+  display: grid;
+  gap: 3px;
+}
+
+.inspector-fields div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 0;
+  border-bottom: 1px solid #2a3136;
+}
+
+.inspector-fields dt {
+  color: #8ea0a9;
+}
+
+.inspector-fields dd {
+  text-align: right;
+}
+
+.inspector-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.inspector-table th, .inspector-table td {
+  padding: 3px 5px;
+  border-bottom: 1px solid #2a3136;
+  text-align: left;
+}
+
+.evidence-raw {
+  max-height: 200px;
+  overflow: auto;
+  padding: 6px;
+  background: #101416;
+  border: 1px solid #2a3136;
+  font-size: 9px;
+  white-space: pre-wrap;
+}
+
+.state-pill, .risk-pill, .sev-pill {
+  padding: 1px 5px;
+  border: 1px solid var(--border-soft);
+  font-size: 9px;
+}
+
+.state-online, .state-healthy, .risk-low { color: var(--green, #4c9a5a); border-color: var(--green, #4c9a5a); }
+.state-degraded, .risk-medium, .sev-medium { color: var(--amber-light, #d8ab52); border-color: var(--amber-light, #d8ab52); }
+.state-isolated, .state-offline, .state-suspicious, .state-compromised, .risk-high, .sev-high, .sev-critical { color: var(--red, #a03d3d); border-color: var(--red, #a03d3d); }
+.sev-low { color: #8ea0a9; }
+
+.network-topology {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.topology-zone b {
+  display: block;
+  margin-bottom: 4px;
+  color: #8ea0a9;
+  font-size: 9px;
+}
+
+.topology-hosts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.topology-node {
+  padding: 5px 9px;
+  border: 1px solid var(--border-soft);
+  background: #242a2e;
+  color: #dce1e3;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.topology-node.state-isolated, .topology-node.state-suspicious, .topology-node.state-compromised {
+  border-color: var(--red, #a03d3d);
+  color: var(--red, #a03d3d);
+}
+
+@media (max-width: 1180px) {
+  .soc-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .soc-inspector {
+    position: static;
+  }
+}
 
 /* =========================================================
    REPLAY
