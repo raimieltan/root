@@ -3,7 +3,7 @@
   "1": "devDependencies",
   "2": "dependencies",
   "3": "TypeScript Configuration",
-  "4": "engine.ts",
+  "4": "blue.ts",
   "5": "SimulationEngine",
   "6": "index.ts",
   "7": "Repository Agent Rules",
@@ -40,7 +40,7 @@
   "38": "66. Page Mapping",
   "39": "6. Canonical Application Names",
   "40": "Broken Unstyled Career Page Screenshot",
-  "41": "replay-client.tsx",
+  "41": "campaign.test.ts",
   "42": "Operation Glasshouse — Discovery Graph",
   "43": "16. SIEM / Log Viewer",
   "44": "40. Audio Production Priority",
@@ -49,5 +49,6 @@
   "47": "23. Post-Operation Reconstruction",
   "48": "3. Core Audio Principles",
   "49": "7. Terminal Audio",
-  "50": "ROOT — Audio Design Document"
+  "50": "ROOT — Audio Design Document",
+  "51": "tools.ts"
 }

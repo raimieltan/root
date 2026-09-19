@@ -1,5 +1,6 @@
 import { AccessLevel, NetworkZone, SecurityEventCategory, SecurityEventSeverity } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
+import { service } from "./content";
 
 const event = (
   action: string,
@@ -13,7 +14,7 @@ export const glasshouse: ScenarioDefinition = {
   name: "Operation Glasshouse",
   organization: "Meridian Dynamics",
   briefing: { red: "Assess the public portal and remote access relationships. Retrieve the protected finance document without modifying production data.", blue: "Investigate unusual application execution and remote access. Prevent finance extraction while preserving the portal and backup services.", constraints: ["Do not modify financial records", "Contain precisely and restore affected services"] },
-  presentation: { caseId: "FIN-06", focus: ["Fundamentals", "Privilege escalation", "Finance trust"], order: 1 },
+  presentation: { caseId: "FIN-06", focus: ["Fundamentals", "Privilege escalation", "Finance trust"], order: 1, prerequisite: "first-shift" },
   availableModes: ["RED", "BLUE"],
   assistance: { guided: ["Start with the authorized public host. Use nmap to identify its services, then inspect any web service with curl. HTTP responses can reveal the application name or canonical hostname.", "Inspect pages before submitting anything. Forms publish their action, method, field names, and allowed values; linked profiles can reveal related systems without exposing a full solution.", "After gaining a session, use ls, cat, grep, less, and ps. A process's full command line often identifies the configuration file it loaded.", "PostgreSQL can be explored without knowing a database name in advance: connect with -h and -U, then use \\l, \\c, \\dt, and \\d before querying."], operator: "Follow the evidence across application, backup, and database trust boundaries." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },
@@ -78,9 +79,9 @@ export const glasshouse: ScenarioDefinition = {
         { username: "root", role: "admin", privilege: AccessLevel.ROOT, groups: ["root"] },
       ],
       services: [
-        { name: "ssh", port: 22, runningAsUser: "root", exposedZones: [NetworkZone.DMZ, NetworkZone.EXTERNAL] },
-        { name: "http", port: 80, runningAsUser: "www-data", exposedZones: [NetworkZone.DMZ, NetworkZone.EXTERNAL] },
-        { name: "https", port: 443, runningAsUser: "www-data", exposedZones: [NetworkZone.DMZ, NetworkZone.EXTERNAL] },
+        service("ssh", 22, "root", [NetworkZone.DMZ, NetworkZone.EXTERNAL]),
+        service("http", 80, "www-data", [NetworkZone.DMZ, NetworkZone.EXTERNAL]),
+        service("https", 443, "www-data", [NetworkZone.DMZ, NetworkZone.EXTERNAL]),
       ],
       files: [
         { path: "/var/www/meridian/app.conf", owner: "www-data", group: "www", permissions: "644", isSecret: true, contents: "DEV_HOST=10.20.10.20\nDEPLOY_USER=deploy\nDEPLOY_TOKEN=MeridianDeploy2024!Secret" },
@@ -95,8 +96,8 @@ export const glasshouse: ScenarioDefinition = {
         { username: "root", role: "admin", privilege: AccessLevel.ROOT, groups: ["root"] },
       ],
       services: [
-        { name: "vpn", port: 443, runningAsUser: "root", exposedZones: [NetworkZone.EXTERNAL] },
-        { name: "ssh", port: 22, runningAsUser: "root", exposedZones: [NetworkZone.EXTERNAL] },
+        service("vpn", 443, "root", [NetworkZone.EXTERNAL]),
+        service("ssh", 22, "root", [NetworkZone.EXTERNAL]),
       ],
       files: [{ path: "/etc/vpn/backup-peers.conf", owner: "root", group: "remote_ops", permissions: "640", isSecret: true, contents: "PEER=BACKUP-01\nSERVICE_USER=backup_svc\nSERVICE_TOKEN=BackupTransit-6f0a" }],
     },
@@ -107,8 +108,8 @@ export const glasshouse: ScenarioDefinition = {
         { username: "root", role: "admin", privilege: AccessLevel.ROOT, groups: ["root"] },
       ],
       services: [
-        { name: "ssh", port: 22, runningAsUser: "root", exposedZones: [NetworkZone.INTERNAL, NetworkZone.DMZ] },
-        { name: "backup-sync", port: 8080, runningAsUser: "root", exposedZones: [NetworkZone.INTERNAL] },
+        service("ssh", 22, "root", [NetworkZone.INTERNAL, NetworkZone.DMZ]),
+        service("backup-sync", 8080, "root", [NetworkZone.INTERNAL]),
       ],
       files: [
         { path: "/etc/backup-sync.conf", owner: "root", group: "deploy", permissions: "660", isSecret: true, contents: "BACKUP_TARGET=/backup\nRUN_HOOK=/opt/backup/run.sh\nRUN_AS=root\nMANUAL_TRIGGER=backup-sync --run-hook\nROUTES_CONFIG=/etc/meridian/routes.conf\nVERIFY_SIGNATURE=true" },
@@ -124,8 +125,8 @@ export const glasshouse: ScenarioDefinition = {
         { username: "root", role: "admin", privilege: AccessLevel.ROOT, groups: ["root"] },
       ],
       services: [
-        { name: "ssh", port: 22, runningAsUser: "root", exposedZones: [NetworkZone.INTERNAL, NetworkZone.FINANCE] },
-        { name: "fin-api", port: 443, runningAsUser: "svc_web", exposedZones: [NetworkZone.INTERNAL, NetworkZone.FINANCE] },
+        service("ssh", 22, "root", [NetworkZone.INTERNAL, NetworkZone.FINANCE]),
+        service("fin-api", 443, "svc_web", [NetworkZone.INTERNAL, NetworkZone.FINANCE]),
       ],
       files: [{ path: "/etc/fin-app/db.conf", owner: "svc_web", group: "svc_web", permissions: "600", isSecret: true, contents: "DB_USER=finance_app\nDB_PASSWORD=FinanceApp2026!Secure\nDB_HOST=10.30.10.21\nDB_PORT=5432\nDB_NAME=finance" }],
       processes: [{ name: "fin-api", pid: 902, runningAs: "svc_web", commandLine: "/opt/fin-app/fin-api --config /etc/fin-app/db.conf" }],
@@ -137,7 +138,7 @@ export const glasshouse: ScenarioDefinition = {
         { username: "db_backup", role: "backup_service", privilege: AccessLevel.SERVICE, groups: ["db_users", "backup"], password: "AtlasBackup-91d2" },
         { username: "root", role: "admin", privilege: AccessLevel.ROOT, groups: ["root"] },
       ],
-      services: [{ name: "postgres", port: 5432, runningAsUser: "finance_app", exposedZones: [NetworkZone.FINANCE] }],
+      services: [service("postgres", 5432, "finance_app", [NetworkZone.FINANCE])],
       files: [{ path: "/opt/db/data/PROJECT_ATLAS.pdf", owner: "finance_app", group: "db_users", permissions: "640", isSecret: true, contents: "PROJECT_ATLAS — CONFIDENTIAL\nMeridian autonomous routing acquisition blueprint." }],
       processes: [{ name: "postgres", pid: 1190, runningAs: "finance_app", commandLine: "/usr/lib/postgresql/bin/postgres -D /opt/db/data -c 'listen_addresses=*' --database=finance" }],
     },
@@ -145,8 +146,8 @@ export const glasshouse: ScenarioDefinition = {
       hostname: "BACKUP-01", ip: "10.30.10.40", zone: NetworkZone.FINANCE, os: "linux",
       users: [{ username: "backup_svc", role: "backup_service", privilege: AccessLevel.SERVICE, groups: ["backup"], password: "BackupTransit-6f0a" }],
       services: [
-        { name: "ssh", port: 22, runningAsUser: "backup_svc", exposedZones: [NetworkZone.DMZ, NetworkZone.FINANCE] },
-        { name: "backup", port: 873, runningAsUser: "backup_svc", exposedZones: [NetworkZone.FINANCE] },
+        service("ssh", 22, "backup_svc", [NetworkZone.DMZ, NetworkZone.FINANCE]),
+        service("backup", 873, "backup_svc", [NetworkZone.FINANCE]),
       ],
       files: [
         { path: "/srv/backup/manifest.txt", owner: "backup_svc", group: "backup", permissions: "640", isSecret: false, contents: "Nightly finance backup manifest" },

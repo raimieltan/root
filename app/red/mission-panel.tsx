@@ -6,6 +6,14 @@ export default function MissionPanel({ view, assistance }: { view: ScenarioView;
     <p className="eyebrow">AUTHORIZED SECURITY ASSESSMENT</p>
     <h2>{view.guidance.objective}</h2>
     <p className="muted">{view.operation.briefing.red}</p>
+    <div className="objective-list" aria-label="Task evidence">
+      <header><b>TASK EVIDENCE</b><span>{view.guidance.objectives.filter((objective) => objective.completed).length} / {view.guidance.objectives.length} verified</span></header>
+      {view.guidance.objectives.map((objective) => <div key={objective.id} className={objective.completed ? "completed" : "pending"}>
+        <span aria-hidden="true">{objective.completed ? "✓" : "□"}</span>
+        <p>{objective.label}</p>
+        <small>{objective.completed ? "VERIFIED" : "OPEN"}</small>
+      </div>)}
+    </div>
     {assistance === "GUIDED" && view.operation.assistance.guided.map((hint) => <p key={hint}>{hint}</p>)}
     <div className="knowledge-state">
       <div><b>KNOWN</b>{view.guidance.knowledge.known.map((fact) => <span key={fact.id}><small>{fact.category}</small>{fact.value}</span>)}</div>
@@ -20,7 +28,7 @@ export default function MissionPanel({ view, assistance }: { view: ScenarioView;
         {hypothesis.evidence.length > 0 && <small>{hypothesis.evidence.join(" · ")}</small>}
       </article>)}
     </div>}
-    {assistance === "OPERATOR" && <div className="mission-suggestion"><b>STANDARD WORKFLOW</b><span>Interpret services, identities, files, and trust relationships using standard operating information.</span></div>}
+    {assistance === "OPERATOR" && <div className="mission-suggestion"><b>STANDARD WORKFLOW</b><span>{view.operation.assistance.operator}</span></div>}
     <div className="opsec-summary"><b>ACTIVITY SUMMARY</b><span>NETWORK {view.opsec.network}</span><span>AUTHENTICATION {view.opsec.authentication}</span><span>ENDPOINT {view.opsec.endpoint}</span></div>
   </section>;
 }

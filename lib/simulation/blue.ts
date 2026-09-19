@@ -96,12 +96,12 @@ export async function advanceBlueScenario(scenarioId: string, blueActorId: strin
 }
 
 export type ResponseInput = { scenarioId: string; actorId: string; action: string; targetId?: string; sessionId?: string; username?: string; connectionId?: string; processId?: string; reason?: string; evidenceIds?: string[]; finding?: string; status?: string };
+export const BLUE_RESPONSE_ACTIONS = ["INSPECT_HOST", "INSPECT_USER", "INSPECT_PROCESS", "REVOKE_SESSION", "RESET_PASSWORD", "DISABLE_ACCOUNT", "BLOCK_CONNECTION", "UNBLOCK_CONNECTION", "ISOLATE_HOST", "RESTORE_HOST", "INCREASE_MONITORING", "REMOVE_PERSISTENCE", "TERMINATE_PROCESS", "DISMISS_ALERT", "INCIDENT_FINDING", "ALERT_REVIEWED"] as const;
 export async function respondToAttack(input: ResponseInput) {
   const actor = await prisma.actor.findFirst({ where: { id: input.actorId, scenarioId: input.scenarioId, role: "blue_operator" }, include: { scenario: true } });
   if (!actor || actor.scenario.state !== "ACTIVE") throw new Error("No active authorized operation");
   const definition = await getDefinitionForScenario(input.scenarioId);
-  const allowed = ["INSPECT_HOST", "INSPECT_USER", "INSPECT_PROCESS", "REVOKE_SESSION", "RESET_PASSWORD", "DISABLE_ACCOUNT", "BLOCK_CONNECTION", "UNBLOCK_CONNECTION", "ISOLATE_HOST", "RESTORE_HOST", "INCREASE_MONITORING", "REMOVE_PERSISTENCE", "TERMINATE_PROCESS", "DISMISS_ALERT", "INCIDENT_FINDING", "ALERT_REVIEWED"];
-  if (!allowed.includes(input.action)) throw new Error("Unsupported response action");
+  if (!(BLUE_RESPONSE_ACTIONS as readonly string[]).includes(input.action)) throw new Error("Unsupported response action");
   const target = input.targetId ? await prisma.machine.findFirst({ where: { id: input.targetId, scenarioId: input.scenarioId } }) : null;
   if (["INSPECT_HOST", "INSPECT_PROCESS", "ISOLATE_HOST", "RESTORE_HOST", "REMOVE_PERSISTENCE", "INCREASE_MONITORING", "TERMINATE_PROCESS"].includes(input.action) && !target) throw new Error("Select a valid host");
   const evidenceIds = input.evidenceIds ?? [];

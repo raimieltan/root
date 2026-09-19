@@ -43,6 +43,7 @@ export type ReplaySummary = {
   sessionCount: number;
   persistenceInstalled: boolean;
   evidenceCount: number;
+  learningEvidence: Array<{ objectiveId: string; label: string; domain?: string; concepts: string[]; stage?: string; evidence?: string }>;
   route: {
     id: string;
     name: string;
@@ -100,7 +101,7 @@ export function snapshotAt(events: ReplayEvent[], lens: ReplayLens, throughEvent
       if (event.action === "RESET_PASSWORD" && event.userId) {
         for (let index = sessions.length - 1; index >= 0; index -= 1) if (sessions[index].user === event.userId) sessions.splice(index, 1);
       }
-      if (event.action === "OBJECTIVE_RETRIEVED") objectiveRetrieved = true;
+      if (event.action === "OBJECTIVE_RETRIEVED" || event.action === "OPERATION_COMPLETED") objectiveRetrieved = true;
       if (event.action === "DETECTION_TRIGGERED") {
         detections.push({
           ruleId: typeof event.metadata.ruleId === "string" ? event.metadata.ruleId : "UNKNOWN",
@@ -119,7 +120,9 @@ export function snapshotAt(events: ReplayEvent[], lens: ReplayLens, throughEvent
 }
 
 export function attackPathFromEvents(events: ReplayEvent[]) {
-  const path: string[] = ["INTERNET"];
+  const mission = events.find((event) => event.action === "MISSION_STARTED");
+  const knownHosts = Array.isArray(mission?.metadata.knownHosts) ? mission.metadata.knownHosts.filter((host): host is string => typeof host === "string") : [];
+  const path: string[] = [knownHosts[0] ?? "INTERNET"];
   for (const event of events) {
     if (["SESSION_CREATED", "DATABASE_SESSION_CREATED"].includes(event.action) && event.target && path.at(-1) !== event.target) path.push(event.target);
   }
@@ -133,7 +136,7 @@ export function identifyRoute(events: ReplayEvent[], routes: RouteDefinition[]) 
 }
 
 export function summarizeReplay(events: ReplayEvent[], scenario: ReplayScenario, routes: RouteDefinition[] = []): ReplaySummary {
-  const objective = events.find((event) => event.action === "OBJECTIVE_RETRIEVED");
+  const objective = events.find((event) => event.action === "OPERATION_COMPLETED") ?? events.find((event) => event.action === "OBJECTIVE_RETRIEVED");
   const containment = events.find((event) => event.action === "ATTACK_CONTAINED");
   const firstDetection = events.find((event) => event.action === "DETECTION_TRIGGERED") ?? (routes.length ? undefined : events.find((event) => Boolean(detectionForAction(event.action))));
   const start = scenario.startedAt ? new Date(scenario.startedAt).getTime() : events[0] ? new Date(events[0].timestamp).getTime() : 0;
@@ -143,6 +146,18 @@ export function summarizeReplay(events: ReplayEvent[], scenario: ReplayScenario,
   const evidence = events.filter((event) => event.action !== "DETECTION_TRIGGERED");
   const objectiveRetrieved = Boolean(objective);
   const contained = Boolean(containment);
+  const learningEvidence = events.flatMap((event) => {
+    if (event.action !== "OBJECTIVE_COMPLETED") return [];
+    const learning = event.metadata.learning && typeof event.metadata.learning === "object" ? event.metadata.learning as Record<string, unknown> : {};
+    return [{
+      objectiveId: typeof event.metadata.objectiveId === "string" ? event.metadata.objectiveId : "unknown",
+      label: typeof event.metadata.label === "string" ? event.metadata.label : "Objective completed",
+      domain: typeof learning.domain === "string" ? learning.domain : undefined,
+      concepts: Array.isArray(learning.concepts) ? learning.concepts.filter((concept): concept is string => typeof concept === "string") : [],
+      stage: typeof learning.stage === "string" ? learning.stage : undefined,
+      evidence: typeof learning.evidence === "string" ? learning.evidence : undefined,
+    }];
+  });
   return {
     durationMs: Math.max(0, end - start),
     detectionTimeMs: firstDetection ? Math.max(0, new Date(firstDetection.timestamp).getTime() - start) : null,
@@ -153,6 +168,7 @@ export function summarizeReplay(events: ReplayEvent[], scenario: ReplayScenario,
     sessionCount: events.filter((event) => event.action === "SESSION_CREATED" || event.action === "ROOT_SESSION_CREATED").length,
     persistenceInstalled: events.some((event) => event.action === "PERSISTENCE_INSTALLED"),
     evidenceCount: evidence.length,
+    learningEvidence,
     route: route ? {
       id: route.id,
       name: route.name,
@@ -189,6 +205,13 @@ export function selectKeyDecision(events: ReplayEvent[], routes: RouteDefinition
     analysis: "Low-privilege control of a root-trusted input converted ordinary access into privileged execution.",
     redPerspective: "Red recognized a permission relationship instead of relying on a generic exploit.",
     bluePerspective: "Blue could correlate the configuration modification, service restart, and new root session.",
+  };
+  const learning = events.filter((event) => event.action === "OBJECTIVE_COMPLETED");
+  if (learning.length) return {
+    title: `${learning.length} task observations reconstructed from authoritative evidence`,
+    analysis: "The completed task record links each conclusion to the event or fact that supports it.",
+    redPerspective: "The operator established a baseline by observing the workstation before drawing conclusions.",
+    bluePerspective: "The same learning evidence remains available for review without changing the underlying event truth.",
   };
   return {
     title: "Reconnaissance established the first useful relationship",

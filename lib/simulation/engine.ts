@@ -1,11 +1,12 @@
 import { AccessLevel, ScenarioState, SecurityEventCategory, SecurityEventSeverity } from "@/app/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 import type { CommandResult, SimulationEvent, TerminalState } from "./types";
-import { detectionForAction } from "./rules";
+import { detectionForAction, parseMetadata } from "./rules";
 import { getDefinitionForScenario } from "./initializer";
 import type { ScenarioDefinition, ScenarioEventDefinition } from "./scenarios";
 import { reachable } from "./network";
-import { parseTerminalInput, psqlUsage } from "./tools";
+import { createToolAdapterRegistry, psqlUsage } from "./tools";
+import type { CurlIntent, PostgresConnectIntent, ServiceIntent, ToolContract } from "./tools";
 
 type EventInput = {
   action: string;
@@ -21,6 +22,7 @@ type EventInput = {
 
 export class SimulationEngine {
   private scenarioDefinition?: Promise<ScenarioDefinition>;
+  private activeTool?: ToolContract;
 
   constructor(private scenarioId: string, private actorId: string) {}
 
@@ -32,44 +34,139 @@ export class SimulationEngine {
   async executeCommand(command: string, state: TerminalState): Promise<CommandResult> {
     const scenario = await prisma.scenario.findUnique({ where: { id: this.scenarioId } });
     if (!scenario || scenario.state !== "ACTIVE") return this.result(false, "This operation has ended.");
-    const intent = parseTerminalInput(command, state.context);
-    if (intent.kind === "AUTHENTICATION_INPUT") return this.completeAuthentication(intent.password, state);
-    if (intent.kind === "PSQL_CONNECT") return this.connectPostgres(intent, state);
-    if (intent.kind === "PSQL_INPUT") return this.postgresInput(intent.input, state);
-    if (intent.kind === "CURL_REQUEST") return this.curl(intent, state);
-    if (intent.kind === "SERVICE_OPERATION") return this.serviceOperation(intent, state);
-    const { command: cmd, args } = intent;
-    switch (cmd) {
-      case "help": return this.result(true, this.help(args[0]));
-      case "clear": return this.result(true, "");
-      case "whoami": return this.result(true, state.currentUser);
-      case "id": return this.identity(state);
-      case "env": return this.environment(state);
-      case "hostname": return this.result(true, state.currentMachine);
-      case "pwd": return this.result(true, state.currentPath ?? "/");
-      case "cd": return this.changeDirectory(args, state);
-      case "ls": return this.listFiles(args, state);
-      case "cat": return this.readFile(args, state, false);
-      case "less": return this.readFile(args, state, false);
-      case "grep": return this.grep(args, state);
-      case "find": return this.find(args, state);
-      case "retrieve": return this.readFile(args, state, true);
-      case "ps": return this.processes(state);
-      case "ip": return this.ip(state);
-      case "ping": return this.ping(args, state);
-      case "nmap": return this.scan(args, state);
-      case "curl": return this.result(false, "Usage: curl [-X METHOD] <url> [--data BODY]");
-      case "psql": return this.result(false, psqlUsage);
-      case "ssh": return this.ssh(args, state);
-      case "john": return this.john(args);
-      case "sessions": return this.sessions(args);
-      case "install-agent": return this.installAgent(state);
-      default: return this.result(false, `Command not found: ${cmd}. Type help.`);
+    const registry = this.toolRegistry();
+    this.activeTool = registry.resolve(command, state.context).contract;
+    try {
+      const result = await registry.execute(command, state);
+      const audit = await this.emit({
+        action: "TOOL_EXECUTED", category: SecurityEventCategory.SYSTEM, severity: SecurityEventSeverity.INFO,
+        visibleToRed: false, visibleToBlue: false,
+        metadata: { family: this.activeTool.family, success: result.success, replay: this.activeTool.replay },
+      });
+      const progress = result.success ? await this.evaluateObjectives() : { events: [] as SimulationEvent[], operationCompleted: false };
+      const output = progress.operationCompleted && !result.output.endsWith("Operation complete.")
+        ? `${result.output}${result.output ? "\n\n" : ""}Operation complete. Evidence package is ready for review.`
+        : result.output;
+      return {
+        ...result,
+        output,
+        events: [...result.events, audit, ...progress.events],
+        objectiveRetrieved: result.objectiveRetrieved || progress.operationCompleted,
+      };
+    } finally {
+      this.activeTool = undefined;
     }
+  }
+
+  private toolRegistry() {
+    return createToolAdapterRegistry({
+      invalid: (message) => this.result(false, message),
+      unknown: (command) => this.result(false, `Command not found: ${command}. Type help.`),
+      shell: {
+        help: (args) => this.result(true, this.help(args[0])),
+        clear: () => this.result(true, ""),
+        whoami: (_args, state) => this.observe(state, "CURRENT_USER", state.currentUser),
+        id: (_args, state) => this.identity(state),
+        env: (_args, state) => this.environment(state),
+        hostname: (_args, state) => this.observe(state, "CURRENT_HOST", state.currentMachine),
+        pwd: (_args, state) => this.observe(state, "CURRENT_DIRECTORY", state.currentPath ?? "/"),
+        cd: (args, state) => this.changeDirectory(args, state),
+        ls: (args, state) => this.listFiles(args, state),
+        cat: (args, state) => this.readFile(args, state, false),
+        less: (args, state) => this.readFile(args, state, false),
+        grep: (args, state) => this.grep(args, state),
+        find: (args, state) => this.find(args, state),
+        retrieve: (args, state) => this.readFile(args, state, true),
+        ps: (_args, state) => this.processes(state),
+        ip: (_args, state) => this.ip(state),
+        ping: (args, state) => this.ping(args, state),
+        nmap: (args, state) => this.scan(args, state),
+        ssh: (args, state) => this.ssh(args, state),
+        john: (args) => this.john(args),
+        sessions: (args) => this.sessions(args),
+        "install-agent": (_args, state) => this.installAgent(state),
+      },
+      curl: (intent, state) => this.curl(intent, state),
+      service: (intent, state) => this.serviceOperation(intent, state),
+      postgresConnect: (intent, state) => this.connectPostgres(intent, state),
+      postgresInput: (input, state) => this.postgresInput(input, state),
+      authenticate: (password, state) => this.completeAuthentication(password, state),
+    });
   }
 
   private result(success: boolean, output: string, events: SimulationEvent[] = []): CommandResult {
     return { success, output, events };
+  }
+
+  private async evaluateObjectives() {
+    const [definition, scenario, storedEvents] = await Promise.all([
+      this.definition(),
+      prisma.scenario.findUniqueOrThrow({ where: { id: this.scenarioId } }),
+      prisma.securityEvent.findMany({
+        where: { scenarioId: this.scenarioId },
+        include: { sourceMachine: true, targetMachine: true },
+        orderBy: { timestamp: "asc" },
+      }),
+    ]);
+    if (scenario.state !== ScenarioState.ACTIVE) return { events: [] as SimulationEvent[], operationCompleted: false };
+
+    const completedIds = new Set(
+      storedEvents
+        .filter((event) => event.action === "OBJECTIVE_COMPLETED")
+        .map((event) => parseMetadata(event.metadata).objectiveId)
+        .filter((id): id is string => typeof id === "string"),
+    );
+    const emitted: SimulationEvent[] = [];
+    for (const objective of definition.objectives) {
+      if (completedIds.has(objective.id)) continue;
+      const evidence = storedEvents.find((event) => {
+        const metadata = parseMetadata(event.metadata);
+        if (objective.type === "retrieve_file") return event.action === "OBJECTIVE_RETRIEVED" && metadata.objectiveId === objective.id;
+        if (objective.type === "fact") return event.action === "FACT_DISCOVERED" && metadata.factId === objective.factId;
+        if (event.action !== objective.event.action) return false;
+        if (objective.event.sourceHost && event.sourceMachine?.hostname !== objective.event.sourceHost) return false;
+        if (objective.event.targetHost && event.targetMachine?.hostname !== objective.event.targetHost) return false;
+        if (objective.event.userId && event.userId !== objective.event.userId) return false;
+        return Object.entries(objective.event.metadata ?? {}).every(([key, value]) => metadata[key] === value);
+      });
+      if (!evidence) continue;
+      emitted.push(await this.emit({
+        action: "OBJECTIVE_COMPLETED",
+        category: SecurityEventCategory.SYSTEM,
+        severity: SecurityEventSeverity.INFO,
+        sourceMachineId: evidence.sourceMachineId ?? undefined,
+        targetMachineId: evidence.targetMachineId ?? undefined,
+        userId: evidence.userId ?? undefined,
+        visibleToRed: true,
+        visibleToBlue: true,
+        metadata: {
+          objectiveId: objective.id,
+          label: objective.label,
+          evidenceEventId: evidence.id,
+          learning: objective.learning,
+        },
+      }));
+      completedIds.add(objective.id);
+    }
+
+    const operationCompleted = definition.objectiveCompletion === "ALL"
+      ? definition.objectives.every((objective) => completedIds.has(objective.id))
+      : definition.objectives.some((objective) => completedIds.has(objective.id));
+    if (!operationCompleted) return { events: emitted, operationCompleted: false };
+
+    emitted.push(await this.emit({
+      action: "OPERATION_COMPLETED",
+      category: SecurityEventCategory.SYSTEM,
+      severity: SecurityEventSeverity.INFO,
+      visibleToRed: true,
+      visibleToBlue: true,
+      metadata: { objectiveIds: [...completedIds], completion: definition.objectiveCompletion ?? "ANY" },
+    }));
+    await prisma.scenario.update({
+      where: { id: this.scenarioId },
+      data: { state: scenario.mode === "BLUE" ? ScenarioState.FAILED : ScenarioState.COMPLETED, endedAt: new Date() },
+    });
+    return { events: emitted, operationCompleted: true };
   }
 
   private help(topic?: string) {
@@ -136,7 +233,7 @@ Type 'help <command>' for details, e.g. help curl`;
         scenarioId: this.scenarioId, actorId: this.actorId, action: input.action, category: input.category,
         severity: input.severity, sourceMachineId: input.sourceMachineId, targetMachineId: input.targetMachineId,
         userId: input.userId, visibleToRed: input.visibleToRed ?? true, visibleToBlue: (input.visibleToBlue ?? true) && monitored,
-        metadata: input.metadata ? JSON.stringify(input.metadata) : undefined,
+        metadata: input.metadata || this.activeTool ? JSON.stringify({ toolId: this.activeTool?.id, ...input.metadata }) : undefined,
       },
     });
     const detection = detectionForAction(event.action, definition.detections);
@@ -220,29 +317,50 @@ Type 'help <command>' for details, e.g. help curl`;
     return { events, output: discoveries.find((entry) => entry.output)?.output };
   }
 
-  private changeDirectory(args: string[], state: TerminalState) {
+  private async observe(state: TerminalState, kind: string, value: string, metadata: Record<string, unknown> = {}) {
+    const session = await this.currentMachine(state);
+    if (!session) return this.result(false, "No active session for this host.");
+    const event = await this.emit({
+      action: "OBSERVATION_RECORDED",
+      category: SecurityEventCategory.SYSTEM,
+      severity: SecurityEventSeverity.INFO,
+      targetMachineId: session.machine.id,
+      userId: session.user.username,
+      visibleToBlue: false,
+      metadata: { kind, value, ...metadata },
+    });
+    return this.result(true, value, [event]);
+  }
+
+  private async changeDirectory(args: string[], state: TerminalState) {
     if (!args[0]) return this.result(false, "Usage: cd <path>");
-    return { ...this.result(true, ""), currentPath: args[0].startsWith("/") ? args[0] : `${state.currentPath ?? "/"}/${args[0]}`.replace(/\/+/g, "/") } as CommandResult;
+    const currentPath = args[0].startsWith("/") ? args[0] : `${state.currentPath ?? "/"}/${args[0]}`.replace(/\/+/g, "/");
+    const observed = await this.observe(state, "DIRECTORY_CHANGED", currentPath, { from: state.currentPath ?? "/", path: currentPath });
+    return { ...observed, currentPath } as CommandResult;
   }
 
   private async identity(state: TerminalState) {
     const session = await this.currentMachine(state);
     if (!session) return this.result(false, "No active session for this host.");
     const uid = 1000 + [...session.user.username].reduce((sum, character) => sum + character.charCodeAt(0), 0) % 800;
-    return this.result(true, `uid=${uid}(${session.user.username}) gid=${uid}(${session.user.username}) groups=${session.user.groups.map((group) => `${group}`).join(",")}`);
+    const output = `uid=${uid}(${session.user.username}) gid=${uid}(${session.user.username}) groups=${session.user.groups.map((group) => `${group}`).join(",")}`;
+    const event = await this.emit({ action: "OBSERVATION_RECORDED", category: SecurityEventCategory.SYSTEM, severity: SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: false, metadata: { kind: "IDENTITY_GROUPS", value: output, groups: session.user.groups, privilege: session.user.privilege } });
+    return this.result(true, output, [event]);
   }
 
   private async environment(state: TerminalState) {
     const session = await this.currentMachine(state);
     if (!session) return this.result(false, "No active session for this host.");
-    return this.result(true, [
+    const output = [
       `HOME=/home/${session.user.username}`,
       `HOSTNAME=${session.machine.hostname}`,
       "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
       "SHELL=/bin/sh",
       `USER=${session.user.username}`,
       `ROOT_CONTEXT=${session.context}`,
-    ].join("\n"));
+    ].join("\n");
+    const event = await this.emit({ action: "OBSERVATION_RECORDED", category: SecurityEventCategory.SYSTEM, severity: SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: false, metadata: { kind: "ENVIRONMENT", value: output, hostname: session.machine.hostname, username: session.user.username } });
+    return this.result(true, output, [event]);
   }
 
   private canReadFile(file: { owner: string; group: string | null; permissions: string }, user: { username: string; groups: string[]; privilege: AccessLevel }) {
@@ -256,7 +374,9 @@ Type 'help <command>' for details, e.g. help curl`;
     const detailed = args[0] === "-l";
     const path = args.find((argument) => argument !== "-l") ?? state.currentPath ?? "/";
     const files = session.machine.files.filter((file) => file.path === path || file.path.startsWith(path === "/" ? "/" : `${path.replace(/\/$/, "")}/`));
-    return this.result(true, files.length ? files.map((file) => detailed ? `${file.permissions} ${file.owner}:${file.group ?? file.owner} ${file.path}` : file.path.split("/").at(-1)).join("\n") : "(empty)");
+    const output = files.length ? files.map((file) => detailed ? `${file.permissions} ${file.owner}:${file.group ?? file.owner} ${file.path}` : file.path.split("/").at(-1)).join("\n") : "(empty)";
+    const event = await this.emit({ action: "OBSERVATION_RECORDED", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: false, metadata: { kind: "DIRECTORY_LISTING", value: output, path, detailed } });
+    return this.result(true, output, [event]);
   }
 
   private async readFile(args: string[], state: TerminalState, retrieve: boolean) {
@@ -273,12 +393,10 @@ Type 'help <command>' for details, e.g. help curl`;
     events.push(...discovery.events);
     const definition = await this.definition();
     const objective = definition.objectives.find((entry) => entry.type === "retrieve_file" && entry.host === session.machine.hostname && entry.path === file.path);
-    if (objective) {
+    if (objective?.type === "retrieve_file") {
       if (!retrieve) return this.result(true, `${file.contents}\n\nUse 'retrieve ${file.path.split("/").at(-1)}' to extract the objective.`, events);
       events.push(await this.emit({ action: "OBJECTIVE_RETRIEVED", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.CRITICAL, targetMachineId: session.machine.id, userId: session.user.username, metadata: { objectiveId: objective.id, file: objective.path.split("/").at(-1) } }));
-      const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: this.scenarioId } });
-      await prisma.scenario.update({ where: { id: this.scenarioId }, data: { state: scenario.mode === "BLUE" ? ScenarioState.FAILED : ScenarioState.COMPLETED, endedAt: new Date() } });
-      return { success: true, output: `${objective.label.replace(/^Retrieve /, "")} retrieved. Operation complete.`, events, objectiveRetrieved: true, discoveredHosts: await this.discoveredHosts() };
+      return { success: true, output: `${objective.label.replace(/^Retrieve /, "")} retrieved.`, events, objectiveRetrieved: true, discoveredHosts: await this.discoveredHosts() };
     }
     return { success: true, output: file.contents ?? "(empty)", events, discoveredHosts: await this.discoveredHosts() };
   }
@@ -318,6 +436,7 @@ Type 'help <command>' for details, e.g. help curl`;
     const lines = session.machine.processes.map((process) => `${process.pid.toString().padEnd(7)} ${process.runningAs.padEnd(12)} ${process.commandLine ?? process.name}`);
     const events: SimulationEvent[] = [];
     for (const process of session.machine.processes) events.push(...(await this.applyDiscovery("process", session.machine.hostname, process.name, session.machine.id, process.commandLine ?? process.name)).events);
+    events.push(await this.emit({ action: "OBSERVATION_RECORDED", category: SecurityEventCategory.PROCESS, severity: SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: false, metadata: { kind: "PROCESS_LISTING", value: lines.join("\n"), processCount: session.machine.processes.length } }));
     return this.result(true, `PID     USER         COMMAND\n1       root         init\n${lines.join("\n")}`, events);
   }
 
@@ -348,7 +467,7 @@ Type 'help <command>' for details, e.g. help curl`;
     return { success: true, output: `Nmap scan report for ${target.hostname} (${target.ip})\nPORT     STATE  SERVICE\n${target.services.map((service) => `${service.port}/tcp`.padEnd(9) + `open   ${service.name}`).join("\n")}`, events, discoveredHosts: await this.discoveredHosts() };
   }
 
-  private async curl(intent: Extract<ReturnType<typeof parseTerminalInput>, { kind: "CURL_REQUEST" }>, state: TerminalState) {
+  private async curl(intent: CurlIntent, state: TerminalState) {
     if (!intent.url) return this.result(false, "Usage: curl [-X METHOD] <url> [--data BODY]");
     const source = await this.currentMachine(state);
     if (!source) return this.result(false, "No active session.");
@@ -378,7 +497,7 @@ Type 'help <command>' for details, e.g. help curl`;
     return { success: true, output: discovery.output ?? `${target.hostname} responded.`, events, discoveredHosts: await this.discoveredHosts() };
   }
 
-  private async serviceOperation(intent: Extract<ReturnType<typeof parseTerminalInput>, { kind: "SERVICE_OPERATION" }>, state: TerminalState) {
+  private async serviceOperation(intent: ServiceIntent, state: TerminalState) {
     const [current, definition] = await Promise.all([this.currentMachine(state), this.definition()]);
     const operation = definition.trustedServiceOperations?.find((entry) => entry.host === current?.machine.hostname && entry.service === intent.service && entry.fromUser === current?.user.username && entry.arguments.every((argument) => intent.args.includes(argument)));
     const service = current?.machine.services.find((entry) => entry.name === intent.service && entry.status === "RUNNING");
@@ -394,7 +513,7 @@ Type 'help <command>' for details, e.g. help curl`;
     return { success: true, output: operation.output, events, sessionUpdated: true, context: { type: "SSH" as const }, newSession: { id: session.id, userId: elevated.username, machineId: current.machine.hostname, privilege: elevated.privilege, sourceMachineId: current.machine.id, createdAt: session.createdAt, active: true, context: "SSH" as const, serviceName: service.name } };
   }
 
-  private async connectPostgres(intent: Extract<ReturnType<typeof parseTerminalInput>, { kind: "PSQL_CONNECT" }>, state: TerminalState) {
+  private async connectPostgres(intent: PostgresConnectIntent, state: TerminalState) {
     const [source, target, definition] = await Promise.all([this.currentMachine(state), this.target(intent.host), this.definition()]);
     const service = target?.services.find((entry) => entry.name === "postgres" && entry.status === "RUNNING");
     const identity = target?.users.find((entry) => entry.username === intent.username);
@@ -487,12 +606,10 @@ Type 'help <command>' for details, e.g. help curl`;
     if (requested.some((column) => !table.columns.includes(column))) return this.result(false, "ERROR: column does not exist");
     const rows = table.rows.map((row) => requested.map((column) => row[column] ?? "").join(" | "));
     const events = [await this.emit({ action: "DATABASE_QUERY", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.HIGH, sourceMachineId: session.sourceMachineId ?? undefined, targetMachineId: session.machineId, userId: session.user.username, metadata: { database: database.database, table: table.name, columns: requested } })];
-    const objective = (await this.definition()).objectives.find((entry) => entry.host === session.machine.hostname && table.rows.some((row) => row.filename === entry.path.split("/").at(-1)));
-    if (objective) {
+    const objective = (await this.definition()).objectives.find((entry) => entry.type === "retrieve_file" && entry.host === session.machine.hostname && table.rows.some((row) => row.filename === entry.path.split("/").at(-1)));
+    if (objective?.type === "retrieve_file") {
       events.push(await this.emit({ action: "OBJECTIVE_RETRIEVED", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.CRITICAL, targetMachineId: session.machineId, userId: session.user.username, metadata: { objectiveId: objective.id, file: objective.path.split("/").at(-1), via: "postgres" } }));
-      const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: this.scenarioId } });
-      await prisma.scenario.update({ where: { id: this.scenarioId }, data: { state: scenario.mode === "BLUE" ? ScenarioState.FAILED : ScenarioState.COMPLETED, endedAt: new Date() } });
-      return { success: true, output: `${requested.join(" | ")}\n${requested.map(() => "----------------").join("+")}\n${rows.join("\n")}\n(${rows.length} row)\n\n${objective.label.replace(/^Retrieve /, "")} retrieved. Operation complete.`, events, objectiveRetrieved: true };
+      return { success: true, output: `${requested.join(" | ")}\n${requested.map(() => "----------------").join("+")}\n${rows.join("\n")}\n(${rows.length} row)\n\n${objective.label.replace(/^Retrieve /, "")} retrieved.`, events, objectiveRetrieved: true };
     }
     return { success: true, output: `${requested.join(" | ")}\n${requested.map(() => "----------------").join("+")}\n${rows.join("\n")}\n(${rows.length} row)`, events };
   }

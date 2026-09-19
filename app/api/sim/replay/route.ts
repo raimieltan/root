@@ -31,8 +31,13 @@ export async function GET(request: Request) {
   const availability = await businessAvailability(scenario.id);
   const reviewed = new Set(events.flatMap((event) => Array.isArray(event.metadata.evidenceIds) ? event.metadata.evidenceIds as string[] : []));
   const missed = events.filter((event) => event.action === "DETECTION_TRIGGERED" && !reviewed.has(event.id) && !reviewed.has(String(event.metadata.evidenceEventId)));
-  const demonstrated = new Set(events.filter((event) => scenario.events.find((raw) => raw.id === event.id)?.actorId === actorId).map((event) => event.action));
-  const progression = { won: scenario.state === "COMPLETED", route: summary.route?.id ?? null, detected: events.some((event) => event.action === "DETECTION_TRIGGERED"), availability: availability.percent, concepts: definition.knowledgeRewards.filter((reward) => reward.actions.some((action) => demonstrated.has(action))).map((reward) => reward.concept) };
+  const actorEvents = events.filter((event) => scenario.events.find((raw) => raw.id === event.id)?.actorId === actorId);
+  const demonstrated = new Set(actorEvents.map((event) => event.action));
+  const annotatedConcepts = actorEvents.flatMap((event) => {
+    const learning = event.metadata.learning && typeof event.metadata.learning === "object" ? event.metadata.learning as Record<string, unknown> : {};
+    return Array.isArray(learning.concepts) ? learning.concepts.filter((concept): concept is string => typeof concept === "string") : [];
+  });
+  const progression = { won: scenario.state === "COMPLETED", route: summary.route?.id ?? null, detected: events.some((event) => event.action === "DETECTION_TRIGGERED"), availability: availability.percent, concepts: [...new Set([...definition.knowledgeRewards.filter((reward) => reward.actions.some((action) => demonstrated.has(action))).map((reward) => reward.concept), ...annotatedConcepts])] };
   return Response.json({
     success: true,
     operation: operationPresentation(definition),

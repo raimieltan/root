@@ -1,11 +1,39 @@
-import type { ScenarioDefinition, RouteDefinition } from "./types";
+import type { ScenarioDefinition, RouteDefinition, ScenarioServiceDefinition } from "./types";
 
 type Machine = ScenarioDefinition["machines"][number];
 export const identity = (username: string, privilege: "USER" | "SERVICE" | "ROOT" = "USER") => ({ username, role: privilege === "SERVICE" ? "service" : "human", privilege, groups: [username] });
 export const file = (path: string, owner: string, contents: string, permissions = "600") => ({ path, owner, group: owner, permissions, isSecret: true, contents });
+export function service(name: string, port: number, runningAsUser: string, exposedZones: ScenarioServiceDefinition["exposedZones"]): ScenarioServiceDefinition {
+  const web = name === "http" || name === "https" || name.endsWith("-api") || name === "vpn";
+  const database = name === "postgres";
+  const trusted = name === "backup-sync" || name === "backup";
+  return {
+    name, port, runningAsUser, exposedZones,
+    permissions: [
+      { action: "CONNECT", requires: ["NETWORK_REACHABLE", "SERVICE_RUNNING"] },
+      ...(!web ? [{ action: "AUTHENTICATE" as const, requires: ["NETWORK_REACHABLE" as const, "SERVICE_RUNNING" as const, "VALID_CREDENTIAL" as const, "IDENTITY_GRANT" as const] }] : []),
+      ...(database ? [{ action: "QUERY" as const, requires: ["SERVICE_RUNNING" as const, "IDENTITY_GRANT" as const, "RESOURCE_PERMISSION" as const] }] : []),
+      ...(trusted ? [{ action: "EXECUTE" as const, requires: ["SERVICE_RUNNING" as const, "GROUP_MEMBERSHIP" as const, "RESOURCE_PERMISSION" as const] }] : []),
+    ],
+    resources: database
+      ? [{ id: `${name}:databases`, kind: "DATABASE", operations: ["ENUMERATE", "QUERY"], sensitivity: "SENSITIVE" }]
+      : trusted
+        ? [{ id: `${name}:trusted-input`, kind: "HOOK", operations: ["READ", "EXECUTE"], sensitivity: "SENSITIVE" }]
+        : web
+          ? [{ id: `${name}:endpoints`, kind: "ENDPOINT", operations: ["ENUMERATE", "EXECUTE"], sensitivity: "INTERNAL" }]
+          : [{ id: `${name}:session`, kind: "SESSION", operations: ["ENUMERATE"], sensitivity: "INTERNAL" }],
+    outcomes: database
+      ? [{ action: "DATABASE_ACCESS", telemetry: ["POSTGRES_AUTH_SUCCESS", "DATABASE_SESSION_CREATED", "DATABASE_QUERY"], blueResponses: ["REVOKE_SESSION", "RESET_PASSWORD", "BLOCK_CONNECTION", "ISOLATE_HOST"] }]
+      : trusted
+        ? [{ action: "TRUSTED_SERVICE_EXECUTION", telemetry: ["PRIVILEGE_ESCALATION", "ROOT_SESSION_CREATED"], blueResponses: ["REVOKE_SESSION", "TERMINATE_PROCESS", "ISOLATE_HOST"] }]
+        : web
+          ? [{ action: "WEB_ACCESS", telemetry: ["WEB_REQUEST", "PROCESS_SPAWN", "SESSION_CREATED"], blueResponses: ["BLOCK_CONNECTION", "TERMINATE_PROCESS", "ISOLATE_HOST"] }]
+          : [{ action: "REMOTE_SESSION", telemetry: ["AUTH_SUCCESS", "AUTH_FAILED", "SESSION_CREATED"], blueResponses: ["REVOKE_SESSION", "RESET_PASSWORD", "DISABLE_ACCOUNT", "BLOCK_CONNECTION"] }],
+  };
+}
 export function host(hostname: string, ip: string, zone: Machine["zone"], users: Machine["users"], files: Machine["files"] = [], web = false): Machine {
   return { hostname, ip, zone, os: "linux", users, files,
-    services: [{ name: "ssh", port: 22, runningAsUser: "root", exposedZones: ["EXTERNAL", "DMZ", "INTERNAL", "FINANCE"] }, ...(web ? [{ name: "https", port: 443, runningAsUser: users[0].username, exposedZones: ["EXTERNAL" as const, "DMZ" as const] }] : [])],
+    services: [service("ssh", 22, "root", ["EXTERNAL", "DMZ", "INTERNAL", "FINANCE"]), ...(web ? [service("https", 443, users[0].username, ["EXTERNAL", "DMZ"])] : [])],
     processes: [{ name: web ? "portal-worker" : "sshd", pid: 210, runningAs: users[0].username }] };
 }
 export const external: Machine = { hostname: "INTERNET", ip: "0.0.0.0", zone: "EXTERNAL", os: "appliance", users: [{ username: "attacker", role: "operator", privilege: "NONE", groups: [] }], services: [], files: [] };

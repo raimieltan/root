@@ -1,16 +1,16 @@
 # Graph Report - root  (2026-09-19)
 
 ## Corpus Check
-- 84 files · ~609,098 words
+- 85 files · ~615,121 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 828 nodes · 1414 edges · 51 communities (41 shown, 7 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 15 edges (avg confidence: 0.83)
+- 870 nodes · 1503 edges · 52 communities (42 shown, 7 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 19 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `60e8c147`
+- Built from commit: `435823a9`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,7 +19,7 @@
 - devDependencies
 - dependencies
 - TypeScript Configuration
-- engine.ts
+- blue.ts
 - SimulationEngine
 - index.ts
 - Repository Agent Rules
@@ -53,7 +53,7 @@
 - 66. Page Mapping
 - 6. Canonical Application Names
 - Broken Unstyled Career Page Screenshot
-- replay-client.tsx
+- campaign.test.ts
 - Operation Glasshouse — Discovery Graph
 - 16. SIEM / Log Viewer
 - 40. Audio Production Priority
@@ -63,18 +63,19 @@
 - 3. Core Audio Principles
 - 7. Terminal Audio
 - ROOT — Audio Design Document
+- tools.ts
 
 ## God Nodes (most connected - your core abstractions)
-1. `SimulationEngine` - 41 edges
-2. `TerminalState` - 26 edges
+1. `SimulationEngine` - 43 edges
+2. `TerminalState` - 28 edges
 3. `getDefinitionForScenario()` - 16 edges
 4. `compilerOptions` - 16 edges
 5. `playAudio()` - 15 edges
 6. `ScenarioDefinition` - 15 edges
 7. `BlueTeamPage()` - 13 edges
-8. `prisma` - 12 edges
-9. `RootAudioSystem` - 11 edges
-10. `readRuns()` - 10 edges
+8. `createToolAdapterRegistry()` - 13 edges
+9. `prisma` - 12 edges
+10. `RootAudioSystem` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Next.js Wordmark Asset` --conceptually_related_to--> `Next.js Bootstrap Instructions`  [INFERRED]
@@ -94,35 +95,35 @@
 ## Hyperedges (group relationships)
 - **Shared Simulation Model** — docs_root_canonical_plan_shared_simulation, docs_root_canonical_plan_everything_leaves_evidence, docs_root_canonical_plan_post_operation_reconstruction [EXTRACTED 1.00]
 
-## Communities (51 total, 7 thin omitted)
+## Communities (52 total, 7 thin omitted)
 
 ### Community 0 - "red/page.tsx"
 Cohesion: 0.06
 Nodes (40): MissionPanel(), NetworkMap(), apps, Credential, navItems, RedTeamPage(), Line, Props (+32 more)
 
 ### Community 1 - "devDependencies"
-Cohesion: 0.06
-Nodes (31): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+23 more)
+Cohesion: 0.05
+Nodes (41): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+33 more)
 
 ### Community 2 - "dependencies"
-Cohesion: 0.05
-Nodes (41): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+33 more)
+Cohesion: 0.06
+Nodes (31): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+23 more)
 
 ### Community 3 - "TypeScript Configuration"
 Cohesion: 0.07
 Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules (+20 more)
 
-### Community 4 - "engine.ts"
-Cohesion: 0.08
-Nodes (49): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+41 more)
+### Community 4 - "blue.ts"
+Cohesion: 0.09
+Nodes (39): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+31 more)
 
 ### Community 5 - "SimulationEngine"
 Cohesion: 0.26
-Nodes (6): SimulationEngine, reachable(), parseTerminalInput(), CommandResult, SimulationEvent, TerminalState
+Nodes (5): SimulationEngine, reachable(), CommandResult, SimulationEvent, TerminalState
 
 ### Community 6 - "index.ts"
 Cohesion: 0.16
-Nodes (25): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+17 more)
+Nodes (26): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+18 more)
 
 ### Community 7 - "Repository Agent Rules"
 Cohesion: 0.20
@@ -205,8 +206,8 @@ Cohesion: 0.40
 Nodes (5): 13. Canonical Recurring Characters, Daniel Kade — Senior Red Operator, Elias Ward — Founder of Nodeline Security, Lena Ortiz — SOC Lead, Mara Voss — Director of Operations
 
 ### Community 32 - "Delivered vertical slices"
-Cohesion: 0.11
-Nodes (17): 1. Structured tool intents and terminal context, 2. Declarative Glasshouse application route, 3. Unix investigation commands, 4. Prompted SSH and PostgreSQL authentication, 5. Scenario content and migrations, 6. First-class credentials and Credentials application, 7. Legacy generic attack shortcuts retired, Deliberately still present (+9 more)
+Cohesion: 0.10
+Nodes (20): 1. Structured tool intents and terminal context, 2. Declarative Glasshouse application route, 3. Unix investigation commands, 4. Prompted SSH and PostgreSQL authentication, 5. Scenario content and migrations, 6. First-class credentials and Credentials application, 7. Legacy generic attack shortcuts retired, 8. Composable tool-adapter layer (+12 more)
 
 ### Community 34 - "blue/page.tsx"
 Cohesion: 0.08
@@ -224,9 +225,9 @@ Nodes (8): 92. Canonical Taxonomy, Artifact, Engagement, Evidence, Exercise, Fin
 Cohesion: 0.33
 Nodes (6): 109. Canonical Page Copy, After-Action Review, Employee Portal, Engagement Workspace, Operations Desk, Security Operations Center
 
-### Community 41 - "replay-client.tsx"
+### Community 41 - "campaign.test.ts"
 Cohesion: 0.07
-Nodes (33): CareerPage(), completeExercise(), proficiencyLabel, geistMono, geistSans, metadata, engagementId(), Home() (+25 more)
+Nodes (37): CareerPage(), completeExercise(), proficiencyLabel, geistMono, geistSans, metadata, engagementId(), Home() (+29 more)
 
 ### Community 42 - "Operation Glasshouse — Discovery Graph"
 Cohesion: 0.29
@@ -260,25 +261,29 @@ Nodes (4): 3. Core Audio Principles, Consistency, Functional Before Cinematic, L
 Cohesion: 0.67
 Nodes (3): 7. Terminal Audio, Command Execution, Typing
 
+### Community 51 - "tools.ts"
+Cohesion: 0.07
+Nodes (41): BLUE_RESPONSE_ACTIONS, EventInput, ScenarioEventDefinition, handlers, result(), unavailable(), argsOf(), AuthenticationIntent (+33 more)
+
 ## Knowledge Gaps
-- **467 isolated node(s):** `RespondFn`, `RespondFn`, `ModuleProps`, `FindingState`, `NAV` (+462 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 511 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **484 isolated node(s):** `RespondFn`, `RespondFn`, `ModuleProps`, `FindingState`, `NAV` (+479 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 530 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `SimulationEngine` connect `SimulationEngine` to `engine.ts`, `index.ts`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **Why does `campaignProgress()` connect `replay-client.tsx` to `engine.ts`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `SimulationEngine` connect `SimulationEngine` to `campaign.test.ts`, `tools.ts`, `blue.ts`, `index.ts`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **Why does `TerminalState` connect `SimulationEngine` to `campaign.test.ts`, `tools.ts`, `blue.ts`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **What connects `RespondFn`, `RespondFn`, `ModuleProps` to the rest of the system?**
-  _467 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _484 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `red/page.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.05817028027498678 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
-- **Should `dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `TypeScript Configuration` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._

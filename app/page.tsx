@@ -13,7 +13,7 @@ const engagementId = (operation: OperationPresentation) => `ENG-${String(1000 + 
 export default function Home() {
   const [operations] = useState<OperationPresentation[]>(() => campaign.map(operationPresentation));
   const [runs, setRuns] = useState<LocalRun[]>([]);
-  const [selected, setSelected] = useState("glasshouse");
+  const [selected, setSelected] = useState("first-shift");
   const [mode, setMode] = useState<"RED" | "BLUE">("RED");
   const [assistance, setAssistance] = useState("GUIDED");
   const [detailTab, setDetailTab] = useState("overview");
@@ -24,12 +24,14 @@ export default function Home() {
     const requestedOperation = params.get("operation");
     if (requestedOperation && operations.some((operation) => operation.id === requestedOperation)) setSelected(requestedOperation);
     if (params.get("team") === "BLUE") setMode("BLUE");
-    if (params.get("assistance") === "OPERATOR" && campaignProgress(savedRuns).operatorModeUnlocked) setAssistance("OPERATOR");
+    if (params.get("assistance") === "OPERATOR" && (campaignProgress(savedRuns).operatorModeUnlocked || operations.find((operation) => operation.id === requestedOperation)?.assistance.operatorAvailableAtStart)) setAssistance("OPERATOR");
     setRuns(savedRuns);
   }, [operations]);
 
   const progress = campaignProgress(runs);
   const operation = operations.find((entry) => entry.id === selected) ?? operations[0];
+  const operatorAvailable = progress.operatorModeUnlocked || operation.assistance.operatorAvailableAtStart;
+  const effectiveAssistance = assistance === "OPERATOR" && operatorAvailable ? "OPERATOR" : "GUIDED";
   const unlocked = !operation.presentation.prerequisite || progress.completed.includes(operation.presentation.prerequisite);
   const statusFor = (entry: OperationPresentation) => {
     if (entry.presentation.prerequisite && !progress.completed.includes(entry.presentation.prerequisite)) return "Access Restricted";
@@ -70,9 +72,9 @@ export default function Home() {
             <aside className="engagement-actions">
               <h2>Workspace Configuration</h2>
               <label>Assignment <select value={mode} onChange={(event) => setMode(event.target.value as "RED" | "BLUE")}>{operation.availableModes.map((value) => <option value={value} key={value}>{value === "RED" ? "Authorized Assessment" : "Incident Response"}</option>)}</select></label>
-              <label>Workflow Mode <select value={assistance} onChange={(event) => setAssistance(event.target.value)}><option value="GUIDED">Assisted</option><option value="OPERATOR" disabled={!progress.operatorModeUnlocked}>Standard {!progress.operatorModeUnlocked ? "— qualification required" : ""}</option></select></label>
-              <p>{assistance === "GUIDED" ? "Contextual analyst notes and procedure references are available." : operation.assistance.operator}</p>
-              {unlocked ? <Link className="primary-button open-workspace" href={`/${mode.toLowerCase()}?operation=${operation.id}&assistance=${assistance}`}>Open in Workspace</Link> : <p className="state-warn">Access requires completion of {operation.presentation.prerequisite} and the associated clearance review.</p>}
+              <label>Workflow Mode <select value={effectiveAssistance} onChange={(event) => setAssistance(event.target.value)}><option value="GUIDED">Assisted</option><option value="OPERATOR" disabled={!operatorAvailable}>Standard {!operatorAvailable ? "— qualification required" : ""}</option></select></label>
+              <p>{effectiveAssistance === "GUIDED" ? "Contextual analyst notes and procedure references are available." : operation.assistance.operator}</p>
+              {unlocked ? <Link className="primary-button open-workspace" href={`/${mode.toLowerCase()}?operation=${operation.id}&assistance=${effectiveAssistance}`}>Open in Workspace</Link> : <p className="state-warn">Access requires completion of {operation.presentation.prerequisite} and the associated clearance review.</p>}
               <h2>Attachments (3)</h2><ul><li>scope_authorization.pdf</li><li>environment_notes.txt</li><li>rules_of_engagement.pdf</li></ul>
             </aside>
           </div>

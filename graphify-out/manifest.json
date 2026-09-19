@@ -108,21 +108,21 @@
     "semantic_hash": "442ad7c5bbbff2217388a344aa7b9ac1"
   },
   "lib/simulation/blue.ts": {
-    "mtime": 1789775856.4715054,
-    "seen": 1789780667.999305,
-    "ast_hash": "932de501df727f3570cd8ec55708de03",
+    "mtime": 1789782718.292391,
+    "seen": 1789782983.229144,
+    "ast_hash": "7ee97b3e417e6078485b8177d73eaf9d",
     "semantic_hash": ""
   },
   "lib/simulation/engine.ts": {
-    "mtime": 1789744013.8071573,
-    "seen": 1789744785.510036,
-    "ast_hash": "7e8c496d2fd2be1011e4ec13ac4ad9bb",
+    "mtime": 1789783019.7502139,
+    "seen": 1789783067.666524,
+    "ast_hash": "6a9ac2ce8ff827e5363cf9b9ac319b56",
     "semantic_hash": ""
   },
   "lib/simulation/initializer.ts": {
-    "mtime": 1789743847.6716177,
-    "seen": 1789744785.510039,
-    "ast_hash": "3c27a3750ce4f343e4d7c348065122df",
+    "mtime": 1789782701.701094,
+    "seen": 1789782983.229179,
+    "ast_hash": "e92a1689f706893c2e2c877c1b85435b",
     "semantic_hash": ""
   },
   "lib/simulation/rules.ts": {
@@ -216,10 +216,10 @@
     "semantic_hash": "a204b372c5d55c1f54f7d45cebd2e649"
   },
   "docs/ROOT_CANONICAL_PLAN.md": {
-    "mtime": 1789660752.4940836,
-    "seen": 1789663363.224043,
-    "ast_hash": "93e6e76f75546a633d17fb0e41a226cd",
-    "semantic_hash": "93e6e76f75546a633d17fb0e41a226cd"
+    "mtime": 1789783530.5683775,
+    "seen": 1789783774.9564009,
+    "ast_hash": "861342160021f79af3b27fffcb244b1b",
+    "semantic_hash": ""
   },
   "docs/ui/VISUAL_STYLES.md": {
     "mtime": 1789737579.1389592,
@@ -288,9 +288,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/glasshouse.ts": {
-    "mtime": 1789745424.7522392,
-    "seen": 1789745463.383282,
-    "ast_hash": "5e4dfd7e6bbc61d69d02b873a3eb69f9",
+    "mtime": 1789782694.86334,
+    "seen": 1789782983.2293692,
+    "ast_hash": "5d82d4e669ee5df7537f562b0d0e0c91",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/index.ts": {
@@ -300,9 +300,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/types.ts": {
-    "mtime": 1789743933.2172832,
-    "seen": 1789744785.510533,
-    "ast_hash": "83acf49bddcba5e07a3763d9c86505dd",
+    "mtime": 1789782653.8238704,
+    "seen": 1789782983.229585,
+    "ast_hash": "13acabb908ad29aaff26e43e0802a012",
     "semantic_hash": ""
   },
   "app/api/operations/route.ts": {
@@ -330,9 +330,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/campaign.test.ts": {
-    "mtime": 1789731120.4169068,
-    "seen": 1789731205.444891,
-    "ast_hash": "a9f28f455d4a298344627fe029e6fcb5",
+    "mtime": 1789782866.955096,
+    "seen": 1789782983.229146,
+    "ast_hash": "e439d09cfc2238a16c71e6600b48d5fe",
     "semantic_hash": ""
   },
   "lib/simulation/network.ts": {
@@ -342,9 +342,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/content.ts": {
-    "mtime": 1789730806.354606,
-    "seen": 1789731205.445108,
-    "ast_hash": "79e71b9ff3a2fc14bcbbbdec29921756",
+    "mtime": 1789782675.0998976,
+    "seen": 1789782983.2292988,
+    "ast_hash": "20e8da31087d0952f9b4d5f5562efd0e",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/dead-drop.ts": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/validate.ts": {
-    "mtime": 1789743580.8585513,
-    "seen": 1789744785.510535,
-    "ast_hash": "b3f18ccb8d3f0c5bf642923afba4567d",
+    "mtime": 1789782733.7305284,
+    "seen": 1789782983.2295868,
+    "ast_hash": "af35c0f74dbf4506b062b4ecda4ed31d",
     "semantic_hash": ""
   },
   "playwright.config.ts": {
@@ -474,9 +474,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/tools.ts": {
-    "mtime": 1789743580.9717002,
-    "seen": 1789744785.510538,
-    "ast_hash": "03f56b682dd922cb6708c638c98e8db1",
+    "mtime": 1789783019.6558282,
+    "seen": 1789783067.667221,
+    "ast_hash": "229eea35266f49b5b07d21e6fd35758b",
     "semantic_hash": ""
   },
   "docs/tools/tools-unix.md": {
@@ -498,9 +498,9 @@
     "semantic_hash": ""
   },
   "docs/REALISTIC_INTERACTION_PROGRESS.md": {
-    "mtime": 1789731199.4374697,
-    "seen": 1789731205.44573,
-    "ast_hash": "170636fa698e3900c0d8f4c9f105dc6e",
+    "mtime": 1789783761.818402,
+    "seen": 1789783774.9563708,
+    "ast_hash": "236e277588af2fa7910d793fa6e69303",
     "semantic_hash": ""
   },
   "app/ui/root-os.tsx": {
@@ -627,6 +627,12 @@
     "mtime": 1789781087.8111262,
     "seen": 1789781894.638394,
     "ast_hash": "f29ebcda145faf38a71b4e13946d13b6",
+    "semantic_hash": ""
+  },
+  "lib/simulation/tool-adapters.test.ts": {
+    "mtime": 1789783019.884478,
+    "seen": 1789783067.667219,
+    "ast_hash": "54b6b5a3f3098cdd13ca985cd3733d5b",
     "semantic_hash": ""
   }
 }

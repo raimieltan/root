@@ -29,7 +29,8 @@ export async function initializeScenario(mode: ScenarioMode = ScenarioMode.RED, 
         users.set(`${machine.hostname}:${user.username}`, createdUser);
       }
       for (const service of machine.services) {
-        await tx.service.create({ data: { ...service, protocol: "tcp", exposedZones: [...service.exposedZones], machineId: id(machine.hostname) } });
+        const { permissions, resources, outcomes, ...persisted } = service;
+        await tx.service.create({ data: { ...persisted, protocol: "tcp", exposedZones: [...service.exposedZones], machineId: id(machine.hostname), metadata: JSON.stringify({ permissions, resources, outcomes }) } });
       }
       for (const file of machine.files) await tx.file.create({ data: { ...file, machineId: id(machine.hostname) } });
       for (const process of machine.processes ?? []) await tx.process.create({ data: { ...process, machineId: id(machine.hostname) } });
@@ -45,10 +46,12 @@ export async function initializeScenario(mode: ScenarioMode = ScenarioMode.RED, 
     const redActor = await tx.actor.create({ data: { name: mode === ScenarioMode.BLUE ? "Scripted Red" : "Red Team Operator", role: mode === ScenarioMode.BLUE ? "red_ai" : "red_operator", scenarioId: scenario.id } });
     const blueActor = mode === ScenarioMode.BLUE ? await tx.actor.create({ data: { name: "Blue Team Operator", role: "blue_operator", scenarioId: scenario.id } }) : null;
     if (mode === ScenarioMode.RED) await tx.actor.create({ data: { name: "Baseline Blue", role: "blue_ai", scenarioId: scenario.id } });
-    const startHost = definition.startingKnowledge.knownHosts[0];
-    const attacker = users.get(`${startHost}:attacker`);
-    if (!attacker) throw new Error("Scenario must define its starting attacker identity");
-    await tx.session.create({ data: { actorId: redActor.id, userId: attacker.id, machineId: id(startHost), privilege: AccessLevel.NONE, scenarioId: scenario.id } });
+    const startHost = definition.startingSession?.host ?? definition.startingKnowledge.knownHosts[0];
+    const startUsername = definition.startingSession?.user ?? "attacker";
+    const startUser = users.get(`${startHost}:${startUsername}`);
+    if (!startUser) throw new Error("Scenario must define its starting identity");
+    const startPrivilege = definition.machines.find((machine) => machine.hostname === startHost)?.users.find((user) => user.username === startUsername)?.privilege ?? AccessLevel.NONE;
+    await tx.session.create({ data: { actorId: redActor.id, userId: startUser.id, machineId: id(startHost), privilege: startPrivilege, scenarioId: scenario.id } });
     await tx.securityEvent.create({
       data: {
         actorId: redActor.id,
@@ -64,6 +67,7 @@ export async function initializeScenario(mode: ScenarioMode = ScenarioMode.RED, 
           assistance,
           knownHosts: definition.startingKnowledge.knownHosts,
           knownAssets: definition.startingKnowledge.knownAssets,
+          startingPath: definition.startingSession?.path ?? "/",
           blueProfileId: blueProfileId ?? definition.defaultBlueProfile,
         }),
       },
@@ -82,9 +86,9 @@ export async function initializeScenario(mode: ScenarioMode = ScenarioMode.RED, 
       redActorId: redActor.id,
       startingState: {
         currentMachine: startHost,
-        currentUser: "attacker",
-        currentPrivilege: AccessLevel.NONE,
-        currentPath: "/",
+        currentUser: startUsername,
+        currentPrivilege: startPrivilege,
+        currentPath: definition.startingSession?.path ?? "/",
         discoveredHosts: [...definition.startingKnowledge.knownHosts],
       },
     };

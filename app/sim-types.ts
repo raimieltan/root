@@ -17,7 +17,7 @@ export type ScenarioView = {
   }>;
   scenario: { id: string; mode: string; state: string; startedAt?: string; endedAt?: string };
   actor: { id: string; role: string }; redActorId?: string;
-  currentSession: { id: string; machine: string; user: string; privilege: string } | null;
+  currentSession: { id: string; machine: string; user: string; privilege: string; path: string } | null;
   sessions: Array<{ id: string; machine: string; user: string; privilege: string; createdAt: string }>;
   discoveredHosts: string[]; machines: MachineView[]; events: EventView[];
   alerts: Array<{ id: string; ruleId: string; title: string; severity: string; summary: string; timestamp: string; rationale: string; evidenceEventId?: string }>;
@@ -34,6 +34,7 @@ export type ScenarioView = {
   opsec: { network: string; authentication: string; endpoint: string };
   guidance: {
     objective: string;
+    objectives: Array<{ id: string; label: string; completed: boolean }>;
     knowledge: {
       known: Array<{ id: string; category: string; value: string }>;
       unknown: string[];

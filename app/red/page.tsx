@@ -44,7 +44,7 @@ export default function RedTeamPage() {
       <div className="engagement-main">
         <div className="workspace-toolbar"><div><span className="live-dot" /> {view.operation.name} <b>{view.scenario.state}</b></div><span>{view.operation.organization} · {view.operation.presentation.caseId} · {assistance === "GUIDED" ? "Assisted" : "Standard"}</span></div>
         <div className="engagement-grid">
-          <Terminal scenarioId={ids.scenarioId} actorId={ids.actorId} prefill={terminalPrefill} initialState={view.currentSession ? { currentMachine: view.currentSession.machine, currentUser: view.currentSession.user, currentPrivilege: view.currentSession.privilege, currentSessionId: view.currentSession.id, currentPath: "/", context: { type: "UNIX" }, discoveredHosts: view.discoveredHosts } : terminalState} onStateChange={setTerminalState} onRefresh={() => void refresh()} />
+          <Terminal scenarioId={ids.scenarioId} actorId={ids.actorId} prefill={terminalPrefill} initialState={view.currentSession ? { currentMachine: view.currentSession.machine, currentUser: view.currentSession.user, currentPrivilege: view.currentSession.privilege, currentSessionId: view.currentSession.id, currentPath: view.currentSession.path, context: { type: "UNIX" }, discoveredHosts: view.discoveredHosts } : terminalState} onStateChange={setTerminalState} onRefresh={() => void refresh()} />
           <NetworkMap machines={view.machines} current={terminalState.currentMachine} organization={view.operation.organization} />
           <div className="engagement-lower">
             {activeApp === "Mission" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} />}

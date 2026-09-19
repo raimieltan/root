@@ -2098,6 +2098,60 @@ button.operation-row.selected {
   font: 10px / 1.45 var(--font-geist-sans);
 }
 
+.objective-list {
+  margin: 10px 14px 12px;
+  border: 1px solid var(--border);
+  background: #071013;
+}
+
+.objective-list > header,
+.objective-list > div {
+  min-height: 27px;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 7px;
+}
+
+.objective-list > header {
+  grid-template-columns: minmax(0, 1fr) auto;
+  border-bottom: 1px solid var(--border);
+  color: var(--blue-light);
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.objective-list > header span {
+  color: #718a94;
+  font-weight: 400;
+}
+
+.objective-list > div + div {
+  border-top: 1px dotted var(--border-soft);
+}
+
+.objective-list > div > span {
+  color: var(--text-muted);
+  font: 11px var(--font-geist-mono);
+}
+
+.objective-list > div.completed > span,
+.objective-list > div.completed small {
+  color: var(--green-light);
+}
+
+.objective-list p {
+  margin: 0;
+  color: #9bb0b8;
+  font: 9px / 1.35 var(--font-geist-sans);
+}
+
+.objective-list small {
+  color: #657b84;
+  font: 7px var(--font-geist-mono);
+}
+
 .progress-list {
   margin: 12px 14px;
 

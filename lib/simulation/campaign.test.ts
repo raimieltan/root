@@ -9,11 +9,14 @@ import { businessAvailability } from "./availability";
 import { validateScenario } from "./scenarios/validate";
 import { campaignProgress, type LocalRun } from "../campaign";
 import type { TerminalState } from "./types";
+import { normalizeReplayEvent, summarizeReplay, visibleToLens } from "./replay";
 
 describe("Canonical campaign", { concurrency: false }, () => {
-  it("expands the content alpha campaign to six organizations and eight linked operations", () => {
-    assert.equal(campaign.length, 8);
-    assert.equal(new Set(campaign.map((definition) => definition.organization)).size, 6);
+  it("adds Act 0 to the content alpha campaign without reducing the linked operation set", () => {
+    assert.equal(campaign.length, 9);
+    assert.equal(new Set(campaign.map((definition) => definition.organization)).size, 7);
+    assert.equal(campaign[0].id, "first-shift");
+    assert.equal(campaign.find((definition) => definition.id === "glasshouse")?.presentation.prerequisite, "first-shift");
     const incidentPack = campaign.filter((definition) => ["strange-login", "something-calling-home", "ghost-account", "no-one-knows"].includes(definition.id));
     assert.deepEqual(incidentPack.map((definition) => definition.presentation.prerequisite), ["paper-trail", "strange-login", "something-calling-home", "ghost-account"]);
     for (const definition of incidentPack) {
@@ -23,11 +26,12 @@ describe("Canonical campaign", { concurrency: false }, () => {
     }
   });
   it("takes a guided newcomer through the prerequisite path to Operator", async () => {
-    const onboardingProfiles = [campaign[0].blueProfiles[1], campaign[1].blueProfiles[0], campaign[2].blueProfiles[1]];
+    const onboarding = ["glasshouse", "nightshift", "dead-drop"].map((id) => campaign.find((definition) => definition.id === id)!);
+    const onboardingProfiles = [onboarding[0].blueProfiles[1], onboarding[1].blueProfiles[0], onboarding[2].blueProfiles[1]];
     const runs: LocalRun[] = [];
 
     for (const [index, profile] of onboardingProfiles.entries()) {
-      const definition = campaign[index];
+      const definition = onboarding[index];
       const initialized = await initializeScenario("RED", definition.id);
       try {
         const state: TerminalState = { ...initialized.startingState, activeSessions: [], credentials: new Map() };
@@ -80,10 +84,21 @@ describe("Canonical campaign", { concurrency: false }, () => {
           assert.equal(result.success, true, `${command}: ${result.output}`);
           if (result.newSession) { state.currentMachine = result.newSession.machineId; state.currentUser = result.newSession.userId; state.currentPrivilege = result.newSession.privilege; state.currentSessionId = result.newSession.id; state.context = result.context; }
         }
-        const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: run.scenarioId }, include: { events: true } });
+        const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: run.scenarioId }, include: { events: { include: { sourceMachine: true, targetMachine: true }, orderBy: { timestamp: "asc" } } } });
         assert.equal(scenario.state, "COMPLETED");
         assert.ok(scenario.events.some((e) => e.action === "OBJECTIVE_RETRIEVED"));
         assert.equal(scenario.events.some((e) => e.action === "WEB_REQUEST"), profile.commands.some((c) => c.startsWith("curl")));
+        const replay = scenario.events.map((event) => normalizeReplayEvent({
+          id: event.id, timestamp: event.timestamp.toISOString(), category: event.category, action: event.action, severity: event.severity,
+          source: event.sourceMachine?.hostname ?? null, target: event.targetMachine?.hostname ?? null, userId: event.userId,
+          metadata: event.metadata, visibleToRed: event.visibleToRed, visibleToBlue: event.visibleToBlue,
+        }));
+        assert.ok(replay.some((event) => visibleToLens(event, "RED")), `${definition.id}: Red replay empty`);
+        assert.ok(replay.some((event) => visibleToLens(event, "BLUE")), `${definition.id}: Blue replay empty`);
+        assert.equal(replay.filter((event) => visibleToLens(event, "TRUTH")).length, replay.length);
+        const summary = summarizeReplay(replay, { state: scenario.state, startedAt: scenario.startedAt?.toISOString(), endedAt: scenario.endedAt?.toISOString() }, definition.routes);
+        assert.equal(summary.route?.id, profile.routeId, `${definition.id}: replay route`);
+        assert.equal(summary.objectiveRetrieved, true, `${definition.id}: replay objective`);
       } finally { await deleteScenario(run.scenarioId); }
     });
     it(`${definition.id}/${profile.id}: Blue AI uses the same route events`, async () => {
@@ -180,7 +195,7 @@ describe("Canonical campaign", { concurrency: false }, () => {
     } finally { await deleteScenario(run.scenarioId); }
   });
   it("rejects invalid content and does not reward repeated command or completion spam", () => {
-    const invalid = structuredClone(campaign[0]); invalid.connections[0].target = "ABSENT";
+    const invalid = structuredClone(campaign.find((definition) => definition.id === "glasshouse")!); invalid.connections[0].target = "ABSENT";
     assert.throws(() => validateScenario(invalid), /unknown host/);
     const run: LocalRun = { scenarioId: "one", actorId: "actor", definitionId: "glasshouse", name: "Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: ["Trust relationships"], availability: 100 } };
     assert.equal(campaignProgress([run, { ...run, scenarioId: "two" }]).xp, campaignProgress([run]).xp);

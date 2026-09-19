@@ -109,7 +109,13 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
         .at(-1)
     : undefined;
   const lastResponseMetadata = parseMetadata(lastResponseEvent?.metadata);
-  const objectiveRetrieved = scenario.events.some((event) => event.action === "OBJECTIVE_RETRIEVED");
+  const objectiveRetrieved = scenario.events.some((event) => event.action === "OBJECTIVE_RETRIEVED" || event.action === "OPERATION_COMPLETED");
+  const completedObjectiveIds = new Set(
+    scenario.events
+      .filter((event) => event.action === "OBJECTIVE_COMPLETED")
+      .map((event) => parseMetadata(event.metadata).objectiveId)
+      .filter((id): id is string => typeof id === "string"),
+  );
   const factEvents = scenario.events
     .filter((event) => event.action === "FACT_DISCOVERED")
     .map((event) => ({ event, metadata: parseMetadata(event.metadata) }));
@@ -141,7 +147,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     connections: connections.map((c) => ({ id: c.id, source: c.source.hostname, target: c.target.hostname, protocol: c.protocol, port: c.port, allowed: c.allowed })),
     scenario: { id: scenario.id, mode: scenario.mode, state: scenario.state, startedAt: scenario.startedAt?.toISOString(), endedAt: scenario.endedAt?.toISOString() },
     actor: { id: actor.id, role: actor.role },
-    currentSession: !isBlue && current ? { id: current.id, machine: current.machine.hostname, user: current.user.username, privilege: current.privilege } : null,
+    currentSession: !isBlue && current ? { id: current.id, machine: current.machine.hostname, user: current.user.username, privilege: current.privilege, path: typeof mission.startingPath === "string" && actorSessions.length === 1 ? mission.startingPath : "/" } : null,
     sessions: (isBlue ? scenario.sessions.filter((s) => s.active && s.machine.zone !== "EXTERNAL") : activeSessions).map((session) => ({ id: session.id, machine: session.machine.hostname, user: session.user.username, privilege: session.privilege, createdAt: session.createdAt.toISOString() })),
     discoveredHosts: isBlue ? machines.map((m) => m.hostname) : [...discovered], machines, events,
     investigation,
@@ -176,7 +182,8 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
       endpoint: level(redFootprint.filter((event) => ["PROCESS", "FILESYSTEM", "PRIVILEGE", "PERSISTENCE"].includes(event.category)).length),
     },
     guidance: {
-      objective: definition.objectives[0]?.label ?? "Complete the objective",
+      objective: definition.objectiveSummary ?? definition.objectives[0]?.label ?? "Complete the objective",
+      objectives: definition.objectives.map((objective) => ({ id: objective.id, label: objective.label, completed: completedObjectiveIds.has(objective.id) })),
       knowledge: {
         known: knownFacts.map((fact) => ({ id: fact.id, category: fact.category, value: fact.known })),
         unknown: unknownFacts.slice(0, 6),

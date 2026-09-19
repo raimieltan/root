@@ -31,6 +31,51 @@ export type ScenarioFact = {
   requiredFor: string;
 };
 
+export type KnowledgeDomain =
+  | "COMPUTING_OS"
+  | "NETWORKING"
+  | "WEB_SYSTEMS"
+  | "DATABASES"
+  | "IDENTITY_ACCESS"
+  | "OFFENSIVE_SECURITY"
+  | "DEFENSIVE_SECURITY"
+  | "NETWORK_PACKET_ANALYSIS"
+  | "CLOUD_INFRASTRUCTURE"
+  | "SECURITY_REASONING";
+
+export type LearningAnnotation = {
+  domain: KnowledgeDomain;
+  concepts: string[];
+  stage: "INTRODUCED" | "PRACTICED" | "DEMONSTRATED" | "PROFICIENT" | "MASTERED";
+  evidence: string;
+};
+
+type ObjectiveBase = {
+  id: string;
+  label: string;
+  learning?: LearningAnnotation;
+};
+
+export type ScenarioObjective =
+  | (ObjectiveBase & { type: "retrieve_file"; host: string; path: string })
+  | (ObjectiveBase & {
+      type: "event";
+      event: {
+        action: string;
+        sourceHost?: string;
+        targetHost?: string;
+        userId?: string;
+        metadata?: Record<string, string | number | boolean>;
+      };
+    })
+  | (ObjectiveBase & { type: "fact"; factId: string });
+
+export type BeginnerExitQuestion = {
+  id: string;
+  prompt: string;
+  evidenceObjectives: string[];
+};
+
 export type RouteDefinition = {
   id: string;
   name: string;
@@ -47,14 +92,43 @@ export type RouteDefinition = {
   };
 };
 
+export type ServicePermissionDefinition = {
+  action: "CONNECT" | "AUTHENTICATE" | "ENUMERATE" | "READ" | "EXECUTE" | "QUERY";
+  requires: Array<"NETWORK_REACHABLE" | "SERVICE_RUNNING" | "VALID_CREDENTIAL" | "IDENTITY_GRANT" | "GROUP_MEMBERSHIP" | "RESOURCE_PERMISSION">;
+};
+
+export type ServiceResourceDefinition = {
+  id: string;
+  kind: "SESSION" | "ENDPOINT" | "CONFIGURATION" | "HOOK" | "DATABASE" | "TABLE" | "FILE";
+  operations: Array<"ENUMERATE" | "READ" | "EXECUTE" | "QUERY">;
+  sensitivity: "PUBLIC" | "INTERNAL" | "SENSITIVE" | "OBJECTIVE";
+};
+
+export type ServiceOutcomeDefinition = {
+  action: string;
+  telemetry: string[];
+  blueResponses: string[];
+};
+
+export type ScenarioServiceDefinition = {
+  name: string;
+  port: number;
+  runningAsUser: string;
+  exposedZones: NetworkZone[];
+  permissions: ServicePermissionDefinition[];
+  resources: ServiceResourceDefinition[];
+  outcomes: ServiceOutcomeDefinition[];
+};
+
 export type ScenarioDefinition = {
   id: string;
   name: string;
   organization: string;
   briefing: { red: string; blue: string; constraints: string[] };
+  objectiveSummary?: string;
   presentation: { caseId: string; focus: string[]; order: number; prerequisite?: string };
   availableModes: Array<"RED" | "BLUE">;
-  assistance: { guided: string[]; operator: string };
+  assistance: { guided: string[]; operator: string; operatorAvailableAtStart?: boolean };
   conditions: { timeLimitMinutes: number; minimumAvailability: number };
   securityControls: Array<{ host: string; telemetry: string[] }>;
   businessServices: Array<{ name: string; hosts: string[]; impact: string }>;
@@ -63,6 +137,7 @@ export type ScenarioDefinition = {
   backgroundActivity: Array<{ host: string; user: string; source?: string; action: string; context: string }>;
   aliases: Record<string, string>;
   startingKnowledge: { knownHosts: string[]; knownAssets: string[] };
+  startingSession?: { host: string; user: string; path?: string };
   facts?: ScenarioFact[];
   machines: Array<{
     hostname: string;
@@ -70,7 +145,7 @@ export type ScenarioDefinition = {
     zone: NetworkZone;
     os: "linux" | "windows" | "appliance";
     users: Array<{ username: string; role: string; privilege: AccessLevel; groups: string[]; password?: string }>;
-    services: Array<{ name: string; port: number; runningAsUser: string; exposedZones: NetworkZone[] }>;
+    services: ScenarioServiceDefinition[];
     files: Array<{ path: string; owner: string; group?: string; permissions: string; isSecret: boolean; contents: string }>;
     processes?: Array<{ name: string; pid: number; runningAs: string; commandLine?: string }>;
   }>;
@@ -112,7 +187,9 @@ export type ScenarioDefinition = {
     output: string;
     evidence: ScenarioEventDefinition[];
   }>;
-  objectives: Array<{ id: string; type: "retrieve_file"; host: string; path: string; label: string }>;
+  objectives: ScenarioObjective[];
+  objectiveCompletion?: "ANY" | "ALL";
+  beginnerExitQuestions?: BeginnerExitQuestion[];
   detections: Record<string, { id: string; title: string; severity: string; rationale: string }>;
   routes: RouteDefinition[];
   blueProfiles: Array<{ id: string; routeId: string; commands: string[] }>;
