@@ -3,7 +3,7 @@ import { commonDetections, discover, external, file, host, identity, link, route
 
 export const deadDrop: ScenarioDefinition = {
   id: "dead-drop", name: "Operation Dead Drop", organization: "Collective Research",
-  presentation: { caseId: "SEG-02", order: 5, prerequisite: "nightshift", focus: ["Segmentation", "Pivoting", "Evidence management"] },
+  presentation: { caseId: "SEG-02", order: 9, prerequisite: "nightshift", focus: ["Segmentation", "Pivoting", "Evidence management"] },
   briefing: { red: "Retrieve DROP_ARCHIVE.enc from the research vault or its recovery replica. The perimeter cannot reach either objective directly. Find a permitted pivot and assess what each route exposes.", blue: "Research exchange and recovery traffic share a restricted environment. Investigate competing routes, prevent archive extraction, and protect research availability.", constraints: ["Public archive is a decoy, not the objective", "Blocking one pivot does not block the independent recovery route"] },
   availableModes: ["RED", "BLUE"], assistance: { guided: ["curl exchange.collective.test reveals a partner credential and a recovery relationship.", "Use ls and cat on each pivot to discover the next permitted connection. Direct perimeter-to-vault access is blocked.", "The public archive is irrelevant. Compare the exchange path with the recovery path and the evidence each leaves."], operator: "Find authorized network relationships across the restricted zones and choose an objective copy." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },

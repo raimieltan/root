@@ -1,16 +1,16 @@
 # Graph Report - root  (2026-09-19)
 
 ## Corpus Check
-- 91 files · ~620,841 words
+- 99 files · ~627,587 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 892 nodes · 1600 edges · 52 communities (42 shown, 7 thin omitted)
+- 912 nodes · 1688 edges · 52 communities (42 shown, 7 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 19 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ab6df7e7`
+- Built from commit: `59032d8a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,16 +66,16 @@
 - tools.ts
 
 ## God Nodes (most connected - your core abstractions)
-1. `SimulationEngine` - 48 edges
-2. `TerminalState` - 32 edges
-3. `ScenarioDefinition` - 18 edges
-4. `getDefinitionForScenario()` - 16 edges
-5. `compilerOptions` - 16 edges
-6. `playAudio()` - 15 edges
-7. `prisma` - 15 edges
-8. `BlueTeamPage()` - 13 edges
-9. `getScenarioView()` - 13 edges
-10. `createToolAdapterRegistry()` - 13 edges
+1. `SimulationEngine` - 52 edges
+2. `TerminalState` - 36 edges
+3. `ScenarioDefinition` - 22 edges
+4. `prisma` - 19 edges
+5. `getScenarioView()` - 17 edges
+6. `getDefinitionForScenario()` - 16 edges
+7. `compilerOptions` - 16 edges
+8. `playAudio()` - 15 edges
+9. `initializeScenario()` - 14 edges
+10. `BlueTeamPage()` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Next.js Wordmark Asset` --conceptually_related_to--> `Next.js Bootstrap Instructions`  [INFERRED]
@@ -102,19 +102,19 @@ Cohesion: 0.06
 Nodes (40): MissionPanel(), NetworkMap(), apps, Credential, navItems, RedTeamPage(), Line, Props (+32 more)
 
 ### Community 1 - "devDependencies"
-Cohesion: 0.06
-Nodes (31): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+23 more)
+Cohesion: 0.05
+Nodes (41): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+33 more)
 
 ### Community 2 - "dependencies"
-Cohesion: 0.05
-Nodes (41): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+33 more)
+Cohesion: 0.06
+Nodes (31): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+23 more)
 
 ### Community 3 - "TypeScript Configuration"
 Cohesion: 0.07
 Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules (+20 more)
 
 ### Community 4 - "engine.ts"
-Cohesion: 0.08
+Cohesion: 0.07
 Nodes (48): POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma, prisma (+40 more)
 
 ### Community 5 - "SimulationEngine"
@@ -122,8 +122,8 @@ Cohesion: 0.26
 Nodes (5): SimulationEngine, reachable(), CommandResult, SimulationEvent, TerminalState
 
 ### Community 6 - "index.ts"
-Cohesion: 0.11
-Nodes (37): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+29 more)
+Cohesion: 0.09
+Nodes (41): commonDetections, discover(), external, file(), host(), identity(), link(), Machine (+33 more)
 
 ### Community 7 - "Repository Agent Rules"
 Cohesion: 0.20
@@ -226,8 +226,8 @@ Cohesion: 0.33
 Nodes (6): 109. Canonical Page Copy, After-Action Review, Employee Portal, Engagement Workspace, Operations Desk, Security Operations Center
 
 ### Community 41 - "replay-client.tsx"
-Cohesion: 0.07
-Nodes (33): CareerPage(), completeExercise(), proficiencyLabel, geistMono, geistSans, metadata, engagementId(), Home() (+25 more)
+Cohesion: 0.08
+Nodes (32): CareerPage(), completeExercise(), proficiencyLabel, geistMono, geistSans, metadata, engagementId(), Home() (+24 more)
 
 ### Community 42 - "Operation Glasshouse — Discovery Graph"
 Cohesion: 0.29
@@ -262,28 +262,28 @@ Cohesion: 0.67
 Nodes (3): 7. Terminal Audio, Command Execution, Typing
 
 ### Community 51 - "tools.ts"
-Cohesion: 0.09
-Nodes (33): BLUE_RESPONSE_ACTIONS, handlers, result(), unavailable(), argsOf(), AuthenticationIntent, commandOf(), createToolAdapterRegistry() (+25 more)
+Cohesion: 0.08
+Nodes (34): BLUE_RESPONSE_ACTIONS, handlers, result(), unavailable(), argsOf(), AuthenticationIntent, commandOf(), createToolAdapterRegistry() (+26 more)
 
 ## Knowledge Gaps
 - **486 isolated node(s):** `RespondFn`, `RespondFn`, `ModuleProps`, `FindingState`, `NAV` (+481 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 538 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 546 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `SimulationEngine` connect `SimulationEngine` to `tools.ts`, `engine.ts`, `index.ts`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Why does `TerminalState` connect `SimulationEngine` to `tools.ts`, `engine.ts`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **What connects `RespondFn`, `RespondFn`, `ModuleProps` to the rest of the system?**
   _486 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `red/page.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.05817028027498678 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
-- **Should `dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `TypeScript Configuration` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._

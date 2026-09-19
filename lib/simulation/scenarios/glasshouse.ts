@@ -14,7 +14,7 @@ export const glasshouse: ScenarioDefinition = {
   name: "Operation Glasshouse",
   organization: "Meridian Dynamics",
   briefing: { red: "Assess the public portal and remote access relationships. Retrieve the protected finance document without modifying production data.", blue: "Investigate unusual application execution and remote access. Prevent finance extraction while preserving the portal and backup services.", constraints: ["Do not modify financial records", "Contain precisely and restore affected services"] },
-  presentation: { caseId: "FIN-06", focus: ["Fundamentals", "Privilege escalation", "Finance trust"], order: 3, prerequisite: "locked-out" },
+  presentation: { caseId: "FIN-06", focus: ["Fundamentals", "Privilege escalation", "Finance trust"], order: 7, prerequisite: "the-new-server" },
   availableModes: ["RED", "BLUE"],
   assistance: { guided: ["Start with the authorized public host. Use nmap to identify its services, then inspect any web service with curl. HTTP responses can reveal the application name or canonical hostname.", "Inspect pages before submitting anything. Forms publish their action, method, field names, and allowed values; linked profiles can reveal related systems without exposing a full solution.", "After gaining a session, use ls, cat, grep, less, and ps. A process's full command line often identifies the configuration file it loaded.", "PostgreSQL can be explored without knowing a database name in advance: connect with -h and -U, then use \\l, \\c, \\dt, and \\d before querying."], operator: "Follow the evidence across application, backup, and database trust boundaries." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },

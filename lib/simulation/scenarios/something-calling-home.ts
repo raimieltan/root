@@ -3,7 +3,7 @@ import { commonDetections, discover, external, file, host, identity, link, route
 
 export const somethingCallingHome: ScenarioDefinition = {
   id: "something-calling-home", name: "Operation Something Is Calling Home", organization: "Halcyon Utilities",
-  presentation: { caseId: "IR-21", order: 8, prerequisite: "strange-login", focus: ["Beaconing", "Persistence", "Operational safety"] },
+  presentation: { caseId: "IR-21", order: 12, prerequisite: "strange-login", focus: ["Beaconing", "Persistence", "Operational safety"] },
   briefing: { red: "Halcyon's outage dashboard and contractor gateway both reach the protected switching schedule. Retrieve SWITCH_WINDOW.csv while preserving a path for persistent access.", blue: "A new periodic process appeared near a contractor access window. Contain the data path and remove persistence without disrupting outage coordination.", constraints: ["A periodic process requires process and startup-artifact correlation", "Outage coordination must remain available"] },
   availableModes: ["RED", "BLUE"], assistance: { guided: ["The dashboard worker can execute as root; install-agent makes the periodic beacon explicit.", "The contractor gateway uses a valid switching identity, but not for interactive schedule export.", "Removing an agent and blocking a connection solve different parts of the incident."], operator: "Separate beacon behavior from the credential path it enables, then contain both with the least operational disruption." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 }, aliases: { "outages.halcyon.test": "OUTAGE-WEB" }, startingKnowledge: { knownHosts: ["INTERNET", "OUTAGE-WEB"], knownAssets: ["outages.halcyon.test"] },

@@ -3,7 +3,7 @@ import { commonDetections, discover, external, file, host, identity, link, route
 
 export const noOneKnows: ScenarioDefinition = {
   id: "no-one-knows", name: "Operation No One Knows", organization: "Halcyon Utilities",
-  presentation: { caseId: "IR-25", order: 10, prerequisite: "ghost-account", focus: ["Hypothesis testing", "Containment", "Availability"] },
+  presentation: { caseId: "IR-25", order: 14, prerequisite: "ghost-account", focus: ["Hypothesis testing", "Containment", "Availability"] },
   briefing: { red: "A vendor diagnostics service and an emergency status portal both have paths to the protected restoration plan. Retrieve RESTORATION_PLAN.pdf without triggering a broad shutdown.", blue: "Conflicting evidence suggests either an approved emergency workflow or an active intrusion. Form a defensible hypothesis, stop the actual route, and keep restoration planning available.", constraints: ["Ambiguity is not a reason to shut down every service", "Containment must preserve restoration planning above 60% availability"] },
   availableModes: ["RED", "BLUE"], assistance: { guided: ["One route is a privileged endpoint path; the other is a vendor trust relationship.", "Inspect the source and purpose before treating the valid vendor identity as hostile.", "Precise connection blocks let you test a hypothesis without taking the restoration service offline."], operator: "Use evidence to state which relationship is compromised, contain it, and prove the independent business path remains available." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 }, aliases: { "status.halcyon.test": "STATUS-WEB" }, startingKnowledge: { knownHosts: ["INTERNET", "STATUS-WEB"], knownAssets: ["status.halcyon.test"] },

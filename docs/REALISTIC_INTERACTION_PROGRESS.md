@@ -1,6 +1,6 @@
 # Realistic Interaction Layer — Progress Checkpoint
 
-**Status:** Realistic interaction Slices 1–8 complete; canonical pre-multiplayer gaps remain, 2026-09-19
+**Status:** Realistic interaction Slices 1–8 complete; Act 0 and Act I content built; canonical pre-multiplayer gaps remain, 2026-09-19
 **Source direction:** `docs/tools/tools-unix.md` and `docs/ROOT_CANONICAL_PLAN.md`
 
 This document records the state of the realistic Red-team interaction work before the PvP build begins. ROOT remains a fully simulated environment: terminal commands, services, credentials, events, and Blue-team consequences are modeled by the application; no live network targets are contacted.
@@ -92,6 +92,15 @@ Applied local Prisma migrations:
 - Contract tests require observable intents and service outcomes to declare replayable telemetry and supported Blue responses.
 - The acceptance matrix now runs every route in all eight campaign operations through Red execution and scripted Red against Blue. Each completed Red route is also reconstructed through Red, Blue, and Truth replay lenses and checked against its expected route and objective outcome.
 
+### 10. Act 0 orientation and Act I network/service missions
+
+- Built `First Shift`, `The Printer`, and `Locked Out` (Act 0), closing Milestone 2's short orientation requirement with reusable event/fact-based objectives (not `retrieve_file`-only), Guided/Operator presentations, learning-event annotations, and beginner exit questions.
+- Built the Act I "Networks and Helpdesk" arc — `Where Did the Website Go?` (NET-01), `Service Unavailable` (NET-02), `Wrong Network` (NET-03), `The New Server` (NET-04) — closing Milestone 2's short network/service operation requirement and Milestone 3's exit condition (a tester can determine what hosts exist, what is reachable, what services are exposed, and which discovered information is useful) for a beginner-scoped network.
+- DNS staleness/migration is modeled through the existing scenario-level `aliases` map (a name resolving to a decommissioned vs. live host) rather than a first-class DNS record store; this is intentionally the minimal mechanic needed for these missions and is **not** the "first-class DNS simulation" Milestone 3 calls for (see gaps below).
+- Added optional per-service `status` (`RUNNING`/`STOPPED`) to `ScenarioServiceDefinition`/`service()` so a mission can model a stopped service on an otherwise-reachable host; fixed `nmap` to report `closed` for stopped services instead of always `open`.
+- Campaign order is now `first-shift → the-printer → locked-out → website-down → service-unavailable → wrong-network → the-new-server → glasshouse → nightshift → dead-drop → paper-trail → strange-login → something-calling-home → ghost-account → no-one-knows` (15 scenarios total).
+- Each mission has full acceptance-test coverage (`*.acceptance.test.ts`) driving it end to end to `COMPLETED` with every objective satisfied.
+
 ## Canonical roadmap alignment
 
 The realistic interaction architecture is established, and new tools and scenario services must continue to satisfy the adapter/service contract tests. This does **not** move ROOT directly to Multiplayer Alpha.
@@ -100,8 +109,8 @@ The expanded canonical roadmap places Multiplayer Alpha at Milestone 11. Milesto
 
 ### Fundamentals, network, and application gaps
 
-- Build the short Act 0 orientation operation and short network/service operation required by Milestone 2, then validate the beginner-understanding exit condition with human playtesting.
-- Add a first-class DNS simulation and complete Intel auto-recording for Milestone 3.
+- Act 0 orientation and the Act I network/service operations are built (see Slice 10 above). Milestone 2's content requirement is satisfied; its exit condition still needs validation with human playtesting, not just automated acceptance tests.
+- Add a first-class DNS simulation (a queryable record store the player can inspect, not only static scenario aliases) and complete Intel auto-recording (a dedicated HOSTS/CREDENTIALS/NETWORKS/RELATIONSHIPS panel per canonical plan §40, beyond the current partial `intel.hosts`/`intel.relationships` shown only in the Network Map) for Milestone 3.
 - Add the Browser interface and persistent HTTP cookie/application-session behavior for Milestone 4.
 
 ### Milestone 8 — ROOT MVP gaps
@@ -143,21 +152,23 @@ Production matchmaking, competitive analytics, and Red/Blue ranking belong to Mi
 
 The key rule for PvP is that clients may render and submit intent, but only the authoritative match simulation may decide state, telemetry, detection, or victory.
 
-## Suggested immediate next task — Act 0 “First Shift” vertical slice
+## Suggested immediate next task — first-class DNS + Intel auto-recording (Milestone 3 close-out)
 
-Build the first short Nodeline orientation operation before adding more offensive depth.
+Act 0 and Act I are built (see Slice 10). The next unmet roadmap gate is the remainder of Milestone 3: a first-class DNS simulation and complete Intel auto-recording, both of which the Act I missions currently work around rather than exercise directly.
 
 Scope:
 
-1. Extend the scenario objective model beyond `retrieve_file` with reusable event/fact-based learning objectives; do not special-case the operation in the engine.
-2. Author `First Shift` around `pwd`, `ls`, `cd`, `cat`, `whoami`, `id`, `env`, and `ps`, teaching current host, current user, groups, file permissions, processes, services, documentation, and evidence versus assumption.
-3. Give the operation Guided and Operator presentations. Guided mode may explain interfaces and concepts but must not provide the answer; Operator mode should rely on in-world documentation.
-4. Complete objectives from authoritative simulation events/facts and attach learning-event annotations so the Knowledge Tracker can consume them later.
-5. Add acceptance coverage proving every required observation is discoverable in-world, the operation completes without hidden strings, and Red/Blue/Truth replay preserves the learning evidence.
-6. Run a fresh-player playtest against the Milestone 2 exit questions before declaring the slice complete.
+1. Add a first-class DNS record model (scenario-declared records: name, type, target host/IP, and a way to model stale/updated records over time) and a `dig`/`nslookup`-equivalent command, replacing the static `aliases` map as the DNS mechanic for new content. Keep `aliases` working for existing scenarios or migrate them, but don't leave two competing DNS mechanics as the long-term model.
+2. Build the canonical-plan §40 Intel system as a dedicated panel: auto-recorded HOSTS, CREDENTIALS, NETWORKS, and RELATIONSHIPS, sourced from the same discovery/credential/session data already recorded by the engine (`applyDiscovery`, `Credential`, `NetworkConnection`) rather than new state. Today only a partial `intel.hosts`/`intel.relationships` view exists inside the Network Map (`app/red/page.tsx`); this should become its own app/tab per the plan's example layout.
+3. Add acceptance coverage: a scenario that requires reading DNS records (not just pinging a hostname) to find the right target, and a check that Intel auto-populates from existing campaign discoveries without any scenario-specific wiring.
+4. Re-validate the Milestone 3 exit condition (a tester can independently determine what hosts exist, what is reachable, what services are exposed, and which discovered information is useful) against the new DNS/Intel surfaces, not just the Act I missions' current alias-based workaround.
 
-This slice closes the earliest unmet roadmap gate and creates reusable foundations for later onboarding, concept-aware hints, proficiency, and the Knowledge Tracker. The next natural slice after it is the Act I network/service operation with first-class DNS and fuller Intel auto-recording.
+After this, the next natural slice is Milestone 4 (Browser interface, HTTP route/cookie/session model, PostgreSQL `psql` deepening) — Glasshouse already exercises a bounded slice of this, but there's no general-purpose Browser app yet.
+
+Separately, and not blocking the above, Milestone 2's exit condition still needs a human playtest pass (a fresh tester walking Act 0 → Act I and explaining current host/user/files/processes/IP-host-service relationships unaided) — the acceptance-test suite proves the content is completable, not that it teaches successfully.
 
 ## Session memory
 
-**2026-09-19 decision:** Realistic interaction Slices 7 and 8 are complete, but the expanded canonical roadmap supersedes the earlier direct move to PvP authority. Close the remaining Milestone 2–4 requirements and Milestones 8–10 before treating Multiplayer Alpha as the active product phase. The immediate implementation priority is the Act 0 `First Shift` vertical slice and its reusable event/fact-based objective foundation.
+**2026-09-19 decision:** Realistic interaction Slices 7 and 8 are complete, but the expanded canonical roadmap supersedes the earlier direct move to PvP authority. Close the remaining Milestone 2–4 requirements and Milestones 8–10 before treating Multiplayer Alpha as the active product phase.
+
+**2026-09-19 update:** Act 0 (`First Shift`, `The Printer`, `Locked Out`) and Act I (`Where Did the Website Go?`, `Service Unavailable`, `Wrong Network`, `The New Server`) are built and pass acceptance tests, closing Milestone 2's content requirement. DNS is only alias-based and Intel auto-recording is only partially built, so Milestone 3 is not fully closed. The immediate implementation priority is first-class DNS + the full Intel panel, per the scope above.

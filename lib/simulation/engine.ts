@@ -464,7 +464,7 @@ Type 'help <command>' for details, e.g. help curl`;
     for (const service of target.services) events.push(...(await this.applyDiscovery("scan", target.hostname, service.name, source.machine.id)).events);
     events.push(await this.emit({ action: "HOST_DISCOVERED", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, visibleToBlue: false }));
     events.push(await this.emit({ action: "PORT_SCAN_DETECTED", category: SecurityEventCategory.NETWORK, severity: SecurityEventSeverity.LOW, sourceMachineId: source.machine.id, targetMachineId: target.id, visibleToRed: false }));
-    return { success: true, output: `Nmap scan report for ${target.hostname} (${target.ip})\nPORT     STATE  SERVICE\n${target.services.map((service) => `${service.port}/tcp`.padEnd(9) + `open   ${service.name}`).join("\n")}`, events, discoveredHosts: await this.discoveredHosts() };
+    return { success: true, output: `Nmap scan report for ${target.hostname} (${target.ip})\nPORT     STATE   SERVICE\n${target.services.map((service) => `${service.port}/tcp`.padEnd(9) + `${service.status === "STOPPED" ? "closed" : "open"}  `.padEnd(8) + service.name).join("\n")}`, events, discoveredHosts: await this.discoveredHosts() };
   }
 
   private async curl(intent: CurlIntent, state: TerminalState) {

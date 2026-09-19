@@ -3,12 +3,12 @@ import type { ScenarioDefinition, RouteDefinition, ScenarioServiceDefinition } f
 type Machine = ScenarioDefinition["machines"][number];
 export const identity = (username: string, privilege: "USER" | "SERVICE" | "ROOT" = "USER") => ({ username, role: privilege === "SERVICE" ? "service" : "human", privilege, groups: [username] });
 export const file = (path: string, owner: string, contents: string, permissions = "600") => ({ path, owner, group: owner, permissions, isSecret: true, contents });
-export function service(name: string, port: number, runningAsUser: string, exposedZones: ScenarioServiceDefinition["exposedZones"]): ScenarioServiceDefinition {
+export function service(name: string, port: number, runningAsUser: string, exposedZones: ScenarioServiceDefinition["exposedZones"], status?: ScenarioServiceDefinition["status"]): ScenarioServiceDefinition {
   const web = name === "http" || name === "https" || name.endsWith("-api") || name === "vpn";
   const database = name === "postgres";
   const trusted = name === "backup-sync" || name === "backup";
   return {
-    name, port, runningAsUser, exposedZones,
+    name, port, runningAsUser, exposedZones, status,
     permissions: [
       { action: "CONNECT", requires: ["NETWORK_REACHABLE", "SERVICE_RUNNING"] },
       ...(!web ? [{ action: "AUTHENTICATE" as const, requires: ["NETWORK_REACHABLE" as const, "SERVICE_RUNNING" as const, "VALID_CREDENTIAL" as const, "IDENTITY_GRANT" as const] }] : []),

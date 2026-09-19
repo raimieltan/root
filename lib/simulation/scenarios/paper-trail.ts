@@ -3,7 +3,7 @@ import { commonDetections, discover, external, file, host, identity, link, route
 
 export const paperTrail: ScenarioDefinition = {
   id: "paper-trail", name: "Operation Paper Trail", organization: "Aster Civic Systems",
-  presentation: { caseId: "AUTH-11", order: 6, prerequisite: "dead-drop", focus: ["Authorization", "Vendor trust", "Precise containment"] },
+  presentation: { caseId: "AUTH-11", order: 10, prerequisite: "dead-drop", focus: ["Authorization", "Vendor trust", "Precise containment"] },
   briefing: {
     red: "Aster's public grant portal and vendor access process both reach the protected award register. Retrieve AWARD_ROSTER.csv without altering any civic records.",
     blue: "Investigate unusual grant-export activity and vendor access to the award register. Stop disclosure while keeping public filing and records review available.",

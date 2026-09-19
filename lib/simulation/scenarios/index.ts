@@ -10,9 +10,13 @@ import { noOneKnows } from "./no-one-knows";
 import { firstShift } from "./first-shift";
 import { thePrinter } from "./the-printer";
 import { lockedOut } from "./locked-out";
+import { websiteDown } from "./website-down";
+import { serviceUnavailable } from "./service-unavailable";
+import { wrongNetwork } from "./wrong-network";
+import { theNewServer } from "./the-new-server";
 import { validateScenario } from "./validate";
 
-export const campaign = [firstShift, thePrinter, lockedOut, glasshouse, nightshift, deadDrop, paperTrail, strangeLogin, somethingCallingHome, ghostAccount, noOneKnows].map(validateScenario);
+export const campaign = [firstShift, thePrinter, lockedOut, websiteDown, serviceUnavailable, wrongNetwork, theNewServer, glasshouse, nightshift, deadDrop, paperTrail, strangeLogin, somethingCallingHome, ghostAccount, noOneKnows].map(validateScenario);
 const scenarios: Record<string, ScenarioDefinition> = Object.fromEntries(campaign.map((definition) => [definition.id, definition]));
 
 export function operationPresentation(definition: ScenarioDefinition) {

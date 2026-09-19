@@ -22,6 +22,16 @@ deviation rather than silently changing the product direction.
 `docs/ROOT-POC.md` is historical POC guidance. Where it differs from the
 canonical plan, `docs/ROOT_CANONICAL_PLAN.md` wins.
 
+# ROOT canonical story
+
+Before writing or reviewing mission/campaign content (operations, briefs,
+narrative beats, characters, evidence, Case Board entries), read
+`docs/story/canon-story.md`. Treat it as the authoritative narrative
+reference — tone, recurring characters, THREAD-17, the Halloway vendor
+thread, and act-by-act story beats. Keep new missions' story content aligned
+with it. If the user explicitly requests a deviation, follow the request and
+call out the deviation rather than silently changing the story direction.
+
 # ROOT visual styles
 
 Before planning, reviewing, or implementing any UI edit, read

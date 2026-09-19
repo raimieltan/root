@@ -1,4 +1,4 @@
-import type { AccessLevel, NetworkZone, SecurityEventCategory, SecurityEventSeverity } from "@/app/generated/prisma/enums";
+import type { AccessLevel, NetworkZone, SecurityEventCategory, SecurityEventSeverity, ServiceStatus } from "@/app/generated/prisma/enums";
 
 export type ScenarioEventDefinition = {
   action: string;
@@ -115,6 +115,7 @@ export type ScenarioServiceDefinition = {
   port: number;
   runningAsUser: string;
   exposedZones: NetworkZone[];
+  status?: ServiceStatus;
   permissions: ServicePermissionDefinition[];
   resources: ServiceResourceDefinition[];
   outcomes: ServiceOutcomeDefinition[];

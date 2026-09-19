@@ -446,7 +446,7 @@
       "file_type": "code",
       "norm_label": "operationpresentation",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L21"
+      "source_location": "L25"
     },
     {
       "id": "lib_simulation_state_scenarioview",
@@ -525,19 +525,6 @@
       "norm_label": "simuser",
       "source_file": "lib/simulation/types.ts",
       "source_location": "L11"
-    },
-    {
-      "id": "lib_simulation_types_terminalcontext",
-      "label": "TerminalContext",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "terminalcontext",
-      "source_file": "lib/simulation/types.ts",
-      "source_location": "L56"
     },
     {
       "id": "app_replay_scenarioid_page_replaypageprops",
@@ -904,6 +891,19 @@
       "source_location": "L11"
     },
     {
+      "id": "lib_simulation_types_terminalcontext",
+      "label": "TerminalContext",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "tools.ts",
+      "file_type": "code",
+      "norm_label": "terminalcontext",
+      "source_file": "lib/simulation/types.ts",
+      "source_location": "L56"
+    },
+    {
       "id": "lib_simulation_scenarios_content_machine",
       "label": "Machine",
       "_callable": true,
@@ -992,7 +992,7 @@
       "file_type": "code",
       "norm_label": "scenariodefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L123"
+      "source_location": "L124"
     },
     {
       "id": "lib_simulation_scenarios_types_scenariodiscovery",
@@ -1867,6 +1867,18 @@
       "source_location": "L80"
     },
     {
+      "id": "app_api_operations_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "app/api/operations/route.ts",
+      "source_location": "L2"
+    },
+    {
       "id": "app_api_sim_blue_advance_route_post",
       "label": "POST()",
       "_callable": true,
@@ -2236,7 +2248,19 @@
       "file_type": "code",
       "norm_label": "getscenariodefinition()",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L23"
+      "source_location": "L27"
+    },
+    {
+      "id": "lib_simulation_service_unavailable_acceptance_test_applyresult",
+      "label": "applyResult()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "applyresult()",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L10"
     },
     {
       "id": "lib_simulation_state_getscenarioview",
@@ -2251,6 +2275,18 @@
       "source_location": "L7"
     },
     {
+      "id": "lib_simulation_the_new_server_acceptance_test_applyresult",
+      "label": "applyResult()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "applyresult()",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L10"
+    },
+    {
       "id": "lib_simulation_the_printer_acceptance_test_applyresult",
       "label": "applyResult()",
       "_callable": true,
@@ -2263,16 +2299,40 @@
       "source_location": "L10"
     },
     {
-      "id": "app_api_operations_route_get",
-      "label": "GET()",
+      "id": "lib_simulation_website_down_acceptance_test_applyresult",
+      "label": "applyResult()",
       "_callable": true,
       "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
+      "community": 4,
+      "community_name": "engine.ts",
       "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "app/api/operations/route.ts",
-      "source_location": "L2"
+      "norm_label": "applyresult()",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "lib_simulation_wrong_network_acceptance_test_applyresult",
+      "label": "applyResult()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "applyresult()",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "tests_browser_campaign_spec_step",
+      "label": "step()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "step()",
+      "source_file": "tests/browser/campaign.spec.ts",
+      "source_location": "L77"
     },
     {
       "id": "app_career_page_careerpage",
@@ -2609,18 +2669,6 @@
       "norm_label": "visibletolens()",
       "source_file": "lib/simulation/replay.ts",
       "source_location": "L63"
-    },
-    {
-      "id": "tests_browser_campaign_spec_step",
-      "label": "step()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "step()",
-      "source_file": "tests/browser/campaign.spec.ts",
-      "source_location": "L77"
     },
     {
       "id": "lib_simulation_engine_simulationengine_applydiscovery",
@@ -3355,6 +3403,30 @@
       "source_location": "L5"
     },
     {
+      "id": "lib_simulation_scenarios_service_unavailable_learning",
+      "label": "learning()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "learning()",
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "lib_simulation_scenarios_the_new_server_learning",
+      "label": "learning()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "learning()",
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L5"
+    },
+    {
       "id": "lib_simulation_scenarios_the_printer_learning",
       "label": "learning()",
       "_callable": true,
@@ -3377,6 +3449,30 @@
       "norm_label": "validatescenario()",
       "source_file": "lib/simulation/scenarios/validate.ts",
       "source_location": "L3"
+    },
+    {
+      "id": "lib_simulation_scenarios_website_down_learning",
+      "label": "learning()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "learning()",
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "lib_simulation_scenarios_wrong_network_learning",
+      "label": "learning()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "learning()",
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L5"
     },
     {
       "id": "app_red_mission_panel",
@@ -3588,6 +3684,17 @@
       "source_location": "L43"
     },
     {
+      "id": "package",
+      "label": "package.json",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "package.json",
+      "source_file": "package.json",
+      "source_location": "L1"
+    },
+    {
       "id": "package_devdependencies",
       "label": "devDependencies",
       "_origin": "ast",
@@ -3762,6 +3869,116 @@
       "norm_label": "@vitest/coverage-v8",
       "source_file": "package.json",
       "source_location": "L36"
+    },
+    {
+      "id": "package_name",
+      "label": "name",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "name",
+      "source_file": "package.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "package_packagemanager",
+      "label": "packageManager",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "packagemanager",
+      "source_file": "package.json",
+      "source_location": "L46"
+    },
+    {
+      "id": "package_private",
+      "label": "private",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "private",
+      "source_file": "package.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "package_scripts_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "package_scripts_lint",
+      "label": "lint",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "lint",
+      "source_file": "package.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "package_scripts_start",
+      "label": "start",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "start",
+      "source_file": "package.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "package_scripts_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "package.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "package_version",
+      "label": "version",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "version",
+      "source_file": "package.json",
+      "source_location": "L3"
     },
     {
       "id": "concurrently",
@@ -4106,17 +4323,6 @@
       "source_location": "L1"
     },
     {
-      "id": "package",
-      "label": "package.json",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "package.json",
-      "source_file": "package.json",
-      "source_location": "L1"
-    },
-    {
       "id": "package_dependencies",
       "label": "dependencies",
       "_origin": "ast",
@@ -4291,116 +4497,6 @@
       "norm_label": "zustand",
       "source_file": "package.json",
       "source_location": "L27"
-    },
-    {
-      "id": "package_name",
-      "label": "name",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "name",
-      "source_file": "package.json",
-      "source_location": "L2"
-    },
-    {
-      "id": "package_packagemanager",
-      "label": "packageManager",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "packagemanager",
-      "source_file": "package.json",
-      "source_location": "L46"
-    },
-    {
-      "id": "package_private",
-      "label": "private",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "private",
-      "source_file": "package.json",
-      "source_location": "L4"
-    },
-    {
-      "id": "package_scripts",
-      "label": "scripts",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "package.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "package_scripts_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "package.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "package_scripts_dev",
-      "label": "dev",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "package.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "package_scripts_lint",
-      "label": "lint",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "lint",
-      "source_file": "package.json",
-      "source_location": "L9"
-    },
-    {
-      "id": "package_scripts_start",
-      "label": "start",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "start",
-      "source_file": "package.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "package_scripts_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "package.json",
-      "source_location": "L10"
-    },
-    {
-      "id": "package_version",
-      "label": "version",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "version",
-      "source_file": "package.json",
-      "source_location": "L3"
     },
     {
       "id": "dotenv",
@@ -6967,6 +7063,17 @@
       "source_location": "L224"
     },
     {
+      "id": "app_api_operations_route",
+      "label": "operations/route.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "operations/route.ts",
+      "source_file": "app/api/operations/route.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "app_api_sim_blue_advance_route",
       "label": "advance/route.ts",
       "_origin": "ast",
@@ -7242,6 +7349,28 @@
       "source_location": "L31"
     },
     {
+      "id": "lib_simulation_scenarios_index_campaign",
+      "label": "campaign",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "campaign",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "lib_simulation_service_unavailable_acceptance_test",
+      "label": "service-unavailable.acceptance.test.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "service-unavailable.acceptance.test.ts",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "lib_simulation_state",
       "label": "state.ts",
       "_origin": "ast",
@@ -7250,6 +7379,17 @@
       "file_type": "code",
       "norm_label": "state.ts",
       "source_file": "lib/simulation/state.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_the_new_server_acceptance_test",
+      "label": "the-new-server.acceptance.test.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "the-new-server.acceptance.test.ts",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
       "source_location": "L1"
     },
     {
@@ -7275,14 +7415,36 @@
       "source_location": "L1"
     },
     {
-      "id": "app_api_operations_route",
-      "label": "operations/route.ts",
+      "id": "lib_simulation_website_down_acceptance_test",
+      "label": "website-down.acceptance.test.ts",
       "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
+      "community": 4,
+      "community_name": "engine.ts",
       "file_type": "code",
-      "norm_label": "operations/route.ts",
-      "source_file": "app/api/operations/route.ts",
+      "norm_label": "website-down.acceptance.test.ts",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_wrong_network_acceptance_test",
+      "label": "wrong-network.acceptance.test.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "wrong-network.acceptance.test.ts",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_browser_campaign_spec",
+      "label": "campaign.spec.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "campaign.spec.ts",
+      "source_file": "tests/browser/campaign.spec.ts",
       "source_location": "L1"
     },
     {
@@ -7438,28 +7600,6 @@
       "norm_label": "trainingmodules",
       "source_file": "lib/campaign.ts",
       "source_location": "L7"
-    },
-    {
-      "id": "lib_simulation_scenarios_index_campaign",
-      "label": "campaign",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "campaign",
-      "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L15"
-    },
-    {
-      "id": "tests_browser_campaign_spec",
-      "label": "campaign.spec.ts",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "campaign.spec.ts",
-      "source_file": "tests/browser/campaign.spec.ts",
-      "source_location": "L1"
     },
     {
       "id": "docs_operations_glasshouse_discovery_graph",
@@ -8184,7 +8324,7 @@
       "file_type": "code",
       "norm_label": "scenarios",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L16"
+      "source_location": "L20"
     },
     {
       "id": "lib_simulation_scenarios_locked_out",
@@ -8275,6 +8415,28 @@
       "source_location": "L4"
     },
     {
+      "id": "lib_simulation_scenarios_service_unavailable",
+      "label": "service-unavailable.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "service-unavailable.ts",
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_service_unavailable_serviceunavailable",
+      "label": "serviceUnavailable",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "serviceunavailable",
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L16"
+    },
+    {
       "id": "lib_simulation_scenarios_something_calling_home",
       "label": "something-calling-home.ts",
       "_origin": "ast",
@@ -8319,6 +8481,28 @@
       "source_location": "L4"
     },
     {
+      "id": "lib_simulation_scenarios_the_new_server",
+      "label": "the-new-server.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "the-new-server.ts",
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_the_new_server_thenewserver",
+      "label": "theNewServer",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "thenewserver",
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L16"
+    },
+    {
       "id": "lib_simulation_scenarios_the_printer",
       "label": "the-printer.ts",
       "_origin": "ast",
@@ -8361,6 +8545,50 @@
       "norm_label": "validate.ts",
       "source_file": "lib/simulation/scenarios/validate.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_website_down",
+      "label": "website-down.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "website-down.ts",
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_website_down_websitedown",
+      "label": "websiteDown",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "websitedown",
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L16"
+    },
+    {
+      "id": "lib_simulation_scenarios_wrong_network",
+      "label": "wrong-network.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "wrong-network.ts",
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_wrong_network_wrongnetwork",
+      "label": "wrongNetwork",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "wrongnetwork",
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L16"
     },
     {
       "id": "docs_tools_tools_unix",
@@ -13845,7 +14073,7 @@
       "confidence_score": 1.0,
       "context": "export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L29",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -13857,7 +14085,7 @@
       "confidence_score": 1.0,
       "context": "export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L30",
+      "source_location": "L34",
       "type_only": true,
       "weight": 1.0
     },
@@ -16839,6 +17067,54 @@
     },
     {
       "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_website_down_websitedown",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_service_unavailable_serviceunavailable",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_wrong_network_wrongnetwork",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_the_new_server_thenewserver",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
       "target": "lib_simulation_scenarios_nightshift_nightshift",
       "relation": "imports",
       "_origin": "ast",
@@ -17270,6 +17546,30 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_service_unavailable",
+      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_service_unavailable",
+      "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_something_calling_home",
       "target": "lib_simulation_scenarios_types_scenariodefinition",
       "relation": "imports",
@@ -17483,6 +17783,30 @@
       "context": "import",
       "source_file": "lib/simulation/scenarios/strange-login.ts",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_new_server",
+      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_new_server",
+      "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -17507,6 +17831,138 @@
       "context": "import",
       "source_file": "lib/simulation/scenarios/validate.ts",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_website_down",
+      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_website_down",
+      "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_wrong_network",
+      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_wrong_network",
+      "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_prisma_prisma",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_engine_simulationengine",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_initializer_deletescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_initializer_initializescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_scenarios_index_getscenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_state_getscenarioview",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_types_terminalstate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -17591,6 +18047,90 @@
       "context": "import",
       "source_file": "lib/simulation/state.ts",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_prisma_prisma",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_engine_simulationengine",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_initializer_deletescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_initializer_initializescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_scenarios_index_getscenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_state_getscenarioview",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_types_terminalstate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -17807,6 +18347,174 @@
       "context": "import",
       "source_file": "lib/simulation/tools.ts",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_prisma_prisma",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_engine_simulationengine",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_initializer_deletescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_initializer_initializescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_scenarios_index_getscenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_state_getscenarioview",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_types_terminalstate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_prisma_prisma",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_engine_simulationengine",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_initializer_deletescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_initializer_initializescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_scenarios_index_getscenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_state_getscenarioview",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_types_terminalstate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -19743,7 +20451,7 @@
     },
     {
       "source": "lib_simulation_scenarios_index",
-      "target": "lib_simulation_scenarios_validate",
+      "target": "lib_simulation_scenarios_website_down",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -19751,6 +20459,54 @@
       "context": "import",
       "source_file": "lib/simulation/scenarios/index.ts",
       "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_service_unavailable",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_wrong_network",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_the_new_server",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_index",
+      "target": "lib_simulation_scenarios_validate",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -19938,6 +20694,31 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_service_unavailable",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L2",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_service_unavailable",
+      "target": "lib_simulation_scenarios_content",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_something_calling_home",
       "target": "lib_simulation_scenarios_types",
       "relation": "imports_from",
@@ -19985,6 +20766,31 @@
       "context": "import",
       "source_file": "lib/simulation/scenarios/strange-login.ts",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_new_server",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L2",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_new_server",
+      "target": "lib_simulation_scenarios_content",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -20010,6 +20816,129 @@
       "context": "import",
       "source_file": "lib/simulation/scenarios/validate.ts",
       "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_website_down",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L2",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_website_down",
+      "target": "lib_simulation_scenarios_content",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_wrong_network",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L2",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_wrong_network",
+      "target": "lib_simulation_scenarios_content",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_prisma",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_engine",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_initializer",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_scenarios_index",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_state",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L8",
       "type_only": true,
       "weight": 1.0
     },
@@ -20071,6 +21000,79 @@
       "context": "import",
       "source_file": "lib/simulation/state.ts",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_prisma",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_engine",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_initializer",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_scenarios_index",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_state",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L8",
+      "type_only": true,
       "weight": 1.0
     },
     {
@@ -20205,6 +21207,152 @@
       "context": "import",
       "source_file": "lib/simulation/tools.ts",
       "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_prisma",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_engine",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_initializer",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_scenarios_index",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_state",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L8",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_prisma",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_engine",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_initializer",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_scenarios_index",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_state",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L8",
       "type_only": true,
       "weight": 1.0
     },
@@ -20553,7 +21701,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L30",
+      "source_location": "L34",
       "type_only": true,
       "weight": 1.0
     },
@@ -20566,7 +21714,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L30",
+      "source_location": "L34",
       "type_only": true,
       "weight": 1.0
     },
@@ -20579,7 +21727,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L30",
+      "source_location": "L34",
       "type_only": true,
       "weight": 1.0
     },
@@ -20592,7 +21740,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L30",
+      "source_location": "L34",
       "type_only": true,
       "weight": 1.0
     },
@@ -20605,7 +21753,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L30",
+      "source_location": "L34",
       "type_only": true,
       "weight": 1.0
     },
@@ -20618,7 +21766,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L30",
+      "source_location": "L34",
       "type_only": true,
       "weight": 1.0
     },
@@ -26747,7 +27895,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L15",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -26758,7 +27906,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L16",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -26769,7 +27917,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L21",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -26780,7 +27928,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L23",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -26839,6 +27987,28 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_service_unavailable",
+      "target": "lib_simulation_scenarios_service_unavailable_serviceunavailable",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_service_unavailable",
+      "target": "lib_simulation_scenarios_service_unavailable_learning",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_something_calling_home",
       "target": "lib_simulation_scenarios_something_calling_home_somethingcallinghome",
       "relation": "contains",
@@ -26858,6 +28028,28 @@
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/strange-login.ts",
       "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_new_server",
+      "target": "lib_simulation_scenarios_the_new_server_thenewserver",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_new_server",
+      "target": "lib_simulation_scenarios_the_new_server_learning",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -26934,7 +28126,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L123",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -27048,6 +28240,61 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_website_down",
+      "target": "lib_simulation_scenarios_website_down_websitedown",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_website_down",
+      "target": "lib_simulation_scenarios_website_down_learning",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_wrong_network",
+      "target": "lib_simulation_scenarios_wrong_network_wrongnetwork",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_wrong_network",
+      "target": "lib_simulation_scenarios_wrong_network_learning",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_service_unavailable_acceptance_test",
+      "target": "lib_simulation_service_unavailable_acceptance_test_applyresult",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/service-unavailable.acceptance.test.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_state",
       "target": "lib_simulation_state_scenarioview",
       "relation": "contains",
@@ -27067,6 +28314,17 @@
       "confidence_score": 1.0,
       "source_file": "lib/simulation/state.ts",
       "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_the_new_server_acceptance_test",
+      "target": "lib_simulation_the_new_server_acceptance_test_applyresult",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/the-new-server.acceptance.test.ts",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -27540,6 +28798,28 @@
       "confidence_score": 1.0,
       "source_file": "lib/simulation/types.ts",
       "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_website_down_acceptance_test",
+      "target": "lib_simulation_website_down_acceptance_test_applyresult",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/website-down.acceptance.test.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_wrong_network_acceptance_test",
+      "target": "lib_simulation_wrong_network_acceptance_test_applyresult",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/wrong-network.acceptance.test.ts",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -28838,7 +30118,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L15",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -29162,5 +30442,5 @@
       "source_file": "docs/ROOT_CANONICAL_PLAN.md"
     }
   ],
-  "built_at_commit": "ab6df7e710f5ea8638e09e7302553bc6b7c8dbfc"
+  "built_at_commit": "59032d8accababe2e7005e74fa1edde25e0ce25e"
 }
