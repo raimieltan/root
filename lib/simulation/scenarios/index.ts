@@ -31,4 +31,4 @@ export function getScenarioDefinition(id = glasshouse.id) {
 }
 
 export { glasshouse };
-export type { BeginnerExitQuestion, LearningAnnotation, RouteDefinition, ScenarioDefinition, ScenarioDnsRecordDefinition, ScenarioEventDefinition, ScenarioObjective } from "./types";
+export type { BeginnerExitQuestion, LearningAnnotation, RouteDefinition, ScenarioDefinition, ScenarioDnsRecordDefinition, ScenarioEventDefinition, ScenarioHttpRouteDefinition, ScenarioObjective } from "./types";

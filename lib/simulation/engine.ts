@@ -517,6 +517,36 @@ Type 'help <command>' for details, e.g. help curl`;
     const path = new URL(`http://${intent.url.replace(/^https?:\/\//, "")}`).pathname;
     const events = [await this.emit({ action: "WEB_REQUEST", category: SecurityEventCategory.WEB, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { method: intent.method, path, data: intent.data } })];
     const form = new URLSearchParams(intent.data ?? "");
+    const httpRoute = (await this.definition()).httpRoutes?.find((entry) => entry.host === target.hostname && entry.method === intent.method && entry.path === path);
+    if (httpRoute?.login) {
+      const username = form.get(httpRoute.login.usernameField);
+      const password = form.get(httpRoute.login.passwordField);
+      const identity = target.users.find((entry) => entry.username === username);
+      const allowed = Boolean(identity?.password && identity.password === password);
+      events.push(await this.emit({ action: allowed ? "WEB_LOGIN_SUCCESS" : "WEB_LOGIN_FAILED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username ?? undefined, metadata: { path } }));
+      if (!allowed || !identity) return this.result(false, httpRoute.invalidOutput ?? "HTTP/1.1 401 Unauthorized\nInvalid credentials.", events);
+      await prisma.httpSession.upsert({
+        where: { scenarioId_actorId_machineId: { scenarioId: this.scenarioId, actorId: this.actorId, machineId: target.id } },
+        create: { scenarioId: this.scenarioId, actorId: this.actorId, machineId: target.id, userId: identity.id },
+        update: { userId: identity.id, createdAt: new Date() },
+      });
+      for (const evidence of httpRoute.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: identity.username }));
+      return { success: true, output: httpRoute.output, events };
+    }
+    if (httpRoute?.requiresSession) {
+      const cookie = await prisma.httpSession.findFirst({ where: { scenarioId: this.scenarioId, actorId: this.actorId, machineId: target.id }, include: { user: true } });
+      if (!cookie) return this.result(false, httpRoute.unauthorizedOutput ?? "HTTP/1.1 401 Unauthorized\nA valid session cookie is required.", events);
+      const discovery = await this.applyDiscovery("web", target.hostname, `${httpRoute.method} ${httpRoute.path}`, source.machine.id);
+      events.push(...discovery.events);
+      for (const evidence of httpRoute.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: cookie.user.username }));
+      return { success: true, output: httpRoute.output, events, discoveredHosts: await this.discoveredHosts() };
+    }
+    if (httpRoute) {
+      const discovery = await this.applyDiscovery("web", target.hostname, `${httpRoute.method} ${httpRoute.path}`, source.machine.id);
+      events.push(...discovery.events);
+      for (const evidence of httpRoute.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id }));
+      return { success: true, output: httpRoute.output, events, discoveredHosts: await this.discoveredHosts() };
+    }
     const webInteractions = (await this.definition()).webInteractions ?? [];
     const publishedInterface = webInteractions.find((entry) => entry.host === target.hostname && entry.path === path);
     const interaction = webInteractions.find((entry) => entry.host === target.hostname && entry.method === intent.method && entry.path === path && (!entry.dataIncludes || intent.data?.includes(entry.dataIncludes)) && (!entry.formField || form.get(entry.formField) === entry.formValue));

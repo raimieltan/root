@@ -124,6 +124,20 @@ export type ScenarioServiceDefinition = {
   outcomes: ServiceOutcomeDefinition[];
 };
 
+// A declarative HTTP route: either a login endpoint that mints a cookie session,
+// or a route gated on holding one, so authenticated flows don't need curl string matching.
+export type ScenarioHttpRouteDefinition = {
+  host: string;
+  method: string;
+  path: string;
+  login?: { usernameField: string; passwordField: string };
+  requiresSession?: boolean;
+  output: string;
+  unauthorizedOutput?: string;
+  invalidOutput?: string;
+  evidence?: ScenarioEventDefinition[];
+};
+
 export type ScenarioDefinition = {
   id: string;
   name: string;
@@ -181,6 +195,7 @@ export type ScenarioDefinition = {
     output: string;
     evidence: ScenarioEventDefinition[];
   }>;
+  httpRoutes?: ScenarioHttpRouteDefinition[];
   trustedServiceOperations?: Array<{
     host: string;
     service: string;

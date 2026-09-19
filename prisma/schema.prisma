@@ -77,11 +77,12 @@ model Scenario {
   startedAt DateTime?
   endedAt   DateTime?
 
-  actors      Actor[]
-  sessions    Session[]
-  events      SecurityEvent[]
-  machines    Machine[]
-  credentials Credential[]
+  actors       Actor[]
+  sessions     Session[]
+  httpSessions HttpSession[]
+  events       SecurityEvent[]
+  machines     Machine[]
+  credentials  Credential[]
 }
 
 // A player/attacker/defender
@@ -93,8 +94,9 @@ model Actor {
   scenario   Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
   scenarioId String
 
-  sessions Session[]
-  events   SecurityEvent[]
+  sessions     Session[]
+  httpSessions HttpSession[]
+  events       SecurityEvent[]
 
   @@index([scenarioId])
 }
@@ -110,12 +112,13 @@ model Machine {
   scenario   Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
   scenarioId String
 
-  users       User[]
-  services    Service[]
-  files       File[]
-  processes   Process[]
-  sessions    Session[]
-  persistence Persistence[]
+  users        User[]
+  services     Service[]
+  files        File[]
+  processes    Process[]
+  sessions     Session[]
+  httpSessions HttpSession[]
+  persistence  Persistence[]
 
   sourceConnections NetworkConnection[] @relation("source")
   targetConnections NetworkConnection[] @relation("target")
@@ -143,7 +146,8 @@ model User {
   groups    String[] // JSON array
   privilege AccessLevel @default(USER)
 
-  sessions Session[]
+  sessions     Session[]
+  httpSessions HttpSession[]
 
   @@unique([machineId, username])
   @@index([machineId])
@@ -310,6 +314,29 @@ model Persistence {
 
   createdAt DateTime @default(now())
 
+  @@index([machineId])
+}
+
+// An HTTP cookie session: proof of a completed login to a web application.
+// Distinct from Session (shell/db access) because logging into a site does not
+// switch the terminal's active machine/context.
+model HttpSession {
+  id      String  @id @default(cuid())
+  actor   Actor?  @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actorId String?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  machineId String
+
+  scenario   Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  scenarioId String
+
+  createdAt DateTime @default(now())
+
+  @@unique([scenarioId, actorId, machineId])
   @@index([machineId])
 }
 

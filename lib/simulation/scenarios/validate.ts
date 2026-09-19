@@ -49,6 +49,11 @@ export function validateScenario(definition: ScenarioDefinition) {
     if (!host(interaction.host).services.some((service) => ["http", "https"].includes(service.name))) fail(`web interaction has no web service ${interaction.host}`);
     if (!interaction.evidence.length) fail(`web interaction lacks telemetry ${interaction.host}:${interaction.path}`);
   }
+  unique((definition.httpRoutes ?? []).map((route) => `${route.host}:${route.method}:${route.path}`), "http route");
+  for (const route of definition.httpRoutes ?? []) {
+    if (!host(route.host).services.some((service) => ["http", "https"].includes(service.name))) fail(`http route has no web service ${route.host}`);
+    if (route.login && route.requiresSession) fail(`http route cannot be both a login and session-gated ${route.host}:${route.path}`);
+  }
   for (const operation of definition.trustedServiceOperations ?? []) {
     user(operation.host, operation.fromUser); user(operation.host, operation.toUser);
     if (!host(operation.host).services.some((service) => service.name === operation.service)) fail(`trusted operation has no service ${operation.host}:${operation.service}`);
