@@ -162,18 +162,16 @@ Production matchmaking, competitive analytics, and Red/Blue ranking belong to Mi
 
 The key rule for PvP is that clients may render and submit intent, but only the authoritative match simulation may decide state, telemetry, detection, or victory.
 
-## Suggested immediate next task — first-class DNS + Intel auto-recording (Milestone 3 close-out)
+## Suggested immediate next task — Milestone 4 (Browser interface, HTTP/cookie/session, deeper psql)
 
-Act 0 and Act I are built (see Slice 10). The next unmet roadmap gate is the remainder of Milestone 3: a first-class DNS simulation and complete Intel auto-recording, both of which the Act I missions currently work around rather than exercise directly.
+Milestone 3 is now closed (see Slice 11: first-class DNS, `dig`/`nslookup`, and the full Intel auto-recording panel). The next unmet roadmap gate is Milestone 4: a general-purpose Browser app, an HTTP route/cookie/session model, and deeper PostgreSQL `psql` support. Glasshouse already exercises a bounded slice of this (raw `curl` against a couple of routes, one `psql` query), but there's no general-purpose Browser app yet, and HTTP sessions/cookies aren't modeled as first-class state the way DNS and SSH sessions now are.
 
 Scope:
 
-1. Add a first-class DNS record model (scenario-declared records: name, type, target host/IP, and a way to model stale/updated records over time) and a `dig`/`nslookup`-equivalent command, replacing the static `aliases` map as the DNS mechanic for new content. Keep `aliases` working for existing scenarios or migrate them, but don't leave two competing DNS mechanics as the long-term model.
-2. Build the canonical-plan §40 Intel system as a dedicated panel: auto-recorded HOSTS, CREDENTIALS, NETWORKS, and RELATIONSHIPS, sourced from the same discovery/credential/session data already recorded by the engine (`applyDiscovery`, `Credential`, `NetworkConnection`) rather than new state. Today only a partial `intel.hosts`/`intel.relationships` view exists inside the Network Map (`app/red/page.tsx`); this should become its own app/tab per the plan's example layout.
-3. Add acceptance coverage: a scenario that requires reading DNS records (not just pinging a hostname) to find the right target, and a check that Intel auto-populates from existing campaign discoveries without any scenario-specific wiring.
-4. Re-validate the Milestone 3 exit condition (a tester can independently determine what hosts exist, what is reachable, what services are exposed, and which discovered information is useful) against the new DNS/Intel surfaces, not just the Act I missions' current alias-based workaround.
-
-After this, the next natural slice is Milestone 4 (Browser interface, HTTP route/cookie/session model, PostgreSQL `psql` deepening) — Glasshouse already exercises a bounded slice of this, but there's no general-purpose Browser app yet.
+1. Add a Browser app (`app/red/page.tsx` or a dedicated tab) that renders HTTP responses instead of raw `curl` text output, and model HTTP sessions/cookies as engine state so login flows, authenticated routes, and session expiry can be scripted into scenarios.
+2. Deepen `psql`: multiple tables/joins, more realistic query errors, and scenario-declared schemas beyond the single-table lookups Glasshouse currently uses.
+3. Add acceptance coverage for a scenario that requires navigating multiple authenticated HTTP routes (not just one `curl`) and a `psql` scenario with a non-trivial query.
+4. Re-validate the Milestone 4 exit condition against the new Browser/HTTP/psql surfaces once built.
 
 Separately, and not blocking the above, Milestone 2's exit condition still needs a human playtest pass (a fresh tester walking Act 0 → Act I and explaining current host/user/files/processes/IP-host-service relationships unaided) — the acceptance-test suite proves the content is completable, not that it teaches successfully.
 
@@ -182,3 +180,5 @@ Separately, and not blocking the above, Milestone 2's exit condition still needs
 **2026-09-19 decision:** Realistic interaction Slices 7 and 8 are complete, but the expanded canonical roadmap supersedes the earlier direct move to PvP authority. Close the remaining Milestone 2–4 requirements and Milestones 8–10 before treating Multiplayer Alpha as the active product phase.
 
 **2026-09-19 update:** Act 0 (`First Shift`, `The Printer`, `Locked Out`) and Act I (`Where Did the Website Go?`, `Service Unavailable`, `Wrong Network`, `The New Server`) are built and pass acceptance tests, closing Milestone 2's content requirement. DNS is only alias-based and Intel auto-recording is only partially built, so Milestone 3 is not fully closed. The immediate implementation priority is first-class DNS + the full Intel panel, per the scope above.
+
+**2026-09-20 update:** Slice 11 (first-class DNS + full Intel auto-recording) is complete, closing Milestone 3. `ScenarioDefinition.aliases` was fully retired in favor of `dnsRecords` (A/CNAME records with depth-limited chain resolution via `resolveDns()`), all 15 scenario files were migrated, and `dig`/`nslookup` were added as real terminal commands emitting `DNS_QUERY` telemetry and driving a new `dns` discovery-trigger kind. `Where Did the Website Go?` now requires an explicit `dig` query before the rest of the investigation, and a new `intel.test.ts` proves Intel auto-populates HOSTS/CREDENTIALS/NETWORKS/RELATIONSHIPS from Glasshouse's existing discovery/session data alone, with a dedicated Intel tab added to `app/red/page.tsx`. `tsc`, `yarn test` (2 pre-existing unrelated failures only), and `yarn build` all pass. The immediate implementation priority is now Milestone 4 (Browser app, HTTP/cookie/session model, deeper `psql`), per the scope above.

@@ -1,5 +1,5 @@
 {
-  "0": "red/page.tsx",
+  "0": "root-chrome.tsx",
   "1": "devDependencies",
   "2": "dependencies",
   "3": "TypeScript Configuration",
@@ -40,7 +40,7 @@
   "38": "66. Page Mapping",
   "39": "6. Canonical Application Names",
   "40": "Broken Unstyled Career Page Screenshot",
-  "41": "replay-client.tsx",
+  "41": "career/page.tsx",
   "42": "Operation Glasshouse — Discovery Graph",
   "43": "16. SIEM / Log Viewer",
   "44": "40. Audio Production Priority",
@@ -50,5 +50,9 @@
   "48": "3. Core Audio Principles",
   "49": "7. Terminal Audio",
   "50": "ROOT — Audio Design Document",
-  "51": "tools.ts"
+  "51": "tools.ts",
+  "52": "red/page.tsx",
+  "53": "inspector.tsx",
+  "54": "RootAudioSystem",
+  "55": "BlueTeamPage"
 }

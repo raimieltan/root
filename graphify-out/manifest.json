@@ -498,9 +498,9 @@
     "semantic_hash": ""
   },
   "docs/REALISTIC_INTERACTION_PROGRESS.md": {
-    "mtime": 1789792074.9471467,
-    "seen": 1789837774.937133,
-    "ast_hash": "868be3e4adedda21d68be2a2d352388d",
+    "mtime": 1789837966.512965,
+    "seen": 1789837973.5061288,
+    "ast_hash": "4f5de08295508c887fbaced88ee52d72",
     "semantic_hash": ""
   },
   "app/ui/root-os.tsx": {
