@@ -3,7 +3,7 @@ import { commonDetections, discover, external, file, host, identity, link, route
 
 export const nightshift: ScenarioDefinition = {
   id: "nightshift", name: "Operation Nightshift", organization: "Kronos Logistics",
-  presentation: { caseId: "ID-03", order: 2, prerequisite: "glasshouse", focus: ["Identity", "Credential reuse", "Persistence"] },
+  presentation: { caseId: "ID-03", order: 4, prerequisite: "glasshouse", focus: ["Identity", "Credential reuse", "Persistence"] },
   briefing: { red: "An after-hours dispatch portal shares identities with internal scheduling. Retrieve NIGHT_MANIFEST.csv from DISPATCH-01. Investigate both endpoint execution and reused credentials.", blue: "A legitimate overnight shift is processing dispatches. Distinguish approved activity from identity misuse, prevent manifest theft, and keep scheduling available.", constraints: ["After-hours authentication alone is not compromise", "Session revocation does not invalidate credentials or remove agents"] },
   availableModes: ["RED", "BLUE"],
   assistance: { guided: ["curl shift.kronos.test exposes a support handover. Compare the human identity with the service identity it can reach.", "After nmap, submit a bounded maintenance job to the portal's documented worker endpoint.", "Use ls to find the handover or worker configuration. install-agent preserves privileged access but produces a beacon."], operator: "Separate user identity, service credentials, active sessions, and persistent access." },

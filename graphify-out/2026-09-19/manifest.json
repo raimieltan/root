@@ -216,10 +216,10 @@
     "semantic_hash": "a204b372c5d55c1f54f7d45cebd2e649"
   },
   "docs/ROOT_CANONICAL_PLAN.md": {
-    "mtime": 1789660752.4940836,
-    "seen": 1789663363.224043,
-    "ast_hash": "93e6e76f75546a633d17fb0e41a226cd",
-    "semantic_hash": "93e6e76f75546a633d17fb0e41a226cd"
+    "mtime": 1789783530.5683775,
+    "seen": 1789783774.9564009,
+    "ast_hash": "861342160021f79af3b27fffcb244b1b",
+    "semantic_hash": ""
   },
   "docs/ui/VISUAL_STYLES.md": {
     "mtime": 1789737579.1389592,
@@ -498,9 +498,9 @@
     "semantic_hash": ""
   },
   "docs/REALISTIC_INTERACTION_PROGRESS.md": {
-    "mtime": 1789783019.9775994,
-    "seen": 1789783067.667676,
-    "ast_hash": "0928d109e9dfb20f391c3e232bf895e3",
+    "mtime": 1789783761.818402,
+    "seen": 1789783774.9563708,
+    "ast_hash": "236e277588af2fa7910d793fa6e69303",
     "semantic_hash": ""
   },
   "app/ui/root-os.tsx": {

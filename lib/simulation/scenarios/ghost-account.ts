@@ -3,7 +3,7 @@ import { commonDetections, discover, external, file, host, identity, link, route
 
 export const ghostAccount: ScenarioDefinition = {
   id: "ghost-account", name: "Operation Ghost Account", organization: "Northline Health",
-  presentation: { caseId: "IR-18", order: 7, prerequisite: "something-calling-home", focus: ["Authorization", "Persistence", "Recovery"] },
+  presentation: { caseId: "IR-18", order: 9, prerequisite: "something-calling-home", focus: ["Authorization", "Persistence", "Recovery"] },
   briefing: { red: "A dormant provisioning account and a privileged intake worker both lead to the credential recovery register. Retrieve RECOVERY_CODES.csv and maintain access if possible.", blue: "A supposedly retired account has resumed activity alongside unusual intake processing. Remove the unauthorized access without locking out legitimate recovery workflows.", constraints: ["Disabling every recovery identity would interrupt patient access recovery", "Session revocation alone does not remove persistent access"] },
   availableModes: ["RED", "BLUE"], assistance: { guided: ["The provisioning account is a valid identity with an invalid lifecycle state.", "The intake worker can sustain a beacon after its original session is revoked.", "Compare an identity response with removing the persistence it left behind."], operator: "Use authorization state, process evidence, and recovery-business context to distinguish a ghost account from valid emergency access." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 }, aliases: { "intake.northline.test": "INTAKE-WEB" }, startingKnowledge: { knownHosts: ["INTERNET", "INTAKE-WEB"], knownAssets: ["intake.northline.test"] },

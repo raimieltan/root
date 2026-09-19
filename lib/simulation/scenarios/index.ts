@@ -8,9 +8,11 @@ import { somethingCallingHome } from "./something-calling-home";
 import { ghostAccount } from "./ghost-account";
 import { noOneKnows } from "./no-one-knows";
 import { firstShift } from "./first-shift";
+import { thePrinter } from "./the-printer";
+import { lockedOut } from "./locked-out";
 import { validateScenario } from "./validate";
 
-export const campaign = [firstShift, glasshouse, nightshift, deadDrop, paperTrail, strangeLogin, somethingCallingHome, ghostAccount, noOneKnows].map(validateScenario);
+export const campaign = [firstShift, thePrinter, lockedOut, glasshouse, nightshift, deadDrop, paperTrail, strangeLogin, somethingCallingHome, ghostAccount, noOneKnows].map(validateScenario);
 const scenarios: Record<string, ScenarioDefinition> = Object.fromEntries(campaign.map((definition) => [definition.id, definition]));
 
 export function operationPresentation(definition: ScenarioDefinition) {

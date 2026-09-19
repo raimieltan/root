@@ -13,10 +13,12 @@ import { normalizeReplayEvent, summarizeReplay, visibleToLens } from "./replay";
 
 describe("Canonical campaign", { concurrency: false }, () => {
   it("adds Act 0 to the content alpha campaign without reducing the linked operation set", () => {
-    assert.equal(campaign.length, 9);
+    assert.equal(campaign.length, 11);
     assert.equal(new Set(campaign.map((definition) => definition.organization)).size, 7);
     assert.equal(campaign[0].id, "first-shift");
-    assert.equal(campaign.find((definition) => definition.id === "glasshouse")?.presentation.prerequisite, "first-shift");
+    assert.equal(campaign.find((definition) => definition.id === "the-printer")?.presentation.prerequisite, "first-shift");
+    assert.equal(campaign.find((definition) => definition.id === "locked-out")?.presentation.prerequisite, "the-printer");
+    assert.equal(campaign.find((definition) => definition.id === "glasshouse")?.presentation.prerequisite, "locked-out");
     const incidentPack = campaign.filter((definition) => ["strange-login", "something-calling-home", "ghost-account", "no-one-knows"].includes(definition.id));
     assert.deepEqual(incidentPack.map((definition) => definition.presentation.prerequisite), ["paper-trail", "strange-login", "something-calling-home", "ghost-account"]);
     for (const definition of incidentPack) {

@@ -3,7 +3,7 @@ import { commonDetections, discover, external, file, host, identity, link, route
 
 export const strangeLogin: ScenarioDefinition = {
   id: "strange-login", name: "Operation The Strange Login", organization: "Northline Health",
-  presentation: { caseId: "IR-14", order: 5, prerequisite: "paper-trail", focus: ["Identity context", "Clinical access", "Triage"] },
+  presentation: { caseId: "IR-14", order: 7, prerequisite: "paper-trail", focus: ["Identity context", "Clinical access", "Triage"] },
   briefing: { red: "Northline's patient-results system is reachable through a maintenance portal and a legitimate locum-access workflow. Retrieve ON_CALL_ROSTER.csv without interrupting clinical results.", blue: "An unfamiliar source used a valid clinical identity shortly after maintenance activity. Determine whether it is a real on-call workflow or misuse, and stop disclosure without taking results offline.", constraints: ["A valid clinician identity is not proof of legitimate intent", "Clinical results must remain available"] },
   availableModes: ["RED", "BLUE"],
   assistance: { guided: ["Compare the source and follow-on behavior of the locum identity with the results service.", "The maintenance portal and remote-clinician path use the same service identity for different business reasons.", "For Blue, disrupt the observed path and verify the alternate source cannot continue."], operator: "Correlate a valid identity with source, timing, target, and business purpose before choosing containment." },

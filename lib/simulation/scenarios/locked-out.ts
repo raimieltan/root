@@ -1,0 +1,149 @@
+import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
+import type { ScenarioDefinition } from "./types";
+import { service } from "./content";
+
+const learning = (
+  concepts: string[],
+  evidence: string,
+  domain: "COMPUTING_OS" | "SECURITY_REASONING" = "COMPUTING_OS",
+): NonNullable<ScenarioDefinition["objectives"][number]["learning"]> => ({
+  domain,
+  concepts,
+  stage: "PRACTICED",
+  evidence,
+});
+
+export const lockedOut: ScenarioDefinition = {
+  id: "locked-out",
+  name: "Locked Out",
+  organization: "Nodeline Security",
+  briefing: {
+    red: "Retrieve your signed onboarding packet from the records archive. Your account has no login on the archive host; determine why, and use only evidence available to you to reach it.",
+    blue: "This orientation assignment has no defensive role.",
+    constraints: ["Use the bounded ROOT/OS terminal", "Treat command output and local documentation as evidence", "Confirm your own account fails before assuming a workaround is needed"],
+  },
+  objectiveSummary: "Reach a host you have no local account on using a documented delegated identity",
+  presentation: { caseId: "NDL-02", focus: ["Users and accounts", "Delegated access", "Cross-host identity"], order: 2, prerequisite: "the-printer" },
+  availableModes: ["RED"],
+  assistance: {
+    guided: [
+      "Confirm what you can from your own workstation first, then try reaching the archive host with your own username before assuming you need something else.",
+      "Read your onboarding folder for how new hires are expected to reach the archive without a direct account.",
+      "A discovered credential belongs to a different identity than your own. Authenticate as that identity, then retrieve the objective file, not just read it.",
+    ],
+    operator: "Use your onboarding folder as the only procedure. Confirm the failure before working around it, and only use identities the evidence has given you.",
+    operatorAvailableAtStart: true,
+  },
+  conditions: { timeLimitMinutes: 20, minimumAvailability: 100 },
+  securityControls: [{ host: "REG-01", telemetry: ["SYSTEM", "FILESYSTEM"] }, { host: "ARCHIVE-01", telemetry: ["AUTH", "FILESYSTEM"] }],
+  businessServices: [{ name: "Records archive access", hosts: ["ARCHIVE-01"], impact: "New hires cannot retrieve signed onboarding packets." }],
+  persistencePolicy: { process: "reg-agent", requiredPrivilege: AccessLevel.ROOT, beaconSeconds: 60 },
+  knowledgeRewards: [],
+  backgroundActivity: [],
+  aliases: { "reg-01.nodeline.test": "REG-01", "archive-01.nodeline.test": "ARCHIVE-01" },
+  startingKnowledge: { knownHosts: ["REG-01"], knownAssets: [] },
+  startingSession: { host: "REG-01", user: "trainee", path: "/home/trainee" },
+  facts: [
+    {
+      id: "locked.handoffNote",
+      category: "IDENTITY",
+      known: "New hires are not provisioned a direct login on ARCHIVE-01; HR issues a temporary pickup identity instead.",
+      unknown: "Why your own account cannot reach the archive host",
+      guidance: "Read the onboarding folder in your home directory before trying anything else.",
+      discoverableFrom: "/home/trainee/onboarding/ARCHIVE_ACCESS.txt",
+      requiredFor: "Understanding why a delegated identity is required",
+    },
+    {
+      id: "locked.tempCredential",
+      category: "IDENTITY",
+      known: "A temporary pickup identity, archivist, is documented for reaching ARCHIVE-01.",
+      unknown: "The username and password needed to authenticate to ARCHIVE-01",
+      guidance: "Treat the documented credential as evidence, not something to guess.",
+      discoverableFrom: "/home/trainee/onboarding/ARCHIVE_ACCESS.txt",
+      requiredFor: "Authenticating to ARCHIVE-01 as a delegated identity",
+    },
+  ],
+  machines: [
+    {
+      hostname: "REG-01",
+      ip: "10.0.0.30",
+      zone: NetworkZone.INTERNAL,
+      os: "linux",
+      users: [
+        { username: "trainee", role: "operator_trainee", privilege: AccessLevel.USER, groups: ["trainees", "operations"] },
+        { username: "lead", role: "shift_lead", privilege: AccessLevel.USER, groups: ["operations"] },
+        { username: "root", role: "administrator", privilege: AccessLevel.ROOT, groups: ["root"] },
+      ],
+      services: [],
+      files: [
+        {
+          path: "/home/trainee/onboarding/ARCHIVE_ACCESS.txt",
+          owner: "trainee",
+          group: "trainees",
+          permissions: "640",
+          isSecret: false,
+          contents: [
+            "ONBOARDING // RECORDS ARCHIVE ACCESS",
+            "",
+            "Your account does not have a login on ARCHIVE-01. New hires are not provisioned there directly.",
+            "HR has issued a temporary pickup identity for the records archive:",
+            "  user: archivist",
+            "  password: Temp-Pickup-2024",
+            "",
+            "Use this identity only to retrieve your onboarding packet, then report completion to your shift lead.",
+          ].join("\n"),
+        },
+      ],
+      processes: [{ name: "sshd", pid: 155, runningAs: "root", commandLine: "/usr/sbin/sshd -D" }],
+    },
+    {
+      hostname: "ARCHIVE-01",
+      ip: "10.0.0.40",
+      zone: NetworkZone.INTERNAL,
+      os: "linux",
+      users: [
+        { username: "archivist", role: "records_clerk", privilege: AccessLevel.USER, groups: ["archive"], password: "Temp-Pickup-2024" },
+        { username: "root", role: "administrator", privilege: AccessLevel.ROOT, groups: ["root"] },
+      ],
+      services: [service("ssh", 22, "root", [NetworkZone.INTERNAL])],
+      files: [
+        {
+          path: "/srv/archive/ONBOARDING_PACKET.txt",
+          owner: "archivist",
+          group: "archive",
+          permissions: "600",
+          isSecret: false,
+          contents: "SIMULATED ONBOARDING PACKET\n\nEmployee: New Hire (trainee)\nStatus: Signed",
+        },
+      ],
+      processes: [{ name: "sshd", pid: 160, runningAs: "root", commandLine: "/usr/sbin/sshd -D" }],
+    },
+  ],
+  connections: [{ source: "REG-01", target: "ARCHIVE-01", port: 22 }],
+  discoveries: [
+    { trigger: { kind: "file", host: "REG-01", value: "/home/trainee/onboarding/ARCHIVE_ACCESS.txt" }, hosts: ["ARCHIVE-01"], facts: ["locked.handoffNote", "locked.tempCredential"], credentials: [{ username: "archivist", scope: "ARCHIVE-01" }] },
+  ],
+  objectives: [
+    { id: "locate-session", type: "event", label: "Establish the current directory", event: { action: "OBSERVATION_RECORDED", targetHost: "REG-01", metadata: { kind: "CURRENT_DIRECTORY" } }, learning: learning(["Files and directories", "Command-line navigation"], "Observed the active shell working directory with pwd.") },
+    { id: "identify-user", type: "event", label: "Identify the current user", event: { action: "OBSERVATION_RECORDED", targetHost: "REG-01", metadata: { kind: "CURRENT_USER" } }, learning: learning(["Users"], "Observed the session username with whoami.") },
+    { id: "inspect-groups", type: "event", label: "Inspect identity and group membership", event: { action: "OBSERVATION_RECORDED", targetHost: "REG-01", metadata: { kind: "IDENTITY_GROUPS" } }, learning: learning(["Users and groups", "Permissions"], "Observed identity, privilege, and group membership with id.") },
+    { id: "inspect-environment", type: "event", label: "Inspect the session environment", event: { action: "OBSERVATION_RECORDED", targetHost: "REG-01", metadata: { kind: "ENVIRONMENT" } }, learning: learning(["Environment variables", "Current host"], "Observed host and session context through environment variables.") },
+    { id: "review-handoff", type: "fact", factId: "locked.handoffNote", label: "Read the onboarding archive access note", learning: learning(["Users", "Documentation"], "Read the onboarding note explaining why a direct account does not exist on the archive host.", "SECURITY_REASONING") },
+    { id: "verify-no-local-account", type: "event", label: "Confirm your own account has no login on the archive host", event: { action: "AUTH_FAILED", targetHost: "ARCHIVE-01", userId: "trainee" }, learning: learning(["Users", "Command-line navigation"], "Attempted to reach ARCHIVE-01 with your own identity and observed the authentication failure before assuming a workaround.", "SECURITY_REASONING") },
+    { id: "discover-credential", type: "fact", factId: "locked.tempCredential", label: "Identify the delegated pickup identity", learning: learning(["Users", "Documentation"], "Identified the documented username and password for the delegated identity rather than guessing one.", "SECURITY_REASONING") },
+    { id: "authenticate-delegated", type: "event", label: "Authenticate to the archive host as the delegated identity", event: { action: "SESSION_CREATED", targetHost: "ARCHIVE-01", userId: "archivist" }, learning: learning(["Users and groups", "Command-line navigation"], "Authenticated to ARCHIVE-01 as the documented delegated identity.") },
+    { id: "retrieve-packet", type: "retrieve_file", host: "ARCHIVE-01", path: "/srv/archive/ONBOARDING_PACKET.txt", label: "Retrieve ONBOARDING_PACKET.txt", learning: learning(["Files and directories", "Evidence versus assumptions"], "Retrieved the onboarding packet only after establishing valid delegated access.", "SECURITY_REASONING") },
+  ],
+  objectiveCompletion: "ALL",
+  beginnerExitQuestions: [
+    { id: "current-host", prompt: "What host are you operating, and what evidence establishes it?", evidenceObjectives: ["inspect-environment"] },
+    { id: "current-user", prompt: "Which user and groups define this session?", evidenceObjectives: ["identify-user", "inspect-groups"] },
+    { id: "access-boundary", prompt: "Why did your own account fail to reach the archive host?", evidenceObjectives: ["verify-no-local-account"] },
+    { id: "delegated-credential", prompt: "What credential let you reach ARCHIVE-01, and where did it come from?", evidenceObjectives: ["review-handoff", "discover-credential", "authenticate-delegated"] },
+    { id: "evidence-outcome", prompt: "What confirms you actually retrieved the onboarding packet, rather than just reading it?", evidenceObjectives: ["retrieve-packet"] },
+  ],
+  detections: {},
+  routes: [],
+  blueProfiles: [],
+  defaultBlueProfile: "",
+};
