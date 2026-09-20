@@ -1,20 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, FileKey2, FileText, FolderOpen, ListTree, Network, ScrollText, Server, SquareTerminal, Waypoints } from "lucide-react";
+import { BookOpen, FileKey2, FileText, FolderOpen, Globe, ListTree, Network, ScrollText, Server, SquareTerminal, Waypoints } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useOperation } from "@/app/use-operation";
 import type { ScenarioView } from "@/app/sim-types";
 import RootChrome from "@/app/ui/root-chrome";
 import { RootTree } from "@/app/ui/root-os";
 import { playAudio } from "@/lib/audio/audio-system";
+import Browser from "./browser";
 import MissionPanel from "./mission-panel";
 import NetworkMap from "./network-map";
 import Terminal, { type TerminalState } from "./terminal";
 
-const apps = ["Mission", "Hosts", "Terminal", "Credentials", "Files", "Processes", "Network", "Intel", "Notes"] as const;
+const apps = ["Mission", "Hosts", "Terminal", "Browser", "Credentials", "Files", "Processes", "Network", "Intel", "Notes"] as const;
 const navItems = [
-  ["Mission", "Overview", BookOpen], ["Hosts", "Hosts", Server], ["Terminal", "Operator Console", SquareTerminal],
+  ["Mission", "Overview", BookOpen], ["Hosts", "Hosts", Server], ["Terminal", "Operator Console", SquareTerminal], ["Browser", "Browser", Globe],
   ["Credentials", "Credential Findings", FileKey2], ["Files", "Files", FolderOpen], ["Processes", "Processes", ListTree],
   ["Network", "Network Map", Network], ["Intel", "Intel", Waypoints], ["Notes", "Case Notes", FileText],
 ] as const;
@@ -50,6 +51,7 @@ export default function RedTeamPage() {
             {activeApp === "Mission" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} />}
             {activeApp === "Hosts" && <DataPanel title="HOST DETAILS" rows={view.machines.map((machine) => `${machine.hostname.padEnd(14)} ${machine.ip.padEnd(15)} ${machine.state}`)} empty="No hosts recorded." />}
             {activeApp === "Terminal" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} />}
+            {activeApp === "Browser" && <Browser scenarioId={ids.scenarioId} actorId={ids.actorId} session={{ currentSessionId: terminalState.currentSessionId, currentMachine: terminalState.currentMachine, currentUser: terminalState.currentUser, currentPath: terminalState.currentPath, context: terminalState.context, discoveredHosts: terminalState.discoveredHosts }} onDiscovered={(hosts) => setTerminalState((prior) => ({ ...prior, discoveredHosts: hosts }))} />}
             {activeApp === "Files" && <DataPanel title={`FILES — ${terminalState.currentMachine}`} rows={(currentMachine?.files ?? []).map((file) => `${file.permissions}  ${file.owner.padEnd(12)} ${file.path}`)} empty="No filesystem access on this host." />}
             {activeApp === "Credentials" && <CredentialsPanel scenarioId={ids.scenarioId} actorId={ids.actorId} credentials={view.credentials} onUse={(command) => { setTerminalPrefill(command); setActiveApp("Terminal"); }} />}
             {activeApp === "Network" && <DataPanel title="DISCOVERED RELATIONSHIPS" rows={[...view.intel.hosts.map((host) => `HOST  ${host}`), ...view.intel.relationships.map((relationship) => `TRUST ${relationship}`)]} empty="No relationships recorded." />}

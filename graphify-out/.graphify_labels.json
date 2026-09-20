@@ -1,5 +1,5 @@
 {
-  "0": "root-chrome.tsx",
+  "0": "red/page.tsx",
   "1": "devDependencies",
   "2": "dependencies",
   "3": "TypeScript Configuration",
@@ -50,9 +50,5 @@
   "48": "3. Core Audio Principles",
   "49": "7. Terminal Audio",
   "50": "ROOT — Audio Design Document",
-  "51": "tools.ts",
-  "52": "audio-system.ts",
-  "53": "red/page.tsx",
-  "54": "root-os.tsx",
-  "55": "RootAudioSystem"
+  "51": "tools.ts"
 }

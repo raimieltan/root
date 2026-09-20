@@ -1,21 +1,21 @@
 # Graph Report - root  (2026-09-20)
 
 ## Corpus Check
-- 101 files · ~630,382 words
+- 102 files · ~630,877 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 922 nodes · 1738 edges · 56 communities (45 shown, 8 thin omitted)
+- 928 nodes · 1751 edges · 52 communities (42 shown, 7 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 19 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ad6f2262`
+- Built from commit: `e1c0c4e7`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- root-chrome.tsx
+- red/page.tsx
 - devDependencies
 - dependencies
 - TypeScript Configuration
@@ -64,10 +64,6 @@
 - 7. Terminal Audio
 - ROOT — Audio Design Document
 - tools.ts
-- audio-system.ts
-- red/page.tsx
-- root-os.tsx
-- RootAudioSystem
 
 ## God Nodes (most connected - your core abstractions)
 1. `SimulationEngine` - 55 edges
@@ -75,10 +71,10 @@
 3. `ScenarioDefinition` - 23 edges
 4. `prisma` - 19 edges
 5. `getScenarioView()` - 18 edges
-6. `getDefinitionForScenario()` - 16 edges
-7. `dns()` - 16 edges
-8. `compilerOptions` - 16 edges
-9. `playAudio()` - 15 edges
+6. `playAudio()` - 17 edges
+7. `getDefinitionForScenario()` - 16 edges
+8. `dns()` - 16 edges
+9. `compilerOptions` - 16 edges
 10. `initializeScenario()` - 15 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -99,19 +95,19 @@
 ## Hyperedges (group relationships)
 - **Shared Simulation Model** — docs_root_canonical_plan_shared_simulation, docs_root_canonical_plan_everything_leaves_evidence, docs_root_canonical_plan_post_operation_reconstruction [EXTRACTED 1.00]
 
-## Communities (56 total, 8 thin omitted)
+## Communities (52 total, 7 thin omitted)
 
-### Community 0 - "root-chrome.tsx"
-Cohesion: 0.14
-Nodes (18): RedTeamPage(), Line, Props, Terminal(), submit(), TerminalState, AudioControlPanel(), runCheck() (+10 more)
+### Community 0 - "red/page.tsx"
+Cohesion: 0.05
+Nodes (43): Browser(), open(), Page, Props, quote(), MissionPanel(), NetworkMap(), apps (+35 more)
 
 ### Community 1 - "devDependencies"
-Cohesion: 0.05
-Nodes (41): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+33 more)
+Cohesion: 0.06
+Nodes (31): concurrently, eslint, eslint-config-next, devDependencies, concurrently, eslint, eslint-config-next, @playwright/test (+23 more)
 
 ### Community 2 - "dependencies"
-Cohesion: 0.06
-Nodes (31): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+23 more)
+Cohesion: 0.05
+Nodes (41): dotenv, lucide-react, next, dependencies, dotenv, lucide-react, next, pg (+33 more)
 
 ### Community 3 - "TypeScript Configuration"
 Cohesion: 0.07
@@ -214,8 +210,8 @@ Cohesion: 0.09
 Nodes (22): 10. Act 0 orientation and Act I network/service missions, 11. First-class DNS and full Intel auto-recording (Milestone 3 close-out), 1. Structured tool intents and terminal context, 2. Declarative Glasshouse application route, 3. Unix investigation commands, 4. Prompted SSH and PostgreSQL authentication, 5. Scenario content and migrations, 6. First-class credentials and Credentials application (+14 more)
 
 ### Community 34 - "blue/page.tsx"
-Cohesion: 0.08
-Nodes (39): HostInspector(), Inspector(), ProcessInspector(), relatedAlerts(), RespondFn, alertEndpoints(), AlertQueue(), Authentication() (+31 more)
+Cohesion: 0.07
+Nodes (41): HostInspector(), Inspector(), ProcessInspector(), relatedAlerts(), RespondFn, alertEndpoints(), AlertQueue(), Authentication() (+33 more)
 
 ### Community 35 - "AUDIO_DESIGN.md"
 Cohesion: 0.06
@@ -230,8 +226,8 @@ Cohesion: 0.33
 Nodes (6): 109. Canonical Page Copy, After-Action Review, Employee Portal, Engagement Workspace, Operations Desk, Security Operations Center
 
 ### Community 41 - "career/page.tsx"
-Cohesion: 0.16
-Nodes (20): CareerPage(), completeExercise(), proficiencyLabel, engagementId(), Home(), RootPane(), RootTable(), RootTabs() (+12 more)
+Cohesion: 0.09
+Nodes (23): CareerPage(), completeExercise(), proficiencyLabel, geistMono, geistSans, metadata, engagementId(), Home() (+15 more)
 
 ### Community 42 - "Operation Glasshouse — Discovery Graph"
 Cohesion: 0.29
@@ -269,22 +265,10 @@ Nodes (3): 7. Terminal Audio, Command Execution, Typing
 Cohesion: 0.08
 Nodes (34): BLUE_RESPONSE_ACTIONS, handlers, result(), unavailable(), argsOf(), AuthenticationIntent, commandOf(), createToolAdapterRegistry() (+26 more)
 
-### Community 52 - "audio-system.ts"
-Cohesion: 0.20
-Nodes (13): MIXER_CHANNELS, AudioSettings, AudioSnapshot, DEFAULT_AUDIO_SETTINGS, Listener, rootAudio, SERVER_AUDIO_SNAPSHOT, AUDIO_CHECK_EVENTS (+5 more)
-
-### Community 53 - "red/page.tsx"
-Cohesion: 0.20
-Nodes (8): MissionPanel(), NetworkMap(), apps, Credential, navItems, EventView, MachineView, ScenarioView
-
-### Community 54 - "root-os.tsx"
-Cohesion: 0.14
-Nodes (3): geistMono, geistSans, metadata
-
 ## Knowledge Gaps
-- **489 isolated node(s):** `RespondFn`, `RespondFn`, `ModuleProps`, `FindingState`, `NAV` (+484 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 550 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **491 isolated node(s):** `RespondFn`, `RespondFn`, `ModuleProps`, `FindingState`, `NAV` (+486 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 552 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -296,10 +280,10 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `ScenarioDefinition` connect `index.ts` to `engine.ts`, `SimulationEngine`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `RespondFn`, `RespondFn`, `ModuleProps` to the rest of the system?**
-  _489 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `root-chrome.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.1380952380952381 - nodes in this community are weakly interconnected._
+  _491 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `red/page.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.05407925407925408 - nodes in this community are weakly interconnected._
 - **Should `devDependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
-- **Should `dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._

@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "app/red/page.tsx": {
-    "mtime": 1789837639.9772112,
-    "seen": 1789837774.936265,
-    "ast_hash": "3834fda41b1f2bf60f20a9357a1ed6ce",
+    "mtime": 1789870093.957784,
+    "seen": 1789870274.837625,
+    "ast_hash": "786971c1e45c758b2e9db3b6c8714532",
     "semantic_hash": ""
   },
   "app/red/terminal.tsx": {
@@ -723,6 +723,12 @@
     "mtime": 1789837673.9966795,
     "seen": 1789837774.9366558,
     "ast_hash": "9b4de3fff3a2bce0f952cd89e4843ede",
+    "semantic_hash": ""
+  },
+  "app/red/browser.tsx": {
+    "mtime": 1789870078.4856515,
+    "seen": 1789870274.8375611,
+    "ast_hash": "3fbf4f1e790f1f8240f374ceee013986",
     "semantic_hash": ""
   }
 }
