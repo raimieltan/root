@@ -164,6 +164,10 @@ export const theNewServer: ScenarioDefinition = {
     { source: "HELPDESK-01", target: "NEW-APP-01", port: 22 },
     { source: "HELPDESK-01", target: "NEW-APP-01", port: 443 },
   ],
+  httpRoutes: [
+    { host: "NEW-APP-01", method: "POST", path: "/login", login: { usernameField: "username", passwordField: "password" }, output: "HTTP/1.1 200 OK\nSet-Cookie: session=new-app-01\n\nLogged in.", invalidOutput: "HTTP/1.1 401 Unauthorized\nInvalid credentials." },
+    { host: "NEW-APP-01", method: "GET", path: "/account", requiresSession: true, output: "HTTP/1.1 200 OK\n\nCommissioning account: launch checklist pending sign-off.", unauthorizedOutput: "HTTP/1.1 401 Unauthorized\nLog in first." },
+  ],
   discoveries: [
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/home/trainee/TICKET-5300.txt" }, hosts: ["NEW-APP-01"], facts: ["newserver.ticket"] },
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/home/trainee/COMMISSIONING_ACCESS.txt" }, facts: ["newserver.commissioningAccess"], credentials: [{ username: "commissioning", scope: "NEW-APP-01" }] },

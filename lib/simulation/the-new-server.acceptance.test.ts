@@ -66,4 +66,36 @@ describe("Act I The New Server", { concurrency: false }, () => {
       await deleteScenario(initialized.scenarioId);
     }
   });
+
+  it("gates an HTTP route behind a declarative login/cookie session rather than curl string matching", async () => {
+    const initialized = await initializeScenario("RED", "the-new-server", undefined, "OPERATOR");
+    try {
+      const state: TerminalState = { ...initialized.startingState, activeSessions: [], credentials: new Map(), context: { type: "UNIX" } };
+      const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+      const run = async (command: string, expectSuccess = true) => {
+        const result = await engine.executeCommand(command, state);
+        assert.equal(result.success, expectSuccess, `${command}: ${result.output}`);
+        applyResult(state, result);
+        return result.output;
+      };
+
+      // Without a cookie session, the protected route is unauthorized — no shell session is opened or switched.
+      assert.match(await run("curl NEW-APP-01/account", false), /401 Unauthorized/);
+      assert.equal(state.currentMachine, initialized.startingState.currentMachine);
+
+      // A wrong password does not mint a cookie.
+      assert.match(await run("curl -X POST NEW-APP-01/login --data \"username=commissioning&password=wrong\"", false), /401 Unauthorized/);
+      assert.equal(await prisma.httpSession.count({ where: { scenarioId: initialized.scenarioId } }), 0);
+
+      // The correct login credential mints a cookie session without switching the terminal's active machine.
+      assert.match(await run("curl -X POST NEW-APP-01/login --data \"username=commissioning&password=SignOff-2026\""), /Set-Cookie/);
+      assert.equal(state.currentMachine, initialized.startingState.currentMachine);
+      assert.equal(await prisma.httpSession.count({ where: { scenarioId: initialized.scenarioId } }), 1);
+
+      // The protected route now succeeds using the cookie, still without a shell session.
+      assert.match(await run("curl NEW-APP-01/account"), /launch checklist pending sign-off/);
+    } finally {
+      await deleteScenario(initialized.scenarioId);
+    }
+  });
 });

@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/engine.ts": {
-    "mtime": 1789837639.9797618,
-    "seen": 1789837774.9365919,
-    "ast_hash": "7310ac145dd072c0a6518448af0f9040",
+    "mtime": 1789839348.240347,
+    "seen": 1789861814.7496462,
+    "ast_hash": "d3310506fa57cdb6dc2036a15b896770",
     "semantic_hash": ""
   },
   "lib/simulation/initializer.ts": {
@@ -294,15 +294,15 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/index.ts": {
-    "mtime": 1789837639.9821732,
-    "seen": 1789837774.936765,
-    "ast_hash": "c9adc8f57fdd23e758af7546da98c657",
+    "mtime": 1789839348.240578,
+    "seen": 1789861814.749959,
+    "ast_hash": "56aab46819e50c1bcbacd76afad7d0d4",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/types.ts": {
-    "mtime": 1789837639.9866393,
-    "seen": 1789837774.936773,
-    "ast_hash": "0b36b19b54d0386ed3c4301bf3d638ab",
+    "mtime": 1789839348.2407856,
+    "seen": 1789861814.7501152,
+    "ast_hash": "041106cb52ef325ea07a7115c71bb5f5",
     "semantic_hash": ""
   },
   "app/api/operations/route.ts": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/validate.ts": {
-    "mtime": 1789837639.9878767,
-    "seen": 1789837774.9367738,
-    "ast_hash": "4a7366f0b86c2372640169ba5e6c4ee2",
+    "mtime": 1789839348.241001,
+    "seen": 1789861814.750116,
+    "ast_hash": "6546d9e6481bfde6d36e8ab914be7370",
     "semantic_hash": ""
   },
   "playwright.config.ts": {
@@ -672,15 +672,15 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/service-unavailable.ts": {
-    "mtime": 1789837639.9848144,
-    "seen": 1789837774.936769,
+    "mtime": 1789857602.122702,
+    "seen": 1789861814.750049,
     "ast_hash": "0a811d6cef798e7e66bd6e89f85de6bd",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/the-new-server.ts": {
-    "mtime": 1789837639.986004,
-    "seen": 1789837774.936772,
-    "ast_hash": "697775c7267789405c05f49c6563eeaa",
+    "mtime": 1789858171.891045,
+    "seen": 1789861814.750093,
+    "ast_hash": "80c598106ab6784ecc19132e54d6b981",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/website-down.ts": {
@@ -702,9 +702,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/the-new-server.acceptance.test.ts": {
-    "mtime": 1789790263.080641,
-    "seen": 1789790390.9191182,
-    "ast_hash": "1760eb653a071d1b633d77ccc87318d5",
+    "mtime": 1789858197.7340345,
+    "seen": 1789861814.750201,
+    "ast_hash": "ccf6a7d534a5abf0b1bcb2e7a49a1520",
     "semantic_hash": ""
   },
   "lib/simulation/website-down.acceptance.test.ts": {
