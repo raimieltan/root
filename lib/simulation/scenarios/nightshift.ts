@@ -1,12 +1,12 @@
 import type { ScenarioDefinition } from "./types";
-import { commonDetections, discover, dns, external, file, host, identity, link, route } from "./content";
+import { commonDetections, discover, dns, external, file, guidedOnboarding, host, identity, link, route, withObjectiveHints } from "./content";
 
 export const nightshift: ScenarioDefinition = {
   id: "nightshift", name: "Operation Nightshift", organization: "Kronos Logistics",
   presentation: { caseId: "ID-03", order: 8, prerequisite: "glasshouse", focus: ["Identity", "Credential reuse", "Persistence"] },
   briefing: { red: "An after-hours dispatch portal shares identities with internal scheduling. Retrieve NIGHT_MANIFEST.csv from DISPATCH-01. Investigate both endpoint execution and reused credentials.", blue: "A legitimate overnight shift is processing dispatches. Distinguish approved activity from identity misuse, prevent manifest theft, and keep scheduling available.", constraints: ["After-hours authentication alone is not compromise", "Session revocation does not invalidate credentials or remove agents"] },
   availableModes: ["RED", "BLUE"],
-  assistance: { guided: ["curl shift.kronos.test exposes a support handover. Compare the human identity with the service identity it can reach.", "After nmap, submit a bounded maintenance job to the portal's documented worker endpoint.", "Use ls to find the handover or worker configuration. install-agent preserves privileged access but produces a beacon."], operator: "Separate user identity, service credentials, active sessions, and persistent access." },
+  assistance: { guided: guidedOnboarding, operator: "Separate user identity, service credentials, active sessions, and persistent access." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },
   dnsRecords: dns({ "shift.kronos.test": "SHIFT-WEB" }), startingKnowledge: { knownHosts: ["INTERNET", "SHIFT-WEB"], knownAssets: ["shift.kronos.test"] },
   machines: [external,
@@ -18,7 +18,7 @@ export const nightshift: ScenarioDefinition = {
   connections: [link("INTERNET", "SHIFT-WEB", 443), link("INTERNET", "ACCESS-01", 22, "AFTER_HOURS_LOGIN"), link("SHIFT-WEB", "DISPATCH-01", 22, "SERVICE_IDENTITY_INTERACTIVE"), link("ACCESS-01", "DISPATCH-01", 22, "TOKEN_REUSE_LOGIN")],
   discoveries: [{ trigger: { kind: "web", host: "SHIFT-WEB", value: "shift.kronos.test" }, output: "Kronos shift handover. Emergency access: morgan@ACCESS-01 using NightHandover-24. Approved shift: 00:00–06:00. Worker maintenance endpoint enabled.", hosts: ["ACCESS-01"], credentials: [{ username: "morgan", scope: "ACCESS-01" }] }, discover("ACCESS-01", "/home/morgan/handover.txt", "DISPATCH-01", "dispatch_svc"), discover("SHIFT-WEB", "/etc/shift/worker.conf", "DISPATCH-01", "dispatch_svc")],
   webInteractions: [{ host: "SHIFT-WEB", method: "POST", path: "/maintenance/jobs", dataIncludes: "job=handover", sessionUser: "root", prerequisiteAction: "PORT_PROBE", output: "The maintenance worker accepted the handover job and runs as root. Session opened.", evidence: [{ action: "WEB_WORKER_EXECUTED", category: "WEB", severity: "HIGH" }, { action: "PROCESS_SPAWN", category: "PROCESS", severity: "HIGH" }] }],
-  objectives: [{ id: "manifest", type: "retrieve_file", host: "DISPATCH-01", path: "/srv/dispatch/NIGHT_MANIFEST.csv", label: "Retrieve NIGHT_MANIFEST.csv" }],
+  objectives: withObjectiveHints("nightshift", [{ id: "manifest", type: "retrieve_file", host: "DISPATCH-01", path: "/srv/dispatch/NIGHT_MANIFEST.csv", label: "Retrieve NIGHT_MANIFEST.csv" }]),
   detections: { ...commonDetections,
     AFTER_HOURS_LOGIN: { id: "AUTH-SHIFT", title: "Remote shift identity", severity: "LOW", rationale: "After-hours access is expected; verify source and follow-on service usage before containment." },
     TOKEN_REUSE_LOGIN: { id: "AUTH-REUSE", title: "Human handover used as service identity", severity: "HIGH", rationale: "An interactive access host reused a shift token for an unattended service account." },

@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { dns } from "./content";
+import { dns, guidedOnboarding, withObjectiveHints } from "./content";
 
 const learning = (
   concepts: string[],
@@ -26,11 +26,7 @@ export const thePrinter: ScenarioDefinition = {
   presentation: { caseId: "NDL-01", focus: ["Processes", "Logs", "Permissions and groups"], order: 1, prerequisite: "first-shift" },
   availableModes: ["RED"],
   assistance: {
-    guided: [
-      "Start with the ticket in your home directory, then confirm whether the reported service is actually stopped before assuming it is.",
-      "A process still running does not mean nothing is wrong. Read its log file for the actual error rather than guessing.",
-      "Compare the failing resource's owner and group permissions against the group membership reference before concluding why access fails.",
-    ],
+    guided: guidedOnboarding,
     operator: "Use the trouble ticket, the spooler log, and the group membership reference as your only procedure. State the cause only from what the evidence shows.",
     operatorAvailableAtStart: true,
   },
@@ -156,7 +152,7 @@ export const thePrinter: ScenarioDefinition = {
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/var/log/print-spooler.log" }, facts: ["printer.logEvidence"] },
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/etc/nodeline/group-membership.txt" }, facts: ["printer.groupMismatch"] },
   ],
-  objectives: [
+  objectives: withObjectiveHints("the-printer", [
     { id: "locate-session", type: "event", label: "Establish the current directory", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_DIRECTORY" } }, learning: learning(["Files and directories", "Command-line navigation"], "Observed the active shell working directory with pwd.") },
     { id: "identify-user", type: "event", label: "Identify the current user", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_USER" } }, learning: learning(["Users"], "Observed the session username with whoami.") },
     { id: "inspect-groups", type: "event", label: "Inspect identity and group membership", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "IDENTITY_GROUPS" } }, learning: learning(["Users and groups", "Permissions"], "Observed identity, privilege, and group membership with id.") },
@@ -166,7 +162,7 @@ export const thePrinter: ScenarioDefinition = {
     { id: "inspect-log", type: "fact", factId: "printer.logEvidence", label: "Find the error in the service log", learning: learning(["Documentation", "Evidence versus assumptions"], "Read the spooler log and identified the actual error rather than assuming a cause.", "SECURITY_REASONING") },
     { id: "inspect-spool-permissions", type: "event", label: "Inspect the spool directory's ownership and permissions", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "DIRECTORY_LISTING", path: "/var/spool/printer", detailed: true } }, learning: learning(["Files and directories", "Permissions"], "Used a long directory listing to observe the spool directory's owner, group, and permission digits.") },
     { id: "correlate-cause", type: "fact", factId: "printer.groupMismatch", label: "Explain the failure as a group membership mismatch", learning: learning(["Users and groups", "Permissions"], "Correlated the spool directory's group requirement with the service account's group membership to explain the failure.", "SECURITY_REASONING") },
-  ],
+  ]),
   objectiveCompletion: "ALL",
   beginnerExitQuestions: [
     { id: "current-host", prompt: "What host are you operating, and what evidence establishes it?", evidenceObjectives: ["inspect-environment"] },

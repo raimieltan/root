@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { dns, service } from "./content";
+import { dns, guidedOnboarding, service, withObjectiveHints } from "./content";
 
 const learning = (
   concepts: string[],
@@ -26,12 +26,7 @@ export const websiteDown: ScenarioDefinition = {
   presentation: { caseId: "NET-01", focus: ["IP addresses and hosts", "DNS", "HTTP basics"], order: 3, prerequisite: "locked-out" },
   availableModes: ["RED"],
   assistance: {
-    guided: [
-      "Read the ticket, then try reaching the intranet by its usual name before assuming the server itself is broken.",
-      "Query the DNS record for the reported hostname directly with dig or nslookup, rather than assuming what it resolves to.",
-      "A host answering ping is not the same as a host running a website. Scan it before deciding what's actually wrong.",
-      "Read the migration notice in your home directory for where the site actually lives now, then reach it directly.",
-    ],
+    guided: guidedOnboarding,
     operator: "Use the trouble ticket and the migration notice as your only procedure. Confirm what a host is actually running before concluding it is down.",
     operatorAvailableAtStart: true,
   },
@@ -177,7 +172,7 @@ export const websiteDown: ScenarioDefinition = {
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/home/trainee/DNS_MIGRATION_NOTICE.txt" }, hosts: ["INTRANET-02"], facts: ["website.migrationNotice"] },
     { trigger: { kind: "web", host: "INTRANET-02", value: "intranet-new.nodeline.test" }, output: "HTTP/1.1 200 OK\n\nNodeline Intranet — Home\nAnnouncements, forms, and directory.", facts: ["website.confirmedLive"] },
   ],
-  objectives: [
+  objectives: withObjectiveHints("website-down", [
     { id: "locate-session", type: "event", label: "Establish the current directory", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_DIRECTORY" } }, learning: learning(["Files and directories", "Command-line navigation"], "Observed the active shell working directory with pwd.", "COMPUTING_OS") },
     { id: "identify-user", type: "event", label: "Identify the current user", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_USER" } }, learning: learning(["Users"], "Observed the session username with whoami.", "COMPUTING_OS") },
     { id: "inspect-groups", type: "event", label: "Inspect identity and group membership", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "IDENTITY_GROUPS" } }, learning: learning(["Users and groups"], "Observed identity, privilege, and group membership with id.", "COMPUTING_OS") },
@@ -188,7 +183,7 @@ export const websiteDown: ScenarioDefinition = {
     { id: "scan-old-host", type: "fact", factId: "website.hostUpNoSite", label: "Scan the host and rule out a total outage", learning: learning(["Ports", "Services"], "Scanned the reachable host and found no web service running, ruling out a full outage.", "SECURITY_REASONING") },
     { id: "discover-migration-notice", type: "fact", factId: "website.migrationNotice", label: "Find the hostname migration notice", learning: learning(["DNS", "Hosts"], "Read the migration notice explaining the stale hostname record and the site's current location.", "SECURITY_REASONING") },
     { id: "reach-live-site", type: "fact", factId: "website.confirmedLive", label: "Reach the intranet at its current hostname", learning: learning(["DNS", "HTTP basics"], "Reached the intranet using the corrected hostname rather than the stale record, and confirmed the response.") },
-  ],
+  ]),
   objectiveCompletion: "ALL",
   beginnerExitQuestions: [
     { id: "current-host", prompt: "What host are you operating, and what evidence establishes it?", evidenceObjectives: ["inspect-environment"] },

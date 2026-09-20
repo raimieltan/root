@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { dns, service } from "./content";
+import { dns, guidedOnboarding, service, withObjectiveHints } from "./content";
 
 const learning = (
   concepts: string[],
@@ -26,11 +26,7 @@ export const wrongNetwork: ScenarioDefinition = {
   presentation: { caseId: "NET-03", focus: ["Routing", "Reachability", "Segmentation"], order: 5, prerequisite: "service-unavailable" },
   availableModes: ["RED"],
   assistance: {
-    guided: [
-      "Try reaching DEPLOY-STAGE directly first. An unreachable result from your own workstation does not mean the host is down.",
-      "Read the network access note in your home directory for how helpdesk reaches the finance deployment segment.",
-      "Once on the jump host, look for a local note describing how it reaches DEPLOY-STAGE, and use the credential it documents.",
-    ],
+    guided: guidedOnboarding,
     operator: "Use the network access note as your only procedure. Confirm whether the failure is a route or a host before assuming either.",
     operatorAvailableAtStart: true,
   },
@@ -177,7 +173,7 @@ export const wrongNetwork: ScenarioDefinition = {
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/home/trainee/NETWORK_ACCESS.txt" }, hosts: ["NETOPS-01"], facts: ["wrongnet.jumphostNote"], credentials: [{ username: "netops", scope: "NETOPS-01" }] },
     { trigger: { kind: "file", host: "NETOPS-01", value: "/home/netops/DEPLOY_ACCESS.txt" }, hosts: ["DEPLOY-STAGE"], facts: ["wrongnet.deployAccess"], credentials: [{ username: "deploy", scope: "DEPLOY-STAGE" }] },
   ],
-  objectives: [
+  objectives: withObjectiveHints("wrong-network", [
     { id: "locate-session", type: "event", label: "Establish the current directory", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_DIRECTORY" } }, learning: learning(["Files and directories", "Command-line navigation"], "Observed the active shell working directory with pwd.", "COMPUTING_OS") },
     { id: "identify-user", type: "event", label: "Identify the current user", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_USER" } }, learning: learning(["Users"], "Observed the session username with whoami.", "COMPUTING_OS") },
     { id: "inspect-groups", type: "event", label: "Inspect identity and group membership", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "IDENTITY_GROUPS" } }, learning: learning(["Users and groups"], "Observed identity, privilege, and group membership with id.", "COMPUTING_OS") },
@@ -188,7 +184,7 @@ export const wrongNetwork: ScenarioDefinition = {
     { id: "discover-deploy-access", type: "fact", factId: "wrongnet.deployAccess", label: "Find the documented deploy-segment credential", learning: learning(["Users", "Documentation"], "Identified the documented credential for reaching DEPLOY-STAGE from the jump host.", "SECURITY_REASONING") },
     { id: "reach-deploy-stage", type: "event", label: "Reach DEPLOY-STAGE from the jump host", event: { action: "SESSION_CREATED", targetHost: "DEPLOY-STAGE", userId: "deploy" }, learning: learning(["Routing", "Segmentation", "SSH"], "Reached DEPLOY-STAGE through the documented jump host after confirming the segment boundary, not by bypassing it.") },
     { id: "retrieve-healthcheck", type: "retrieve_file", host: "DEPLOY-STAGE", path: "/srv/deploy/STAGE_HEALTHCHECK.txt", label: "Retrieve STAGE_HEALTHCHECK.txt", learning: learning(["Evidence versus assumptions"], "Retrieved confirmation that DEPLOY-STAGE was healthy the entire time and only unreachable from outside its segment.", "SECURITY_REASONING") },
-  ],
+  ]),
   objectiveCompletion: "ALL",
   beginnerExitQuestions: [
     { id: "current-host", prompt: "What host are you operating, and what evidence establishes it?", evidenceObjectives: ["inspect-environment"] },

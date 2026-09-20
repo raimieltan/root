@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { dns, service } from "./content";
+import { dns, guidedOnboarding, service, withObjectiveHints } from "./content";
 
 const learning = (
   concepts: string[],
@@ -26,11 +26,7 @@ export const lockedOut: ScenarioDefinition = {
   presentation: { caseId: "NDL-02", focus: ["Users and accounts", "Delegated access", "Cross-host identity"], order: 2, prerequisite: "the-printer" },
   availableModes: ["RED"],
   assistance: {
-    guided: [
-      "Confirm what you can from your own workstation first, then try reaching the archive host with your own username before assuming you need something else.",
-      "Read your onboarding folder for how new hires are expected to reach the archive without a direct account.",
-      "A discovered credential belongs to a different identity than your own. Authenticate as that identity, then retrieve the objective file, not just read it.",
-    ],
+    guided: guidedOnboarding,
     operator: "Use your onboarding folder as the only procedure. Confirm the failure before working around it, and only use identities the evidence has given you.",
     operatorAvailableAtStart: true,
   },
@@ -123,7 +119,7 @@ export const lockedOut: ScenarioDefinition = {
   discoveries: [
     { trigger: { kind: "file", host: "REG-01", value: "/home/trainee/onboarding/ARCHIVE_ACCESS.txt" }, hosts: ["ARCHIVE-01"], facts: ["locked.handoffNote", "locked.tempCredential"], credentials: [{ username: "archivist", scope: "ARCHIVE-01" }] },
   ],
-  objectives: [
+  objectives: withObjectiveHints("locked-out", [
     { id: "locate-session", type: "event", label: "Establish the current directory", event: { action: "OBSERVATION_RECORDED", targetHost: "REG-01", metadata: { kind: "CURRENT_DIRECTORY" } }, learning: learning(["Files and directories", "Command-line navigation"], "Observed the active shell working directory with pwd.") },
     { id: "identify-user", type: "event", label: "Identify the current user", event: { action: "OBSERVATION_RECORDED", targetHost: "REG-01", metadata: { kind: "CURRENT_USER" } }, learning: learning(["Users"], "Observed the session username with whoami.") },
     { id: "inspect-groups", type: "event", label: "Inspect identity and group membership", event: { action: "OBSERVATION_RECORDED", targetHost: "REG-01", metadata: { kind: "IDENTITY_GROUPS" } }, learning: learning(["Users and groups", "Permissions"], "Observed identity, privilege, and group membership with id.") },
@@ -133,7 +129,7 @@ export const lockedOut: ScenarioDefinition = {
     { id: "discover-credential", type: "fact", factId: "locked.tempCredential", label: "Identify the delegated pickup identity", learning: learning(["Users", "Documentation"], "Identified the documented username and password for the delegated identity rather than guessing one.", "SECURITY_REASONING") },
     { id: "authenticate-delegated", type: "event", label: "Authenticate to the archive host as the delegated identity", event: { action: "SESSION_CREATED", targetHost: "ARCHIVE-01", userId: "archivist" }, learning: learning(["Users and groups", "Command-line navigation"], "Authenticated to ARCHIVE-01 as the documented delegated identity.") },
     { id: "retrieve-packet", type: "retrieve_file", host: "ARCHIVE-01", path: "/srv/archive/ONBOARDING_PACKET.txt", label: "Retrieve ONBOARDING_PACKET.txt", learning: learning(["Files and directories", "Evidence versus assumptions"], "Retrieved the onboarding packet only after establishing valid delegated access.", "SECURITY_REASONING") },
-  ],
+  ]),
   objectiveCompletion: "ALL",
   beginnerExitQuestions: [
     { id: "current-host", prompt: "What host are you operating, and what evidence establishes it?", evidenceObjectives: ["inspect-environment"] },

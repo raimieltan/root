@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone, SecurityEventCategory, SecurityEventSeverity } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { dns, service } from "./content";
+import { dns, guidedOnboarding, service, withObjectiveHints } from "./content";
 
 const event = (
   action: string,
@@ -16,7 +16,7 @@ export const glasshouse: ScenarioDefinition = {
   briefing: { red: "Assess the public portal and remote access relationships. Retrieve the protected finance document without modifying production data.", blue: "Investigate unusual application execution and remote access. Prevent finance extraction while preserving the portal and backup services.", constraints: ["Do not modify financial records", "Contain precisely and restore affected services"] },
   presentation: { caseId: "FIN-06", focus: ["Fundamentals", "Privilege escalation", "Finance trust"], order: 7, prerequisite: "the-new-server" },
   availableModes: ["RED", "BLUE"],
-  assistance: { guided: ["Start with the authorized public host. Use nmap to identify its services, then inspect any web service with curl. HTTP responses can reveal the application name or canonical hostname.", "Inspect pages before submitting anything. Forms publish their action, method, field names, and allowed values; linked profiles can reveal related systems without exposing a full solution.", "After gaining a session, use ls, cat, grep, less, and ps. A process's full command line often identifies the configuration file it loaded.", "PostgreSQL can be explored without knowing a database name in advance: connect with -h and -U, then use \\l, \\c, \\dt, and \\d before querying."], operator: "Follow the evidence across application, backup, and database trust boundaries." },
+  assistance: { guided: guidedOnboarding, operator: "Follow the evidence across application, backup, and database trust boundaries." },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },
   securityControls: [{ host: "WEB-01", telemetry: ["WEB", "NETWORK", "PROCESS", "AUTH"] }, { host: "DEV-01", telemetry: ["AUTH", "NETWORK", "PRIVILEGE", "FILESYSTEM", "PERSISTENCE"] }, { host: "FIN-APP", telemetry: ["AUTH", "NETWORK"] }, { host: "VPN-01", telemetry: ["AUTH", "NETWORK"] }, { host: "BACKUP-01", telemetry: ["AUTH", "NETWORK"] }, { host: "FIN-DB", telemetry: ["AUTH", "FILESYSTEM"] }],
   businessServices: [{ name: "Employee portal", hosts: ["WEB-01"], impact: "Employees cannot access operations requests." }, { name: "Finance", hosts: ["FIN-APP", "FIN-DB"], impact: "Invoice processing stops." }, { name: "Backups", hosts: ["VPN-01", "BACKUP-01"], impact: "Scheduled recovery copies are delayed." }],
@@ -232,7 +232,7 @@ export const glasshouse: ScenarioDefinition = {
       event("PRIVILEGE_ESCALATION", SecurityEventCategory.PRIVILEGE, SecurityEventSeverity.CRITICAL),
     ],
   }],
-  objectives: [{ id: "atlas", type: "retrieve_file", host: "FIN-DB", path: "/opt/db/data/PROJECT_ATLAS.pdf", label: "Retrieve PROJECT_ATLAS.pdf" }],
+  objectives: withObjectiveHints("glasshouse", [{ id: "atlas", type: "retrieve_file", host: "FIN-DB", path: "/opt/db/data/PROJECT_ATLAS.pdf", label: "Retrieve PROJECT_ATLAS.pdf" }]),
   detections: {
     PORT_SCAN_DETECTED: { id: "NET-SCAN-01", title: "Port scan", severity: "LOW", rationale: "Multiple service probes reached the same host in a short interval." },
     EXPLOIT_VULNERABILITY: { id: "WEB-EXEC-01", title: "Suspicious web activity", severity: "MEDIUM", rationale: "An unusual web request was followed by server-side process execution." },

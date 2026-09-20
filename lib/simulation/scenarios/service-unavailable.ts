@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { dns, service } from "./content";
+import { dns, guidedOnboarding, service, withObjectiveHints } from "./content";
 
 const learning = (
   concepts: string[],
@@ -26,11 +26,7 @@ export const serviceUnavailable: ScenarioDefinition = {
   presentation: { caseId: "NET-02", focus: ["Ports", "Services", "SSH"], order: 4, prerequisite: "website-down" },
   availableModes: ["RED"],
   assistance: {
-    guided: [
-      "Read the ticket, then ping REPORTS-01 before assuming the whole host is offline.",
-      "A host answering ping can still have a stopped service. Scan it to see which ports are actually open.",
-      "Read the standard access note for how helpdesk reaches internal hosts, then SSH in and check what the reporting process is actually doing.",
-    ],
+    guided: guidedOnboarding,
     operator: "Use the trouble ticket and the standard access note as your only procedure. Confirm the service's state directly rather than assuming from the outage report.",
     operatorAvailableAtStart: true,
   },
@@ -172,7 +168,7 @@ export const serviceUnavailable: ScenarioDefinition = {
     { trigger: { kind: "scan", host: "REPORTS-01", value: "https" }, facts: ["reports.portClosed"] },
     { trigger: { kind: "file", host: "REPORTS-01", value: "/var/log/reports-app.log" }, facts: ["reports.processCrashed"] },
   ],
-  objectives: [
+  objectives: withObjectiveHints("service-unavailable", [
     { id: "locate-session", type: "event", label: "Establish the current directory", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_DIRECTORY" } }, learning: learning(["Files and directories", "Command-line navigation"], "Observed the active shell working directory with pwd.", "COMPUTING_OS") },
     { id: "identify-user", type: "event", label: "Identify the current user", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_USER" } }, learning: learning(["Users"], "Observed the session username with whoami.", "COMPUTING_OS") },
     { id: "inspect-groups", type: "event", label: "Inspect identity and group membership", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "IDENTITY_GROUPS" } }, learning: learning(["Users and groups"], "Observed identity, privilege, and group membership with id.", "COMPUTING_OS") },
@@ -183,7 +179,7 @@ export const serviceUnavailable: ScenarioDefinition = {
     { id: "discover-access", type: "fact", factId: "reports.standardAccess", label: "Find the standard internal access credential", learning: learning(["Users", "SSH", "Documentation"], "Identified the documented standard credential for internal hosts rather than guessing one.", "SECURITY_REASONING") },
     { id: "authenticate-reports", type: "event", label: "Log in to REPORTS-01", event: { action: "SESSION_CREATED", targetHost: "REPORTS-01", userId: "trainee" }, learning: learning(["SSH", "Users"], "Authenticated to REPORTS-01 using the documented standard credential.") },
     { id: "correlate-cause", type: "fact", factId: "reports.processCrashed", label: "Explain the outage as a crashed service", learning: learning(["Processes", "Services", "Evidence versus assumptions"], "Read the reporting app log and confirmed the service had exited on a configuration error, rather than the host being down.", "SECURITY_REASONING") },
-  ],
+  ]),
   objectiveCompletion: "ALL",
   beginnerExitQuestions: [
     { id: "current-host", prompt: "What host are you operating, and what evidence establishes it?", evidenceObjectives: ["inspect-environment"] },

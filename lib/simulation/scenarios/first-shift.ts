@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { dns, service } from "./content";
+import { dns, guidedOnboarding, service, withObjectiveHints } from "./content";
 
 const learning = (
   concepts: string[],
@@ -26,11 +26,7 @@ export const firstShift: ScenarioDefinition = {
   presentation: { caseId: "NDL-00", focus: ["Terminal fundamentals", "Operating systems", "Evidence"], order: 0 },
   availableModes: ["RED"],
   assistance: {
-    guided: [
-      "Begin with the welcome file in your home directory. Use pwd to establish location, then compare whoami with id instead of treating them as interchangeable.",
-      "A long listing shows ownership and permission data. Read the local handbook only after you have established that your identity can access it.",
-      "Use env and ps to connect session context with machine behavior. A process name is evidence of execution; the handbook explains how to distinguish a process, service, host, and address.",
-    ],
+    guided: guidedOnboarding,
     operator: "Use the welcome file and workstation handbook as the only procedure. Record conclusions only when terminal output supports them.",
     operatorAvailableAtStart: true,
   },
@@ -129,7 +125,7 @@ export const firstShift: ScenarioDefinition = {
     { trigger: { kind: "file", host: "OPS-01", value: "/usr/share/doc/nodeline/FIRST_SHIFT.txt" }, facts: ["orientation.handbook"] },
     { trigger: { kind: "process", host: "OPS-01", value: "nodeline-docs" }, facts: ["orientation.serviceRelationship"] },
   ],
-  objectives: [
+  objectives: withObjectiveHints("first-shift", [
     { id: "locate-session", type: "event", label: "Establish the current directory", event: { action: "OBSERVATION_RECORDED", targetHost: "OPS-01", metadata: { kind: "CURRENT_DIRECTORY" } }, learning: learning(["Files and directories", "Command-line navigation"], "Observed the active shell working directory with pwd.") },
     { id: "identify-user", type: "event", label: "Identify the current user", event: { action: "OBSERVATION_RECORDED", targetHost: "OPS-01", metadata: { kind: "CURRENT_USER" } }, learning: learning(["Users"], "Observed the session username with whoami.") },
     { id: "inspect-groups", type: "event", label: "Inspect identity and group membership", event: { action: "OBSERVATION_RECORDED", targetHost: "OPS-01", metadata: { kind: "IDENTITY_GROUPS" } }, learning: learning(["Users and groups", "Permissions"], "Observed identity, privilege, and group membership with id.") },
@@ -138,7 +134,7 @@ export const firstShift: ScenarioDefinition = {
     { id: "navigate-docs", type: "event", label: "Navigate to local documentation", event: { action: "OBSERVATION_RECORDED", targetHost: "OPS-01", metadata: { kind: "DIRECTORY_CHANGED" } }, learning: learning(["Command-line navigation", "Documentation"], "Changed the shell working directory using an in-world documented path.") },
     { id: "read-handbook", type: "fact", factId: "orientation.handbook", label: "Read the workstation evidence procedure", learning: learning(["Documentation", "Evidence versus assumptions"], "Read the local procedure and recorded its evidence rule.", "SECURITY_REASONING") },
     { id: "inspect-services", type: "fact", factId: "orientation.serviceRelationship", label: "Relate a process to its host and service", learning: learning(["Processes", "Services", "IP / host / service relationship"], "Correlated the process command line with the documented host, address, port, and service.") },
-  ],
+  ]),
   objectiveCompletion: "ALL",
   beginnerExitQuestions: [
     { id: "current-host", prompt: "What host are you operating, and what evidence establishes it?", evidenceObjectives: ["inspect-environment"] },

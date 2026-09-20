@@ -1,6 +1,6 @@
 import { AccessLevel, NetworkZone } from "@/app/generated/prisma/enums";
 import type { ScenarioDefinition } from "./types";
-import { dns, service } from "./content";
+import { dns, guidedOnboarding, service, withObjectiveHints } from "./content";
 
 const learning = (
   concepts: string[],
@@ -26,11 +26,7 @@ export const theNewServer: ScenarioDefinition = {
   presentation: { caseId: "NET-04", focus: ["IP addressing", "Hosts", "Ports and services", "SSH"], order: 6, prerequisite: "wrong-network" },
   availableModes: ["RED"],
   assistance: {
-    guided: [
-      "Read the provisioning ticket. It lists two candidate IPs; do not assume either one is correct without checking.",
-      "Scan whichever address answers ping to see exactly what it is running before trusting the ticket's description.",
-      "Confirm the web service actually serves the expected application, then log in with the commissioning credential to retrieve the checklist.",
-    ],
+    guided: guidedOnboarding,
     operator: "Use the provisioning ticket as your only procedure. Verify address, reachability, and exposed service independently before signing off.",
     operatorAvailableAtStart: true,
   },
@@ -175,7 +171,7 @@ export const theNewServer: ScenarioDefinition = {
     { trigger: { kind: "scan", host: "NEW-APP-01", value: "https" }, facts: ["newserver.portsConfirmed"] },
     { trigger: { kind: "web", host: "NEW-APP-01", value: "newapp.nodeline.test" }, output: "HTTP/1.1 200 OK\n\nWelcome — Client Application\nBuild verified for launch.", facts: ["newserver.appConfirmed"] },
   ],
-  objectives: [
+  objectives: withObjectiveHints("the-new-server", [
     { id: "locate-session", type: "event", label: "Establish the current directory", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_DIRECTORY" } }, learning: learning(["Files and directories", "Command-line navigation"], "Observed the active shell working directory with pwd.", "COMPUTING_OS") },
     { id: "identify-user", type: "event", label: "Identify the current user", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "CURRENT_USER" } }, learning: learning(["Users"], "Observed the session username with whoami.", "COMPUTING_OS") },
     { id: "inspect-groups", type: "event", label: "Inspect identity and group membership", event: { action: "OBSERVATION_RECORDED", targetHost: "HELPDESK-01", metadata: { kind: "IDENTITY_GROUPS" } }, learning: learning(["Users and groups"], "Observed identity, privilege, and group membership with id.", "COMPUTING_OS") },
@@ -187,7 +183,7 @@ export const theNewServer: ScenarioDefinition = {
     { id: "discover-commissioning-access", type: "fact", factId: "newserver.commissioningAccess", label: "Find the commissioning credential", learning: learning(["Users", "SSH", "Documentation"], "Identified the documented commissioning credential rather than guessing one.", "SECURITY_REASONING") },
     { id: "authenticate-newapp", type: "event", label: "Log in to NEW-APP-01", event: { action: "SESSION_CREATED", targetHost: "NEW-APP-01", userId: "commissioning" }, learning: learning(["SSH", "Users"], "Authenticated to NEW-APP-01 using the documented commissioning credential.") },
     { id: "retrieve-checklist", type: "retrieve_file", host: "NEW-APP-01", path: "/srv/app/GO_LIVE_CHECKLIST.txt", label: "Retrieve GO_LIVE_CHECKLIST.txt", learning: learning(["Evidence versus assumptions"], "Retrieved the go-live checklist only after independently verifying address, reachability, and exposed service.", "SECURITY_REASONING") },
-  ],
+  ]),
   objectiveCompletion: "ALL",
   beginnerExitQuestions: [
     { id: "current-host", prompt: "What host are you operating, and what evidence establishes it?", evidenceObjectives: ["inspect-environment"] },

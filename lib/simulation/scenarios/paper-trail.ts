@@ -1,5 +1,5 @@
 import type { ScenarioDefinition } from "./types";
-import { commonDetections, discover, dns, external, file, host, identity, link, route } from "./content";
+import { commonDetections, discover, dns, external, file, guidedOnboarding, host, identity, link, route, withObjectiveHints } from "./content";
 
 export const paperTrail: ScenarioDefinition = {
   id: "paper-trail", name: "Operation Paper Trail", organization: "Aster Civic Systems",
@@ -11,7 +11,7 @@ export const paperTrail: ScenarioDefinition = {
   },
   availableModes: ["RED", "BLUE"],
   assistance: {
-    guided: ["curl grants.aster.test reveals the vendor reconciliation relationship. The public portal has a separate export worker.", "Use ls and cat after access: compare who controls the export configuration with which identity can read the award register.", "For Blue, contain the observed record-access relationship, then test whether the other authorization path remains viable."],
+    guided: guidedOnboarding,
     operator: "Separate a legitimate vendor authorization from the source and purpose that make it suspicious.",
   },
   conditions: { timeLimitMinutes: 90, minimumAvailability: 60 },
@@ -36,7 +36,7 @@ export const paperTrail: ScenarioDefinition = {
     discover("GRANT-WEB", "/etc/aster/export.conf", "RECORDS-01", "records_svc"),
   ],
   webInteractions: [{ host: "GRANT-WEB", method: "POST", path: "/exports/jobs", dataIncludes: "format=award", sessionUser: "root", prerequisiteAction: "PORT_PROBE", output: "The public export worker accepted the unsigned award job as root. Session opened.", evidence: [{ action: "WEB_WORKER_EXECUTED", category: "WEB", severity: "HIGH" }, { action: "PROCESS_SPAWN", category: "PROCESS", severity: "HIGH" }] }],
-  objectives: [{ id: "award-roster", type: "retrieve_file", host: "RECORDS-01", path: "/srv/awards/AWARD_ROSTER.csv", label: "Retrieve AWARD_ROSTER.csv" }],
+  objectives: withObjectiveHints("paper-trail", [{ id: "award-roster", type: "retrieve_file", host: "RECORDS-01", path: "/srv/awards/AWARD_ROSTER.csv", label: "Retrieve AWARD_ROSTER.csv" }]),
   detections: {
     ...commonDetections,
     VENDOR_RECONCILIATION_LOGIN: { id: "AUTH-VENDOR-01", title: "Vendor reconciliation login", severity: "LOW", rationale: "Vendor access is expected only when its source, timing, and follow-on record activity match the reconciliation purpose." },

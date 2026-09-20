@@ -31,6 +31,23 @@ describe("Canonical campaign", { concurrency: false }, () => {
       assert.ok(definition.knowledgeRewards.some((reward) => reward.concept === "Incident response"));
     }
   });
+  it("authors a three-tier Guided Mode chain for every objective", () => {
+    for (const definition of campaign) {
+      const factIds = new Set((definition.facts ?? []).map((fact) => fact.id));
+      for (const objective of definition.objectives) {
+        assert.equal(objective.hints.length, 3, `${definition.id}/${objective.id}`);
+        assert.ok(objective.hints.every((tier) => tier.text.trim().length > 0));
+        for (const tier of objective.hints) {
+          for (const factId of tier.skipIfFactKnown ?? []) {
+            assert.ok(factIds.has(factId), `${definition.id}/${objective.id}: ${factId}`);
+          }
+        }
+      }
+      assert.ok(definition.assistance.guided.every((line) =>
+        !definition.objectives.some((objective) => line.includes(objective.id))
+      ));
+    }
+  });
   it("takes a guided newcomer through the prerequisite path to Operator", async () => {
     const onboarding = ["glasshouse", "nightshift", "dead-drop"].map((id) => campaign.find((definition) => definition.id === id)!);
     const onboardingProfiles = [onboarding[0].blueProfiles[1], onboarding[1].blueProfiles[0], onboarding[2].blueProfiles[1]];

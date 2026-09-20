@@ -53,10 +53,18 @@ export type LearningAnnotation = {
   evidence: string;
 };
 
+export type HintTier = {
+  text: string;
+  skipIfFactKnown?: string[];
+};
+
+export type HintChain = [HintTier, HintTier, HintTier];
+
 type ObjectiveBase = {
   id: string;
   label: string;
   learning?: LearningAnnotation;
+  hints: HintChain;
 };
 
 export type ScenarioObjective =
