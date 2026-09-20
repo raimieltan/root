@@ -224,6 +224,19 @@ describe("Canonical campaign", { concurrency: false }, () => {
     assert.equal(campaignProgress([run, { ...run, scenarioId: "two" }]).xp, campaignProgress([run]).xp);
     assert.deepEqual(campaignProgress([run]).completed, ["glasshouse"]);
   });
+  it("rejects incomplete and dangling hint chains", () => {
+    const missing = structuredClone(campaign[0]);
+    missing.objectives[0].hints = missing.objectives[0].hints.slice(0, 2) as never;
+    assert.throws(() => validateScenario(missing), /exactly 3 hints/);
+
+    const blank = structuredClone(campaign[0]);
+    blank.objectives[0].hints[1].text = "   ";
+    assert.throws(() => validateScenario(blank), /empty hint text/);
+
+    const dangling = structuredClone(campaign[0]);
+    dangling.objectives[0].hints[0].skipIfFactKnown = ["absent.fact"];
+    assert.throws(() => validateScenario(dangling), /unknown hint fact absent\.fact/);
+  });
   it("earns Operator Mode clearance from demonstrated knowledge, not training review alone", () => {
     const run: LocalRun = { scenarioId: "one", actorId: "actor", definitionId: "glasshouse", name: "Glasshouse", mode: "RED", assistance: "GUIDED", startedAt: "", result: { won: true, route: "application-chain", detected: true, concepts: ["Trust relationships", "Privilege escalation"], availability: 100 } };
     const trainingOnly = campaignProgress([], [{ moduleId: "trust-boundary", completedAt: "now" }]);

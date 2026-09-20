@@ -66,6 +66,13 @@ export function validateScenario(definition: ScenarioDefinition) {
   if (!definition.objectives.length) fail("objectives required");
   unique(definition.objectives.map((objective) => objective.id), "objective");
   for (const objective of definition.objectives) {
+    if (objective.hints.length !== 3) fail(`objective ${objective.id} must define exactly 3 hints`);
+    for (const tier of objective.hints) {
+      if (!tier.text.trim()) fail(`objective ${objective.id} has empty hint text`);
+      for (const factId of tier.skipIfFactKnown ?? []) {
+        if (!factIds.includes(factId)) fail(`objective ${objective.id} references unknown hint fact ${factId}`);
+      }
+    }
     if (objective.type === "retrieve_file" && !host(objective.host).files.some((file) => file.path === objective.path)) fail("objective file absent");
     if (objective.type === "fact" && !definition.facts?.some((fact) => fact.id === objective.factId)) fail(`objective references unknown fact ${objective.factId}`);
     if (objective.type === "event") {
