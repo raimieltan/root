@@ -161,7 +161,8 @@ input:focus, select:focus, textarea:focus { outline: 1px solid var(--blue); outl
 .desk-filterbar > span { font-weight: 700; margin-right: auto; }
 .desk-filterbar label { display: flex; align-items: center; gap: 5px; color: var(--text-secondary); }
 .desk-filterbar select { min-width: 150px; }
-.assignment-pane .os-pane-content { overflow: hidden; }
+.assignment-pane .os-pane-content { overflow: hidden; display: grid; }
+.assignment-pane .os-table-scroll { min-height: 0; overflow: auto; }
 .engagement-details { min-height: 0; display: grid; grid-template-rows: 30px minmax(0, 1fr); border: 1px solid #101214; background: var(--panel); }
 .engagement-detail-body { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 310px; overflow: hidden; }
 .engagement-summary { padding: 12px; overflow: auto; border-right: 1px solid #101214; }
