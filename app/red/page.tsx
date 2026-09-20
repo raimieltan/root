@@ -21,7 +21,7 @@ const navItems = [
 ] as const;
 
 export default function RedTeamPage() {
-  const { ids, view, refresh, error, retry } = useOperation("RED");
+  const { ids, view, refresh, updateView, error, retry } = useOperation("RED");
   const [activeApp, setActiveApp] = useState<(typeof apps)[number]>("Terminal");
   const assistance = view?.assistance;
   const [terminalPrefill, setTerminalPrefill] = useState("");
@@ -48,9 +48,9 @@ export default function RedTeamPage() {
           <Terminal scenarioId={ids.scenarioId} actorId={ids.actorId} prefill={terminalPrefill} initialState={view.currentSession ? { currentMachine: view.currentSession.machine, currentUser: view.currentSession.user, currentPrivilege: view.currentSession.privilege, currentSessionId: view.currentSession.id, currentPath: view.currentSession.path, context: { type: "UNIX" }, discoveredHosts: view.discoveredHosts } : terminalState} onStateChange={setTerminalState} onRefresh={() => void refresh()} />
           <NetworkMap machines={view.machines} current={terminalState.currentMachine} organization={view.operation.organization} />
           <div className="engagement-lower">
-            {activeApp === "Mission" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} />}
+            {activeApp === "Mission" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} scenarioId={ids.scenarioId} actorId={ids.actorId} onViewChange={updateView} />}
             {activeApp === "Hosts" && <DataPanel title="HOST DETAILS" rows={view.machines.map((machine) => `${machine.hostname.padEnd(14)} ${machine.ip.padEnd(15)} ${machine.state}`)} empty="No hosts recorded." />}
-            {activeApp === "Terminal" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} />}
+            {activeApp === "Terminal" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} scenarioId={ids.scenarioId} actorId={ids.actorId} onViewChange={updateView} />}
             {activeApp === "Browser" && <Browser scenarioId={ids.scenarioId} actorId={ids.actorId} session={{ currentSessionId: terminalState.currentSessionId, currentMachine: terminalState.currentMachine, currentUser: terminalState.currentUser, currentPath: terminalState.currentPath, context: terminalState.context, discoveredHosts: terminalState.discoveredHosts }} onDiscovered={(hosts) => setTerminalState((prior) => ({ ...prior, discoveredHosts: hosts }))} />}
             {activeApp === "Files" && <DataPanel title={`FILES — ${terminalState.currentMachine}`} rows={(currentMachine?.files ?? []).map((file) => `${file.permissions}  ${file.owner.padEnd(12)} ${file.path}`)} empty="No filesystem access on this host." />}
             {activeApp === "Credentials" && <CredentialsPanel scenarioId={ids.scenarioId} actorId={ids.actorId} credentials={view.credentials} onUse={(command) => { setTerminalPrefill(command); setActiveApp("Terminal"); }} />}

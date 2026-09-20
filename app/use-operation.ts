@@ -54,5 +54,5 @@ export function useOperation(mode: "RED" | "BLUE") {
     setAttempt((value) => value + 1);
   }, []);
 
-  return { ids, view, refresh, error, setError, retry };
+  return { ids, view, refresh, updateView: setView, error, setError, retry };
 }
