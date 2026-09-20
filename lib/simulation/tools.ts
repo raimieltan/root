@@ -67,7 +67,7 @@ const shellDefinitions: ShellDefinition[] = [
   { command: "help", contract: passive("shell.help", "shell", "help [command]") },
   { command: "clear", contract: passive("shell.clear", "shell", "clear") },
   { command: "whoami", contract: passive("shell.whoami", "shell", "whoami", ["session identity"]) },
-  { command: "id", contract: passive("shell.id", "shell", "id", ["identity", "groups", "privilege"]) },
+  { command: "id", contract: passive("shell.id", "shell", "id [username]", ["local identities", "groups", "privilege"]) },
   { command: "env", contract: passive("shell.env", "shell", "env", ["session environment"]) },
   { command: "hostname", contract: passive("shell.hostname", "shell", "hostname", ["machine identity"]) },
   { command: "pwd", contract: passive("shell.pwd", "shell", "pwd", ["session working directory"]) },

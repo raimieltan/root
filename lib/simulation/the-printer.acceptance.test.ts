@@ -20,7 +20,7 @@ describe("Act 0 The Printer", { concurrency: false }, () => {
     assert.ok(definition.objectives.some((objective) => objective.type === "fact"));
   });
 
-  it("is completable from process, log, and permission evidence", async () => {
+  it("is completable by inspecting the service identity without guessing an evidence-file path", async () => {
     const initialized = await initializeScenario("RED", "the-printer", undefined, "OPERATOR");
     try {
       const state: TerminalState = { ...initialized.startingState, activeSessions: [], credentials: new Map(), context: { type: "UNIX" } };
@@ -32,6 +32,7 @@ describe("Act 0 The Printer", { concurrency: false }, () => {
         return result.output;
       };
 
+      assert.match(await run("help id"), /id \[username\]/);
       await run("pwd");
       await run("whoami");
       await run("id");
@@ -40,7 +41,7 @@ describe("Act 0 The Printer", { concurrency: false }, () => {
       await run("ps");
       assert.match(await run("grep ERROR /var/log/print-spooler.log"), /permission denied/i);
       assert.match(await run("ls -l /var/spool/printer"), /770 root:print/);
-      await run("cat /etc/nodeline/group-membership.txt");
+      assert.match(await run("id printsvc"), /uid=\d+\(printsvc\).*groups=printsvc/);
 
       const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: initialized.scenarioId } });
       assert.equal(scenario.state, "COMPLETED");

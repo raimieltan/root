@@ -38,6 +38,7 @@ export function validateScenario(definition: ScenarioDefinition) {
     }
     const machine = host(discovery.trigger.host);
     if (discovery.trigger.kind === "file" && !machine.files.some((f) => f.path === discovery.trigger.value)) fail("discovery file absent");
+    if (discovery.trigger.kind === "identity") user(machine.hostname, discovery.trigger.value);
     discovery.hosts?.forEach(host);
     discovery.credentials?.forEach((c) => user(c.scope, c.username));
     for (const fact of discovery.facts ?? []) if (!definition.facts?.some((entry) => entry.id === fact)) fail(`unknown discovery fact ${fact}`);

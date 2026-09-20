@@ -66,7 +66,7 @@ export class SimulationEngine {
         help: (args) => this.result(true, this.help(args[0])),
         clear: () => this.result(true, ""),
         whoami: (_args, state) => this.observe(state, "CURRENT_USER", state.currentUser),
-        id: (_args, state) => this.identity(state),
+        id: (args, state) => this.identity(args, state),
         env: (_args, state) => this.environment(state),
         hostname: (_args, state) => this.observe(state, "CURRENT_HOST", state.currentMachine),
         pwd: (_args, state) => this.observe(state, "CURRENT_DIRECTORY", state.currentPath ?? "/"),
@@ -177,6 +177,7 @@ export class SimulationEngine {
       ping: "ping <host>\n  Checks whether a host is reachable over the network.\n  Example: ping 10.10.10.10",
       dig: "dig <name>\n  Queries the DNS record for a hostname and prints its answer section.\n  Use it to see exactly what a name currently resolves to, including a stale record.\n  Example: dig intranet.nodeline.test",
       nslookup: "nslookup <name>\n  Queries the DNS record for a hostname in nslookup's resolver-style format.\n  Example: nslookup intranet.nodeline.test",
+      id: "id [username]\n  Reports the identity and group membership of the current user or a named local user.\n  Example: id printsvc",
       curl: "curl [-X METHOD] <url> [--data BODY]\n  curl <url>                     performs a GET request and prints the response.\n  curl -X POST <url> --data \"field=value\"   sends form data, usually as a POST.\n  Inspect a page's response for forms, links, or comments before guessing an endpoint.\n  Example: curl portal.example.test",
       ssh: "ssh <user@host>\n  Opens a remote shell session if you hold valid credentials for that user on that host.\n  You'll be prompted for a password if one is required.\n  Example: ssh deploy@10.20.10.20",
       psql: "psql -h HOST -U USER [-d DATABASE] [--password SECRET]\n  Connects to a PostgreSQL service. Omit -d to connect without selecting a database,\n  then use \\l to list databases and \\c <database> to select one.\n  Once connected: \\dt lists tables, \\d <table> describes its columns,\n  SELECT <columns> FROM <table>; reads rows, \\q disconnects.\n  Example: psql -h 10.30.10.21 -U someuser",
@@ -198,7 +199,7 @@ export class SimulationEngine {
 Recon:       nmap <host> · ping <host> · curl <url> · ip · dig <name> · nslookup <name>
 Access:      ssh <user@host> · sessions
 Filesystem:  pwd · cd <path> · ls [-l] [path] · cat <path> · less <path> · grep TEXT [path] · find [path] -name NAME
-System:      whoami · id · hostname · env · ps · backup-sync --run-hook
+    System:      whoami · id [username] · hostname · env · ps · backup-sync --run-hook
 Web:         curl [-X METHOD] URL [--data BODY]
 Database:    psql -h HOST -U USER [-d DATABASE] --password SECRET
 Tools:       john <file> · install-agent · clear
@@ -214,7 +215,7 @@ Type 'help <command>' for details, e.g. help curl`;
         active: true,
         ...(state.currentSessionId ? { id: state.currentSessionId } : { machine: { hostname: state.currentMachine }, user: { username: state.currentUser } }),
       },
-      include: { machine: { include: { files: true, services: true, processes: true } }, user: true },
+      include: { machine: { include: { files: true, services: true, processes: true, users: true } }, user: true },
     });
     return session;
   }
@@ -309,7 +310,7 @@ Type 'help <command>' for details, e.g. help curl`;
     return this.emit({ ...context, ...definition, metadata: { ...context.metadata, ...definition.metadata } });
   }
 
-  private async applyDiscovery(kind: "file" | "web" | "scan" | "process" | "postgres" | "dns", host: string, value: string, sourceMachineId?: string, visibleContent?: string) {
+  private async applyDiscovery(kind: "file" | "web" | "scan" | "process" | "postgres" | "dns" | "identity", host: string, value: string, sourceMachineId?: string, visibleContent?: string) {
     const definition = await this.definition();
     const matches = definition.discoveries
       .filter((entry) => {
@@ -379,13 +380,17 @@ Type 'help <command>' for details, e.g. help curl`;
     return { ...observed, currentPath } as CommandResult;
   }
 
-  private async identity(state: TerminalState) {
+  private async identity(args: string[], state: TerminalState) {
     const session = await this.currentMachine(state);
     if (!session) return this.result(false, "No active session for this host.");
-    const uid = 1000 + [...session.user.username].reduce((sum, character) => sum + character.charCodeAt(0), 0) % 800;
-    const output = `uid=${uid}(${session.user.username}) gid=${uid}(${session.user.username}) groups=${session.user.groups.map((group) => `${group}`).join(",")}`;
-    const event = await this.emit({ action: "OBSERVATION_RECORDED", category: SecurityEventCategory.SYSTEM, severity: SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: false, metadata: { kind: "IDENTITY_GROUPS", value: output, groups: session.user.groups, privilege: session.user.privilege } });
-    return this.result(true, output, [event]);
+    const username = args[0] ?? session.user.username;
+    const identity = session.machine.users.find((user) => user.username === username);
+    if (!identity) return this.result(false, `id: '${username}': no such user`);
+    const uid = 1000 + [...identity.username].reduce((sum, character) => sum + character.charCodeAt(0), 0) % 800;
+    const output = `uid=${uid}(${identity.username}) gid=${uid}(${identity.username}) groups=${identity.groups.map((group) => `${group}`).join(",")}`;
+    const event = await this.emit({ action: "OBSERVATION_RECORDED", category: SecurityEventCategory.SYSTEM, severity: SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: false, metadata: { kind: "IDENTITY_GROUPS", value: output, username: identity.username, groups: identity.groups, privilege: identity.privilege } });
+    const discovery = await this.applyDiscovery("identity", session.machine.hostname, identity.username, session.machine.id);
+    return this.result(true, output, [event, ...discovery.events]);
   }
 
   private async environment(state: TerminalState) {

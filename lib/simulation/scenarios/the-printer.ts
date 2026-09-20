@@ -27,7 +27,7 @@ export const thePrinter: ScenarioDefinition = {
   availableModes: ["RED"],
   assistance: {
     guided: guidedOnboarding,
-    operator: "Use the trouble ticket, the spooler log, and the group membership reference as your only procedure. State the cause only from what the evidence shows.",
+    operator: "Use the trouble ticket, the spooler log, and standard identity and permission inspection as your only procedure. State the cause only from what the evidence shows.",
     operatorAvailableAtStart: true,
   },
   conditions: { timeLimitMinutes: 20, minimumAvailability: 100 },
@@ -72,8 +72,9 @@ export const thePrinter: ScenarioDefinition = {
       category: "IDENTITY",
       known: "printsvc is not a member of the print group that /var/spool/printer's permissions require for write access.",
       unknown: "Why a running, correctly-owned process still cannot write to its own spool directory",
-      guidance: "Compare the spool directory's group ownership and mode against the group membership reference.",
-      discoverableFrom: "/etc/nodeline/group-membership.txt",
+      guidance: "Compare the spool directory's group ownership and mode against the service account's identity.",
+      discoverableFrom: "id printsvc on HELPDESK-01",
+      alternative: "/etc/nodeline/group-membership.txt",
       requiredFor: "Explaining the failure as a group relationship rather than a crash",
     },
   ],
@@ -150,6 +151,7 @@ export const thePrinter: ScenarioDefinition = {
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/home/trainee/TICKET-4471.txt" }, facts: ["printer.ticket"] },
     { trigger: { kind: "process", host: "HELPDESK-01", value: "print-spoolerd" }, facts: ["printer.processState"] },
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/var/log/print-spooler.log" }, facts: ["printer.logEvidence"] },
+    { trigger: { kind: "identity", host: "HELPDESK-01", value: "printsvc" }, facts: ["printer.groupMismatch"] },
     { trigger: { kind: "file", host: "HELPDESK-01", value: "/etc/nodeline/group-membership.txt" }, facts: ["printer.groupMismatch"] },
   ],
   objectives: withObjectiveHints("the-printer", [

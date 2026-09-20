@@ -63,7 +63,7 @@ const scenarioObjectiveHints: Record<string, Record<string, HintChain>> = {
     "inspect-process": evidence("A stalled queue does not prove the service process stopped.", "Check the process table before deciding the daemon crashed.", "Run `ps` and locate `print-spoolerd`.", "printer.processState"),
     "inspect-log": evidence("A running daemon can still fail when it touches a protected resource.", "Read the service log for the first concrete error.", "Run `cat /var/log/print-spooler.log` and identify the permission denial.", "printer.logEvidence"),
     "inspect-spool-permissions": hintChain("The failing resource's owner, group, and mode determine who may write to it.", "Inspect the spool directory itself with a detailed listing.", "Run `ls -l /var/spool/printer` and record its owner, group, and permission digits."),
-    "correlate-cause": evidence("The directory requirement matters only when compared with the service account's groups.", "Find the local group-membership reference and compare it with the spool directory.", "Run `cat /etc/nodeline/group-membership.txt`; compare `printsvc` with the required `print` group.", "printer.groupMismatch"),
+    "correlate-cause": evidence("The directory requirement matters only when compared with the service account's groups.", "Inspect the `printsvc` identity and compare its groups with the spool directory.", "Run `id printsvc`; compare its groups with the required `print` group.", "printer.groupMismatch"),
   },
   "locked-out": {
     "review-handoff": evidence("A missing local account may be an intentional delegated-access design.", "Read the onboarding note before inventing a workaround.", "Run `cat /home/trainee/onboarding/ARCHIVE_ACCESS.txt`.", "locked.handoffNote"),

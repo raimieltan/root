@@ -40,7 +40,7 @@
   "38": "66. Page Mapping",
   "39": "6. Canonical Application Names",
   "40": "Broken Unstyled Career Page Screenshot",
-  "41": "career/page.tsx",
+  "41": "replay-client.tsx",
   "42": "Operation Glasshouse — Discovery Graph",
   "43": "16. SIEM / Log Viewer",
   "44": "40. Audio Production Priority",
@@ -50,5 +50,9 @@
   "48": "3. Core Audio Principles",
   "49": "7. Terminal Audio",
   "50": "ROOT — Audio Design Document",
-  "51": "tools.ts"
+  "51": "tools.ts",
+  "52": "Guided Mode Hints — Design",
+  "53": "guidance.test.ts",
+  "54": "Review Focus",
+  "55": "Q: Implement the Guided Mode hints design across the ROOT codebase"
 }

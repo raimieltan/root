@@ -226,3 +226,33 @@ follow-up, it's part of shipping the feature.
 - Hints authored for all scenarios in this pass, not just Glasshouse,
   per explicit direction — this is the majority of the implementation
   effort and should be planned as its own phase.
+
+
+
+⏺ Here's where things stand — I'm stopping here rather than pushing further given the context budget.
+
+  Committed already (from earlier in this session):
+  - docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md — full design spec for Guided Mode hints (objective-scoped, 3-tier progressive disclosure, context-aware skipping via
+    skipIfFactKnown, stuck detection, event-sourced via HINT_REQUESTED events, no new Prisma tables).
+  - docs/ROOT_CANONICAL_PLAN.md and AGENTS.md updated to mandate 3-tier hint chains for every objective in every scenario, enforced by the validator.
+  
+  Not yet written: the implementation plan document (docs/superpowers/plans/2026-09-20-guided-mode-hints.md) required by the writing-plans skill. This session was spent gathering the real
+  content needed to avoid placeholders in that plan:
+
+  - Confirmed exact current shapes of lib/simulation/scenarios/types.ts, validate.ts, and lib/simulation/state.ts (guidance object, fact/objective computation) — these are the three core
+    files the system-side tasks will touch, plus a new app/api/sim/hint/route.ts mirroring app/api/sim/blue/respond/route.ts.
+  - Read all 15 scenario files in full and verified exact objective IDs, fact IDs, hosts, and (critically) the actual exploit chains for the 7 "web-worker" scenarios (ghost-account,
+    no-one-knows, something-calling-home, strange-login, paper-trail, nightshift, dead-drop) — these use a curl+POST reconciliation-worker root-shell pattern plus an alternate
+    legitimate-identity pivot path, which I had gotten wrong in my initial (pre-verification) hint drafts. Re-derived correct 3-tier hint text for all of these against their real
+    discoveries/configs.
+  - Also re-verified the generic Act-0 tutorial objectives (locate-session/identify-user/inspect-groups/inspect-environment, shared across first-shift, locked-out, the-printer,
+    service-unavailable, the-new-server, website-down, wrong-network) and the scenario-specific objectives for each of those 7 files, plus Glasshouse's single rich atlas objective (confirmed
+    FIN-DB / /opt/db/data/PROJECT_ATLAS.pdf, not the path I'd guessed earlier).
+
+  Key implementation note surfaced during verification: lib/simulation/scenarios/index.ts calls validateScenario eagerly on the whole campaign array at module load, so making hints a
+  required field + adding validator enforcement will break every test until all 15 files have hints authored — the plan needs to sequence content-authoring tasks immediately after the
+  type/validator change (using a synthetic fixture, like campaign.test.ts already does, for the validator's own unit test so that task isn't blocked on content).
+
+  Next step when resumed: write docs/superpowers/plans/2026-09-20-guided-mode-hints.md using the writing-plans skill format — system tasks (types → validator → state.ts → API route → UI)
+  followed by one content-authoring task per scenario file, using the verified hint text derived above — then run the plan's self-review and offer the Subagent-Driven vs. Inline execution
+  choice.

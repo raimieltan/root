@@ -20,13 +20,65 @@
   },
   "nodes": [
     {
+      "id": "app_red_browser_page",
+      "label": "Page",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "page",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "app_red_browser_props",
+      "label": "Props",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "app_red_mission_panel_missionpanelprops",
+      "label": "MissionPanelProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "missionpanelprops",
+      "source_file": "app/red/mission-panel.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_red_page_credential",
+      "label": "Credential",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "credential",
+      "source_file": "app/red/page.tsx",
+      "source_location": "L88"
+    },
+    {
       "id": "app_red_terminal_line",
       "label": "Line",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "line",
       "source_file": "app/red/terminal.tsx",
@@ -39,7 +91,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "props",
       "source_file": "app/red/terminal.tsx",
@@ -52,11 +104,37 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "terminalstate",
       "source_file": "app/red/terminal.tsx",
       "source_location": "L6"
+    },
+    {
+      "id": "app_sim_types_eventview",
+      "label": "EventView",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "eventview",
+      "source_file": "app/sim-types.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "app_sim_types_machineview",
+      "label": "MachineView",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "machineview",
+      "source_file": "app/sim-types.ts",
+      "source_location": "L1"
     },
     {
       "id": "app_ui_root_chrome_section",
@@ -65,7 +143,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "section",
       "source_file": "app/ui/root-chrome.tsx",
@@ -78,11 +156,115 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "tone",
       "source_file": "app/ui/root-chrome.tsx",
       "source_location": "L11"
+    },
+    {
+      "id": "lib_audio_audio_system_audiosettings",
+      "label": "AudioSettings",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "audiosettings",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "lib_audio_audio_system_audiosnapshot",
+      "label": "AudioSnapshot",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "audiosnapshot",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "lib_audio_audio_system_listener",
+      "label": "Listener",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "listener",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem",
+      "label": "RootAudioSystem",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "rootaudiosystem",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L50"
+    },
+    {
+      "id": "lib_audio_catalog_audiocategory",
+      "label": "AudioCategory",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "audiocategory",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_audio_catalog_audioeventdefinition",
+      "label": "AudioEventDefinition",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "audioeventdefinition",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "lib_audio_catalog_audioeventname",
+      "label": "AudioEventName",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "audioeventname",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "lib_audio_catalog_tonestep",
+      "label": "ToneStep",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "tonestep",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L27"
     },
     {
       "id": "app_blue_inspector_respondfn",
@@ -176,30 +358,17 @@
       "source_location": "L7"
     },
     {
-      "id": "app_replay_scenarioid_page_replaypageprops",
-      "label": "ReplayPageProps",
+      "id": "app_sim_types_scenarioview",
+      "label": "ScenarioView",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
+      "community": 34,
+      "community_name": "blue/page.tsx",
       "file_type": "code",
-      "norm_label": "replaypageprops",
-      "source_file": "app/replay/[scenarioId]/page.tsx",
+      "norm_label": "scenarioview",
+      "source_file": "app/sim-types.ts",
       "source_location": "L3"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client_replaypayload",
-      "label": "ReplayPayload",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replaypayload",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L10"
     },
     {
       "id": "lib_simulation_blue_responseinput",
@@ -228,17 +397,30 @@
       "source_location": "L11"
     },
     {
-      "id": "lib_simulation_replay_keydecision",
-      "label": "KeyDecision",
+      "id": "lib_simulation_hints_hintrequesterror",
+      "label": "HintRequestError",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "engine.ts",
       "file_type": "code",
-      "norm_label": "keydecision",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L56"
+      "norm_label": "hintrequesterror",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "lib_simulation_hints_hintrequestinput",
+      "label": "HintRequestInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "hintrequestinput",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L6"
     },
     {
       "id": "lib_simulation_replay_replayevent",
@@ -254,19 +436,6 @@
       "source_location": "L6"
     },
     {
-      "id": "lib_simulation_replay_replaylens",
-      "label": "ReplayLens",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replaylens",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L4"
-    },
-    {
       "id": "lib_simulation_replay_replayscenario",
       "label": "ReplayScenario",
       "_callable": true,
@@ -278,32 +447,6 @@
       "norm_label": "replayscenario",
       "source_file": "lib/simulation/replay.ts",
       "source_location": "L20"
-    },
-    {
-      "id": "lib_simulation_replay_replaysnapshot",
-      "label": "ReplaySnapshot",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replaysnapshot",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L26"
-    },
-    {
-      "id": "lib_simulation_replay_replaysummary",
-      "label": "ReplaySummary",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replaysummary",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L36"
     },
     {
       "id": "lib_simulation_rules_alertview",
@@ -368,7 +511,7 @@
       "file_type": "code",
       "norm_label": "scenarioview",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L217"
+      "source_location": "L222"
     },
     {
       "id": "lib_simulation_types_simfile",
@@ -436,13 +579,39 @@
       "source_location": "L11"
     },
     {
+      "id": "app_replay_scenarioid_page_replaypageprops",
+      "label": "ReplayPageProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "replaypageprops",
+      "source_file": "app/replay/[scenarioId]/page.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client_replaypayload",
+      "label": "ReplayPayload",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "replaypayload",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L10"
+    },
+    {
       "id": "lib_campaign_localrun",
       "label": "LocalRun",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "localrun",
       "source_file": "lib/campaign.ts",
@@ -455,7 +624,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "trainingmodule",
       "source_file": "lib/campaign.ts",
@@ -468,11 +637,63 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "trainingrecord",
       "source_file": "lib/campaign.ts",
       "source_location": "L2"
+    },
+    {
+      "id": "lib_simulation_replay_keydecision",
+      "label": "KeyDecision",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "keydecision",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L56"
+    },
+    {
+      "id": "lib_simulation_replay_replaylens",
+      "label": "ReplayLens",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "replaylens",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "lib_simulation_replay_replaysnapshot",
+      "label": "ReplaySnapshot",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "replaysnapshot",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L26"
+    },
+    {
+      "id": "lib_simulation_replay_replaysummary",
+      "label": "ReplaySummary",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "replaysummary",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L36"
     },
     {
       "id": "lib_simulation_engine_simulationengine",
@@ -748,160 +969,30 @@
       "source_location": "L56"
     },
     {
-      "id": "lib_audio_audio_system_audiosettings",
-      "label": "AudioSettings",
+      "id": "lib_simulation_guidance_guidanceevent",
+      "label": "GuidanceEvent",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 52,
-      "community_name": "audio-system.ts",
+      "community": 53,
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "audiosettings",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "lib_audio_audio_system_audiosnapshot",
-      "label": "AudioSnapshot",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "audiosnapshot",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L22"
-    },
-    {
-      "id": "lib_audio_audio_system_listener",
-      "label": "Listener",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "listener",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L47"
-    },
-    {
-      "id": "lib_audio_catalog_audiocategory",
-      "label": "AudioCategory",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "audiocategory",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_audio_catalog_audioeventdefinition",
-      "label": "AudioEventDefinition",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "audioeventdefinition",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L34"
-    },
-    {
-      "id": "lib_audio_catalog_audioeventname",
-      "label": "AudioEventName",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "audioeventname",
-      "source_file": "lib/audio/catalog.ts",
+      "norm_label": "guidanceevent",
+      "source_file": "lib/simulation/guidance.ts",
       "source_location": "L3"
     },
     {
-      "id": "lib_audio_catalog_tonestep",
-      "label": "ToneStep",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "tonestep",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L27"
-    },
-    {
-      "id": "app_red_page_credential",
-      "label": "Credential",
+      "id": "lib_simulation_guidance_objectivehintguidance",
+      "label": "ObjectiveHintGuidance",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "credential",
-      "source_file": "app/red/page.tsx",
-      "source_location": "L86"
-    },
-    {
-      "id": "app_sim_types_eventview",
-      "label": "EventView",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 53,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "eventview",
-      "source_file": "app/sim-types.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "app_sim_types_machineview",
-      "label": "MachineView",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 53,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "machineview",
-      "source_file": "app/sim-types.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_sim_types_scenarioview",
-      "label": "ScenarioView",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 53,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "scenarioview",
-      "source_file": "app/sim-types.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem",
-      "label": "RootAudioSystem",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": "rootaudiosystem",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L50"
+      "norm_label": "objectivehintguidance",
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L10"
     },
     {
       "id": "lib_simulation_scenarios_content_machine",
@@ -917,6 +1008,19 @@
       "source_location": "L3"
     },
     {
+      "id": "lib_simulation_scenarios_content_objectivedraft",
+      "label": "ObjectiveDraft",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "objectivedraft",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L4"
+    },
+    {
       "id": "lib_simulation_scenarios_types_beginnerexitquestion",
       "label": "BeginnerExitQuestion",
       "_callable": true,
@@ -927,7 +1031,33 @@
       "file_type": "code",
       "norm_label": "beginnerexitquestion",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L76"
+      "source_location": "L84"
+    },
+    {
+      "id": "lib_simulation_scenarios_types_hintchain",
+      "label": "HintChain",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "hintchain",
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L61"
+    },
+    {
+      "id": "lib_simulation_scenarios_types_hinttier",
+      "label": "HintTier",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "hinttier",
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L56"
     },
     {
       "id": "lib_simulation_scenarios_types_knowledgedomain",
@@ -966,7 +1096,7 @@
       "file_type": "code",
       "norm_label": "objectivebase",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L56"
+      "source_location": "L63"
     },
     {
       "id": "lib_simulation_scenarios_types_routedefinition",
@@ -979,7 +1109,7 @@
       "file_type": "code",
       "norm_label": "routedefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L82"
+      "source_location": "L90"
     },
     {
       "id": "lib_simulation_scenarios_types_scenariodefinition",
@@ -992,7 +1122,7 @@
       "file_type": "code",
       "norm_label": "scenariodefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L141"
+      "source_location": "L149"
     },
     {
       "id": "lib_simulation_scenarios_types_scenariodiscovery",
@@ -1057,7 +1187,7 @@
       "file_type": "code",
       "norm_label": "scenariohttproutedefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L129"
+      "source_location": "L137"
     },
     {
       "id": "lib_simulation_scenarios_types_scenarioobjective",
@@ -1070,7 +1200,7 @@
       "file_type": "code",
       "norm_label": "scenarioobjective",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L62"
+      "source_location": "L70"
     },
     {
       "id": "lib_simulation_scenarios_types_scenarioservicedefinition",
@@ -1083,7 +1213,7 @@
       "file_type": "code",
       "norm_label": "scenarioservicedefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L116"
+      "source_location": "L124"
     },
     {
       "id": "lib_simulation_scenarios_types_serviceoutcomedefinition",
@@ -1096,7 +1226,7 @@
       "file_type": "code",
       "norm_label": "serviceoutcomedefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L110"
+      "source_location": "L118"
     },
     {
       "id": "lib_simulation_scenarios_types_servicepermissiondefinition",
@@ -1109,7 +1239,7 @@
       "file_type": "code",
       "norm_label": "servicepermissiondefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L98"
+      "source_location": "L106"
     },
     {
       "id": "lib_simulation_scenarios_types_serviceresourcedefinition",
@@ -1122,7 +1252,103 @@
       "file_type": "code",
       "norm_label": "serviceresourcedefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L103"
+      "source_location": "L111"
+    },
+    {
+      "id": "app_red_browser_browser",
+      "label": "Browser()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "browser()",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L20"
+    },
+    {
+      "id": "app_red_browser_browser_open",
+      "label": "open()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "open()",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L29"
+    },
+    {
+      "id": "app_red_browser_quote",
+      "label": "quote()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "quote()",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "app_red_mission_panel_missionpanel",
+      "label": "MissionPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "missionpanel()",
+      "source_file": "app/red/mission-panel.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "app_red_network_map_networkmap",
+      "label": "NetworkMap()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "networkmap()",
+      "source_file": "app/red/network-map.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_red_page_credentialspanel",
+      "label": "CredentialsPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "credentialspanel()",
+      "source_file": "app/red/page.tsx",
+      "source_location": "L90"
+    },
+    {
+      "id": "app_red_page_datapanel",
+      "label": "DataPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "datapanel()",
+      "source_file": "app/red/page.tsx",
+      "source_location": "L69"
+    },
+    {
+      "id": "app_red_page_intelpanel",
+      "label": "IntelPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "intelpanel()",
+      "source_file": "app/red/page.tsx",
+      "source_location": "L73"
     },
     {
       "id": "app_red_page_redteampage",
@@ -1130,11 +1356,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "redteampage()",
       "source_file": "app/red/page.tsx",
-      "source_location": "L22"
+      "source_location": "L23"
     },
     {
       "id": "app_red_terminal_terminal",
@@ -1142,7 +1368,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "terminal()",
       "source_file": "app/red/terminal.tsx",
@@ -1154,7 +1380,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "submit()",
       "source_file": "app/red/terminal.tsx",
@@ -1166,7 +1392,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "audiocontrolpanel()",
       "source_file": "app/ui/audio-control.tsx",
@@ -1178,7 +1404,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "runcheck()",
       "source_file": "app/ui/audio-control.tsx",
@@ -1190,7 +1416,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "audiovisualindicator()",
       "source_file": "app/ui/audio-control.tsx",
@@ -1202,7 +1428,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "userootaudio()",
       "source_file": "app/ui/audio-control.tsx",
@@ -1214,7 +1440,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "clock()",
       "source_file": "app/ui/root-chrome.tsx",
@@ -1226,7 +1452,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "loginscreen()",
       "source_file": "app/ui/root-chrome.tsx",
@@ -1238,7 +1464,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "rootchrome()",
       "source_file": "app/ui/root-chrome.tsx",
@@ -1250,7 +1476,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "rootwindow()",
       "source_file": "app/ui/root-os.tsx",
@@ -1262,11 +1488,131 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "playaudio()",
       "source_file": "lib/audio/audio-system.ts",
       "source_location": "L160"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_emit",
+      "label": ".emit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".emit()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L156"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_getserversnapshot",
+      "label": ".getServerSnapshot()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".getserversnapshot()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L58"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_getsnapshot",
+      "label": ".getSnapshot()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".getsnapshot()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L57"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_hydrate",
+      "label": ".hydrate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".hydrate()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L61"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_play",
+      "label": ".play()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".play()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L96"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_setsetting",
+      "label": ".setSetting()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".setsetting()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L88"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_stopambience",
+      "label": ".stopAmbience()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".stopambience()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L151"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_subscribe",
+      "label": ".subscribe()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".subscribe()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L59"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_syncambience",
+      "label": ".syncAmbience()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".syncambience()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L133"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_unlock",
+      "label": ".unlock()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": ".unlock()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L70"
     },
     {
       "id": "app_blue_inspector_alertinspector",
@@ -1773,6 +2119,18 @@
       "source_location": "L3"
     },
     {
+      "id": "app_api_sim_hint_route_post",
+      "label": "POST()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "post()",
+      "source_file": "app/api/sim/hint/route.ts",
+      "source_location": "L3"
+    },
+    {
       "id": "app_api_sim_init_route_post",
       "label": "POST()",
       "_callable": true,
@@ -1807,42 +2165,6 @@
       "norm_label": "get()",
       "source_file": "app/api/sim/state/route.ts",
       "source_location": "L3"
-    },
-    {
-      "id": "app_replay_scenarioid_page_replaypage",
-      "label": "ReplayPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replaypage()",
-      "source_file": "app/replay/[scenarioId]/page.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client_formatelapsed",
-      "label": "formatElapsed()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "formatelapsed()",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L27"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client_replayclient",
-      "label": "ReplayClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replayclient()",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L36"
     },
     {
       "id": "lib_prisma_createprismaclient",
@@ -1927,6 +2249,42 @@
       "norm_label": "runroute()",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
       "source_location": "L96"
+    },
+    {
+      "id": "lib_simulation_hints_hintrequesterror_constructor",
+      "label": ".constructor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": ".constructor()",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L14"
+    },
+    {
+      "id": "lib_simulation_hints_isretryabletransactionerror",
+      "label": "isRetryableTransactionError()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "isretryabletransactionerror()",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "lib_simulation_hints_requesthint",
+      "label": "requestHint()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "requesthint()",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L24"
     },
     {
       "id": "lib_simulation_initializer_deletescenario",
@@ -2037,18 +2395,6 @@
       "source_location": "L187"
     },
     {
-      "id": "lib_simulation_replay_snapshotat",
-      "label": "snapshotAt()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "snapshotat()",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L67"
-    },
-    {
       "id": "lib_simulation_replay_summarizereplay",
       "label": "summarizeReplay()",
       "_callable": true,
@@ -2083,18 +2429,6 @@
       "norm_label": "event()",
       "source_file": "lib/simulation/replay.test.ts",
       "source_location": "L7"
-    },
-    {
-      "id": "lib_simulation_replay_visibletolens",
-      "label": "visibleToLens()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "visibletolens()",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L63"
     },
     {
       "id": "lib_simulation_rules_alertsfromevents",
@@ -2178,7 +2512,7 @@
       "file_type": "code",
       "norm_label": "getscenarioview()",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L7"
+      "source_location": "L8"
     },
     {
       "id": "lib_simulation_the_new_server_acceptance_test_applyresult",
@@ -2234,7 +2568,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "get()",
       "source_file": "app/api/operations/route.ts",
@@ -2246,7 +2580,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "careerpage()",
       "source_file": "app/career/page.tsx",
@@ -2258,11 +2592,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "completeexercise()",
       "source_file": "app/career/page.tsx",
       "source_location": "L32"
+    },
+    {
+      "id": "app_layout_rootlayout",
+      "label": "RootLayout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "rootlayout()",
+      "source_file": "app/layout.tsx",
+      "source_location": "L21"
     },
     {
       "id": "app_page_engagementid",
@@ -2270,7 +2616,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "engagementid()",
       "source_file": "app/page.tsx",
@@ -2282,11 +2628,95 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "home()",
       "source_file": "app/page.tsx",
       "source_location": "L13"
+    },
+    {
+      "id": "app_replay_scenarioid_page_replaypage",
+      "label": "ReplayPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "replaypage()",
+      "source_file": "app/replay/[scenarioId]/page.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client_formatelapsed",
+      "label": "formatElapsed()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "formatelapsed()",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L27"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client_replayclient",
+      "label": "ReplayClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "replayclient()",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L36"
+    },
+    {
+      "id": "app_ui_root_os_rootbutton",
+      "label": "RootButton()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "rootbutton()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L49"
+    },
+    {
+      "id": "app_ui_root_os_rootempty",
+      "label": "RootEmpty()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "rootempty()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L86"
+    },
+    {
+      "id": "app_ui_root_os_rootinput",
+      "label": "RootInput()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "rootinput()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L53"
+    },
+    {
+      "id": "app_ui_root_os_rootmenubar",
+      "label": "RootMenuBar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "rootmenubar()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L35"
     },
     {
       "id": "app_ui_root_os_rootpane",
@@ -2294,11 +2724,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "rootpane()",
       "source_file": "app/ui/root-os.tsx",
       "source_location": "L67"
+    },
+    {
+      "id": "app_ui_root_os_rootselect",
+      "label": "RootSelect()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "rootselect()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L57"
+    },
+    {
+      "id": "app_ui_root_os_rootstatusbar",
+      "label": "RootStatusBar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "rootstatusbar()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L45"
     },
     {
       "id": "app_ui_root_os_roottable",
@@ -2306,7 +2760,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "roottable()",
       "source_file": "app/ui/root-os.tsx",
@@ -2318,11 +2772,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "roottabs()",
       "source_file": "app/ui/root-os.tsx",
       "source_location": "L61"
+    },
+    {
+      "id": "app_ui_root_os_roottitlebar",
+      "label": "RootTitleBar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "roottitlebar()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L23"
+    },
+    {
+      "id": "app_ui_root_os_roottoolbar",
+      "label": "RootToolbar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "roottoolbar()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L41"
     },
     {
       "id": "app_ui_root_os_roottree",
@@ -2330,7 +2808,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "roottree()",
       "source_file": "app/ui/root-os.tsx",
@@ -2342,7 +2820,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "useoperation()",
       "source_file": "app/use-operation.ts",
@@ -2354,7 +2832,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "campaignprogress()",
       "source_file": "lib/campaign.ts",
@@ -2366,7 +2844,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "readruns()",
       "source_file": "lib/campaign.ts",
@@ -2378,7 +2856,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "readtraining()",
       "source_file": "lib/campaign.ts",
@@ -2390,7 +2868,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "saverun()",
       "source_file": "lib/campaign.ts",
@@ -2402,11 +2880,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "savetraining()",
       "source_file": "lib/campaign.ts",
       "source_location": "L60"
+    },
+    {
+      "id": "lib_simulation_replay_snapshotat",
+      "label": "snapshotAt()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "snapshotat()",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L67"
+    },
+    {
+      "id": "lib_simulation_replay_visibletolens",
+      "label": "visibleToLens()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "visibletolens()",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L63"
     },
     {
       "id": "tests_browser_campaign_spec_step",
@@ -2414,7 +2916,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "step()",
       "source_file": "tests/browser/campaign.spec.ts",
@@ -3057,292 +3559,88 @@
       "source_location": "L53"
     },
     {
-      "id": "app_red_mission_panel_missionpanel",
-      "label": "MissionPanel()",
+      "id": "lib_simulation_guidance_derivehintguidance",
+      "label": "deriveHintGuidance()",
       "_callable": true,
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "missionpanel()",
-      "source_file": "app/red/mission-panel.tsx",
-      "source_location": "L3"
+      "norm_label": "derivehintguidance()",
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L29"
     },
     {
-      "id": "app_red_network_map_networkmap",
-      "label": "NetworkMap()",
+      "id": "lib_simulation_guidance_isactorstuck",
+      "label": "isActorStuck()",
       "_callable": true,
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "networkmap()",
-      "source_file": "app/red/network-map.tsx",
-      "source_location": "L6"
+      "norm_label": "isactorstuck()",
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L64"
     },
     {
-      "id": "app_red_page_credentialspanel",
-      "label": "CredentialsPanel()",
+      "id": "lib_simulation_guidance_metadataof",
+      "label": "metadataOf()",
       "_callable": true,
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "credentialspanel()",
-      "source_file": "app/red/page.tsx",
-      "source_location": "L88"
+      "norm_label": "metadataof()",
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L17"
     },
     {
-      "id": "app_red_page_datapanel",
-      "label": "DataPanel()",
+      "id": "lib_simulation_guidance_test_at",
+      "label": "at()",
       "_callable": true,
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "datapanel()",
-      "source_file": "app/red/page.tsx",
-      "source_location": "L67"
+      "norm_label": "at()",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L7"
     },
     {
-      "id": "app_red_page_intelpanel",
-      "label": "IntelPanel()",
+      "id": "lib_simulation_guidance_test_event",
+      "label": "event()",
       "_callable": true,
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "intelpanel()",
-      "source_file": "app/red/page.tsx",
-      "source_location": "L71"
+      "norm_label": "event()",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L8"
     },
     {
-      "id": "app_layout_rootlayout",
-      "label": "RootLayout()",
+      "id": "lib_simulation_guidance_test_hintrequested",
+      "label": "hintRequested()",
       "_callable": true,
       "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
+      "community": 53,
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "rootlayout()",
-      "source_file": "app/layout.tsx",
-      "source_location": "L21"
+      "norm_label": "hintrequested()",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L14"
     },
     {
-      "id": "app_ui_root_os_rootbutton",
-      "label": "RootButton()",
+      "id": "lib_simulation_guidance_test_tool",
+      "label": "tool()",
       "_callable": true,
       "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
+      "community": 53,
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "rootbutton()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L49"
-    },
-    {
-      "id": "app_ui_root_os_rootempty",
-      "label": "RootEmpty()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "rootempty()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L86"
-    },
-    {
-      "id": "app_ui_root_os_rootinput",
-      "label": "RootInput()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "rootinput()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L53"
-    },
-    {
-      "id": "app_ui_root_os_rootmenubar",
-      "label": "RootMenuBar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "rootmenubar()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L35"
-    },
-    {
-      "id": "app_ui_root_os_rootselect",
-      "label": "RootSelect()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "rootselect()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L57"
-    },
-    {
-      "id": "app_ui_root_os_rootstatusbar",
-      "label": "RootStatusBar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "rootstatusbar()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L45"
-    },
-    {
-      "id": "app_ui_root_os_roottitlebar",
-      "label": "RootTitleBar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "roottitlebar()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L23"
-    },
-    {
-      "id": "app_ui_root_os_roottoolbar",
-      "label": "RootToolbar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "roottoolbar()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L41"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_emit",
-      "label": ".emit()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".emit()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L156"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_getserversnapshot",
-      "label": ".getServerSnapshot()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".getserversnapshot()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L58"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_getsnapshot",
-      "label": ".getSnapshot()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".getsnapshot()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L57"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_hydrate",
-      "label": ".hydrate()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".hydrate()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L61"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_play",
-      "label": ".play()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".play()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L96"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_setsetting",
-      "label": ".setSetting()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".setsetting()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L88"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_stopambience",
-      "label": ".stopAmbience()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".stopambience()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L151"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_subscribe",
-      "label": ".subscribe()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".subscribe()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L59"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_syncambience",
-      "label": ".syncAmbience()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".syncambience()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L133"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_unlock",
-      "label": ".unlock()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "RootAudioSystem",
-      "file_type": "code",
-      "norm_label": ".unlock()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L70"
+      "norm_label": "tool()",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L19"
     },
     {
       "id": "lib_simulation_scenarios_content_discover",
@@ -3354,7 +3652,7 @@
       "file_type": "code",
       "norm_label": "discover()",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L41"
+      "source_location": "L167"
     },
     {
       "id": "lib_simulation_scenarios_content_dns",
@@ -3366,7 +3664,19 @@
       "file_type": "code",
       "norm_label": "dns()",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L43"
+      "source_location": "L169"
+    },
+    {
+      "id": "lib_simulation_scenarios_content_evidence",
+      "label": "evidence()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "evidence()",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L48"
     },
     {
       "id": "lib_simulation_scenarios_content_file",
@@ -3378,7 +3688,19 @@
       "file_type": "code",
       "norm_label": "file()",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L5"
+      "source_location": "L131"
+    },
+    {
+      "id": "lib_simulation_scenarios_content_hintchain",
+      "label": "hintChain()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "hintchain()",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L10"
     },
     {
       "id": "lib_simulation_scenarios_content_host",
@@ -3390,7 +3712,7 @@
       "file_type": "code",
       "norm_label": "host()",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L34"
+      "source_location": "L160"
     },
     {
       "id": "lib_simulation_scenarios_content_identity",
@@ -3402,7 +3724,19 @@
       "file_type": "code",
       "norm_label": "identity()",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L4"
+      "source_location": "L130"
+    },
+    {
+      "id": "lib_simulation_scenarios_content_known",
+      "label": "known()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "known()",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L47"
     },
     {
       "id": "lib_simulation_scenarios_content_link",
@@ -3414,7 +3748,7 @@
       "file_type": "code",
       "norm_label": "link()",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L40"
+      "source_location": "L166"
     },
     {
       "id": "lib_simulation_scenarios_content_route",
@@ -3426,7 +3760,7 @@
       "file_type": "code",
       "norm_label": "route()",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L50"
+      "source_location": "L176"
     },
     {
       "id": "lib_simulation_scenarios_content_service",
@@ -3438,7 +3772,19 @@
       "file_type": "code",
       "norm_label": "service()",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L6"
+      "source_location": "L132"
+    },
+    {
+      "id": "lib_simulation_scenarios_content_withobjectivehints",
+      "label": "withObjectiveHints()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "withobjectivehints()",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L123"
     },
     {
       "id": "lib_simulation_scenarios_first_shift_learning",
@@ -3549,22 +3895,121 @@
       "source_location": "L5"
     },
     {
+      "id": "app_red_browser",
+      "label": "browser.tsx",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "browser.tsx",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_red_mission_panel",
+      "label": "mission-panel.tsx",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "mission-panel.tsx",
+      "source_file": "app/red/mission-panel.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_red_network_map",
+      "label": "network-map.tsx",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "network-map.tsx",
+      "source_file": "app/red/network-map.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_red_page",
+      "label": "red/page.tsx",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "red/page.tsx",
+      "source_file": "app/red/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_red_page_apps",
+      "label": "apps",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "apps",
+      "source_file": "app/red/page.tsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "app_red_page_navitems",
+      "label": "navItems",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "navitems",
+      "source_file": "app/red/page.tsx",
+      "source_location": "L17"
+    },
+    {
       "id": "app_red_terminal",
       "label": "terminal.tsx",
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "terminal.tsx",
       "source_file": "app/red/terminal.tsx",
       "source_location": "L1"
     },
     {
+      "id": "app_sim_types",
+      "label": "sim-types.ts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "sim-types.ts",
+      "source_file": "app/sim-types.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_ui_audio_control",
+      "label": "audio-control.tsx",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "audio-control.tsx",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_ui_audio_control_mixer_channels",
+      "label": "MIXER_CHANNELS",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "mixer_channels",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L14"
+    },
+    {
       "id": "app_ui_root_chrome",
       "label": "root-chrome.tsx",
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "root-chrome.tsx",
       "source_file": "app/ui/root-chrome.tsx",
@@ -3575,7 +4020,7 @@
       "label": "appInfo",
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "appinfo",
       "source_file": "app/ui/root-chrome.tsx",
@@ -3586,11 +4031,88 @@
       "label": "shortcuts",
       "_origin": "ast",
       "community": 0,
-      "community_name": "root-chrome.tsx",
+      "community_name": "red/page.tsx",
       "file_type": "code",
       "norm_label": "shortcuts",
       "source_file": "app/ui/root-chrome.tsx",
       "source_location": "L21"
+    },
+    {
+      "id": "lib_audio_audio_system",
+      "label": "audio-system.ts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "audio-system.ts",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_audio_audio_system_default_audio_settings",
+      "label": "DEFAULT_AUDIO_SETTINGS",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "default_audio_settings",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudio",
+      "label": "rootAudio",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "rootaudio",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L159"
+    },
+    {
+      "id": "lib_audio_audio_system_server_audio_snapshot",
+      "label": "SERVER_AUDIO_SNAPSHOT",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "server_audio_snapshot",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L48"
+    },
+    {
+      "id": "lib_audio_catalog",
+      "label": "catalog.ts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "catalog.ts",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_audio_catalog_audio_check_events",
+      "label": "AUDIO_CHECK_EVENTS",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "audio_check_events",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L68"
+    },
+    {
+      "id": "lib_audio_catalog_audio_event_catalog",
+      "label": "AUDIO_EVENT_CATALOG",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "red/page.tsx",
+      "file_type": "code",
+      "norm_label": "audio_event_catalog",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L43"
     },
     {
       "id": "package",
@@ -7040,6 +7562,17 @@
       "source_location": "L1"
     },
     {
+      "id": "app_api_sim_hint_route",
+      "label": "hint/route.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "hint/route.ts",
+      "source_file": "app/api/sim/hint/route.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "app_api_sim_init_route",
       "label": "init/route.ts",
       "_origin": "ast",
@@ -7071,39 +7604,6 @@
       "norm_label": "state/route.ts",
       "source_file": "app/api/sim/state/route.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "app_replay_scenarioid_page",
-      "label": "[scenarioId]/page.tsx",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "[scenarioid]/page.tsx",
-      "source_file": "app/replay/[scenarioId]/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client",
-      "label": "replay-client.tsx",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replay-client.tsx",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client_emptysnapshot",
-      "label": "emptySnapshot",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "emptysnapshot",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L25"
     },
     {
       "id": "lib_prisma",
@@ -7214,6 +7714,28 @@
       "norm_label": "routes",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
       "source_location": "L13"
+    },
+    {
+      "id": "lib_simulation_hints",
+      "label": "hints.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "hints.ts",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_hints_test",
+      "label": "hints.test.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "hints.test.ts",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L1"
     },
     {
       "id": "lib_simulation_initializer",
@@ -7407,7 +7929,7 @@
       "label": "operations/route.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "operations/route.ts",
       "source_file": "app/api/operations/route.ts",
@@ -7418,7 +7940,7 @@
       "label": "career/page.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "career/page.tsx",
       "source_file": "app/career/page.tsx",
@@ -7429,21 +7951,109 @@
       "label": "proficiencyLabel",
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "proficiencylabel",
       "source_file": "app/career/page.tsx",
       "source_location": "L11"
     },
     {
+      "id": "app_layout",
+      "label": "layout.tsx",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "layout.tsx",
+      "source_file": "app/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_layout_geistmono",
+      "label": "geistMono",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "geistmono",
+      "source_file": "app/layout.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "app_layout_geistsans",
+      "label": "geistSans",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "geistsans",
+      "source_file": "app/layout.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_layout_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "app/layout.tsx",
+      "source_location": "L16"
+    },
+    {
       "id": "app_page",
       "label": "app/page.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "app/page.tsx",
       "source_file": "app/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_replay_scenarioid_page",
+      "label": "[scenarioId]/page.tsx",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "[scenarioid]/page.tsx",
+      "source_file": "app/replay/[scenarioId]/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client",
+      "label": "replay-client.tsx",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "replay-client.tsx",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client_emptysnapshot",
+      "label": "emptySnapshot",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "emptysnapshot",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L25"
+    },
+    {
+      "id": "app_ui_root_os",
+      "label": "root-os.tsx",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay-client.tsx",
+      "file_type": "code",
+      "norm_label": "root-os.tsx",
+      "source_file": "app/ui/root-os.tsx",
       "source_location": "L1"
     },
     {
@@ -7451,7 +8061,7 @@
       "label": "use-operation.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "use-operation.ts",
       "source_file": "app/use-operation.ts",
@@ -7462,7 +8072,7 @@
       "label": "campaign.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "campaign.ts",
       "source_file": "lib/campaign.ts",
@@ -7473,7 +8083,7 @@
       "label": "trainingModules",
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "trainingmodules",
       "source_file": "lib/campaign.ts",
@@ -7484,7 +8094,7 @@
       "label": "campaign",
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "campaign",
       "source_file": "lib/simulation/scenarios/index.ts",
@@ -7495,7 +8105,7 @@
       "label": "campaign.spec.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "career/page.tsx",
+      "community_name": "replay-client.tsx",
       "file_type": "code",
       "norm_label": "campaign.spec.ts",
       "source_file": "tests/browser/campaign.spec.ts",
@@ -8084,224 +8694,428 @@
       "source_location": "L66"
     },
     {
-      "id": "app_ui_audio_control",
-      "label": "audio-control.tsx",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design",
+      "label": "2026-09-20-guided-mode-hints-design.md",
       "_origin": "ast",
       "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "audio-control.tsx",
-      "source_file": "app/ui/audio-control.tsx",
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "2026-09-20-guided-mode-hints-design.md",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
       "source_location": "L1"
     },
     {
-      "id": "app_ui_audio_control_mixer_channels",
-      "label": "MIXER_CHANNELS",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_api",
+      "label": "API",
       "_origin": "ast",
       "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "mixer_channels",
-      "source_file": "app/ui/audio-control.tsx",
-      "source_location": "L14"
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "api",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L118"
     },
     {
-      "id": "lib_audio_audio_system",
-      "label": "audio-system.ts",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_content_authoring_all_scenarios",
+      "label": "Content authoring \u2014 all scenarios",
       "_origin": "ast",
       "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "audio-system.ts",
-      "source_file": "lib/audio/audio-system.ts",
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "content authoring \u2014 all scenarios",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L186"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_context_aware_skipping",
+      "label": "Context-aware skipping",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "context-aware skipping",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L108"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_data_model",
+      "label": "Data model",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "data model",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L42"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_goals",
+      "label": "Goals",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "goals",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L19"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "label": "Guided Mode Hints \u2014 Design",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "guided mode hints \u2014 design",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
       "source_location": "L1"
     },
     {
-      "id": "lib_audio_audio_system_default_audio_settings",
-      "label": "DEFAULT_AUDIO_SETTINGS",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_non_goals",
+      "label": "Non-goals",
       "_origin": "ast",
       "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "default_audio_settings",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L29"
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "non-goals",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L34"
     },
     {
-      "id": "lib_audio_audio_system_rootaudio",
-      "label": "rootAudio",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_open_items_resolved_during_design",
+      "label": "Open items resolved during design",
       "_origin": "ast",
       "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "rootaudio",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L159"
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "open items resolved during design",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L220"
     },
     {
-      "id": "lib_audio_audio_system_server_audio_snapshot",
-      "label": "SERVER_AUDIO_SNAPSHOT",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_problem",
+      "label": "Problem",
       "_origin": "ast",
       "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "server_audio_snapshot",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L48"
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "problem",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L3"
     },
     {
-      "id": "lib_audio_catalog",
-      "label": "catalog.ts",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_reveal_state_event_sourced_no_new_persistence",
+      "label": "Reveal state (event-sourced, no new persistence)",
       "_origin": "ast",
       "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "catalog.ts",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L1"
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "reveal state (event-sourced, no new persistence)",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L69"
     },
     {
-      "id": "lib_audio_catalog_audio_check_events",
-      "label": "AUDIO_CHECK_EVENTS",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_state_ts_changes",
+      "label": "`state.ts` changes",
       "_origin": "ast",
       "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "audio_check_events",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L68"
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "`state.ts` changes",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L134"
     },
     {
-      "id": "lib_audio_catalog_audio_event_catalog",
-      "label": "AUDIO_EVENT_CATALOG",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_stuck_detection",
+      "label": "Stuck detection",
       "_origin": "ast",
       "community": 52,
-      "community_name": "audio-system.ts",
-      "file_type": "code",
-      "norm_label": "audio_event_catalog",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L43"
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "stuck detection",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L94"
     },
     {
-      "id": "app_red_mission_panel",
-      "label": "mission-panel.tsx",
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_testing",
+      "label": "Testing",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "testing",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L206"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_ui_app_red_mission_panel_tsx",
+      "label": "UI (`app/red/mission-panel.tsx`)",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "ui (`app/red/mission-panel.tsx`)",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L156"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_validation_lib_simulation_scenarios_validate_ts",
+      "label": "Validation (`lib/simulation/scenarios/validate.ts`)",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "Guided Mode Hints \u2014 Design",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "validation (`lib/simulation/scenarios/validate.ts`)",
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L173"
+    },
+    {
+      "id": "lib_simulation_guidance",
+      "label": "guidance.ts",
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "mission-panel.tsx",
-      "source_file": "app/red/mission-panel.tsx",
+      "norm_label": "guidance.ts",
+      "source_file": "lib/simulation/guidance.ts",
       "source_location": "L1"
     },
     {
-      "id": "app_red_network_map",
-      "label": "network-map.tsx",
+      "id": "lib_simulation_guidance_test",
+      "label": "guidance.test.ts",
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "network-map.tsx",
-      "source_file": "app/red/network-map.tsx",
+      "norm_label": "guidance.test.ts",
+      "source_file": "lib/simulation/guidance.test.ts",
       "source_location": "L1"
     },
     {
-      "id": "app_red_page",
-      "label": "red/page.tsx",
+      "id": "lib_simulation_guidance_test_objectives",
+      "label": "objectives",
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "red/page.tsx",
-      "source_file": "app/red/page.tsx",
-      "source_location": "L1"
+      "norm_label": "objectives",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L21"
     },
     {
-      "id": "app_red_page_apps",
-      "label": "apps",
+      "id": "lib_simulation_guidance_test_startedat",
+      "label": "startedAt",
       "_origin": "ast",
       "community": 53,
-      "community_name": "red/page.tsx",
+      "community_name": "guidance.test.ts",
       "file_type": "code",
-      "norm_label": "apps",
-      "source_file": "app/red/page.tsx",
-      "source_location": "L15"
-    },
-    {
-      "id": "app_red_page_navitems",
-      "label": "navItems",
-      "_origin": "ast",
-      "community": 53,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "navitems",
-      "source_file": "app/red/page.tsx",
-      "source_location": "L16"
-    },
-    {
-      "id": "app_sim_types",
-      "label": "sim-types.ts",
-      "_origin": "ast",
-      "community": 53,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "sim-types.ts",
-      "source_file": "app/sim-types.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_layout",
-      "label": "layout.tsx",
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "layout.tsx",
-      "source_file": "app/layout.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_layout_geistmono",
-      "label": "geistMono",
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "geistmono",
-      "source_file": "app/layout.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "app_layout_geistsans",
-      "label": "geistSans",
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "geistsans",
-      "source_file": "app/layout.tsx",
+      "norm_label": "startedat",
+      "source_file": "lib/simulation/guidance.test.ts",
       "source_location": "L6"
     },
     {
-      "id": "app_layout_metadata",
-      "label": "metadata",
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints",
+      "label": "2026-09-20-guided-mode-hints.md",
       "_origin": "ast",
       "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "app/layout.tsx",
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "2026-09-20-guided-mode-hints.md",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints_global_constraints",
+      "label": "Global Constraints",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "global constraints",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L13"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints_guided_mode_hints_implementation_plan",
+      "label": "Guided Mode Hints Implementation Plan",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "guided mode hints implementation plan",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints_review_focus",
+      "label": "Review Focus",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "review focus",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L25"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_1_scenario_hint_schema_and_complete_campaign_content",
+      "label": "Task 1: Scenario hint schema and complete campaign content",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 1: scenario hint schema and complete campaign content",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L35"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_2_structural_scenario_validation",
+      "label": "Task 2: Structural scenario validation",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 2: structural scenario validation",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L248"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_3_pure_derived_guidance_and_scenarioview_integration",
+      "label": "Task 3: Pure derived guidance and ScenarioView integration",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 3: pure derived guidance and scenarioview integration",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L305"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_4_server_authoritative_hint_request_flow",
+      "label": "Task 4: Server-authoritative hint request flow",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 4: server-authoritative hint request flow",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L414"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_5_guided_mission_panel_controls_and_restrained_visual_treatment",
+      "label": "Task 5: Guided Mission panel controls and restrained visual treatment",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 5: guided mission panel controls and restrained visual treatment",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L526"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_6_full_regression_verification_and_graph_refresh",
+      "label": "Task 6: Full regression verification and graph refresh",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "Review Focus",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 6: full regression verification and graph refresh",
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L605"
+    },
+    {
+      "id": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the",
+      "label": "query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "Q: Implement the Guided Mode hints design across the ROOT codebase",
+      "file_type": "document",
+      "frontmatter": {
+        "type": "query",
+        "date": "2026-09-20T02:48:32.910462+00:00",
+        "question": "Implement the Guided Mode hints design across the ROOT codebase",
+        "contributor": "graphify",
+        "outcome": "useful",
+        "source_nodes": "[&quot;ObjectiveBase&quot;, &quot;ScenarioDefinition&quot;, &quot;mission-panel.tsx&quot;, &quot;ScenarioView&quot;, &quot;validate.ts&quot;]"
+      },
+      "node_kind": "page",
+      "norm_label": "query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "source_file": "graphify-out/memory/query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_answer",
+      "label": "Answer",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "Q: Implement the Guided Mode hints design across the ROOT codebase",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "answer",
+      "source_file": "graphify-out/memory/query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "source_location": "L12"
+    },
+    {
+      "id": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_outcome",
+      "label": "Outcome",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "Q: Implement the Guided Mode hints design across the ROOT codebase",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "outcome",
+      "source_file": "graphify-out/memory/query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
       "source_location": "L16"
     },
     {
-      "id": "app_ui_root_os",
-      "label": "root-os.tsx",
+      "id": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_q_implement_the_guided_mode_hints_design_across_the_root_codebase",
+      "label": "Q: Implement the Guided Mode hints design across the ROOT codebase",
       "_origin": "ast",
-      "community": 54,
-      "community_name": "root-os.tsx",
-      "file_type": "code",
-      "norm_label": "root-os.tsx",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L1"
+      "community": 55,
+      "community_name": "Q: Implement the Guided Mode hints design across the ROOT codebase",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "q: implement the guided mode hints design across the root codebase",
+      "source_file": "graphify-out/memory/query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "source_location": "L10"
+    },
+    {
+      "id": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_source_nodes",
+      "label": "Source Nodes",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "Q: Implement the Guided Mode hints design across the ROOT codebase",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "source nodes",
+      "source_file": "graphify-out/memory/query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "source_location": "L20"
     },
     {
       "id": "lib_simulation_scenarios_content",
@@ -8323,7 +9137,7 @@
       "file_type": "code",
       "norm_label": "commondetections",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L44"
+      "source_location": "L170"
     },
     {
       "id": "lib_simulation_scenarios_content_external",
@@ -8334,7 +9148,40 @@
       "file_type": "code",
       "norm_label": "external",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L39"
+      "source_location": "L165"
+    },
+    {
+      "id": "lib_simulation_scenarios_content_guidedonboarding",
+      "label": "guidedOnboarding",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "guidedonboarding",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L18"
+    },
+    {
+      "id": "lib_simulation_scenarios_content_scenarioobjectivehints",
+      "label": "scenarioObjectiveHints",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "scenarioobjectivehints",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L54"
+    },
+    {
+      "id": "lib_simulation_scenarios_content_sharedobjectivehints",
+      "label": "sharedObjectiveHints",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "sharedobjectivehints",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L24"
     },
     {
       "id": "lib_simulation_scenarios_dead_drop",
@@ -11077,6 +11924,18 @@
       "weight": 1.0
     },
     {
+      "source": "app_api_sim_hint_route_post",
+      "target": "lib_simulation_hints_requesthint",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/api/sim/hint/route.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "app_api_sim_init_route_post",
       "target": "lib_simulation_initializer_initializescenario",
       "relation": "calls",
@@ -11521,6 +12380,30 @@
       "weight": 1.0
     },
     {
+      "source": "app_red_browser_browser_open",
+      "target": "lib_audio_audio_system_playaudio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_browser_browser_open",
+      "target": "app_red_browser_quote",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
       "source": "app_red_page_redteampage",
       "target": "app_use_operation_useoperation",
       "relation": "calls",
@@ -11529,7 +12412,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/red/page.tsx",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -11541,7 +12424,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/red/page.tsx",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -13873,6 +14756,126 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_guidance_derivehintguidance",
+      "target": "lib_simulation_guidance_metadataof",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_isactorstuck",
+      "target": "lib_simulation_guidance_metadataof",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test_event",
+      "target": "lib_simulation_guidance_test_at",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test_hintrequested",
+      "target": "lib_simulation_guidance_test_event",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test_tool",
+      "target": "lib_simulation_guidance_test_event",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_requesthint",
+      "target": "lib_simulation_hints_hintrequesterror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_requesthint",
+      "target": "lib_simulation_initializer_getdefinitionforscenario",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_requesthint",
+      "target": "lib_simulation_rules_parsemetadata",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_requesthint",
+      "target": "lib_simulation_hints_isretryabletransactionerror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_requesthint",
+      "target": "lib_simulation_state_getscenarioview",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_initializer_getdefinitionforscenario",
       "target": "lib_simulation_rules_parsemetadata",
       "relation": "calls",
@@ -14017,6 +15020,30 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_content_evidence",
+      "target": "lib_simulation_scenarios_content_hintchain",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content_evidence",
+      "target": "lib_simulation_scenarios_content_known",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_content_host",
       "target": "lib_simulation_scenarios_content_service",
       "relation": "calls",
@@ -14025,7 +15052,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L36",
+      "source_location": "L162",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_state_getscenarioview",
+      "target": "lib_simulation_guidance_derivehintguidance",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/state.ts",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_state_getscenarioview",
+      "target": "lib_simulation_guidance_isactorstuck",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/state.ts",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -14037,7 +15088,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L152",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -14049,7 +15100,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L184",
+      "source_location": "L187",
       "weight": 1.0
     },
     {
@@ -14061,7 +15112,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -14073,7 +15124,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -14085,7 +15136,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L24",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -14097,7 +15148,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L95",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -14650,6 +15701,30 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/api/sim/credentials/route.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_api_sim_hint_route",
+      "target": "lib_simulation_hints_hintrequesterror",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/api/sim/hint/route.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_api_sim_hint_route",
+      "target": "lib_simulation_hints_requesthint",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/api/sim/hint/route.ts",
       "source_location": "L1",
       "weight": 1.0
     },
@@ -15470,6 +16545,30 @@
       "weight": 1.0
     },
     {
+      "source": "app_red_browser",
+      "target": "lib_audio_audio_system_playaudio",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_browser",
+      "target": "app_red_terminal_terminalstate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "app_red_mission_panel",
       "target": "app_sim_types_scenarioview",
       "relation": "imports",
@@ -15478,7 +16577,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/red/mission-panel.tsx",
-      "source_location": "L1",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -15507,7 +16606,7 @@
     },
     {
       "source": "app_red_page",
-      "target": "app_red_mission_panel_missionpanel",
+      "target": "app_red_browser_browser",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15519,7 +16618,7 @@
     },
     {
       "source": "app_red_page",
-      "target": "app_red_network_map_networkmap",
+      "target": "app_red_mission_panel_missionpanel",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15531,7 +16630,7 @@
     },
     {
       "source": "app_red_page",
-      "target": "app_red_terminal_terminal",
+      "target": "app_red_network_map_networkmap",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15543,6 +16642,18 @@
     },
     {
       "source": "app_red_page",
+      "target": "app_red_terminal_terminal",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/red/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_page",
       "target": "app_red_terminal_terminalstate",
       "relation": "imports",
       "_origin": "ast",
@@ -15550,7 +16661,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/red/page.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -16742,6 +17853,210 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_guidance",
+      "target": "lib_simulation_scenarios_types_scenarioobjective",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_scenarios_types_scenarioobjective",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance_derivehintguidance",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance_guidanceevent",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance_isactorstuck",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_prisma_prisma",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_initializer_getdefinitionforscenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_rules_parsemetadata",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_state_getscenarioview",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_state_scenarioview",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_prisma_prisma",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_engine_simulationengine",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_initializer_deletescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_initializer_initializescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_hints_requesthint",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_rules_parsemetadata",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_types_terminalstate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_initializer",
       "target": "lib_prisma_prisma",
       "relation": "imports",
@@ -17043,6 +18358,30 @@
     },
     {
       "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_types_hintchain",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_types_hinttier",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
       "target": "lib_simulation_scenarios_types_routedefinition",
       "relation": "imports",
       "_origin": "ast",
@@ -17068,6 +18407,18 @@
     {
       "source": "lib_simulation_scenarios_content",
       "target": "lib_simulation_scenarios_types_scenariodnsrecorddefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_types_scenarioobjective",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -17163,6 +18514,18 @@
     },
     {
       "source": "lib_simulation_scenarios_dead_drop",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/dead-drop.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_dead_drop",
       "target": "lib_simulation_scenarios_content_host",
       "relation": "imports",
       "_origin": "ast",
@@ -17210,6 +18573,18 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_dead_drop",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/dead-drop.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_first_shift",
       "target": "lib_simulation_scenarios_types_scenariodefinition",
       "relation": "imports",
@@ -17235,7 +18610,31 @@
     },
     {
       "source": "lib_simulation_scenarios_first_shift",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/first-shift.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_first_shift",
       "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/first-shift.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_first_shift",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -17319,6 +18718,18 @@
     },
     {
       "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_ghost_account",
       "target": "lib_simulation_scenarios_content_host",
       "relation": "imports",
       "_origin": "ast",
@@ -17366,6 +18777,18 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_ghost_account",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/ghost-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_glasshouse",
       "target": "lib_simulation_scenarios_types_scenariodefinition",
       "relation": "imports",
@@ -17391,7 +18814,31 @@
     },
     {
       "source": "lib_simulation_scenarios_glasshouse",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/glasshouse.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_glasshouse",
       "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/glasshouse.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_glasshouse",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -17607,7 +19054,31 @@
     },
     {
       "source": "lib_simulation_scenarios_locked_out",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/locked-out.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_locked_out",
       "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/locked-out.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_locked_out",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -17691,6 +19162,18 @@
     },
     {
       "source": "lib_simulation_scenarios_nightshift",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/nightshift.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_nightshift",
       "target": "lib_simulation_scenarios_content_host",
       "relation": "imports",
       "_origin": "ast",
@@ -17728,6 +19211,18 @@
     {
       "source": "lib_simulation_scenarios_nightshift",
       "target": "lib_simulation_scenarios_content_route",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/nightshift.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_nightshift",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -17811,6 +19306,18 @@
     },
     {
       "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
       "target": "lib_simulation_scenarios_content_host",
       "relation": "imports",
       "_origin": "ast",
@@ -17848,6 +19355,18 @@
     {
       "source": "lib_simulation_scenarios_no_one_knows",
       "target": "lib_simulation_scenarios_content_route",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/no-one-knows.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_no_one_knows",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -17931,6 +19450,18 @@
     },
     {
       "source": "lib_simulation_scenarios_paper_trail",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/paper-trail.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_paper_trail",
       "target": "lib_simulation_scenarios_content_host",
       "relation": "imports",
       "_origin": "ast",
@@ -17968,6 +19499,18 @@
     {
       "source": "lib_simulation_scenarios_paper_trail",
       "target": "lib_simulation_scenarios_content_route",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/paper-trail.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_paper_trail",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -17992,6 +19535,18 @@
     {
       "source": "lib_simulation_scenarios_service_unavailable",
       "target": "lib_simulation_scenarios_content_dns",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_service_unavailable",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -18014,6 +19569,18 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_scenarios_service_unavailable",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/service-unavailable.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_scenarios_something_calling_home",
       "target": "lib_simulation_scenarios_types_scenariodefinition",
       "relation": "imports",
@@ -18087,6 +19654,18 @@
     },
     {
       "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
       "target": "lib_simulation_scenarios_content_host",
       "relation": "imports",
       "_origin": "ast",
@@ -18124,6 +19703,18 @@
     {
       "source": "lib_simulation_scenarios_something_calling_home",
       "target": "lib_simulation_scenarios_content_route",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/something-calling-home.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_something_calling_home",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -18207,6 +19798,18 @@
     },
     {
       "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
       "target": "lib_simulation_scenarios_content_host",
       "relation": "imports",
       "_origin": "ast",
@@ -18244,6 +19847,18 @@
     {
       "source": "lib_simulation_scenarios_strange_login",
       "target": "lib_simulation_scenarios_content_route",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/strange-login.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_strange_login",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -18279,7 +19894,31 @@
     },
     {
       "source": "lib_simulation_scenarios_the_new_server",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_new_server",
       "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/the-new-server.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_new_server",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -18304,6 +19943,30 @@
     {
       "source": "lib_simulation_scenarios_the_printer",
       "target": "lib_simulation_scenarios_content_dns",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/the-printer.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_printer",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/the-printer.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_the_printer",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -18351,7 +20014,31 @@
     },
     {
       "source": "lib_simulation_scenarios_website_down",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_website_down",
       "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/website-down.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_website_down",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -18387,7 +20074,31 @@
     },
     {
       "source": "lib_simulation_scenarios_wrong_network",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_wrong_network",
       "target": "lib_simulation_scenarios_content_service",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/scenarios/wrong-network.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_wrong_network",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -18563,6 +20274,30 @@
       "context": "import",
       "source_file": "lib/simulation/state.ts",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_state",
+      "target": "lib_simulation_guidance_derivehintguidance",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/state.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_state",
+      "target": "lib_simulation_guidance_isactorstuck",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/state.ts",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -19515,6 +21250,18 @@
       "weight": 1.0
     },
     {
+      "source": "app_api_sim_hint_route",
+      "target": "lib_simulation_hints",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/api/sim/hint/route.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
       "source": "app_api_sim_init_route",
       "target": "lib_simulation_initializer",
       "relation": "imports_from",
@@ -19854,6 +21601,31 @@
       "weight": 1.0
     },
     {
+      "source": "app_red_browser",
+      "target": "lib_audio_audio_system",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_browser",
+      "target": "app_red_terminal",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L5",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
       "source": "app_red_mission_panel",
       "target": "app_sim_types",
       "relation": "imports_from",
@@ -19862,7 +21634,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/red/mission-panel.tsx",
-      "source_location": "L1",
+      "source_location": "L4",
       "type_only": true,
       "weight": 1.0
     },
@@ -19893,7 +21665,7 @@
     },
     {
       "source": "app_red_page",
-      "target": "app_red_mission_panel",
+      "target": "app_red_browser",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -19905,7 +21677,7 @@
     },
     {
       "source": "app_red_page",
-      "target": "app_red_network_map",
+      "target": "app_red_mission_panel",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -19917,7 +21689,7 @@
     },
     {
       "source": "app_red_page",
-      "target": "app_red_terminal",
+      "target": "app_red_network_map",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -19925,6 +21697,18 @@
       "context": "import",
       "source_file": "app/red/page.tsx",
       "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_page",
+      "target": "app_red_terminal",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/red/page.tsx",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -20643,6 +22427,165 @@
       "context": "import",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L3",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_prisma",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_initializer",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_rules",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_state",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_prisma",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_engine",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_initializer",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_hints",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_rules",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints_test",
+      "target": "lib_simulation_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/hints.test.ts",
+      "source_location": "L8",
+      "type_only": true,
       "weight": 1.0
     },
     {
@@ -21580,6 +23523,18 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_state",
+      "target": "lib_simulation_guidance",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/state.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_the_new_server_acceptance_test",
       "target": "lib_prisma",
       "relation": "imports_from",
@@ -22453,6 +24408,17 @@
       "weight": 1.0
     },
     {
+      "source": "app_api_sim_hint_route",
+      "target": "app_api_sim_hint_route_post",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/api/sim/hint/route.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "app_api_sim_init_route",
       "target": "app_api_sim_init_route_post",
       "relation": "contains",
@@ -23036,6 +25002,61 @@
       "weight": 1.0
     },
     {
+      "source": "app_red_browser",
+      "target": "app_red_browser_page",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_browser",
+      "target": "app_red_browser_quote",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_browser",
+      "target": "app_red_browser_browser",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_browser",
+      "target": "app_red_browser_props",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_browser_browser",
+      "target": "app_red_browser_browser_open",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/red/browser.tsx",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
       "source": "app_red_mission_panel",
       "target": "app_red_mission_panel_missionpanel",
       "relation": "contains",
@@ -23043,7 +25064,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/mission-panel.tsx",
-      "source_location": "L3",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "app_red_mission_panel",
+      "target": "app_red_mission_panel_missionpanelprops",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/red/mission-panel.tsx",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -23065,7 +25097,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0
     },
     {
@@ -23076,7 +25108,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -23087,7 +25119,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -23098,7 +25130,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L67",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -23109,7 +25141,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L71",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -23120,7 +25152,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L86",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -23131,7 +25163,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L88",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -25456,6 +27488,270 @@
       "weight": 1.0
     },
     {
+      "source": "docs_superpowers_plans_2026_09_20_guided_mode_hints",
+      "target": "docs_superpowers_plans_2026_09_20_guided_mode_hints_guided_mode_hints_implementation_plan",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_guided_mode_hints_guided_mode_hints_implementation_plan",
+      "target": "docs_superpowers_plans_2026_09_20_guided_mode_hints_global_constraints",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_guided_mode_hints_guided_mode_hints_implementation_plan",
+      "target": "docs_superpowers_plans_2026_09_20_guided_mode_hints_review_focus",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_guided_mode_hints_review_focus",
+      "target": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_2_structural_scenario_validation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L248",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_guided_mode_hints_review_focus",
+      "target": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_3_pure_derived_guidance_and_scenarioview_integration",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L305",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_guided_mode_hints_review_focus",
+      "target": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_1_scenario_hint_schema_and_complete_campaign_content",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_guided_mode_hints_review_focus",
+      "target": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_4_server_authoritative_hint_request_flow",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L414",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_guided_mode_hints_review_focus",
+      "target": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_5_guided_mission_panel_controls_and_restrained_visual_treatment",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L526",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_guided_mode_hints_review_focus",
+      "target": "docs_superpowers_plans_2026_09_20_guided_mode_hints_task_6_full_regression_verification_and_graph_refresh",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-20-guided-mode-hints.md",
+      "source_location": "L605",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_context_aware_skipping",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_api",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L118",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_state_ts_changes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_ui_app_red_mission_panel_tsx",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L156",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_validation_lib_simulation_scenarios_validate_ts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_content_authoring_all_scenarios",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_goals",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_testing",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_open_items_resolved_during_design",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L220",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_problem",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_non_goals",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_data_model",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_reveal_state_event_sourced_no_new_persistence",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
+      "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_stuck_detection",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md",
+      "source_location": "L94",
+      "weight": 1.0
+    },
+    {
       "source": "docs_tools_tools_unix",
       "target": "docs_tools_tools_unix_root_realistic_interaction_layer_specification",
       "relation": "contains",
@@ -27612,6 +29908,50 @@
       "weight": 1.0
     },
     {
+      "source": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the",
+      "target": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_q_implement_the_guided_mode_hints_design_across_the_root_codebase",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphify-out/memory/query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_q_implement_the_guided_mode_hints_design_across_the_root_codebase",
+      "target": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_answer",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphify-out/memory/query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_q_implement_the_guided_mode_hints_design_across_the_root_codebase",
+      "target": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_outcome",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphify-out/memory/query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_q_implement_the_guided_mode_hints_design_across_the_root_codebase",
+      "target": "graphify_out_memory_query_20260920_024832_implement_the_guided_mode_hints_design_across_the_source_nodes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphify-out/memory/query_20260920_024832_implement_the_guided_mode_hints_design_across_the.md",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
       "source": "lib_audio_audio_system",
       "target": "lib_audio_audio_system_rootaudio",
       "relation": "contains",
@@ -28030,6 +30370,171 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_guidance",
+      "target": "lib_simulation_guidance_objectivehintguidance",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance",
+      "target": "lib_simulation_guidance_metadataof",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance",
+      "target": "lib_simulation_guidance_derivehintguidance",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance",
+      "target": "lib_simulation_guidance_guidanceevent",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance",
+      "target": "lib_simulation_guidance_isactorstuck",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.ts",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance_test_hintrequested",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance_test_tool",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance_test_objectives",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance_test_startedat",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance_test_at",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_guidance_test",
+      "target": "lib_simulation_guidance_test_event",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/guidance.test.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_hints_hintrequesterror",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_hints_isretryabletransactionerror",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_hints_requesthint",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_hints",
+      "target": "lib_simulation_hints_hintrequestinput",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_initializer",
       "target": "lib_simulation_initializer_getscenario",
       "relation": "contains",
@@ -28372,6 +30877,160 @@
     },
     {
       "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_hintchain",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_withobjectivehints",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L123",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_identity",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_file",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_service",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_host",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L160",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_external",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L165",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_link",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L166",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_discover",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L167",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_dns",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L169",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_commondetections",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_route",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_guidedonboarding",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
+      "target": "lib_simulation_scenarios_content_sharedobjectivehints",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/content.ts",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_content",
       "target": "lib_simulation_scenarios_content_machine",
       "relation": "contains",
       "_origin": "ast",
@@ -28383,29 +31042,7 @@
     },
     {
       "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_host",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L34",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_external",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L39",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_identity",
+      "target": "lib_simulation_scenarios_content_objectivedraft",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -28416,79 +31053,35 @@
     },
     {
       "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_link",
+      "target": "lib_simulation_scenarios_content_known",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L40",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_discover",
+      "target": "lib_simulation_scenarios_content_evidence",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L41",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_dns",
+      "target": "lib_simulation_scenarios_content_scenarioobjectivehints",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L43",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_commondetections",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L44",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_file",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_route",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L50",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_content",
-      "target": "lib_simulation_scenarios_content_service",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/content.ts",
-      "source_location": "L6",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -28746,13 +31339,24 @@
     },
     {
       "source": "lib_simulation_scenarios_types",
+      "target": "lib_simulation_scenarios_types_servicepermissiondefinition",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_types",
       "target": "lib_simulation_scenarios_types_serviceresourcedefinition",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L103",
+      "source_location": "L111",
       "weight": 1.0
     },
     {
@@ -28763,18 +31367,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L110",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_types",
-      "target": "lib_simulation_scenarios_types_scenarioservicedefinition",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L116",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -28790,13 +31383,24 @@
     },
     {
       "source": "lib_simulation_scenarios_types",
+      "target": "lib_simulation_scenarios_types_scenarioservicedefinition",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_types",
       "target": "lib_simulation_scenarios_types_scenariohttproutedefinition",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L129",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -28807,7 +31411,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L141",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -28867,7 +31471,7 @@
     },
     {
       "source": "lib_simulation_scenarios_types",
-      "target": "lib_simulation_scenarios_types_objectivebase",
+      "target": "lib_simulation_scenarios_types_hinttier",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -28878,13 +31482,35 @@
     },
     {
       "source": "lib_simulation_scenarios_types",
+      "target": "lib_simulation_scenarios_types_hintchain",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_types",
+      "target": "lib_simulation_scenarios_types_objectivebase",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_types",
       "target": "lib_simulation_scenarios_types_scenarioobjective",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L62",
+      "source_location": "L70",
       "weight": 1.0
     },
     {
@@ -28895,7 +31521,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L76",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -28906,18 +31532,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L82",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_scenarios_types",
-      "target": "lib_simulation_scenarios_types_servicepermissiondefinition",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L98",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -28994,7 +31609,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L217",
+      "source_location": "L222",
       "weight": 1.0
     },
     {
@@ -29005,7 +31620,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/state.ts",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -30800,6 +33415,17 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_hints_hintrequesterror",
+      "target": "lib_simulation_hints_hintrequesterror_constructor",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/hints.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_glasshouse_e2e_test_runroute",
       "target": "lib_simulation_engine_simulationengine_executecommand",
       "relation": "calls",
@@ -31156,5 +33782,5 @@
       "source_file": "docs/ROOT_CANONICAL_PLAN.md"
     }
   ],
-  "built_at_commit": "ad6f2262ec194df0e2ee2a88ce50b6e03438b98c"
+  "built_at_commit": "38cabc3fd9a1afb608b30522d72fe8e7062237d2"
 }

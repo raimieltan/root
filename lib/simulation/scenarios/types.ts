@@ -10,7 +10,7 @@ export type ScenarioEventDefinition = {
 };
 
 export type ScenarioDiscovery = {
-  trigger: { kind: "file" | "web" | "scan" | "process" | "postgres" | "dns"; host: string; value: string };
+  trigger: { kind: "file" | "web" | "scan" | "process" | "postgres" | "dns" | "identity"; host: string; value: string };
   output?: string;
   hosts?: string[];
   credentials?: Array<{ username: string; scope: string }>;
