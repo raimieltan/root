@@ -3774,6 +3774,13 @@ timeLimit
 
 New content should rarely require new simulation code.
 
+Every objective on every scenario must define a 3-tier Guided Mode hint
+chain (concept → direction → strong hint), authored against that
+scenario's own facts/discoveries so context-aware skipping is meaningful.
+This is enforced by the scenario validator, not left as a convention. See
+`docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md` for the
+hint data model and authoring pattern.
+
 \---
 
 **# 58. Internal Content Authoring Tools**

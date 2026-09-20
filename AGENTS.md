@@ -22,6 +22,15 @@ deviation rather than silently changing the product direction.
 `docs/ROOT-POC.md` is historical POC guidance. Where it differs from the
 canonical plan, `docs/ROOT_CANONICAL_PLAN.md` wins.
 
+# ROOT scenario authoring
+
+Every objective in every scenario (`lib/simulation/scenarios/*.ts`) must
+define a 3-tier Guided Mode hint chain (concept → direction → strong
+hint), per `docs/superpowers/specs/2026-09-20-guided-mode-hints-design.md`.
+When adding a new scenario or a new objective to an existing one, author
+its hints in the same pass — do not leave them for later. The scenario
+validator enforces this structurally.
+
 # ROOT canonical story
 
 Before writing or reviewing mission/campaign content (operations, briefs,
