@@ -33,7 +33,19 @@ describe("Act 0 The Printer", { concurrency: false }, () => {
       };
 
       assert.match(await run("help id"), /id \[username\]/);
-      await run("pwd");
+      assert.equal(await run("pwd"), "/home/trainee");
+      await run("cd /var");
+      assert.equal(await run("pwd"), "/var");
+      await run("cd log");
+      assert.equal(await run("pwd"), "/var/log");
+      await run("cd ..");
+      assert.equal(await run("pwd"), "/var");
+      await run("cd");
+      assert.equal(await run("pwd"), "/home/trainee");
+      const missingDirectory = await engine.executeCommand("cd /not-a-real-directory", state);
+      assert.equal(missingDirectory.success, false);
+      assert.match(missingDirectory.output, /No such directory/);
+      assert.equal(state.currentPath, "/home/trainee");
       await run("whoami");
       await run("id");
       await run("env");

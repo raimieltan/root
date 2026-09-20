@@ -54,9 +54,9 @@
     "semantic_hash": ""
   },
   "app/red/mission-panel.tsx": {
-    "mtime": 1789877629.4951928,
-    "seen": 1789882206.673267,
-    "ast_hash": "19f4efb37bec74d1323edd8fcdaeff9e",
+    "mtime": 1789882352.8074815,
+    "seen": 1789895447.250677,
+    "ast_hash": "183965b7c4a15260740f5f169c6ebe22",
     "semantic_hash": ""
   },
   "app/red/network-map.tsx": {
@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/engine.ts": {
-    "mtime": 1789839348.240347,
-    "seen": 1789861814.7496462,
-    "ast_hash": "d3310506fa57cdb6dc2036a15b896770",
+    "mtime": 1789883366.7588267,
+    "seen": 1789895447.251925,
+    "ast_hash": "5d7bcf6d4e6cf9613b6fea7bdb43a4e7",
     "semantic_hash": ""
   },
   "lib/simulation/initializer.ts": {
@@ -300,9 +300,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/types.ts": {
-    "mtime": 1789873164.6273544,
-    "seen": 1789882206.6759932,
-    "ast_hash": "31bb0736de1601a8b4e217363c1b5889",
+    "mtime": 1789883247.754364,
+    "seen": 1789895447.254817,
+    "ast_hash": "f60b9eb199a8a838119faafca861b862",
     "semantic_hash": ""
   },
   "app/api/operations/route.ts": {
@@ -342,9 +342,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/content.ts": {
-    "mtime": 1789873265.2243412,
-    "seen": 1789882206.6757472,
-    "ast_hash": "36313fac82c817681d1be9ac6126f770",
+    "mtime": 1789883248.2590456,
+    "seen": 1789895447.254119,
+    "ast_hash": "8bae402abf9c330d2a1f8a8296f6c00f",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/dead-drop.ts": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/validate.ts": {
-    "mtime": 1789875246.2924964,
-    "seen": 1789882206.675998,
-    "ast_hash": "e52955cee23aa764fe6bfa96e9e09f1c",
+    "mtime": 1789883367.377829,
+    "seen": 1789895447.2548192,
+    "ast_hash": "1f9ece8adccfcb1589f25041c2a2bef8",
     "semantic_hash": ""
   },
   "playwright.config.ts": {
@@ -474,9 +474,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/tools.ts": {
-    "mtime": 1789837639.9900987,
-    "seen": 1789837774.936862,
-    "ast_hash": "047573dafd815fb50b8e258228f8b42c",
+    "mtime": 1789883367.0070314,
+    "seen": 1789895447.255198,
+    "ast_hash": "8ec53985251c7d56ec129964d3ea606e",
     "semantic_hash": ""
   },
   "docs/tools/tools-unix.md": {
@@ -660,15 +660,15 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/the-printer.ts": {
-    "mtime": 1789873310.184975,
-    "seen": 1789882206.67599,
-    "ast_hash": "e3043d81a1bd46fdac45d64ae6a119a7",
+    "mtime": 1789883248.1250958,
+    "seen": 1789895447.254814,
+    "ast_hash": "ab01eec01abe012ab00767157801015b",
     "semantic_hash": ""
   },
   "lib/simulation/the-printer.acceptance.test.ts": {
-    "mtime": 1789788680.2020316,
-    "seen": 1789788951.64858,
-    "ast_hash": "d9d229b93f0c673cc5f93a91a29dd083",
+    "mtime": 1789883335.1483297,
+    "seen": 1789895447.255114,
+    "ast_hash": "17e3580aa0adf43ca25ca0e3282c57eb",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/service-unavailable.ts": {

@@ -54,7 +54,11 @@ const routes = {
     "curl portal.meridian.test",
     "curl --data upload=archive portal.meridian.test/legacy-upload",
     "ls -l /",
-    "less /var/www/meridian/app.conf",
+    "cd /var",
+    "ls -l",
+    "cd www/meridian",
+    "ls -l .",
+    "less app.conf",
     "ssh deploy@DEV-01",
     "MeridianDeploy2024!Secret",
     "ps",
@@ -117,8 +121,8 @@ async function runRoute(commands: string[]) {
         state.currentPrivilege = result.newSession.privilege;
         state.currentSessionId = result.newSession.id;
         state.context = result.context;
-        state.currentPath = "/";
       }
+      if (result.currentPath) state.currentPath = result.currentPath;
     }
     const scenario = await prisma.scenario.findUniqueOrThrow({
       where: { id: initialized.scenarioId },
@@ -239,7 +243,8 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
     assert.match(outputFor("curl portal.meridian.test"), /method="POST" action="\/legacy-upload"/);
     assert.match(outputFor("curl portal.meridian.test"), /select name="upload"/);
     assert.match(outputFor("curl portal.meridian.test"), /option value="archive"/);
-    assert.match(outputFor("ls -l /"), /\/var\/www\/meridian\/app\.conf/);
+    assert.match(outputFor("ls -l /"), /var\//);
+    assert.match(outputFor("ls -l ."), /app\.conf/);
     assert.match(outputFor("ps"), /backup-sync --config \/etc\/backup-sync\.conf/);
     assert.match(outputFor("less /etc/backup-sync.conf"), /MANUAL_TRIGGER=backup-sync --run-hook/);
     assert.match(outputFor("less /etc/backup-sync.conf"), /ROUTES_CONFIG=\/etc\/meridian\/routes\.conf/);

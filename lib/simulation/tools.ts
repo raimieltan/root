@@ -71,7 +71,7 @@ const shellDefinitions: ShellDefinition[] = [
   { command: "env", contract: passive("shell.env", "shell", "env", ["session environment"]) },
   { command: "hostname", contract: passive("shell.hostname", "shell", "hostname", ["machine identity"]) },
   { command: "pwd", contract: passive("shell.pwd", "shell", "pwd", ["session working directory"]) },
-  { command: "cd", contract: passive("shell.cd", "shell", "cd <path>", ["session working directory"]), validate: (args) => args[0] ? null : "Usage: cd <path>" },
+  { command: "cd", contract: passive("shell.cd", "shell", "cd [path]", ["session working directory"]) },
   { command: "ls", contract: passive("shell.ls", "shell", "ls [-l] [path]", ["filesystem metadata"]) },
   { command: "cat", contract: observable({ id: "shell.cat", family: "shell", syntax: "cat <file>", permissions: ["filesystem read permission"], resources: ["file", "credential discovery", "scenario fact"], outcomes: ["resource contents", "discovery"], telemetry: ["FILE_READ", "SENSITIVE_FILE_READ", "CREDENTIAL_DISCOVERED", "FACT_DISCOVERED"], blueResponses: ["ISOLATE_HOST", "RESET_PASSWORD", "DISABLE_ACCOUNT"] }), validate: (args) => args[0] ? null : "Usage: cat <file>" },
   { command: "less", contract: observable({ id: "shell.less", family: "shell", syntax: "less <file>", permissions: ["filesystem read permission"], resources: ["file", "credential discovery", "scenario fact"], outcomes: ["resource contents", "discovery"], telemetry: ["FILE_READ", "SENSITIVE_FILE_READ", "CREDENTIAL_DISCOVERED", "FACT_DISCOVERED"], blueResponses: ["ISOLATE_HOST", "RESET_PASSWORD", "DISABLE_ACCOUNT"] }), validate: (args) => args[0] ? null : "Usage: less <file>" },

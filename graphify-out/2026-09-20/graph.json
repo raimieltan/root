@@ -2932,7 +2932,7 @@
       "file_type": "code",
       "norm_label": ".applydiscovery()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L312"
+      "source_location": "L313"
     },
     {
       "id": "lib_simulation_engine_simulationengine_canreadfile",
@@ -2944,7 +2944,7 @@
       "file_type": "code",
       "norm_label": ".canreadfile()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L406"
+      "source_location": "L411"
     },
     {
       "id": "lib_simulation_engine_simulationengine_changedirectory",
@@ -2956,7 +2956,7 @@
       "file_type": "code",
       "norm_label": ".changedirectory()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L375"
+      "source_location": "L376"
     },
     {
       "id": "lib_simulation_engine_simulationengine_completeauthentication",
@@ -2968,7 +2968,7 @@
       "file_type": "code",
       "norm_label": ".completeauthentication()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L687"
+      "source_location": "L692"
     },
     {
       "id": "lib_simulation_engine_simulationengine_connectpostgres",
@@ -2980,7 +2980,7 @@
       "file_type": "code",
       "norm_label": ".connectpostgres()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L586"
+      "source_location": "L591"
     },
     {
       "id": "lib_simulation_engine_simulationengine_constructor",
@@ -3004,7 +3004,7 @@
       "file_type": "code",
       "norm_label": ".curl()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L510"
+      "source_location": "L515"
     },
     {
       "id": "lib_simulation_engine_simulationengine_currentmachine",
@@ -3016,7 +3016,7 @@
       "file_type": "code",
       "norm_label": ".currentmachine()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L209"
+      "source_location": "L210"
     },
     {
       "id": "lib_simulation_engine_simulationengine_definition",
@@ -3040,7 +3040,7 @@
       "file_type": "code",
       "norm_label": ".dig()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L240"
+      "source_location": "L241"
     },
     {
       "id": "lib_simulation_engine_simulationengine_discoveredhosts",
@@ -3052,7 +3052,7 @@
       "file_type": "code",
       "norm_label": ".discoveredhosts()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L300"
+      "source_location": "L301"
     },
     {
       "id": "lib_simulation_engine_simulationengine_emit",
@@ -3064,7 +3064,7 @@
       "file_type": "code",
       "norm_label": ".emit()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L265"
+      "source_location": "L266"
     },
     {
       "id": "lib_simulation_engine_simulationengine_emitdefinition",
@@ -3076,7 +3076,7 @@
       "file_type": "code",
       "norm_label": ".emitdefinition()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L308"
+      "source_location": "L309"
     },
     {
       "id": "lib_simulation_engine_simulationengine_environment",
@@ -3088,7 +3088,7 @@
       "file_type": "code",
       "norm_label": ".environment()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L391"
+      "source_location": "L396"
     },
     {
       "id": "lib_simulation_engine_simulationengine_evaluateobjectives",
@@ -3124,7 +3124,7 @@
       "file_type": "code",
       "norm_label": ".find()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L462"
+      "source_location": "L467"
     },
     {
       "id": "lib_simulation_engine_simulationengine_grep",
@@ -3136,7 +3136,7 @@
       "file_type": "code",
       "norm_label": ".grep()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L444"
+      "source_location": "L449"
     },
     {
       "id": "lib_simulation_engine_simulationengine_help",
@@ -3160,7 +3160,7 @@
       "file_type": "code",
       "norm_label": ".identity()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L382"
+      "source_location": "L383"
     },
     {
       "id": "lib_simulation_engine_simulationengine_installagent",
@@ -3172,7 +3172,7 @@
       "file_type": "code",
       "norm_label": ".installagent()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L756"
+      "source_location": "L761"
     },
     {
       "id": "lib_simulation_engine_simulationengine_ip",
@@ -3184,7 +3184,7 @@
       "file_type": "code",
       "norm_label": ".ip()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L483"
+      "source_location": "L488"
     },
     {
       "id": "lib_simulation_engine_simulationengine_john",
@@ -3196,7 +3196,7 @@
       "file_type": "code",
       "norm_label": ".john()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L739"
+      "source_location": "L744"
     },
     {
       "id": "lib_simulation_engine_simulationengine_listfiles",
@@ -3208,7 +3208,7 @@
       "file_type": "code",
       "norm_label": ".listfiles()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L411"
+      "source_location": "L416"
     },
     {
       "id": "lib_simulation_engine_simulationengine_observe",
@@ -3220,7 +3220,7 @@
       "file_type": "code",
       "norm_label": ".observe()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L360"
+      "source_location": "L361"
     },
     {
       "id": "lib_simulation_engine_simulationengine_ping",
@@ -3232,7 +3232,7 @@
       "file_type": "code",
       "norm_label": ".ping()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L488"
+      "source_location": "L493"
     },
     {
       "id": "lib_simulation_engine_simulationengine_postgresinput",
@@ -3244,7 +3244,7 @@
       "file_type": "code",
       "norm_label": ".postgresinput()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L612"
+      "source_location": "L617"
     },
     {
       "id": "lib_simulation_engine_simulationengine_processes",
@@ -3256,7 +3256,7 @@
       "file_type": "code",
       "norm_label": ".processes()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L473"
+      "source_location": "L478"
     },
     {
       "id": "lib_simulation_engine_simulationengine_readfile",
@@ -3268,7 +3268,7 @@
       "file_type": "code",
       "norm_label": ".readfile()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L422"
+      "source_location": "L427"
     },
     {
       "id": "lib_simulation_engine_simulationengine_resolvedns",
@@ -3280,7 +3280,7 @@
       "file_type": "code",
       "norm_label": ".resolvedns()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L230"
+      "source_location": "L231"
     },
     {
       "id": "lib_simulation_engine_simulationengine_result",
@@ -3304,7 +3304,7 @@
       "file_type": "code",
       "norm_label": ".scan()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L497"
+      "source_location": "L502"
     },
     {
       "id": "lib_simulation_engine_simulationengine_serviceoperation",
@@ -3316,7 +3316,7 @@
       "file_type": "code",
       "norm_label": ".serviceoperation()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L570"
+      "source_location": "L575"
     },
     {
       "id": "lib_simulation_engine_simulationengine_sessions",
@@ -3328,7 +3328,7 @@
       "file_type": "code",
       "norm_label": ".sessions()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L743"
+      "source_location": "L748"
     },
     {
       "id": "lib_simulation_engine_simulationengine_ssh",
@@ -3340,7 +3340,7 @@
       "file_type": "code",
       "norm_label": ".ssh()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L714"
+      "source_location": "L719"
     },
     {
       "id": "lib_simulation_engine_simulationengine_target",
@@ -3352,7 +3352,7 @@
       "file_type": "code",
       "norm_label": ".target()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L222"
+      "source_location": "L223"
     },
     {
       "id": "lib_simulation_engine_simulationengine_toolregistry",
@@ -12856,7 +12856,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L313",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -12868,7 +12868,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L325",
+      "source_location": "L326",
       "weight": 1.0
     },
     {
@@ -12880,7 +12880,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L329",
+      "source_location": "L330",
       "weight": 1.0
     },
     {
@@ -12892,7 +12892,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L333",
+      "source_location": "L334",
       "weight": 1.0
     },
     {
@@ -12904,7 +12904,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L355",
+      "source_location": "L356",
       "weight": 1.0
     },
     {
@@ -12916,7 +12916,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L376",
+      "source_location": "L377",
       "weight": 1.0
     },
     {
@@ -12928,36 +12928,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L378",
+      "source_location": "L379",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_completeauthentication",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L688",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L689",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_engine_simulationengine_find",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12969,7 +12945,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_network_reachable",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12981,19 +12957,31 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_engine_simulationengine_emit",
+      "target": "lib_simulation_engine_simulationengine_find",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L697",
+      "source_location": "L698",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_engine_simulationengine_definition",
+      "target": "lib_simulation_network_reachable",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L699",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_completeauthentication",
+      "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13005,6 +12993,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_completeauthentication",
+      "target": "lib_simulation_engine_simulationengine_definition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L707",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_completeauthentication",
       "target": "lib_simulation_engine_simulationengine_emitdefinition",
       "relation": "calls",
       "_origin": "ast",
@@ -13012,7 +13012,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L703",
+      "source_location": "L708",
       "weight": 1.0
     },
     {
@@ -13024,7 +13024,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L587",
+      "source_location": "L592",
       "weight": 1.0
     },
     {
@@ -13036,7 +13036,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L587",
+      "source_location": "L592",
       "weight": 1.0
     },
     {
@@ -13048,7 +13048,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L587",
+      "source_location": "L592",
       "weight": 1.0
     },
     {
@@ -13060,7 +13060,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L588",
+      "source_location": "L593",
       "weight": 1.0
     },
     {
@@ -13072,7 +13072,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L591",
+      "source_location": "L596",
       "weight": 1.0
     },
     {
@@ -13084,7 +13084,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L597",
+      "source_location": "L602",
       "weight": 1.0
     },
     {
@@ -13096,48 +13096,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L598",
+      "source_location": "L603",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_curl",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L511",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_curl",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L512",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_curl",
-      "target": "lib_simulation_engine_simulationengine_target",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L514",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_curl",
-      "target": "lib_simulation_network_reachable",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13149,6 +13113,42 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L517",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_engine_simulationengine_target",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L519",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_network_reachable",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L521",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_curl",
       "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
@@ -13156,7 +13156,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L518",
+      "source_location": "L523",
       "weight": 1.0
     },
     {
@@ -13168,7 +13168,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L520",
+      "source_location": "L525",
       "weight": 1.0
     },
     {
@@ -13180,7 +13180,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L520",
+      "source_location": "L525",
       "weight": 1.0
     },
     {
@@ -13192,7 +13192,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L533",
+      "source_location": "L538",
       "weight": 1.0
     },
     {
@@ -13204,7 +13204,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L539",
+      "source_location": "L544",
       "weight": 1.0
     },
     {
@@ -13216,7 +13216,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L542",
+      "source_location": "L547",
       "weight": 1.0
     },
     {
@@ -13240,24 +13240,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L241",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_dig",
-      "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
       "source_location": "L242",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_dig",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13269,6 +13257,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_dig",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L244",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_dig",
       "target": "lib_simulation_engine_simulationengine_resolvedns",
       "relation": "calls",
       "_origin": "ast",
@@ -13276,7 +13276,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L245",
+      "source_location": "L246",
       "weight": 1.0
     },
     {
@@ -13288,7 +13288,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L247",
+      "source_location": "L248",
       "weight": 1.0
     },
     {
@@ -13300,7 +13300,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L251",
+      "source_location": "L252",
       "weight": 1.0
     },
     {
@@ -13312,7 +13312,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L252",
+      "source_location": "L253",
       "weight": 1.0
     },
     {
@@ -13324,7 +13324,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L259",
+      "source_location": "L260",
       "weight": 1.0
     },
     {
@@ -13336,7 +13336,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L302",
+      "source_location": "L303",
       "weight": 1.0
     },
     {
@@ -13348,7 +13348,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L266",
+      "source_location": "L267",
       "weight": 1.0
     },
     {
@@ -13360,7 +13360,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L269",
+      "source_location": "L270",
       "weight": 1.0
     },
     {
@@ -13372,7 +13372,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L279",
+      "source_location": "L280",
       "weight": 1.0
     },
     {
@@ -13384,7 +13384,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L309",
+      "source_location": "L310",
       "weight": 1.0
     },
     {
@@ -13396,7 +13396,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L392",
+      "source_location": "L397",
       "weight": 1.0
     },
     {
@@ -13408,7 +13408,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L393",
+      "source_location": "L398",
       "weight": 1.0
     },
     {
@@ -13420,7 +13420,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L402",
+      "source_location": "L407",
       "weight": 1.0
     },
     {
@@ -13528,7 +13528,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L463",
+      "source_location": "L468",
       "weight": 1.0
     },
     {
@@ -13540,7 +13540,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L464",
+      "source_location": "L469",
       "weight": 1.0
     },
     {
@@ -13552,7 +13552,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L469",
+      "source_location": "L474",
       "weight": 1.0
     },
     {
@@ -13564,7 +13564,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L446",
+      "source_location": "L451",
       "weight": 1.0
     },
     {
@@ -13576,24 +13576,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L447",
+      "source_location": "L452",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_grep",
       "target": "lib_simulation_engine_simulationengine_canreadfile",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L450",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_grep",
-      "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13605,6 +13593,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_grep",
+      "target": "lib_simulation_engine_simulationengine_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L460",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_grep",
       "target": "lib_simulation_engine_simulationengine_applydiscovery",
       "relation": "calls",
       "_origin": "ast",
@@ -13612,24 +13612,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L457",
+      "source_location": "L462",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_identity",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L383",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_identity",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13641,7 +13629,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_identity",
-      "target": "lib_simulation_engine_simulationengine_emit",
+      "target": "lib_simulation_engine_simulationengine_result",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L385",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_identity",
+      "target": "lib_simulation_engine_simulationengine_find",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13649,6 +13649,30 @@
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
       "source_location": "L387",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_identity",
+      "target": "lib_simulation_engine_simulationengine_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L391",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_identity",
+      "target": "lib_simulation_engine_simulationengine_applydiscovery",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L392",
       "weight": 1.0
     },
     {
@@ -13660,7 +13684,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L757",
+      "source_location": "L762",
       "weight": 1.0
     },
     {
@@ -13672,7 +13696,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L758",
+      "source_location": "L763",
       "weight": 1.0
     },
     {
@@ -13684,7 +13708,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L759",
+      "source_location": "L764",
       "weight": 1.0
     },
     {
@@ -13696,7 +13720,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L763",
+      "source_location": "L768",
       "weight": 1.0
     },
     {
@@ -13708,7 +13732,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L484",
+      "source_location": "L489",
       "weight": 1.0
     },
     {
@@ -13720,7 +13744,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L485",
+      "source_location": "L490",
       "weight": 1.0
     },
     {
@@ -13732,7 +13756,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L740",
+      "source_location": "L745",
       "weight": 1.0
     },
     {
@@ -13744,7 +13768,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L412",
+      "source_location": "L417",
       "weight": 1.0
     },
     {
@@ -13756,7 +13780,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L413",
+      "source_location": "L418",
       "weight": 1.0
     },
     {
@@ -13768,7 +13792,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L415",
+      "source_location": "L420",
       "weight": 1.0
     },
     {
@@ -13780,24 +13804,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L418",
+      "source_location": "L423",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_observe",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L361",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_observe",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13809,7 +13821,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_observe",
-      "target": "lib_simulation_engine_simulationengine_emit",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13817,6 +13829,18 @@
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
       "source_location": "L363",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_observe",
+      "target": "lib_simulation_engine_simulationengine_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L364",
       "weight": 1.0
     },
     {
@@ -13828,7 +13852,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L489",
+      "source_location": "L494",
       "weight": 1.0
     },
     {
@@ -13840,7 +13864,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L490",
+      "source_location": "L495",
       "weight": 1.0
     },
     {
@@ -13852,7 +13876,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L490",
+      "source_location": "L495",
       "weight": 1.0
     },
     {
@@ -13864,7 +13888,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L492",
+      "source_location": "L497",
       "weight": 1.0
     },
     {
@@ -13876,7 +13900,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L493",
+      "source_location": "L498",
       "weight": 1.0
     },
     {
@@ -13888,36 +13912,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L613",
+      "source_location": "L618",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_postgresinput",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L614",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_postgresinput",
-      "target": "lib_simulation_engine_simulationengine_definition",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L615",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_postgresinput",
-      "target": "lib_simulation_engine_simulationengine_applydiscovery",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13929,6 +13929,30 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_postgresinput",
+      "target": "lib_simulation_engine_simulationengine_definition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L620",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_postgresinput",
+      "target": "lib_simulation_engine_simulationengine_applydiscovery",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L624",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_postgresinput",
       "target": "lib_simulation_engine_simulationengine_find",
       "relation": "calls",
       "_origin": "ast",
@@ -13936,7 +13960,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L625",
+      "source_location": "L630",
       "weight": 1.0
     },
     {
@@ -13948,7 +13972,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L678",
+      "source_location": "L683",
       "weight": 1.0
     },
     {
@@ -13960,7 +13984,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L474",
+      "source_location": "L479",
       "weight": 1.0
     },
     {
@@ -13972,7 +13996,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L475",
+      "source_location": "L480",
       "weight": 1.0
     },
     {
@@ -13984,7 +14008,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L478",
+      "source_location": "L483",
       "weight": 1.0
     },
     {
@@ -13996,48 +14020,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L479",
+      "source_location": "L484",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_readfile",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L423",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_readfile",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L424",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_readfile",
-      "target": "lib_simulation_engine_simulationengine_find",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L426",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_readfile",
-      "target": "lib_simulation_engine_simulationengine_canreadfile",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14049,6 +14037,42 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_readfile",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L429",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_readfile",
+      "target": "lib_simulation_engine_simulationengine_find",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L431",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_readfile",
+      "target": "lib_simulation_engine_simulationengine_canreadfile",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L433",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_readfile",
       "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
@@ -14056,7 +14080,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L430",
+      "source_location": "L435",
       "weight": 1.0
     },
     {
@@ -14068,7 +14092,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L432",
+      "source_location": "L437",
       "weight": 1.0
     },
     {
@@ -14080,7 +14104,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L434",
+      "source_location": "L439",
       "weight": 1.0
     },
     {
@@ -14092,7 +14116,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L439",
+      "source_location": "L444",
       "weight": 1.0
     },
     {
@@ -14104,7 +14128,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L232",
+      "source_location": "L233",
       "weight": 1.0
     },
     {
@@ -14116,60 +14140,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L233",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_scan",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L498",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_scan",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L499",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_scan",
-      "target": "lib_simulation_engine_simulationengine_target",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L499",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_scan",
-      "target": "lib_simulation_network_reachable",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L501",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_scan",
-      "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14181,7 +14157,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_scan",
-      "target": "lib_simulation_engine_simulationengine_applydiscovery",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14193,6 +14169,54 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_scan",
+      "target": "lib_simulation_engine_simulationengine_target",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L504",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_scan",
+      "target": "lib_simulation_network_reachable",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L506",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_scan",
+      "target": "lib_simulation_engine_simulationengine_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L508",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_scan",
+      "target": "lib_simulation_engine_simulationengine_applydiscovery",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L509",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_scan",
       "target": "lib_simulation_engine_simulationengine_discoveredhosts",
       "relation": "calls",
       "_origin": "ast",
@@ -14200,48 +14224,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L507",
+      "source_location": "L512",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_serviceoperation",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L571",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_serviceoperation",
-      "target": "lib_simulation_engine_simulationengine_definition",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L571",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_serviceoperation",
-      "target": "lib_simulation_engine_simulationengine_find",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L572",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_serviceoperation",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14253,6 +14241,42 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_definition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L576",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_find",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L577",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_result",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L581",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
       "target": "lib_simulation_engine_simulationengine_emitdefinition",
       "relation": "calls",
       "_origin": "ast",
@@ -14260,7 +14284,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L580",
+      "source_location": "L585",
       "weight": 1.0
     },
     {
@@ -14272,7 +14296,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L581",
+      "source_location": "L586",
       "weight": 1.0
     },
     {
@@ -14284,7 +14308,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L747",
+      "source_location": "L752",
       "weight": 1.0
     },
     {
@@ -14296,7 +14320,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L715",
+      "source_location": "L720",
       "weight": 1.0
     },
     {
@@ -14308,7 +14332,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L717",
+      "source_location": "L722",
       "weight": 1.0
     },
     {
@@ -14320,7 +14344,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L717",
+      "source_location": "L722",
       "weight": 1.0
     },
     {
@@ -14332,7 +14356,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L719",
+      "source_location": "L724",
       "weight": 1.0
     },
     {
@@ -14344,7 +14368,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L728",
+      "source_location": "L733",
       "weight": 1.0
     },
     {
@@ -14356,7 +14380,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L729",
+      "source_location": "L734",
       "weight": 1.0
     },
     {
@@ -14368,7 +14392,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L732",
+      "source_location": "L737",
       "weight": 1.0
     },
     {
@@ -14380,7 +14404,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L734",
+      "source_location": "L739",
       "weight": 1.0
     },
     {
@@ -14392,7 +14416,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L224",
+      "source_location": "L225",
       "weight": 1.0
     },
     {
@@ -15425,7 +15449,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L687",
+      "source_location": "L692",
       "weight": 1.0
     },
     {
@@ -15437,7 +15461,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L265",
+      "source_location": "L266",
       "weight": 1.0
     },
     {
@@ -15461,7 +15485,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L230",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -23921,7 +23945,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L375",
+      "source_location": "L376",
       "weight": 1.0
     },
     {
@@ -23933,7 +23957,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L687",
+      "source_location": "L692",
       "weight": 1.0
     },
     {
@@ -23945,7 +23969,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L586",
+      "source_location": "L591",
       "weight": 1.0
     },
     {
@@ -23957,7 +23981,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L586",
+      "source_location": "L591",
       "weight": 1.0
     },
     {
@@ -23969,7 +23993,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L510",
+      "source_location": "L515",
       "weight": 1.0
     },
     {
@@ -23981,7 +24005,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L510",
+      "source_location": "L515",
       "weight": 1.0
     },
     {
@@ -23993,7 +24017,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L209",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -24005,7 +24029,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L240",
+      "source_location": "L241",
       "weight": 1.0
     },
     {
@@ -24017,7 +24041,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L308",
+      "source_location": "L309",
       "weight": 1.0
     },
     {
@@ -24029,7 +24053,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L391",
+      "source_location": "L396",
       "weight": 1.0
     },
     {
@@ -24053,7 +24077,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L462",
+      "source_location": "L467",
       "weight": 1.0
     },
     {
@@ -24065,7 +24089,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L444",
+      "source_location": "L449",
       "weight": 1.0
     },
     {
@@ -24077,7 +24101,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L382",
+      "source_location": "L383",
       "weight": 1.0
     },
     {
@@ -24089,7 +24113,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L756",
+      "source_location": "L761",
       "weight": 1.0
     },
     {
@@ -24101,7 +24125,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L483",
+      "source_location": "L488",
       "weight": 1.0
     },
     {
@@ -24113,7 +24137,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L411",
+      "source_location": "L416",
       "weight": 1.0
     },
     {
@@ -24125,7 +24149,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L360",
+      "source_location": "L361",
       "weight": 1.0
     },
     {
@@ -24137,7 +24161,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L488",
+      "source_location": "L493",
       "weight": 1.0
     },
     {
@@ -24149,7 +24173,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L612",
+      "source_location": "L617",
       "weight": 1.0
     },
     {
@@ -24161,7 +24185,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L473",
+      "source_location": "L478",
       "weight": 1.0
     },
     {
@@ -24173,7 +24197,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L422",
+      "source_location": "L427",
       "weight": 1.0
     },
     {
@@ -24197,7 +24221,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L497",
+      "source_location": "L502",
       "weight": 1.0
     },
     {
@@ -24209,7 +24233,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L570",
+      "source_location": "L575",
       "weight": 1.0
     },
     {
@@ -24221,7 +24245,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L570",
+      "source_location": "L575",
       "weight": 1.0
     },
     {
@@ -24233,7 +24257,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L714",
+      "source_location": "L719",
       "weight": 1.0
     },
     {
@@ -33037,7 +33061,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L209",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -33048,7 +33072,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L222",
+      "source_location": "L223",
       "weight": 1.0
     },
     {
@@ -33059,7 +33083,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L230",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -33070,7 +33094,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L240",
+      "source_location": "L241",
       "weight": 1.0
     },
     {
@@ -33081,7 +33105,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L265",
+      "source_location": "L266",
       "weight": 1.0
     },
     {
@@ -33114,7 +33138,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L300",
+      "source_location": "L301",
       "weight": 1.0
     },
     {
@@ -33125,7 +33149,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L308",
+      "source_location": "L309",
       "weight": 1.0
     },
     {
@@ -33136,7 +33160,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L312",
+      "source_location": "L313",
       "weight": 1.0
     },
     {
@@ -33158,7 +33182,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L360",
+      "source_location": "L361",
       "weight": 1.0
     },
     {
@@ -33169,7 +33193,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L375",
+      "source_location": "L376",
       "weight": 1.0
     },
     {
@@ -33180,7 +33204,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L382",
+      "source_location": "L383",
       "weight": 1.0
     },
     {
@@ -33191,7 +33215,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L391",
+      "source_location": "L396",
       "weight": 1.0
     },
     {
@@ -33202,7 +33226,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L406",
+      "source_location": "L411",
       "weight": 1.0
     },
     {
@@ -33213,7 +33237,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L411",
+      "source_location": "L416",
       "weight": 1.0
     },
     {
@@ -33224,7 +33248,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L422",
+      "source_location": "L427",
       "weight": 1.0
     },
     {
@@ -33235,7 +33259,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L444",
+      "source_location": "L449",
       "weight": 1.0
     },
     {
@@ -33246,7 +33270,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L462",
+      "source_location": "L467",
       "weight": 1.0
     },
     {
@@ -33257,7 +33281,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L473",
+      "source_location": "L478",
       "weight": 1.0
     },
     {
@@ -33268,7 +33292,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L483",
+      "source_location": "L488",
       "weight": 1.0
     },
     {
@@ -33279,7 +33303,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L488",
+      "source_location": "L493",
       "weight": 1.0
     },
     {
@@ -33290,7 +33314,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L497",
+      "source_location": "L502",
       "weight": 1.0
     },
     {
@@ -33301,7 +33325,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L510",
+      "source_location": "L515",
       "weight": 1.0
     },
     {
@@ -33312,7 +33336,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L570",
+      "source_location": "L575",
       "weight": 1.0
     },
     {
@@ -33323,7 +33347,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L586",
+      "source_location": "L591",
       "weight": 1.0
     },
     {
@@ -33345,7 +33369,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L612",
+      "source_location": "L617",
       "weight": 1.0
     },
     {
@@ -33356,7 +33380,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L687",
+      "source_location": "L692",
       "weight": 1.0
     },
     {
@@ -33367,7 +33391,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L714",
+      "source_location": "L719",
       "weight": 1.0
     },
     {
@@ -33378,7 +33402,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L739",
+      "source_location": "L744",
       "weight": 1.0
     },
     {
@@ -33389,7 +33413,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L743",
+      "source_location": "L748",
       "weight": 1.0
     },
     {
@@ -33400,7 +33424,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L756",
+      "source_location": "L761",
       "weight": 1.0
     },
     {
@@ -33782,5 +33806,5 @@
       "source_file": "docs/ROOT_CANONICAL_PLAN.md"
     }
   ],
-  "built_at_commit": "38cabc3fd9a1afb608b30522d72fe8e7062237d2"
+  "built_at_commit": "7d25367f4c320ce519d544e4f2f2281f675bbdb2"
 }

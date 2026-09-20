@@ -47,9 +47,13 @@ export class SimulationEngine {
       const output = progress.operationCompleted && !result.output.endsWith("Operation complete.")
         ? `${result.output}${result.output ? "\n\n" : ""}Operation complete. Evidence package is ready for review.`
         : result.output;
+      const sessionHome = result.newSession && result.context?.type !== "POSTGRES" && result.context?.type !== "AUTHENTICATING"
+        ? `/home/${result.newSession.userId}`
+        : undefined;
       return {
         ...result,
         output,
+        currentPath: result.currentPath ?? sessionHome,
         events: [...result.events, audit, ...progress.events],
         objectiveRetrieved: result.objectiveRetrieved || progress.operationCompleted,
       };
@@ -69,7 +73,7 @@ export class SimulationEngine {
         id: (args, state) => this.identity(args, state),
         env: (_args, state) => this.environment(state),
         hostname: (_args, state) => this.observe(state, "CURRENT_HOST", state.currentMachine),
-        pwd: (_args, state) => this.observe(state, "CURRENT_DIRECTORY", state.currentPath ?? "/"),
+        pwd: (_args, state) => this.observe(state, "CURRENT_DIRECTORY", this.resolvePath(".", state)),
         cd: (args, state) => this.changeDirectory(args, state),
         ls: (args, state) => this.listFiles(args, state),
         cat: (args, state) => this.readFile(args, state, false),
@@ -181,10 +185,11 @@ export class SimulationEngine {
       curl: "curl [-X METHOD] <url> [--data BODY]\n  curl <url>                     performs a GET request and prints the response.\n  curl -X POST <url> --data \"field=value\"   sends form data, usually as a POST.\n  Inspect a page's response for forms, links, or comments before guessing an endpoint.\n  Example: curl portal.example.test",
       ssh: "ssh <user@host>\n  Opens a remote shell session if you hold valid credentials for that user on that host.\n  You'll be prompted for a password if one is required.\n  Example: ssh deploy@10.20.10.20",
       psql: "psql -h HOST -U USER [-d DATABASE] [--password SECRET]\n  Connects to a PostgreSQL service. Omit -d to connect without selecting a database,\n  then use \\l to list databases and \\c <database> to select one.\n  Once connected: \\dt lists tables, \\d <table> describes its columns,\n  SELECT <columns> FROM <table>; reads rows, \\q disconnects.\n  Example: psql -h 10.30.10.21 -U someuser",
-      ls: "ls [-l] [path]\n  Lists files visible to your current session. -l shows owner and permissions.\n  Example: ls -l /etc",
+      cd: "cd [path]\n  Changes the current directory. Relative paths, ., .., and ~ are supported. With no path, returns home.",
+      ls: "ls [-l] [path]\n  Lists the immediate contents of a directory. -l shows owner and permissions.\n  Example: ls -l /etc",
       cat: "cat <path>\n  Prints a file's contents if your session has permission to read it.",
       less: "less <path>\n  Opens a readable file for inspection. ROOT prints the bounded simulated file contents.\n  Example: less /etc/example.conf",
-      grep: "grep <text> [path]\n  Searches file contents (or all readable files if no path given) for a case-insensitive match.\n  Example: grep password /etc/app.conf",
+      grep: "grep <text> [path]\n  Searches readable file contents under the given path, or under the current directory if omitted.\n  Example: grep password /etc/app.conf",
       find: "find [path] -name <name>\n  Searches a directory tree for a file by exact filename.\n  Example: find /etc -name app.conf",
       ps: "ps\n  Lists running processes on the current host, including their full command line.\n  Command lines often reveal configuration file paths worth inspecting.",
       "backup-sync": "backup-sync --run-hook\n  Manually triggers a service's maintained hook, if your session has the required group\n  membership and the hook script is writable by your group.",
@@ -198,7 +203,7 @@ export class SimulationEngine {
 
 Recon:       nmap <host> · ping <host> · curl <url> · ip · dig <name> · nslookup <name>
 Access:      ssh <user@host> · sessions
-Filesystem:  pwd · cd <path> · ls [-l] [path] · cat <path> · less <path> · grep TEXT [path] · find [path] -name NAME
+Filesystem:  pwd · cd [path] · ls [-l] [path] · cat <path> · less <path> · grep TEXT [path] · find [path] -name NAME
     System:      whoami · id [username] · hostname · env · ps · backup-sync --run-hook
 Web:         curl [-X METHOD] URL [--data BODY]
 Database:    psql -h HOST -U USER [-d DATABASE] --password SECRET
@@ -374,10 +379,38 @@ Type 'help <command>' for details, e.g. help curl`;
   }
 
   private async changeDirectory(args: string[], state: TerminalState) {
-    if (!args[0]) return this.result(false, "Usage: cd <path>");
-    const currentPath = args[0].startsWith("/") ? args[0] : `${state.currentPath ?? "/"}/${args[0]}`.replace(/\/+/g, "/");
+    const session = await this.currentMachine(state);
+    if (!session) return this.result(false, "No active session for this host.");
+    const requestedPath = args[0] ?? `~/`;
+    const currentPath = this.resolvePath(requestedPath, state);
+    if (!this.filesystemDirectories(session.machine).has(currentPath)) {
+      return this.result(false, `cd: ${requestedPath}: No such directory`);
+    }
     const observed = await this.observe(state, "DIRECTORY_CHANGED", currentPath, { from: state.currentPath ?? "/", path: currentPath });
     return { ...observed, currentPath } as CommandResult;
+  }
+
+  private resolvePath(input: string, state: TerminalState) {
+    const home = `/home/${state.currentUser}`;
+    const expanded = input === "~" ? home : input.startsWith("~/") ? `${home}/${input.slice(2)}` : input;
+    const source = expanded.startsWith("/") ? expanded : `${state.currentPath ?? home}/${expanded}`;
+    const segments: string[] = [];
+    for (const segment of source.split("/")) {
+      if (!segment || segment === ".") continue;
+      if (segment === "..") segments.pop();
+      else segments.push(segment);
+    }
+    return `/${segments.join("/")}`;
+  }
+
+  private filesystemDirectories(machine: { files: Array<{ path: string }>; users: Array<{ username: string }> }) {
+    const directories = new Set(["/", "/etc", "/home", "/opt", "/tmp", "/usr", "/var"]);
+    for (const user of machine.users) directories.add(`/home/${user.username}`);
+    for (const file of machine.files) {
+      const segments = file.path.split("/").filter(Boolean);
+      for (let index = 1; index < segments.length; index += 1) directories.add(`/${segments.slice(0, index).join("/")}`);
+    }
+    return directories;
   }
 
   private async identity(args: string[], state: TerminalState) {
@@ -416,10 +449,39 @@ Type 'help <command>' for details, e.g. help curl`;
   private async listFiles(args: string[], state: TerminalState) {
     const session = await this.currentMachine(state);
     if (!session) return this.result(false, "No active session for this host.");
-    const detailed = args[0] === "-l";
-    const path = args.find((argument) => argument !== "-l") ?? state.currentPath ?? "/";
-    const files = session.machine.files.filter((file) => file.path === path || file.path.startsWith(path === "/" ? "/" : `${path.replace(/\/$/, "")}/`));
-    const output = files.length ? files.map((file) => detailed ? `${file.permissions} ${file.owner}:${file.group ?? file.owner} ${file.path}` : file.path.split("/").at(-1)).join("\n") : "(empty)";
+    const detailed = args.includes("-l");
+    const requestedPath = args.find((argument) => argument !== "-l") ?? ".";
+    const path = this.resolvePath(requestedPath, state);
+    const directories = this.filesystemDirectories(session.machine);
+    const exactFile = session.machine.files.find((file) => file.path === path);
+    if (!directories.has(path) && !exactFile) return this.result(false, `ls: cannot access '${requestedPath}': No such file or directory`);
+
+    let output: string;
+    if (exactFile && !directories.has(path)) {
+      output = detailed ? `${exactFile.permissions} ${exactFile.owner}:${exactFile.group ?? exactFile.owner} ${exactFile.path}` : exactFile.path.split("/").at(-1) ?? exactFile.path;
+    } else {
+      const prefix = path === "/" ? "/" : `${path}/`;
+      const children = new Map<string, { path: string; file?: (typeof session.machine.files)[number] }>();
+      for (const directory of directories) {
+        if (!directory.startsWith(prefix) || directory === path) continue;
+        const remainder = directory.slice(prefix.length);
+        if (remainder && !remainder.includes("/")) children.set(directory, { path: directory });
+      }
+      for (const file of session.machine.files) {
+        if (!file.path.startsWith(prefix)) continue;
+        const remainder = file.path.slice(prefix.length);
+        if (!remainder || remainder.includes("/")) continue;
+        children.set(file.path, { path: file.path, file });
+      }
+      const entries = [...children.values()].sort((left, right) => left.path.localeCompare(right.path));
+      output = entries.length ? entries.map((entry) => {
+        const name = entry.path.split("/").at(-1) ?? entry.path;
+        if (!detailed) return entry.file ? name : `${name}/`;
+        return entry.file
+          ? `${entry.file.permissions} ${entry.file.owner}:${entry.file.group ?? entry.file.owner} ${name}`
+          : `755 root:root ${name}/`;
+      }).join("\n") : "(empty)";
+    }
     const event = await this.emit({ action: "OBSERVATION_RECORDED", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.INFO, targetMachineId: session.machine.id, userId: session.user.username, visibleToBlue: false, metadata: { kind: "DIRECTORY_LISTING", value: output, path, detailed } });
     return this.result(true, output, [event]);
   }
@@ -428,7 +490,8 @@ Type 'help <command>' for details, e.g. help curl`;
     if (!args[0]) return this.result(false, `Usage: ${retrieve ? "retrieve" : "cat"} <file>`);
     const session = await this.currentMachine(state);
     if (!session) return this.result(false, "No active session for this host.");
-    const file = session.machine.files.find((entry) => entry.path === args[0] || entry.path.endsWith(`/${args[0]}`));
+    const path = this.resolvePath(args[0], state);
+    const file = session.machine.files.find((entry) => entry.path === path);
     if (!file) return this.result(false, `File not found: ${args[0]}`);
     if (!this.canReadFile(file, session.user)) return this.result(false, "Permission denied");
     const events: SimulationEvent[] = [];
@@ -451,8 +514,18 @@ Type 'help <command>' for details, e.g. help curl`;
     if (!pattern) return this.result(false, "Usage: grep <text> [path]");
     const session = await this.currentMachine(state);
     if (!session) return this.result(false, "No active session for this host.");
-    const path = args[1];
-    const files = session.machine.files.filter((file) => (!path || file.path === path || file.path.endsWith(`/${path}`)) && this.canReadFile(file, session.user));
+    const requestedPath = args[1] ?? ".";
+    const path = this.resolvePath(requestedPath, state);
+    const directories = this.filesystemDirectories(session.machine);
+    const files = session.machine.files.filter((file) => {
+      const inScope = directories.has(path)
+        ? file.path.startsWith(path === "/" ? "/" : `${path}/`)
+        : file.path === path;
+      return inScope && this.canReadFile(file, session.user);
+    });
+    if (!directories.has(path) && !session.machine.files.some((file) => file.path === path)) {
+      return this.result(false, `grep: ${requestedPath}: No such file or directory`);
+    }
     const matchedFiles = files.filter((file) => (file.contents ?? "").toLowerCase().includes(pattern.toLowerCase()));
     const lines = matchedFiles.flatMap((file) => (file.contents ?? "").split("\n").flatMap((line, index) => line.toLowerCase().includes(pattern.toLowerCase()) ? [`${file.path}:${index + 1}:${line}`] : []));
     const events: SimulationEvent[] = [];
@@ -470,8 +543,10 @@ Type 'help <command>' for details, e.g. help curl`;
     const nameIndex = args.indexOf("-name");
     const name = nameIndex >= 0 ? args[nameIndex + 1] : undefined;
     if (nameIndex >= 0 && !name) return this.result(false, "Usage: find [path] -name <name>");
-    const root = args.find((argument, index) => index !== nameIndex && index !== nameIndex + 1 && !argument.startsWith("-")) ?? state.currentPath ?? "/";
-    const files = session.machine.files.filter((file) => file.path.startsWith(root === "/" ? "/" : root) && this.canReadFile(file, session.user) && (!name || file.path.split("/").at(-1) === name));
+    const requestedRoot = args.find((argument, index) => index !== nameIndex && index !== nameIndex + 1 && !argument.startsWith("-")) ?? ".";
+    const root = this.resolvePath(requestedRoot, state);
+    if (!this.filesystemDirectories(session.machine).has(root)) return this.result(false, `find: '${requestedRoot}': No such directory`);
+    const files = session.machine.files.filter((file) => file.path.startsWith(root === "/" ? "/" : `${root}/`) && this.canReadFile(file, session.user) && (!name || file.path.split("/").at(-1) === name));
     return this.result(true, files.map((file) => file.path).join("\n") || "");
   }
 

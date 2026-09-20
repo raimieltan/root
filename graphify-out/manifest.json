@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/engine.ts": {
-    "mtime": 1789883366.7588267,
-    "seen": 1789895447.251925,
-    "ast_hash": "5d7bcf6d4e6cf9613b6fea7bdb43a4e7",
+    "mtime": 1789903419.8601167,
+    "seen": 1789904200.497194,
+    "ast_hash": "d1da19be26f5eb54abdfc9fea8d34593",
     "semantic_hash": ""
   },
   "lib/simulation/initializer.ts": {
@@ -282,9 +282,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/glasshouse.e2e.test.ts": {
-    "mtime": 1789745424.5350637,
-    "seen": 1789745463.382945,
-    "ast_hash": "8938d087dcb5b447a95c54e86bfc4d8c",
+    "mtime": 1789903682.4326525,
+    "seen": 1789904200.4973829,
+    "ast_hash": "9728aad5bada9e482a334cf0f0dced7d",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/glasshouse.ts": {
@@ -474,9 +474,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/tools.ts": {
-    "mtime": 1789883367.0070314,
-    "seen": 1789895447.255198,
-    "ast_hash": "8ec53985251c7d56ec129964d3ea606e",
+    "mtime": 1789903378.3542027,
+    "seen": 1789904200.500373,
+    "ast_hash": "2a386fb4af6414f8e4b0737155973deb",
     "semantic_hash": ""
   },
   "docs/tools/tools-unix.md": {
@@ -666,9 +666,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/the-printer.acceptance.test.ts": {
-    "mtime": 1789883335.1483297,
-    "seen": 1789895447.255114,
-    "ast_hash": "17e3580aa0adf43ca25ca0e3282c57eb",
+    "mtime": 1789903420.009599,
+    "seen": 1789904200.500318,
+    "ast_hash": "53db5e4b0de4ec074df2dae1cb1578e2",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/service-unavailable.ts": {
