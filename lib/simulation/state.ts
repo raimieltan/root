@@ -3,6 +3,7 @@ import { alertsFromEvents, parseMetadata, suspicionFromEvents } from "./rules";
 import { getDefinitionForScenario } from "./initializer";
 import { operationPresentation } from "./scenarios";
 import { businessAvailability } from "./availability";
+import { deriveHintGuidance, isActorStuck } from "./guidance";
 
 export async function getScenarioView(scenarioId: string, actorId: string) {
   const scenario = await prisma.scenario.findUnique({
@@ -120,6 +121,8 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     .filter((event) => event.action === "FACT_DISCOVERED")
     .map((event) => ({ event, metadata: parseMetadata(event.metadata) }));
   const discoveredFactIds = new Set(factEvents.map(({ metadata }) => metadata.factId).filter((id): id is string => typeof id === "string"));
+  const hints = deriveHintGuidance(definition.objectives, scenario.events, discoveredFactIds, completedObjectiveIds);
+  const stuck = isActorStuck(scenario.events, actor.id, scenario.startedAt ?? scenario.createdAt);
   const knownFacts = (definition.facts ?? []).filter((fact) => fact.knownAtStart || discoveredFactIds.has(fact.id));
   const unknownFacts = [...new Set((definition.facts ?? []).filter((fact) => !fact.knownAtStart && !discoveredFactIds.has(fact.id)).map((fact) => fact.unknown))];
   const latestFactEvent = factEvents.at(-1);
@@ -192,6 +195,8 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     guidance: {
       objective: definition.objectiveSummary ?? definition.objectives[0]?.label ?? "Complete the objective",
       objectives: definition.objectives.map((objective) => ({ id: objective.id, label: objective.label, completed: completedObjectiveIds.has(objective.id) })),
+      hints,
+      stuck,
       knowledge: {
         known: knownFacts.map((fact) => ({ id: fact.id, category: fact.category, value: fact.known })),
         unknown: unknownFacts.slice(0, 6),

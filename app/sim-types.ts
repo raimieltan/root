@@ -35,6 +35,8 @@ export type ScenarioView = {
   guidance: {
     objective: string;
     objectives: Array<{ id: string; label: string; completed: boolean }>;
+    hints: Array<{ objectiveId: string; unlockedTier: number; revealedText: string[]; nextAvailable: boolean }>;
+    stuck: boolean;
     knowledge: {
       known: Array<{ id: string; category: string; value: string }>;
       unknown: string[];
