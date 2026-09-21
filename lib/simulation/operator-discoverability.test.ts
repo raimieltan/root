@@ -54,6 +54,19 @@ describe("OperatorKnowledgeLedger", () => {
     assert.equal(ledger.authorize("Bridge-Access-9", state).allowed, true);
   });
 
+  it("learns only credentials explicitly revealed through the player credential workflow", () => {
+    const definition = getScenarioDefinition("glasshouse");
+    const ledger = OperatorKnowledgeLedger.fromScenario(definition);
+    const state = stateFor(definition.id);
+
+    assert.equal(ledger.authorize("ssh fieldops@VPN-01", state).allowed, false);
+    ledger.observeCredential({ username: "fieldops", scope: "VPN-01", secret: "FieldOps-ReadOnly" });
+    assert.equal(ledger.authorize("ssh fieldops@VPN-01", state).allowed, true);
+
+    state.context = { type: "AUTHENTICATING", serviceName: "ssh", username: "fieldops", host: "VPN-01" };
+    assert.equal(ledger.authorize("FieldOps-ReadOnly", state).allowed, true);
+  });
+
   it("requires HTTP routes, form fields, and values to be observed", () => {
     const definition = getScenarioDefinition("the-new-server");
     const ledger = OperatorKnowledgeLedger.fromScenario(definition);

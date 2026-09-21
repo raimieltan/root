@@ -69,6 +69,7 @@ describe("Canonical campaign", { concurrency: false }, () => {
             state.currentSessionId = result.newSession.id;
             state.context = result.context;
           }
+          if (result.currentPath) state.currentPath = result.currentPath;
         }
         const events = await prisma.securityEvent.findMany({ where: { scenarioId: initialized.scenarioId, actorId: initialized.actorId } });
         const actions = new Set(events.map((event) => event.action));
@@ -106,6 +107,7 @@ describe("Canonical campaign", { concurrency: false }, () => {
           const result = await engine.executeCommand(command, state);
           assert.equal(result.success, true, `${command}: ${result.output}`);
           if (result.newSession) { state.currentMachine = result.newSession.machineId; state.currentUser = result.newSession.userId; state.currentPrivilege = result.newSession.privilege; state.currentSessionId = result.newSession.id; state.context = result.context; }
+          if (result.currentPath) state.currentPath = result.currentPath;
         }
         const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: run.scenarioId }, include: { events: { include: { sourceMachine: true, targetMachine: true }, orderBy: { timestamp: "asc" } } } });
         assert.equal(scenario.state, "COMPLETED");

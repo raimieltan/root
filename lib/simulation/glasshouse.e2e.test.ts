@@ -39,14 +39,20 @@ const routes = {
     "curl portal.meridian.test/api/profile",
     "ssh fieldops@VPN-01",
     "FieldOps-ReadOnly",
-    "ls -l /",
+    "ls /etc",
+    "ls /etc/vpn",
     "cat /etc/vpn/backup-peers.conf",
     "ssh backup_svc@BACKUP-01",
     "BackupTransit-6f0a",
-    "ls -l /",
+    "ls /etc",
+    "ls /etc/backup",
     "cat /etc/backup/finance-db.conf",
-    "psql -h FIN-DB -U db_backup -d finance",
+    "psql -h FIN-DB -U db_backup",
     "AtlasBackup-91d2",
+    "\\l",
+    "\\c finance",
+    "\\dt",
+    "\\d documents",
     "SELECT filename, classification FROM documents;",
   ],
   organicDiscovery: [
@@ -123,7 +129,15 @@ async function runRoute(commands: string[], enforceDiscoverability = false) {
       const stateBefore = { ...state };
       const result = await engine.executeCommand(command, state);
       assert.equal(result.success, true, `${command}: ${result.output}`);
-      if (enforceDiscoverability) ledger.record(command, stateBefore, result);
+      if (enforceDiscoverability) {
+        ledger.record(command, stateBefore, result);
+        const credentials = await prisma.credential.findMany({ where: { scenarioId: initialized.scenarioId, valid: true } });
+        for (const credential of credentials) ledger.observeCredential({
+          username: credential.username,
+          scope: credential.knownScope,
+          secret: credential.secret,
+        });
+      }
       transcript.push({ command, output: result.output });
       if (result.newSession) {
         state.currentMachine = result.newSession.machineId;
@@ -131,6 +145,7 @@ async function runRoute(commands: string[], enforceDiscoverability = false) {
         state.currentPrivilege = result.newSession.privilege;
         state.currentSessionId = result.newSession.id;
         state.context = result.context;
+        state.currentPath = "/";
       }
       if (result.currentPath) state.currentPath = result.currentPath;
     }
@@ -215,7 +230,7 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
   });
 
   it("retrieves the same objective through VPN and backup trust with different evidence", async () => {
-    const result = await runRoute(routes.backup);
+    const result = await runRoute(routes.backup, true);
     const detections = result.events.filter((event) => event.action === "DETECTION_TRIGGERED").map((event) => event.metadata.ruleId);
 
     assert.equal(result.state, "COMPLETED");

@@ -550,6 +550,12 @@ Includes:
 
 No step-by-step answers.
 
+### Operator discoverability contract
+
+Every player-facing route must be completable without source-code knowledge, AI-profile knowledge, or guessed simulator constants. Required hosts, identities, secrets, paths, HTTP routes, form fields and values, database names, tables, and columns must be available from the briefing, starting state, player-visible interfaces, or evidence produced by prior valid actions.
+
+Automated route validation must keep player paths separate from autonomous Red/Blue scripts and reject commands that consume facts the player has not yet observed. Credentials deliberately exposed through the Credentials app count as player-visible evidence after reveal. Every declared campaign route must have player-validation coverage, including alternate and backup routes.
+
 **## Real Terminal / Black Box Mode**
 
 Advanced mode.

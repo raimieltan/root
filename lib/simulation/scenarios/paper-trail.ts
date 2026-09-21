@@ -31,7 +31,7 @@ export const paperTrail: ScenarioDefinition = {
     link("FILING-01", "RECORDS-01", 22),
   ],
   discoveries: [
-    { trigger: { kind: "web", host: "GRANT-WEB", value: "grants.aster.test" }, output: "Aster Civic Grants\nVendor reconciliation: lena@VENDOR-01 / AsterRecon-41\nPublic export worker enabled for filing review.", hosts: ["VENDOR-01"], credentials: [{ username: "lena", scope: "VENDOR-01" }] },
+    { trigger: { kind: "web", host: "GRANT-WEB", value: "grants.aster.test" }, output: "Aster Civic Grants\nVendor reconciliation: lena@VENDOR-01 / AsterRecon-41\nExport form: POST /exports/jobs with format=award.", hosts: ["VENDOR-01"], credentials: [{ username: "lena", scope: "VENDOR-01" }] },
     discover("VENDOR-01", "/home/lena/reconciliation.txt", "RECORDS-01", "records_svc"),
     discover("GRANT-WEB", "/etc/aster/export.conf", "RECORDS-01", "records_svc"),
   ],
@@ -48,8 +48,8 @@ export const paperTrail: ScenarioDefinition = {
     route("vendor-reconciliation", "Vendor reconciliation", ["INTERNET", "VENDOR-01", "RECORDS-01"], "A legitimate vendor identity receives a read-only records service credential during reconciliation. The authorization becomes dangerous when its source and purpose diverge.", "Can a valid vendor reconciliation relationship reach records outside its intended business purpose?", false),
   ],
   blueProfiles: [
-    { id: "public-export", routeId: "public-export", commands: ["nmap GRANT-WEB", "curl -X POST grants.aster.test/exports/jobs --data format=award", "cat /etc/aster/export.conf", "ssh records_svc@RECORDS-01", "retrieve AWARD_ROSTER.csv"] },
-    { id: "vendor-reconciliation", routeId: "vendor-reconciliation", commands: ["curl grants.aster.test", "ssh lena@VENDOR-01", "cat /home/lena/reconciliation.txt", "ssh records_svc@RECORDS-01", "retrieve AWARD_ROSTER.csv"] },
+    { id: "public-export", routeId: "public-export", commands: ["nmap GRANT-WEB", "curl -X POST grants.aster.test/exports/jobs --data format=award", "cat /etc/aster/export.conf", "ssh records_svc@RECORDS-01", "retrieve /srv/awards/AWARD_ROSTER.csv"] },
+    { id: "vendor-reconciliation", routeId: "vendor-reconciliation", commands: ["curl grants.aster.test", "ssh lena@VENDOR-01", "cat /home/lena/reconciliation.txt", "ssh records_svc@RECORDS-01", "retrieve /srv/awards/AWARD_ROSTER.csv"] },
   ],
   defaultBlueProfile: "vendor-reconciliation",
   securityControls: [{ host: "GRANT-WEB", telemetry: ["WEB", "NETWORK", "PROCESS", "AUTH"] }, { host: "VENDOR-01", telemetry: ["AUTH", "NETWORK"] }, { host: "RECORDS-01", telemetry: ["AUTH", "FILESYSTEM"] }],

@@ -2,6 +2,7 @@ import type { ScenarioDefinition } from "./scenarios";
 import type { CommandResult, TerminalState } from "./types";
 
 export type OperatorAuthorization = { allowed: boolean; unknown: string[] };
+export type OperatorVisibleCredential = { username: string; scope: string; secret?: string | null };
 
 const STANDARD_DIRECTORIES = new Set(["/", "/etc", "/home", "/opt", "/tmp", "/usr", "/var"]);
 const UNQUOTED = /^["']|["']$/g;
@@ -58,6 +59,17 @@ export class OperatorKnowledgeLedger {
     const ledger = new OperatorKnowledgeLedger(seed);
     if (startingSession?.path) ledger.observePath(startingSession.host, startingSession.path);
     return ledger;
+  }
+
+  observeCredential(credential: OperatorVisibleCredential) {
+    const observation = [
+      `${credential.username}@${credential.scope}`,
+      credential.username,
+      credential.scope,
+      credential.secret ?? "",
+    ].filter(Boolean).join("\n").toLowerCase();
+    this.observations.push(observation);
+    this.runtimeObservations.push(observation);
   }
 
   authorize(command: string, state: TerminalState): OperatorAuthorization {
