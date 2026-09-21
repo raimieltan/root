@@ -111,6 +111,15 @@ Applied local Prisma migrations:
 - Added acceptance coverage: `website-down.acceptance.test.ts` now asserts the DNS answer section and that completion requires the `dig` step; a new `lib/simulation/intel.test.ts` drives Glasshouse's application route through the engine and asserts `view.intel` populates HOSTS/CREDENTIALS/NETWORKS/RELATIONSHIPS from that activity alone.
 - Re-validated: `yarn tsc --noEmit`, `yarn test` (76 tests; the 2 failures are pre-existing on `main`, unrelated to this slice — confirmed via `git stash`), and `yarn build` all pass.
 
+### 12. Operator discoverability gate and realistic filesystem navigation
+
+- Replaced string-concatenation working directories with normalized simulated paths supporting absolute and relative navigation, `.`, `..`, `~`, and home-directory defaults. File commands now resolve against the working directory, `ls` exposes immediate children instead of recursively leaking the filesystem, and invalid `cd` targets fail without changing state.
+- Added `OperatorKnowledgeLedger`, which distinguishes mission-visible starting knowledge from evidence observed at runtime. Operator acceptance paths must learn scenario-specific hosts, identities, credentials, paths, HTTP routes/form data, and database identifiers before using them.
+- Applied the no-oracle gate to Act 0, Act I, and Glasshouse's organic route. The audit replaced hidden absolute-path assumptions with directory traversal and exposed one missing New Server clue, now published in its provisioning ticket.
+- Glasshouse's organic path now uses the IP addresses actually printed by configuration evidence instead of silently substituting internal symbolic hostnames.
+- Scenario validation now rejects non-starting facts and fact objectives with no declared discovery source.
+- Remaining adoption scope: extend the executable no-oracle gate across Acts II–V before treating the full campaign as organically discoverable.
+
 ## Canonical roadmap alignment
 
 The realistic interaction architecture is established, and new tools and scenario services must continue to satisfy the adapter/service contract tests. This does **not** move ROOT directly to Multiplayer Alpha.

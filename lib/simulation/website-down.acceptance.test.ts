@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "./engine";
 import { deleteScenario, initializeScenario } from "./initializer";
+import { OperatorKnowledgeLedger } from "./operator-discoverability";
 import { getScenarioDefinition } from "./scenarios";
 import { getScenarioView } from "./state";
 import type { TerminalState } from "./types";
@@ -24,9 +25,14 @@ describe("Act I Where Did the Website Go?", { concurrency: false }, () => {
     try {
       const state: TerminalState = { ...initialized.startingState, activeSessions: [], credentials: new Map(), context: { type: "UNIX" } };
       const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+      const ledger = OperatorKnowledgeLedger.fromScenario(getScenarioDefinition("website-down"));
       const run = async (command: string, expectSuccess = true) => {
+        const authorization = ledger.authorize(command, state);
+        assert.equal(authorization.allowed, true, `${command}: unknown operator knowledge: ${authorization.unknown.join(", ")}`);
+        const stateBefore = { ...state };
         const result = await engine.executeCommand(command, state);
         assert.equal(result.success, expectSuccess, `${command}: ${result.output}`);
+        ledger.record(command, stateBefore, result);
         applyResult(state, result);
         return result.output;
       };
@@ -35,6 +41,7 @@ describe("Act I Where Did the Website Go?", { concurrency: false }, () => {
       await run("whoami");
       await run("id");
       await run("env");
+      await run("ls");
       await run("cat TICKET-5102.txt");
 
       // Query the DNS record directly rather than assuming what the hostname resolves to.

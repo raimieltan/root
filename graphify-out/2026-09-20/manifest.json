@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/engine.ts": {
-    "mtime": 1789883366.7588267,
-    "seen": 1789895447.251925,
-    "ast_hash": "5d7bcf6d4e6cf9613b6fea7bdb43a4e7",
+    "mtime": 1789903419.8601167,
+    "seen": 1789904200.497194,
+    "ast_hash": "d1da19be26f5eb54abdfc9fea8d34593",
     "semantic_hash": ""
   },
   "lib/simulation/initializer.ts": {
@@ -282,9 +282,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/glasshouse.e2e.test.ts": {
-    "mtime": 1789745424.5350637,
-    "seen": 1789745463.382945,
-    "ast_hash": "8938d087dcb5b447a95c54e86bfc4d8c",
+    "mtime": 1789906162.7229247,
+    "seen": 1789906488.9714172,
+    "ast_hash": "66745bac1c14d8edd3b97c06cfaac54a",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/glasshouse.ts": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/validate.ts": {
-    "mtime": 1789883367.377829,
-    "seen": 1789895447.2548192,
-    "ast_hash": "1f9ece8adccfcb1589f25041c2a2bef8",
+    "mtime": 1789906312.1416426,
+    "seen": 1789906488.972074,
+    "ast_hash": "6c4f1a189f343766dc1565c61dd14ab9",
     "semantic_hash": ""
   },
   "playwright.config.ts": {
@@ -474,9 +474,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/tools.ts": {
-    "mtime": 1789883367.0070314,
-    "seen": 1789895447.255198,
-    "ast_hash": "8ec53985251c7d56ec129964d3ea606e",
+    "mtime": 1789903378.3542027,
+    "seen": 1789904200.500373,
+    "ast_hash": "2a386fb4af6414f8e4b0737155973deb",
     "semantic_hash": ""
   },
   "docs/tools/tools-unix.md": {
@@ -498,9 +498,9 @@
     "semantic_hash": ""
   },
   "docs/REALISTIC_INTERACTION_PROGRESS.md": {
-    "mtime": 1789837966.512965,
-    "seen": 1789837973.5061288,
-    "ast_hash": "4f5de08295508c887fbaced88ee52d72",
+    "mtime": 1789906321.9620025,
+    "seen": 1789906488.9724958,
+    "ast_hash": "6ba2ca87116d00bd1ed6db3e56e99137",
     "semantic_hash": ""
   },
   "app/ui/root-os.tsx": {
@@ -636,15 +636,15 @@
     "semantic_hash": ""
   },
   "lib/simulation/first-shift.acceptance.test.ts": {
-    "mtime": 1789784869.38209,
-    "seen": 1789788951.6480598,
-    "ast_hash": "21193c9cec04516da3da45badd194e4c",
+    "mtime": 1789905990.9924653,
+    "seen": 1789906488.971414,
+    "ast_hash": "018297c32f55effbbf311c56b900c014",
     "semantic_hash": ""
   },
   "lib/simulation/locked-out.acceptance.test.ts": {
-    "mtime": 1789788770.61564,
-    "seen": 1789788951.648234,
-    "ast_hash": "28d68a6c16e47e5b358341a5d431e66d",
+    "mtime": 1789905071.348714,
+    "seen": 1789906488.9715729,
+    "ast_hash": "9356eca0af4a66696be89f9fcafd517b",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/first-shift.ts": {
@@ -666,9 +666,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/the-printer.acceptance.test.ts": {
-    "mtime": 1789883335.1483297,
-    "seen": 1789895447.255114,
-    "ast_hash": "17e3580aa0adf43ca25ca0e3282c57eb",
+    "mtime": 1789905071.2179193,
+    "seen": 1789906488.972152,
+    "ast_hash": "276819eccb1ddd2e3a06034355984b4c",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/service-unavailable.ts": {
@@ -678,9 +678,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/the-new-server.ts": {
-    "mtime": 1789873311.317854,
-    "seen": 1789882206.675987,
-    "ast_hash": "29e0573f1e352690994a5e6cb4ef496d",
+    "mtime": 1789905071.8565905,
+    "seen": 1789906488.972019,
+    "ast_hash": "97ba689864a0482ad32db3ad2ce994e4",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/website-down.ts": {
@@ -696,27 +696,27 @@
     "semantic_hash": ""
   },
   "lib/simulation/service-unavailable.acceptance.test.ts": {
-    "mtime": 1789790225.3674643,
-    "seen": 1789790390.9190772,
-    "ast_hash": "e02948f94471fb1f8212464a15c74355",
+    "mtime": 1789905071.4524136,
+    "seen": 1789906488.9721248,
+    "ast_hash": "ce4b377fe108510af98015cea58f981a",
     "semantic_hash": ""
   },
   "lib/simulation/the-new-server.acceptance.test.ts": {
-    "mtime": 1789858197.7340345,
-    "seen": 1789861814.750201,
-    "ast_hash": "ccf6a7d534a5abf0b1bcb2e7a49a1520",
+    "mtime": 1789905071.7003136,
+    "seen": 1789906488.972151,
+    "ast_hash": "d4d946c004cc0dd06b7017f8c5bd66c7",
     "semantic_hash": ""
   },
   "lib/simulation/website-down.acceptance.test.ts": {
-    "mtime": 1789837639.9904635,
-    "seen": 1789837774.936883,
-    "ast_hash": "d933ced1d5329e9159951ee32681bf8b",
+    "mtime": 1789904903.7258418,
+    "seen": 1789906488.972225,
+    "ast_hash": "d4e88794390f849876ed9c4d0e5f79d1",
     "semantic_hash": ""
   },
   "lib/simulation/wrong-network.acceptance.test.ts": {
-    "mtime": 1789790234.86394,
-    "seen": 1789790390.919276,
-    "ast_hash": "b992f0697334586cb6c81a34fdbe26fb",
+    "mtime": 1789905071.553582,
+    "seen": 1789906488.9722261,
+    "ast_hash": "eb6deba0f4e3ec1fc533c43c87d46056",
     "semantic_hash": ""
   },
   "lib/simulation/intel.test.ts": {
@@ -777,6 +777,24 @@
     "mtime": 1789872512.9110286,
     "seen": 1789882206.68099,
     "ast_hash": "4e28fd0110efe9c02736aed5a914648d",
+    "semantic_hash": ""
+  },
+  "lib/simulation/operator-discoverability.test.ts": {
+    "mtime": 1789904827.4763033,
+    "seen": 1789906488.971599,
+    "ast_hash": "9e32379d77e2ee1f6f8d52591b705764",
+    "semantic_hash": ""
+  },
+  "lib/simulation/operator-discoverability.ts": {
+    "mtime": 1789906049.61008,
+    "seen": 1789906488.9715998,
+    "ast_hash": "f397b86187be2e818a19e3d84772293b",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-09-20-operator-discoverability-gate.md": {
+    "mtime": 1789904601.7864115,
+    "seen": 1789906488.97265,
+    "ast_hash": "451dad22315eb189e3c580ec54e5ce17",
     "semantic_hash": ""
   }
 }

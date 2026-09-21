@@ -4,6 +4,7 @@ import { AccessLevel, ScenarioMode } from "@/app/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "./engine";
 import { deleteScenario, initializeScenario } from "./initializer";
+import { OperatorKnowledgeLedger } from "./operator-discoverability";
 import { normalizeReplayEvent, summarizeReplay } from "./replay";
 import { advanceAutonomousBlueDefense, respondToAttack } from "./blue";
 import { glasshouse } from "./scenarios";
@@ -17,7 +18,7 @@ const routes = {
     "curl portal.meridian.test",
     "curl --data upload=archive portal.meridian.test/legacy-upload",
     "cat /var/www/meridian/app.conf",
-    "ssh deploy@DEV-01",
+    "ssh deploy@10.20.10.20",
     "MeridianDeploy2024!Secret",
     "id",
     "ls -l /opt/backup/run.sh",
@@ -56,21 +57,23 @@ const routes = {
     "ls -l /",
     "cd /var",
     "ls -l",
-    "cd www/meridian",
+    "cd www",
+    "ls",
+    "cd meridian",
     "ls -l .",
     "less app.conf",
-    "ssh deploy@DEV-01",
+    "ssh deploy@10.20.10.20",
     "MeridianDeploy2024!Secret",
     "ps",
     "grep HOOK /etc/backup-sync.conf",
     "less /etc/backup-sync.conf",
     "backup-sync --run-hook",
     "less /etc/meridian/routes.conf",
-    "ssh svc_web@FIN-APP",
+    "ssh svc_web@10.30.10.20",
     "svc-meridian-2026",
     "ps",
     "less /etc/fin-app/db.conf",
-    "psql -h FIN-DB -U finance_app",
+    "psql -h 10.30.10.21 -U finance_app",
     "FinanceApp2026!Secure",
     "\\l",
     "\\c finance",
@@ -97,7 +100,7 @@ const routes = {
   ],
 };
 
-async function runRoute(commands: string[]) {
+async function runRoute(commands: string[], enforceDiscoverability = false) {
   const initialized = await initializeScenario(ScenarioMode.RED);
   const state: TerminalState = {
     currentMachine: "INTERNET",
@@ -110,10 +113,17 @@ async function runRoute(commands: string[]) {
   };
   try {
     const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+    const ledger = OperatorKnowledgeLedger.fromScenario(glasshouse);
     const transcript: Array<{ command: string; output: string }> = [];
     for (const command of commands) {
+      if (enforceDiscoverability) {
+        const authorization = ledger.authorize(command, state);
+        assert.equal(authorization.allowed, true, `${command}: unknown operator knowledge: ${authorization.unknown.join(", ")}`);
+      }
+      const stateBefore = { ...state };
       const result = await engine.executeCommand(command, state);
       assert.equal(result.success, true, `${command}: ${result.output}`);
+      if (enforceDiscoverability) ledger.record(command, stateBefore, result);
       transcript.push({ command, output: result.output });
       if (result.newSession) {
         state.currentMachine = result.newSession.machineId;
@@ -234,7 +244,7 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
   });
 
   it("completes using only facts discoverable in-game: page source, process command line, and \\l/\\c/\\d", async () => {
-    const result = await runRoute(routes.organicDiscovery);
+    const result = await runRoute(routes.organicDiscovery, true);
     assert.equal(result.state, "COMPLETED");
     assert.equal(result.events.find((event) => event.action === "OBJECTIVE_RETRIEVED")?.metadata.via, "postgres");
     const outputFor = (command: string) => result.transcript.find((entry) => entry.command === command)?.output ?? "";

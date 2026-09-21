@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "./engine";
 import { deleteScenario, initializeScenario } from "./initializer";
+import { OperatorKnowledgeLedger } from "./operator-discoverability";
 import { getScenarioDefinition } from "./scenarios";
 import { getScenarioView } from "./state";
 import type { TerminalState } from "./types";
@@ -31,9 +32,14 @@ describe("Act 0 Locked Out", { concurrency: false }, () => {
     try {
       const state: TerminalState = { ...initialized.startingState, activeSessions: [], credentials: new Map(), context: { type: "UNIX" } };
       const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+      const ledger = OperatorKnowledgeLedger.fromScenario(getScenarioDefinition("locked-out"));
       const run = async (command: string, expectSuccess = true) => {
+        const authorization = ledger.authorize(command, state);
+        assert.equal(authorization.allowed, true, `${command}: unknown operator knowledge: ${authorization.unknown.join(", ")}`);
+        const stateBefore = { ...state };
         const result = await engine.executeCommand(command, state);
         assert.equal(result.success, expectSuccess, `${command}: ${result.output}`);
+        ledger.record(command, stateBefore, result);
         applyResult(state, result);
         return result.output;
       };
@@ -42,7 +48,10 @@ describe("Act 0 Locked Out", { concurrency: false }, () => {
       await run("whoami");
       await run("id");
       await run("env");
-      await run("cat onboarding/ARCHIVE_ACCESS.txt");
+      await run("ls");
+      await run("cd onboarding");
+      await run("ls");
+      await run("cat ARCHIVE_ACCESS.txt");
 
       // Own account has no login on the archive host.
       await run("ssh trainee@ARCHIVE-01", false);
@@ -50,7 +59,8 @@ describe("Act 0 Locked Out", { concurrency: false }, () => {
       // Delegated identity, discovered from the onboarding note.
       await run("ssh archivist@ARCHIVE-01");
       await run("Temp-Pickup-2024");
-      await run("retrieve ONBOARDING_PACKET.txt");
+      const packetPath = (await run("find / -name ONBOARDING_PACKET.txt")).trim();
+      await run(`retrieve ${packetPath}`);
 
       const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: initialized.scenarioId } });
       assert.equal(scenario.state, "COMPLETED");

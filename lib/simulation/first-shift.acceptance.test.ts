@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "./engine";
 import { deleteScenario, initializeScenario } from "./initializer";
+import { OperatorKnowledgeLedger } from "./operator-discoverability";
 import { normalizeReplayEvent, summarizeReplay, visibleToLens, type ReplayLens } from "./replay";
 import { getScenarioDefinition } from "./scenarios";
 import { getScenarioView } from "./state";
@@ -35,9 +36,14 @@ describe("Act 0 First Shift", { concurrency: false }, () => {
     try {
       const state: TerminalState = { ...initialized.startingState, activeSessions: [], credentials: new Map(), context: { type: "UNIX" } };
       const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+      const ledger = OperatorKnowledgeLedger.fromScenario(getScenarioDefinition("first-shift"));
       const run = async (command: string) => {
+        const authorization = ledger.authorize(command, state);
+        assert.equal(authorization.allowed, true, `${command}: unknown operator knowledge: ${authorization.unknown.join(", ")}`);
+        const stateBefore = { ...state };
         const result = await engine.executeCommand(command, state);
         assert.equal(result.success, true, `${command}: ${result.output}`);
+        ledger.record(command, stateBefore, result);
         applyResult(state, result);
         return result.output;
       };
@@ -54,7 +60,7 @@ describe("Act 0 First Shift", { concurrency: false }, () => {
       assert.match(await run("env"), /HOSTNAME=OPS-01/);
       await run(`cd ${handbookPath.slice(0, handbookPath.lastIndexOf("/"))}`);
       assert.match(await run("ls -l"), /640 root:trainees/);
-      assert.match(await run(`cat ${handbookPath.split("/").at(-1)}`), /evidence from untested assumptions/i);
+      assert.match(await run(`cat ${handbookPath.split("/").at(-1)}`), /State conclusions.*assumption/i);
       assert.match(await run("ps"), /nodeline-docs --listen 10\.0\.0\.10:8080/);
 
       const scenario = await prisma.scenario.findUniqueOrThrow({

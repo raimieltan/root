@@ -109,6 +109,7 @@ export const theNewServer: ScenarioDefinition = {
             "",
             "A new client-facing application host was provisioned for tomorrow's launch.",
             "Provisional IP 10.0.0.90 was reassigned to 10.0.0.91 after an address conflict during setup.",
+            "Expected application URL: newapp.nodeline.test.",
             "Verify the address, confirm the host is reachable, confirm it exposes only the expected services, confirm it serves the correct application, and sign off with evidence.",
           ].join("\n"),
         },

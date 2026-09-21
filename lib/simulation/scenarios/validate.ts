@@ -45,6 +45,10 @@ export function validateScenario(definition: ScenarioDefinition) {
   }
   const factIds = definition.facts?.map((fact) => fact.id) ?? [];
   if (new Set(factIds).size !== factIds.length) fail("duplicate fact id");
+  const discoveredFactIds = new Set(definition.discoveries.flatMap((discovery) => discovery.facts ?? []));
+  for (const fact of definition.facts ?? []) {
+    if (!fact.knownAtStart && !discoveredFactIds.has(fact.id)) fail(`fact ${fact.id} has no discovery source`);
+  }
   for (const interaction of definition.webInteractions ?? []) {
     user(interaction.host, interaction.sessionUser);
     if (!host(interaction.host).services.some((service) => ["http", "https"].includes(service.name))) fail(`web interaction has no web service ${interaction.host}`);
@@ -75,7 +79,10 @@ export function validateScenario(definition: ScenarioDefinition) {
       }
     }
     if (objective.type === "retrieve_file" && !host(objective.host).files.some((file) => file.path === objective.path)) fail("objective file absent");
-    if (objective.type === "fact" && !definition.facts?.some((fact) => fact.id === objective.factId)) fail(`objective references unknown fact ${objective.factId}`);
+    if (objective.type === "fact") {
+      const fact = definition.facts?.find((entry) => entry.id === objective.factId) ?? fail(`objective references unknown fact ${objective.factId}`);
+      if (!fact.knownAtStart && !discoveredFactIds.has(fact.id)) fail(`objective fact ${fact.id} has no discovery source`);
+    }
     if (objective.type === "event") {
       if (!objective.event.action) fail("event objective action required");
       if (objective.event.sourceHost) host(objective.event.sourceHost);

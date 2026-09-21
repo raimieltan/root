@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import { prisma } from "@/lib/prisma";
 import { SimulationEngine } from "./engine";
 import { deleteScenario, initializeScenario } from "./initializer";
+import { OperatorKnowledgeLedger } from "./operator-discoverability";
 import { getScenarioDefinition } from "./scenarios";
 import { getScenarioView } from "./state";
 import type { TerminalState } from "./types";
@@ -25,9 +26,14 @@ describe("Act 0 The Printer", { concurrency: false }, () => {
     try {
       const state: TerminalState = { ...initialized.startingState, activeSessions: [], credentials: new Map(), context: { type: "UNIX" } };
       const engine = new SimulationEngine(initialized.scenarioId, initialized.actorId);
+      const ledger = OperatorKnowledgeLedger.fromScenario(getScenarioDefinition("the-printer"));
       const run = async (command: string) => {
+        const authorization = ledger.authorize(command, state);
+        assert.equal(authorization.allowed, true, `${command}: unknown operator knowledge: ${authorization.unknown.join(", ")}`);
+        const stateBefore = { ...state };
         const result = await engine.executeCommand(command, state);
         assert.equal(result.success, true, `${command}: ${result.output}`);
+        ledger.record(command, stateBefore, result);
         applyResult(state, result);
         return result.output;
       };
@@ -36,6 +42,7 @@ describe("Act 0 The Printer", { concurrency: false }, () => {
       assert.equal(await run("pwd"), "/home/trainee");
       await run("cd /var");
       assert.equal(await run("pwd"), "/var");
+      await run("ls");
       await run("cd log");
       assert.equal(await run("pwd"), "/var/log");
       await run("cd ..");
@@ -49,10 +56,17 @@ describe("Act 0 The Printer", { concurrency: false }, () => {
       await run("whoami");
       await run("id");
       await run("env");
+      await run("ls");
       await run("cat TICKET-4471.txt");
       await run("ps");
-      assert.match(await run("grep ERROR /var/log/print-spooler.log"), /permission denied/i);
-      assert.match(await run("ls -l /var/spool/printer"), /770 root:print/);
+      await run("cd /var");
+      await run("ls");
+      await run("cd log");
+      await run("ls");
+      assert.match(await run("grep ERROR print-spooler.log"), /permission denied/i);
+      await run("cd ../spool");
+      await run("ls");
+      assert.match(await run("ls -l printer"), /770 root:print/);
       assert.match(await run("id printsvc"), /uid=\d+\(printsvc\).*groups=printsvc/);
 
       const scenario = await prisma.scenario.findUniqueOrThrow({ where: { id: initialized.scenarioId } });
