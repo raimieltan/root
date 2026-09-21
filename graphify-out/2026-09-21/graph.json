@@ -46,19 +46,6 @@
       "source_location": "L7"
     },
     {
-      "id": "app_red_mission_panel_missionpanelprops",
-      "label": "MissionPanelProps",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "missionpanelprops",
-      "source_file": "app/red/mission-panel.tsx",
-      "source_location": "L6"
-    },
-    {
       "id": "app_red_page_credential",
       "label": "Credential",
       "_callable": true,
@@ -109,162 +96,6 @@
       "norm_label": "terminalstate",
       "source_file": "app/red/terminal.tsx",
       "source_location": "L6"
-    },
-    {
-      "id": "app_sim_types_eventview",
-      "label": "EventView",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "eventview",
-      "source_file": "app/sim-types.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "app_sim_types_machineview",
-      "label": "MachineView",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "machineview",
-      "source_file": "app/sim-types.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_ui_root_chrome_section",
-      "label": "Section",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "section",
-      "source_file": "app/ui/root-chrome.tsx",
-      "source_location": "L10"
-    },
-    {
-      "id": "app_ui_root_chrome_tone",
-      "label": "Tone",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "tone",
-      "source_file": "app/ui/root-chrome.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "lib_audio_audio_system_audiosettings",
-      "label": "AudioSettings",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audiosettings",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "lib_audio_audio_system_audiosnapshot",
-      "label": "AudioSnapshot",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audiosnapshot",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L22"
-    },
-    {
-      "id": "lib_audio_audio_system_listener",
-      "label": "Listener",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "listener",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L47"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem",
-      "label": "RootAudioSystem",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "rootaudiosystem",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L50"
-    },
-    {
-      "id": "lib_audio_catalog_audiocategory",
-      "label": "AudioCategory",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audiocategory",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_audio_catalog_audioeventdefinition",
-      "label": "AudioEventDefinition",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audioeventdefinition",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L34"
-    },
-    {
-      "id": "lib_audio_catalog_audioeventname",
-      "label": "AudioEventName",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audioeventname",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "lib_audio_catalog_tonestep",
-      "label": "ToneStep",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "tonestep",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L27"
     },
     {
       "id": "app_blue_inspector_respondfn",
@@ -358,6 +189,45 @@
       "source_location": "L7"
     },
     {
+      "id": "app_red_mission_panel_missionpanelprops",
+      "label": "MissionPanelProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "missionpanelprops",
+      "source_file": "app/red/mission-panel.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_sim_types_eventview",
+      "label": "EventView",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "eventview",
+      "source_file": "app/sim-types.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "app_sim_types_machineview",
+      "label": "MachineView",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "machineview",
+      "source_file": "app/sim-types.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "app_sim_types_scenarioview",
       "label": "ScenarioView",
       "_callable": true,
@@ -382,6 +252,19 @@
       "norm_label": "responseinput",
       "source_file": "lib/simulation/blue.ts",
       "source_location": "L98"
+    },
+    {
+      "id": "lib_simulation_campaign_operator_routes_test_routecatalog",
+      "label": "RouteCatalog",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "routecatalog",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L11"
     },
     {
       "id": "lib_simulation_engine_eventinput",
@@ -446,33 +329,20 @@
       "file_type": "code",
       "norm_label": "operatorknowledgeledger",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L34"
+      "source_location": "L35"
     },
     {
-      "id": "lib_simulation_replay_replayevent",
-      "label": "ReplayEvent",
+      "id": "lib_simulation_operator_discoverability_operatorvisiblecredential",
+      "label": "OperatorVisibleCredential",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "engine.ts",
       "file_type": "code",
-      "norm_label": "replayevent",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "lib_simulation_replay_replayscenario",
-      "label": "ReplayScenario",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replayscenario",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L20"
+      "norm_label": "operatorvisiblecredential",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L5"
     },
     {
       "id": "lib_simulation_rules_alertview",
@@ -605,39 +475,13 @@
       "source_location": "L11"
     },
     {
-      "id": "app_replay_scenarioid_page_replaypageprops",
-      "label": "ReplayPageProps",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "replaypageprops",
-      "source_file": "app/replay/[scenarioId]/page.tsx",
-      "source_location": "L3"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client_replaypayload",
-      "label": "ReplayPayload",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "replaypayload",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L10"
-    },
-    {
       "id": "lib_campaign_localrun",
       "label": "LocalRun",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "localrun",
       "source_file": "lib/campaign.ts",
@@ -650,7 +494,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "trainingmodule",
       "source_file": "lib/campaign.ts",
@@ -663,63 +507,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "trainingrecord",
       "source_file": "lib/campaign.ts",
       "source_location": "L2"
-    },
-    {
-      "id": "lib_simulation_replay_keydecision",
-      "label": "KeyDecision",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "keydecision",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L56"
-    },
-    {
-      "id": "lib_simulation_replay_replaylens",
-      "label": "ReplayLens",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "replaylens",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "lib_simulation_replay_replaysnapshot",
-      "label": "ReplaySnapshot",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "replaysnapshot",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L26"
-    },
-    {
-      "id": "lib_simulation_replay_replaysummary",
-      "label": "ReplaySummary",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "replaysummary",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L36"
     },
     {
       "id": "lib_simulation_engine_simulationengine",
@@ -1021,6 +813,240 @@
       "source_location": "L10"
     },
     {
+      "id": "lib_simulation_scenarios_types_scenarioobjective",
+      "label": "ScenarioObjective",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "guidance.test.ts",
+      "file_type": "code",
+      "norm_label": "scenarioobjective",
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L70"
+    },
+    {
+      "id": "app_replay_scenarioid_page_replaypageprops",
+      "label": "ReplayPageProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replaypageprops",
+      "source_file": "app/replay/[scenarioId]/page.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client_replaypayload",
+      "label": "ReplayPayload",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replaypayload",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "lib_simulation_replay_keydecision",
+      "label": "KeyDecision",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "keydecision",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L56"
+    },
+    {
+      "id": "lib_simulation_replay_replayevent",
+      "label": "ReplayEvent",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replayevent",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "lib_simulation_replay_replaylens",
+      "label": "ReplayLens",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replaylens",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "lib_simulation_replay_replayscenario",
+      "label": "ReplayScenario",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replayscenario",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "lib_simulation_replay_replaysnapshot",
+      "label": "ReplaySnapshot",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replaysnapshot",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L26"
+    },
+    {
+      "id": "lib_simulation_replay_replaysummary",
+      "label": "ReplaySummary",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replaysummary",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L36"
+    },
+    {
+      "id": "lib_simulation_scenarios_types_routedefinition",
+      "label": "RouteDefinition",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "routedefinition",
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L90"
+    },
+    {
+      "id": "lib_audio_audio_system_audiosettings",
+      "label": "AudioSettings",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audiosettings",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "lib_audio_audio_system_audiosnapshot",
+      "label": "AudioSnapshot",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audiosnapshot",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "lib_audio_audio_system_listener",
+      "label": "Listener",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "listener",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "lib_audio_catalog_audiocategory",
+      "label": "AudioCategory",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audiocategory",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_audio_catalog_audioeventdefinition",
+      "label": "AudioEventDefinition",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audioeventdefinition",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "lib_audio_catalog_tonestep",
+      "label": "ToneStep",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "tonestep",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L27"
+    },
+    {
+      "id": "app_ui_root_chrome_section",
+      "label": "Section",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "section",
+      "source_file": "app/ui/root-chrome.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "app_ui_root_chrome_tone",
+      "label": "Tone",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "tone",
+      "source_file": "app/ui/root-chrome.tsx",
+      "source_location": "L11"
+    },
+    {
       "id": "lib_simulation_scenarios_content_machine",
       "label": "Machine",
       "_callable": true,
@@ -1125,19 +1151,6 @@
       "source_location": "L63"
     },
     {
-      "id": "lib_simulation_scenarios_types_routedefinition",
-      "label": "RouteDefinition",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "index.ts",
-      "file_type": "code",
-      "norm_label": "routedefinition",
-      "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L90"
-    },
-    {
       "id": "lib_simulation_scenarios_types_scenariodefinition",
       "label": "ScenarioDefinition",
       "_callable": true,
@@ -1216,19 +1229,6 @@
       "source_location": "L137"
     },
     {
-      "id": "lib_simulation_scenarios_types_scenarioobjective",
-      "label": "ScenarioObjective",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "index.ts",
-      "file_type": "code",
-      "norm_label": "scenarioobjective",
-      "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L70"
-    },
-    {
       "id": "lib_simulation_scenarios_types_scenarioservicedefinition",
       "label": "ScenarioServiceDefinition",
       "_callable": true,
@@ -1281,6 +1281,32 @@
       "source_location": "L111"
     },
     {
+      "id": "lib_audio_audio_system_rootaudiosystem",
+      "label": "RootAudioSystem",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": "rootaudiosystem",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L50"
+    },
+    {
+      "id": "lib_audio_catalog_audioeventname",
+      "label": "AudioEventName",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": "audioeventname",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L3"
+    },
+    {
       "id": "app_red_browser_browser",
       "label": "Browser()",
       "_callable": true,
@@ -1315,30 +1341,6 @@
       "norm_label": "quote()",
       "source_file": "app/red/browser.tsx",
       "source_location": "L16"
-    },
-    {
-      "id": "app_red_mission_panel_missionpanel",
-      "label": "MissionPanel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "missionpanel()",
-      "source_file": "app/red/mission-panel.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "app_red_network_map_networkmap",
-      "label": "NetworkMap()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "networkmap()",
-      "source_file": "app/red/network-map.tsx",
-      "source_location": "L6"
     },
     {
       "id": "app_red_page_credentialspanel",
@@ -1413,66 +1415,6 @@
       "source_location": "L21"
     },
     {
-      "id": "app_ui_audio_control_audiocontrolpanel",
-      "label": "AudioControlPanel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audiocontrolpanel()",
-      "source_file": "app/ui/audio-control.tsx",
-      "source_location": "L24"
-    },
-    {
-      "id": "app_ui_audio_control_audiocontrolpanel_runcheck",
-      "label": "runCheck()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "runcheck()",
-      "source_file": "app/ui/audio-control.tsx",
-      "source_location": "L31"
-    },
-    {
-      "id": "app_ui_audio_control_audiovisualindicator",
-      "label": "AudioVisualIndicator()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audiovisualindicator()",
-      "source_file": "app/ui/audio-control.tsx",
-      "source_location": "L101"
-    },
-    {
-      "id": "app_ui_audio_control_userootaudio",
-      "label": "useRootAudio()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "userootaudio()",
-      "source_file": "app/ui/audio-control.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "app_ui_root_chrome_clock",
-      "label": "Clock()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "clock()",
-      "source_file": "app/ui/root-chrome.tsx",
-      "source_location": "L28"
-    },
-    {
       "id": "app_ui_root_chrome_loginscreen",
       "label": "LoginScreen()",
       "_callable": true,
@@ -1485,30 +1427,6 @@
       "source_location": "L34"
     },
     {
-      "id": "app_ui_root_chrome_rootchrome",
-      "label": "RootChrome()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "rootchrome()",
-      "source_file": "app/ui/root-chrome.tsx",
-      "source_location": "L52"
-    },
-    {
-      "id": "app_ui_root_os_rootwindow",
-      "label": "RootWindow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "rootwindow()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L5"
-    },
-    {
       "id": "lib_audio_audio_system_playaudio",
       "label": "playAudio()",
       "_callable": true,
@@ -1519,126 +1437,6 @@
       "norm_label": "playaudio()",
       "source_file": "lib/audio/audio-system.ts",
       "source_location": "L160"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_emit",
-      "label": ".emit()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".emit()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L156"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_getserversnapshot",
-      "label": ".getServerSnapshot()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".getserversnapshot()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L58"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_getsnapshot",
-      "label": ".getSnapshot()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".getsnapshot()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L57"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_hydrate",
-      "label": ".hydrate()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".hydrate()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L61"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_play",
-      "label": ".play()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".play()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L96"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_setsetting",
-      "label": ".setSetting()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".setsetting()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L88"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_stopambience",
-      "label": ".stopAmbience()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".stopambience()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L151"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_subscribe",
-      "label": ".subscribe()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".subscribe()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L59"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_syncambience",
-      "label": ".syncAmbience()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".syncambience()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L133"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudiosystem_unlock",
-      "label": ".unlock()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": ".unlock()",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L70"
     },
     {
       "id": "app_blue_inspector_alertinspector",
@@ -2085,6 +1883,30 @@
       "source_location": "L39"
     },
     {
+      "id": "app_red_mission_panel_missionpanel",
+      "label": "MissionPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "missionpanel()",
+      "source_file": "app/red/mission-panel.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "app_red_network_map_networkmap",
+      "label": "NetworkMap()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "networkmap()",
+      "source_file": "app/red/network-map.tsx",
+      "source_location": "L6"
+    },
+    {
       "id": "lib_audio_catalog_alerteventforseverity",
       "label": "alertEventForSeverity()",
       "_callable": true,
@@ -2253,6 +2075,54 @@
       "source_location": "L100"
     },
     {
+      "id": "lib_simulation_campaign_operator_routes_test_endpointroute",
+      "label": "endpointRoute()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "endpointroute()",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "lib_simulation_campaign_operator_routes_test_identityroute",
+      "label": "identityRoute()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "identityroute()",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L40"
+    },
+    {
+      "id": "lib_simulation_campaign_operator_routes_test_revealplayercredentials",
+      "label": "revealPlayerCredentials()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "revealplayercredentials()",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L122"
+    },
+    {
+      "id": "lib_simulation_campaign_operator_routes_test_updatestate",
+      "label": "updateState()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "updatestate()",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L107"
+    },
+    {
       "id": "lib_simulation_first_shift_acceptance_test_applyresult",
       "label": "applyResult()",
       "_callable": true,
@@ -2274,7 +2144,7 @@
       "file_type": "code",
       "norm_label": "runroute()",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L103"
+      "source_location": "L109"
     },
     {
       "id": "lib_simulation_hints_hintrequesterror_constructor",
@@ -2373,42 +2243,6 @@
       "source_location": "L11"
     },
     {
-      "id": "lib_simulation_operator_discoverability_commandparts",
-      "label": "commandParts()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "commandparts()",
-      "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "lib_simulation_operator_discoverability_normalizedpath",
-      "label": "normalizedPath()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "normalizedpath()",
-      "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L13"
-    },
-    {
-      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_authorize",
-      "label": ".authorize()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": ".authorize()",
-      "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L63"
-    },
-    {
       "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_constructor",
       "label": ".constructor()",
       "_callable": true,
@@ -2418,7 +2252,7 @@
       "file_type": "code",
       "norm_label": ".constructor()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L39"
+      "source_location": "L40"
     },
     {
       "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_fromscenario",
@@ -2430,19 +2264,19 @@
       "file_type": "code",
       "norm_label": ".fromscenario()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L43"
+      "source_location": "L44"
     },
     {
-      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_known",
-      "label": ".known()",
+      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_observecredential",
+      "label": ".observeCredential()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "engine.ts",
       "file_type": "code",
-      "norm_label": ".known()",
+      "norm_label": ".observecredential()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L145"
+      "source_location": "L64"
     },
     {
       "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_observepath",
@@ -2454,7 +2288,7 @@
       "file_type": "code",
       "norm_label": ".observepath()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L164"
+      "source_location": "L176"
     },
     {
       "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_pathkey",
@@ -2466,43 +2300,7 @@
       "file_type": "code",
       "norm_label": ".pathkey()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L168"
-    },
-    {
-      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_pathknown",
-      "label": ".pathKnown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": ".pathknown()",
-      "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L151"
-    },
-    {
-      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_record",
-      "label": ".record()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": ".record()",
-      "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L124"
-    },
-    {
-      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_resultfor",
-      "label": ".resultFor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": ".resultfor()",
-      "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L159"
+      "source_location": "L180"
     },
     {
       "id": "lib_simulation_operator_discoverability_test_failed",
@@ -2539,18 +2337,6 @@
       "norm_label": "successful()",
       "source_file": "lib/simulation/operator-discoverability.test.ts",
       "source_location": "L8"
-    },
-    {
-      "id": "lib_simulation_operator_discoverability_urlparts",
-      "label": "urlParts()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "urlparts()",
-      "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L26"
     },
     {
       "id": "lib_simulation_replay_attackpathfromevents",
@@ -2611,30 +2397,6 @@
       "norm_label": "summarizereplay()",
       "source_file": "lib/simulation/replay.ts",
       "source_location": "L138"
-    },
-    {
-      "id": "lib_simulation_replay_test_at",
-      "label": "at()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "at()",
-      "source_file": "lib/simulation/replay.test.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "lib_simulation_replay_test_event",
-      "label": "event()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "event()",
-      "source_file": "lib/simulation/replay.test.ts",
-      "source_location": "L7"
     },
     {
       "id": "lib_simulation_rules_alertsfromevents",
@@ -2769,24 +2531,12 @@
       "source_location": "L11"
     },
     {
-      "id": "app_api_operations_route_get",
-      "label": "GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "app/api/operations/route.ts",
-      "source_location": "L2"
-    },
-    {
       "id": "app_career_page_careerpage",
       "label": "CareerPage()",
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "careerpage()",
       "source_file": "app/career/page.tsx",
@@ -2798,23 +2548,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "completeexercise()",
       "source_file": "app/career/page.tsx",
       "source_location": "L32"
-    },
-    {
-      "id": "app_layout_rootlayout",
-      "label": "RootLayout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "rootlayout()",
-      "source_file": "app/layout.tsx",
-      "source_location": "L21"
     },
     {
       "id": "app_page_engagementid",
@@ -2822,7 +2560,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "engagementid()",
       "source_file": "app/page.tsx",
@@ -2834,131 +2572,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "home()",
       "source_file": "app/page.tsx",
       "source_location": "L13"
-    },
-    {
-      "id": "app_replay_scenarioid_page_replaypage",
-      "label": "ReplayPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "replaypage()",
-      "source_file": "app/replay/[scenarioId]/page.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client_formatelapsed",
-      "label": "formatElapsed()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "formatelapsed()",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L27"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client_replayclient",
-      "label": "ReplayClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "replayclient()",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L36"
-    },
-    {
-      "id": "app_ui_root_os_rootbutton",
-      "label": "RootButton()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "rootbutton()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L49"
-    },
-    {
-      "id": "app_ui_root_os_rootempty",
-      "label": "RootEmpty()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "rootempty()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L86"
-    },
-    {
-      "id": "app_ui_root_os_rootinput",
-      "label": "RootInput()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "rootinput()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L53"
-    },
-    {
-      "id": "app_ui_root_os_rootmenubar",
-      "label": "RootMenuBar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "rootmenubar()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L35"
-    },
-    {
-      "id": "app_ui_root_os_rootpane",
-      "label": "RootPane()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "rootpane()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L67"
-    },
-    {
-      "id": "app_ui_root_os_rootselect",
-      "label": "RootSelect()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "rootselect()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L57"
-    },
-    {
-      "id": "app_ui_root_os_rootstatusbar",
-      "label": "RootStatusBar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "rootstatusbar()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L45"
     },
     {
       "id": "app_ui_root_os_roottable",
@@ -2966,7 +2584,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "roottable()",
       "source_file": "app/ui/root-os.tsx",
@@ -2978,35 +2596,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "roottabs()",
       "source_file": "app/ui/root-os.tsx",
       "source_location": "L61"
-    },
-    {
-      "id": "app_ui_root_os_roottitlebar",
-      "label": "RootTitleBar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "roottitlebar()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L23"
-    },
-    {
-      "id": "app_ui_root_os_roottoolbar",
-      "label": "RootToolbar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "roottoolbar()",
-      "source_file": "app/ui/root-os.tsx",
-      "source_location": "L41"
     },
     {
       "id": "app_ui_root_os_roottree",
@@ -3014,7 +2608,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "roottree()",
       "source_file": "app/ui/root-os.tsx",
@@ -3026,7 +2620,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "useoperation()",
       "source_file": "app/use-operation.ts",
@@ -3038,7 +2632,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "campaignprogress()",
       "source_file": "lib/campaign.ts",
@@ -3050,7 +2644,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "readruns()",
       "source_file": "lib/campaign.ts",
@@ -3062,7 +2656,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "readtraining()",
       "source_file": "lib/campaign.ts",
@@ -3074,7 +2668,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "saverun()",
       "source_file": "lib/campaign.ts",
@@ -3086,47 +2680,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "savetraining()",
       "source_file": "lib/campaign.ts",
       "source_location": "L60"
-    },
-    {
-      "id": "lib_simulation_replay_snapshotat",
-      "label": "snapshotAt()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "snapshotat()",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L67"
-    },
-    {
-      "id": "lib_simulation_replay_visibletolens",
-      "label": "visibleToLens()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "visibletolens()",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L63"
-    },
-    {
-      "id": "tests_browser_campaign_spec_step",
-      "label": "step()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "step()",
-      "source_file": "tests/browser/campaign.spec.ts",
-      "source_location": "L77"
     },
     {
       "id": "lib_simulation_engine_simulationengine_applydiscovery",
@@ -3609,6 +3167,102 @@
       "source_location": "L3"
     },
     {
+      "id": "lib_simulation_operator_discoverability_commandparts",
+      "label": "commandParts()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "SimulationEngine",
+      "file_type": "code",
+      "norm_label": "commandparts()",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "lib_simulation_operator_discoverability_normalizedpath",
+      "label": "normalizedPath()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "SimulationEngine",
+      "file_type": "code",
+      "norm_label": "normalizedpath()",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L14"
+    },
+    {
+      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_authorize",
+      "label": ".authorize()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "SimulationEngine",
+      "file_type": "code",
+      "norm_label": ".authorize()",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L75"
+    },
+    {
+      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_known",
+      "label": ".known()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "SimulationEngine",
+      "file_type": "code",
+      "norm_label": ".known()",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L157"
+    },
+    {
+      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_pathknown",
+      "label": ".pathKnown()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "SimulationEngine",
+      "file_type": "code",
+      "norm_label": ".pathknown()",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L163"
+    },
+    {
+      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_record",
+      "label": ".record()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "SimulationEngine",
+      "file_type": "code",
+      "norm_label": ".record()",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L136"
+    },
+    {
+      "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_resultfor",
+      "label": ".resultFor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "SimulationEngine",
+      "file_type": "code",
+      "norm_label": ".resultfor()",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L171"
+    },
+    {
+      "id": "lib_simulation_operator_discoverability_urlparts",
+      "label": "urlParts()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "SimulationEngine",
+      "file_type": "code",
+      "norm_label": "urlparts()",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L27"
+    },
+    {
       "id": "lib_simulation_tool_adapters_test_result",
       "label": "result()",
       "_callable": true,
@@ -3873,6 +3527,306 @@
       "source_location": "L19"
     },
     {
+      "id": "app_replay_scenarioid_page_replaypage",
+      "label": "ReplayPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replaypage()",
+      "source_file": "app/replay/[scenarioId]/page.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client_formatelapsed",
+      "label": "formatElapsed()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "formatelapsed()",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L27"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client_replayclient",
+      "label": "ReplayClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replayclient()",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L36"
+    },
+    {
+      "id": "lib_simulation_replay_snapshotat",
+      "label": "snapshotAt()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "snapshotat()",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L67"
+    },
+    {
+      "id": "lib_simulation_replay_test_at",
+      "label": "at()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "at()",
+      "source_file": "lib/simulation/replay.test.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "lib_simulation_replay_test_event",
+      "label": "event()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "event()",
+      "source_file": "lib/simulation/replay.test.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "lib_simulation_replay_visibletolens",
+      "label": "visibleToLens()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "visibletolens()",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L63"
+    },
+    {
+      "id": "app_layout_rootlayout",
+      "label": "RootLayout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "rootlayout()",
+      "source_file": "app/layout.tsx",
+      "source_location": "L21"
+    },
+    {
+      "id": "app_ui_root_os_rootbutton",
+      "label": "RootButton()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "rootbutton()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L49"
+    },
+    {
+      "id": "app_ui_root_os_rootempty",
+      "label": "RootEmpty()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "rootempty()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L86"
+    },
+    {
+      "id": "app_ui_root_os_rootinput",
+      "label": "RootInput()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "rootinput()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L53"
+    },
+    {
+      "id": "app_ui_root_os_rootmenubar",
+      "label": "RootMenuBar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "rootmenubar()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L35"
+    },
+    {
+      "id": "app_ui_root_os_rootpane",
+      "label": "RootPane()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "rootpane()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L67"
+    },
+    {
+      "id": "app_ui_root_os_rootselect",
+      "label": "RootSelect()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "rootselect()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L57"
+    },
+    {
+      "id": "app_ui_root_os_rootstatusbar",
+      "label": "RootStatusBar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "rootstatusbar()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L45"
+    },
+    {
+      "id": "app_ui_root_os_roottitlebar",
+      "label": "RootTitleBar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "roottitlebar()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L23"
+    },
+    {
+      "id": "app_ui_root_os_roottoolbar",
+      "label": "RootToolbar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "roottoolbar()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L41"
+    },
+    {
+      "id": "app_ui_audio_control_audiocontrolpanel",
+      "label": "AudioControlPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "audiocontrolpanel()",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L24"
+    },
+    {
+      "id": "app_ui_audio_control_audiocontrolpanel_runcheck",
+      "label": "runCheck()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "runcheck()",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L31"
+    },
+    {
+      "id": "app_ui_audio_control_audiovisualindicator",
+      "label": "AudioVisualIndicator()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "audiovisualindicator()",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L101"
+    },
+    {
+      "id": "app_ui_audio_control_userootaudio",
+      "label": "useRootAudio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "userootaudio()",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "app_ui_root_chrome_clock",
+      "label": "Clock()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "clock()",
+      "source_file": "app/ui/root-chrome.tsx",
+      "source_location": "L28"
+    },
+    {
+      "id": "app_ui_root_chrome_rootchrome",
+      "label": "RootChrome()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "rootchrome()",
+      "source_file": "app/ui/root-chrome.tsx",
+      "source_location": "L52"
+    },
+    {
+      "id": "app_ui_root_os_rootwindow",
+      "label": "RootWindow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "rootwindow()",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "app_api_operations_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "app/api/operations/route.ts",
+      "source_location": "L2"
+    },
+    {
       "id": "lib_simulation_scenarios_content_discover",
       "label": "discover()",
       "_callable": true,
@@ -4125,6 +4079,138 @@
       "source_location": "L5"
     },
     {
+      "id": "tests_browser_campaign_spec_step",
+      "label": "step()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "step()",
+      "source_file": "tests/browser/campaign.spec.ts",
+      "source_location": "L77"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_emit",
+      "label": ".emit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".emit()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L156"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_getserversnapshot",
+      "label": ".getServerSnapshot()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".getserversnapshot()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L58"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_getsnapshot",
+      "label": ".getSnapshot()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".getsnapshot()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L57"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_hydrate",
+      "label": ".hydrate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".hydrate()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L61"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_play",
+      "label": ".play()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".play()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L96"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_setsetting",
+      "label": ".setSetting()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".setsetting()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L88"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_stopambience",
+      "label": ".stopAmbience()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".stopambience()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L151"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_subscribe",
+      "label": ".subscribe()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".subscribe()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L59"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_syncambience",
+      "label": ".syncAmbience()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".syncambience()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L133"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudiosystem_unlock",
+      "label": ".unlock()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RootAudioSystem",
+      "file_type": "code",
+      "norm_label": ".unlock()",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L70"
+    },
+    {
       "id": "app_red_browser",
       "label": "browser.tsx",
       "_origin": "ast",
@@ -4133,28 +4219,6 @@
       "file_type": "code",
       "norm_label": "browser.tsx",
       "source_file": "app/red/browser.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_red_mission_panel",
-      "label": "mission-panel.tsx",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "mission-panel.tsx",
-      "source_file": "app/red/mission-panel.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_red_network_map",
-      "label": "network-map.tsx",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "network-map.tsx",
-      "source_file": "app/red/network-map.tsx",
       "source_location": "L1"
     },
     {
@@ -4200,149 +4264,6 @@
       "norm_label": "terminal.tsx",
       "source_file": "app/red/terminal.tsx",
       "source_location": "L1"
-    },
-    {
-      "id": "app_sim_types",
-      "label": "sim-types.ts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "sim-types.ts",
-      "source_file": "app/sim-types.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_ui_audio_control",
-      "label": "audio-control.tsx",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audio-control.tsx",
-      "source_file": "app/ui/audio-control.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_ui_audio_control_mixer_channels",
-      "label": "MIXER_CHANNELS",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "mixer_channels",
-      "source_file": "app/ui/audio-control.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "app_ui_root_chrome",
-      "label": "root-chrome.tsx",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "root-chrome.tsx",
-      "source_file": "app/ui/root-chrome.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_ui_root_chrome_appinfo",
-      "label": "appInfo",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "appinfo",
-      "source_file": "app/ui/root-chrome.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "app_ui_root_chrome_shortcuts",
-      "label": "shortcuts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "shortcuts",
-      "source_file": "app/ui/root-chrome.tsx",
-      "source_location": "L21"
-    },
-    {
-      "id": "lib_audio_audio_system",
-      "label": "audio-system.ts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audio-system.ts",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_audio_audio_system_default_audio_settings",
-      "label": "DEFAULT_AUDIO_SETTINGS",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "default_audio_settings",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L29"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudio",
-      "label": "rootAudio",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "rootaudio",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L159"
-    },
-    {
-      "id": "lib_audio_audio_system_server_audio_snapshot",
-      "label": "SERVER_AUDIO_SNAPSHOT",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "server_audio_snapshot",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L48"
-    },
-    {
-      "id": "lib_audio_catalog",
-      "label": "catalog.ts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "catalog.ts",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_audio_catalog_audio_check_events",
-      "label": "AUDIO_CHECK_EVENTS",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audio_check_events",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L68"
-    },
-    {
-      "id": "lib_audio_catalog_audio_event_catalog",
-      "label": "AUDIO_EVENT_CATALOG",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "red/page.tsx",
-      "file_type": "code",
-      "norm_label": "audio_event_catalog",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L43"
     },
     {
       "id": "package_devdependencies",
@@ -7124,6 +7045,39 @@
       "source_location": "L20"
     },
     {
+      "id": "app_red_mission_panel",
+      "label": "mission-panel.tsx",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "mission-panel.tsx",
+      "source_file": "app/red/mission-panel.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_red_network_map",
+      "label": "network-map.tsx",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "network-map.tsx",
+      "source_file": "app/red/network-map.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_sim_types",
+      "label": "sim-types.ts",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "sim-types.ts",
+      "source_file": "app/sim-types.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_audio_audio_design",
       "label": "AUDIO_DESIGN.md",
       "_origin": "ast",
@@ -7903,6 +7857,28 @@
       "source_location": "L1"
     },
     {
+      "id": "lib_simulation_campaign_operator_routes_test",
+      "label": "campaign-operator-routes.test.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "campaign-operator-routes.test.ts",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_campaign_operator_routes_test_operatorroutes",
+      "label": "operatorRoutes",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "operatorroutes",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L63"
+    },
+    {
       "id": "lib_simulation_campaign_test",
       "label": "campaign.test.ts",
       "_origin": "ast",
@@ -8054,7 +8030,7 @@
       "file_type": "code",
       "norm_label": "standard_directories",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L6"
+      "source_location": "L7"
     },
     {
       "id": "lib_simulation_operator_discoverability_test",
@@ -8066,39 +8042,6 @@
       "norm_label": "operator-discoverability.test.ts",
       "source_file": "lib/simulation/operator-discoverability.test.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "lib_simulation_replay",
-      "label": "replay.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replay.ts",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_simulation_replay_test",
-      "label": "replay.test.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replay.test.ts",
-      "source_file": "lib/simulation/replay.test.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_simulation_replay_test_glasshouse",
-      "label": "glasshouse",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "glasshouse",
-      "source_file": "lib/simulation/replay.test.ts",
-      "source_location": "L21"
     },
     {
       "id": "lib_simulation_rules",
@@ -8200,22 +8143,11 @@
       "source_location": "L1"
     },
     {
-      "id": "app_api_operations_route",
-      "label": "operations/route.ts",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "operations/route.ts",
-      "source_file": "app/api/operations/route.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "app_career_page",
       "label": "career/page.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "career/page.tsx",
       "source_file": "app/career/page.tsx",
@@ -8226,109 +8158,21 @@
       "label": "proficiencyLabel",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "proficiencylabel",
       "source_file": "app/career/page.tsx",
       "source_location": "L11"
     },
     {
-      "id": "app_layout",
-      "label": "layout.tsx",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "layout.tsx",
-      "source_file": "app/layout.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_layout_geistmono",
-      "label": "geistMono",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "geistmono",
-      "source_file": "app/layout.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "app_layout_geistsans",
-      "label": "geistSans",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "geistsans",
-      "source_file": "app/layout.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "app_layout_metadata",
-      "label": "metadata",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "app/layout.tsx",
-      "source_location": "L16"
-    },
-    {
       "id": "app_page",
       "label": "app/page.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "app/page.tsx",
       "source_file": "app/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_replay_scenarioid_page",
-      "label": "[scenarioId]/page.tsx",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "[scenarioid]/page.tsx",
-      "source_file": "app/replay/[scenarioId]/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client",
-      "label": "replay-client.tsx",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "replay-client.tsx",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_replay_scenarioid_replay_client_emptysnapshot",
-      "label": "emptySnapshot",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "emptysnapshot",
-      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
-      "source_location": "L25"
-    },
-    {
-      "id": "app_ui_root_os",
-      "label": "root-os.tsx",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "root-os.tsx",
-      "source_file": "app/ui/root-os.tsx",
       "source_location": "L1"
     },
     {
@@ -8336,7 +8180,7 @@
       "label": "use-operation.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "use-operation.ts",
       "source_file": "app/use-operation.ts",
@@ -8347,7 +8191,7 @@
       "label": "campaign.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "campaign.ts",
       "source_file": "lib/campaign.ts",
@@ -8358,33 +8202,11 @@
       "label": "trainingModules",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "career/page.tsx",
       "file_type": "code",
       "norm_label": "trainingmodules",
       "source_file": "lib/campaign.ts",
       "source_location": "L7"
-    },
-    {
-      "id": "lib_simulation_scenarios_index_campaign",
-      "label": "campaign",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "campaign",
-      "source_file": "lib/simulation/scenarios/index.ts",
-      "source_location": "L19"
-    },
-    {
-      "id": "tests_browser_campaign_spec",
-      "label": "campaign.spec.ts",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "replay-client.tsx",
-      "file_type": "code",
-      "norm_label": "campaign.spec.ts",
-      "source_file": "tests/browser/campaign.spec.ts",
-      "source_location": "L1"
     },
     {
       "id": "docs_operations_glasshouse_discovery_graph",
@@ -9393,6 +9215,270 @@
       "source_location": "L20"
     },
     {
+      "id": "app_replay_scenarioid_page",
+      "label": "[scenarioId]/page.tsx",
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "[scenarioid]/page.tsx",
+      "source_file": "app/replay/[scenarioId]/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client",
+      "label": "replay-client.tsx",
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replay-client.tsx",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_replay_scenarioid_replay_client_emptysnapshot",
+      "label": "emptySnapshot",
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "emptysnapshot",
+      "source_file": "app/replay/[scenarioId]/replay-client.tsx",
+      "source_location": "L25"
+    },
+    {
+      "id": "lib_simulation_replay",
+      "label": "replay.ts",
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replay.ts",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_replay_test",
+      "label": "replay.test.ts",
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replay.test.ts",
+      "source_file": "lib/simulation/replay.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_replay_test_glasshouse",
+      "label": "glasshouse",
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "glasshouse",
+      "source_file": "lib/simulation/replay.test.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "app_layout",
+      "label": "layout.tsx",
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "layout.tsx",
+      "source_file": "app/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_layout_geistmono",
+      "label": "geistMono",
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "geistmono",
+      "source_file": "app/layout.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "app_layout_geistsans",
+      "label": "geistSans",
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "geistsans",
+      "source_file": "app/layout.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_layout_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "app/layout.tsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "app_ui_root_os",
+      "label": "root-os.tsx",
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "root-os.tsx",
+      "file_type": "code",
+      "norm_label": "root-os.tsx",
+      "source_file": "app/ui/root-os.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_ui_audio_control",
+      "label": "audio-control.tsx",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audio-control.tsx",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_ui_audio_control_mixer_channels",
+      "label": "MIXER_CHANNELS",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "mixer_channels",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "lib_audio_audio_system",
+      "label": "audio-system.ts",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audio-system.ts",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_audio_audio_system_default_audio_settings",
+      "label": "DEFAULT_AUDIO_SETTINGS",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "default_audio_settings",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudio",
+      "label": "rootAudio",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "rootaudio",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L159"
+    },
+    {
+      "id": "lib_audio_audio_system_server_audio_snapshot",
+      "label": "SERVER_AUDIO_SNAPSHOT",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "server_audio_snapshot",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L48"
+    },
+    {
+      "id": "lib_audio_catalog",
+      "label": "catalog.ts",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "catalog.ts",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_audio_catalog_audio_check_events",
+      "label": "AUDIO_CHECK_EVENTS",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audio_check_events",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L68"
+    },
+    {
+      "id": "lib_audio_catalog_audio_event_catalog",
+      "label": "AUDIO_EVENT_CATALOG",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audio_event_catalog",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L43"
+    },
+    {
+      "id": "app_ui_root_chrome",
+      "label": "root-chrome.tsx",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "root-chrome.tsx",
+      "source_file": "app/ui/root-chrome.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_ui_root_chrome_appinfo",
+      "label": "appInfo",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "appinfo",
+      "source_file": "app/ui/root-chrome.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "app_ui_root_chrome_shortcuts",
+      "label": "shortcuts",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "root-chrome.tsx",
+      "file_type": "code",
+      "norm_label": "shortcuts",
+      "source_file": "app/ui/root-chrome.tsx",
+      "source_location": "L21"
+    },
+    {
+      "id": "app_api_operations_route",
+      "label": "operations/route.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "operations/route.ts",
+      "source_file": "app/api/operations/route.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "lib_simulation_scenarios_content",
       "label": "content.ts",
       "_origin": "ast",
@@ -9556,6 +9642,17 @@
       "norm_label": "index.ts",
       "source_file": "lib/simulation/scenarios/index.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_scenarios_index_campaign",
+      "label": "campaign",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "campaign",
+      "source_file": "lib/simulation/scenarios/index.ts",
+      "source_location": "L19"
     },
     {
       "id": "lib_simulation_scenarios_index_scenarios",
@@ -9833,6 +9930,17 @@
       "source_location": "L16"
     },
     {
+      "id": "tests_browser_campaign_spec",
+      "label": "campaign.spec.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "index.ts",
+      "file_type": "code",
+      "norm_label": "campaign.spec.ts",
+      "source_file": "tests/browser/campaign.spec.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_superpowers_plans_2026_09_20_operator_discoverability_gate",
       "label": "2026-09-20-operator-discoverability-gate.md",
       "_origin": "ast",
@@ -9927,6 +10035,78 @@
       "norm_label": "task 4: repository verification and documentation",
       "source_file": "docs/superpowers/plans/2026-09-20-operator-discoverability-gate.md",
       "source_location": "L113"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability",
+      "label": "2026-09-21-campaign-operator-discoverability.md",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Campaign-wide Operator Discoverability Implementation Plan",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "2026-09-21-campaign-operator-discoverability.md",
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_campaign_wide_operator_discoverability_implementation_plan",
+      "label": "Campaign-wide Operator Discoverability Implementation Plan",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Campaign-wide Operator Discoverability Implementation Plan",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "campaign-wide operator discoverability implementation plan",
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_task_1_model_player_visible_credential_reveals",
+      "label": "Task 1: Model player-visible credential reveals",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Campaign-wide Operator Discoverability Implementation Plan",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 1: model player-visible credential reveals",
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L13"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_task_2_add_campaign_player_route_validation",
+      "label": "Task 2: Add campaign player-route validation",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Campaign-wide Operator Discoverability Implementation Plan",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 2: add campaign player-route validation",
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L21"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_task_3_gate_the_glasshouse_alternate_route",
+      "label": "Task 3: Gate the Glasshouse alternate route",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Campaign-wide Operator Discoverability Implementation Plan",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 3: gate the glasshouse alternate route",
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L35"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_task_4_verify_and_synchronize_project_knowledge",
+      "label": "Task 4: Verify and synchronize project knowledge",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Campaign-wide Operator Discoverability Implementation Plan",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 4: verify and synchronize project knowledge",
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L42"
     },
     {
       "id": "docs_tools_tools_unix",
@@ -15231,7 +15411,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L104",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
@@ -15243,7 +15423,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L115",
+      "source_location": "L121",
       "weight": 1.0
     },
     {
@@ -15255,7 +15435,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L116",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -15267,7 +15447,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L141",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -15279,7 +15459,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L158",
+      "source_location": "L173",
       "weight": 1.0
     },
     {
@@ -15291,7 +15471,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L161",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
@@ -15452,6 +15632,18 @@
     },
     {
       "source": "lib_simulation_operator_discoverability_operatorknowledgeledger_authorize",
+      "target": "lib_simulation_operator_discoverability_urlparts",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_operator_discoverability_operatorknowledgeledger_authorize",
       "target": "lib_simulation_operator_discoverability_commandparts",
       "relation": "calls",
       "_origin": "ast",
@@ -15459,7 +15651,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L64",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -15471,7 +15663,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L67",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -15483,7 +15675,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L67",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -15495,19 +15687,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L73",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_operator_discoverability_operatorknowledgeledger_authorize",
-      "target": "lib_simulation_operator_discoverability_urlparts",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L96",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -15519,7 +15699,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L58",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -15531,7 +15711,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L59",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -15543,7 +15723,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L165",
+      "source_location": "L177",
       "weight": 1.0
     },
     {
@@ -15555,7 +15735,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L153",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -15567,7 +15747,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L154",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -15579,7 +15759,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L156",
+      "source_location": "L168",
       "weight": 1.0
     },
     {
@@ -15591,7 +15771,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L131",
+      "source_location": "L143",
       "weight": 1.0
     },
     {
@@ -15603,7 +15783,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L133",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -15615,7 +15795,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L136",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -17933,6 +18113,90 @@
       "context": "import",
       "source_file": "lib/simulation/blue.ts",
       "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_prisma_prisma",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_engine_simulationengine",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_initializer_deletescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_initializer_initializescenario",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_operator_discoverability_operatorknowledgeledger",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_scenarios_index_getscenariodefinition",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_types_terminalstate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -22939,6 +23203,79 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_prisma",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_engine",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_initializer",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_operator_discoverability",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_scenarios_index",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L9",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_campaign_test",
       "target": "lib_campaign",
       "relation": "imports_from",
@@ -25315,7 +25652,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L63",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -25327,7 +25664,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -25339,7 +25676,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L151",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -25351,7 +25688,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L124",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -25363,7 +25700,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L124",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -28805,6 +29142,61 @@
       "weight": 1.0
     },
     {
+      "source": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability",
+      "target": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_campaign_wide_operator_discoverability_implementation_plan",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_campaign_wide_operator_discoverability_implementation_plan",
+      "target": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_task_1_model_player_visible_credential_reveals",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_campaign_wide_operator_discoverability_implementation_plan",
+      "target": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_task_2_add_campaign_player_route_validation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_campaign_wide_operator_discoverability_implementation_plan",
+      "target": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_task_3_gate_the_glasshouse_alternate_route",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_campaign_wide_operator_discoverability_implementation_plan",
+      "target": "docs_superpowers_plans_2026_09_21_campaign_operator_discoverability_task_4_verify_and_synchronize_project_knowledge",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
       "source": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design",
       "target": "docs_superpowers_specs_2026_09_20_guided_mode_hints_design_guided_mode_hints_design",
       "relation": "contains",
@@ -31533,6 +31925,72 @@
       "weight": 1.0
     },
     {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_campaign_operator_routes_test_updatestate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_campaign_operator_routes_test_routecatalog",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_campaign_operator_routes_test_revealplayercredentials",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_campaign_operator_routes_test_endpointroute",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_campaign_operator_routes_test_identityroute",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test",
+      "target": "lib_simulation_campaign_operator_routes_test_operatorroutes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
       "source": "lib_simulation_engine",
       "target": "lib_simulation_engine_eventinput",
       "relation": "contains",
@@ -31573,7 +32031,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L103",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -31831,13 +32289,24 @@
     },
     {
       "source": "lib_simulation_operator_discoverability",
+      "target": "lib_simulation_operator_discoverability_commandparts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_operator_discoverability",
       "target": "lib_simulation_operator_discoverability_normalizedpath",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -31848,7 +32317,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L26",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -31859,7 +32328,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L34",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -31875,24 +32344,24 @@
     },
     {
       "source": "lib_simulation_operator_discoverability",
+      "target": "lib_simulation_operator_discoverability_operatorvisiblecredential",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_operator_discoverability",
       "target": "lib_simulation_operator_discoverability_standard_directories",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_operator_discoverability",
-      "target": "lib_simulation_operator_discoverability_commandparts",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L9",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -34772,7 +35241,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L124",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -34783,7 +35252,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L145",
+      "source_location": "L157",
       "weight": 1.0
     },
     {
@@ -34794,7 +35263,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L151",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -34805,7 +35274,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L159",
+      "source_location": "L171",
       "weight": 1.0
     },
     {
@@ -34816,7 +35285,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L164",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
@@ -34827,7 +35296,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L168",
+      "source_location": "L180",
       "weight": 1.0
     },
     {
@@ -34838,7 +35307,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L39",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_operator_discoverability_operatorknowledgeledger",
+      "target": "lib_simulation_operator_discoverability_operatorknowledgeledger_observecredential",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/operator-discoverability.ts",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -34849,7 +35329,19 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L63",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_campaign_operator_routes_test_revealplayercredentials",
+      "target": "lib_simulation_operator_discoverability_operatorknowledgeledger_observecredential",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "context": "call",
+      "source_file": "lib/simulation/campaign-operator-routes.test.ts",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -34861,7 +35353,7 @@
       "confidence_score": 0.8,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L124",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -35209,5 +35701,5 @@
       "source_file": "docs/ROOT_CANONICAL_PLAN.md"
     }
   ],
-  "built_at_commit": "ffcc44af50b831d72bc8ffe3a067d87b47d8e907"
+  "built_at_commit": "3586559818de5569f35601d1cd7718abee25da99"
 }

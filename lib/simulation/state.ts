@@ -12,6 +12,7 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
       actors: true,
       machines: { include: { services: true, files: true, processes: true, persistence: true } },
       sessions: { include: { machine: true, user: true }, orderBy: { createdAt: "asc" } },
+      httpSessions: { include: { machine: true, user: true }, orderBy: { createdAt: "asc" } },
       credentials: { orderBy: { discoveredAt: "asc" } },
       events: { include: { sourceMachine: true, targetMachine: true }, orderBy: { timestamp: "asc" } },
     },
@@ -160,6 +161,9 @@ export async function getScenarioView(scenarioId: string, actorId: string) {
     actor: { id: actor.id, role: actor.role },
     currentSession: !isBlue && current ? { id: current.id, machine: current.machine.hostname, user: current.user.username, privilege: current.privilege, path: typeof mission.startingPath === "string" && actorSessions.length === 1 ? mission.startingPath : "/" } : null,
     sessions: (isBlue ? scenario.sessions.filter((s) => s.active && s.machine.zone !== "EXTERNAL") : activeSessions).map((session) => ({ id: session.id, machine: session.machine.hostname, user: session.user.username, privilege: session.privilege, createdAt: session.createdAt.toISOString() })),
+    httpSessions: isBlue ? [] : scenario.httpSessions
+      .filter((session) => session.actorId === actor.id)
+      .map((session) => ({ host: session.machine.hostname, username: session.user.username, cookieName: "session", createdAt: session.createdAt.toISOString() })),
     discoveredHosts: isBlue ? machines.map((m) => m.hostname) : [...discovered], machines, events,
     investigation,
     alerts,

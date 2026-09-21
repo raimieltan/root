@@ -40,7 +40,7 @@
   "38": "66. Page Mapping",
   "39": "6. Canonical Application Names",
   "40": "Broken Unstyled Career Page Screenshot",
-  "41": "replay-client.tsx",
+  "41": "career/page.tsx",
   "42": "Operation Glasshouse — Discovery Graph",
   "43": "16. SIEM / Log Viewer",
   "44": "40. Audio Production Priority",
@@ -55,5 +55,11 @@
   "53": "guidance.test.ts",
   "54": "Review Focus",
   "55": "Q: Implement the Guided Mode hints design across the ROOT codebase",
-  "61": "Review Focus"
+  "56": "replay.ts",
+  "57": "root-os.tsx",
+  "58": "audio-system.ts",
+  "59": "root-chrome.tsx",
+  "60": "RootAudioSystem",
+  "61": "Review Focus",
+  "62": "Campaign-wide Operator Discoverability Implementation Plan"
 }

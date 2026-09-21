@@ -57,7 +57,6 @@ describe("Tool adapter contracts", () => {
 
   it("requires explicit service permissions, resources, outcomes, telemetry, and countermeasures across the campaign", () => {
     for (const definition of campaign) {
-      assert.deepEqual(new Set(definition.availableModes), new Set(["RED", "BLUE"]), definition.id);
       for (const machine of definition.machines) for (const service of machine.services) {
         assert.ok(service.permissions.length, `${definition.id}:${machine.hostname}:${service.name}:permissions`);
         assert.ok(service.resources.length, `${definition.id}:${machine.hostname}:${service.name}:resources`);

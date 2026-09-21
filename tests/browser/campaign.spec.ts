@@ -1,6 +1,44 @@
 import { test, expect } from "@playwright/test";
 import { campaign } from "../../lib/simulation/scenarios";
 
+test("Browser discovers, authenticates, and reuses an application session", async ({ page }) => {
+  const targetIndex = campaign.findIndex((operation) => operation.id === "the-new-server");
+  const prerequisites = campaign.slice(0, targetIndex).map((operation) => ({
+    scenarioId: `browser-prerequisite-${operation.id}`,
+    actorId: "browser-prerequisite",
+    definitionId: operation.id,
+    name: operation.name,
+    mode: "RED",
+    assistance: "OPERATOR",
+    startedAt: "",
+    result: { won: true, route: "orientation", detected: false, concepts: [], availability: 100 },
+  }));
+  await page.addInitScript((history) => {
+    sessionStorage.setItem("root:workstation-authenticated", "true");
+    localStorage.setItem("root:campaign:v1", JSON.stringify(history));
+  }, prerequisites);
+
+  await page.goto("/red?operation=the-new-server&assistance=GUIDED");
+  await page.getByRole("button", { name: "Browser", exact: true }).click();
+  await page.getByLabel("Address").fill("newapp.nodeline.test");
+  await page.getByRole("button", { name: "Go", exact: true }).click();
+
+  await expect(page.locator(".browser-document-text")).toContainText("Client Application");
+  await expect(page.getByRole("button", { name: "Commissioning account" })).toBeVisible();
+  await page.getByLabel("Username", { exact: true }).fill("commissioning");
+  await page.getByLabel("Password", { exact: true }).fill("SignOff-2026");
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+
+  const sessions = page.getByLabel("Application sessions");
+  await expect(sessions.getByText("NEW-APP-01", { exact: true })).toBeVisible();
+  await expect(sessions.getByText("commissioning", { exact: true })).toBeVisible();
+  await page.getByTitle("Back").click();
+  await page.getByRole("button", { name: "Commissioning account" }).click();
+  await expect(page.getByText("Commissioning account: launch checklist pending sign-off.", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Go", exact: true })).toBeEnabled();
+  await page.screenshot({ path: "/tmp/root-stateful-browser.png", fullPage: true });
+});
+
 test("operation selection → all Red campaign results → reconstruction → unlocks", async ({ page }) => {
   const errors: string[] = []; page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");

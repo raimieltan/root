@@ -122,7 +122,9 @@ export function snapshotAt(events: ReplayEvent[], lens: ReplayLens, throughEvent
 export function attackPathFromEvents(events: ReplayEvent[]) {
   const mission = events.find((event) => event.action === "MISSION_STARTED");
   const knownHosts = Array.isArray(mission?.metadata.knownHosts) ? mission.metadata.knownHosts.filter((host): host is string => typeof host === "string") : [];
-  const path: string[] = [knownHosts[0] ?? "INTERNET"];
+  const hasSessionPath = events.some((event) => ["SESSION_CREATED", "DATABASE_SESSION_CREATED"].includes(event.action) && event.target);
+  const observedHost = events.find((event) => event.target)?.target;
+  const path: string[] = [knownHosts[0] ?? (!hasSessionPath && observedHost ? observedHost : "INTERNET")];
   for (const event of events) {
     if (["SESSION_CREATED", "DATABASE_SESSION_CREATED"].includes(event.action) && event.target && path.at(-1) !== event.target) path.push(event.target);
   }

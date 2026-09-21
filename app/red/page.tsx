@@ -29,6 +29,24 @@ export default function RedTeamPage() {
   const priorScenarioState = useRef<string | undefined>(undefined);
 
   useEffect(() => {
+    if (!view?.currentSession) return;
+    const serverSession = view.currentSession;
+    setTerminalState((current) => {
+      const sameSession = current.currentSessionId === serverSession.id;
+      return {
+        ...current,
+        currentMachine: serverSession.machine,
+        currentUser: serverSession.user,
+        currentPrivilege: serverSession.privilege,
+        currentSessionId: serverSession.id,
+        currentPath: sameSession ? current.currentPath : serverSession.path,
+        context: sameSession ? current.context : { type: "UNIX" },
+        discoveredHosts: view.discoveredHosts,
+      };
+    });
+  }, [view?.currentSession, view?.discoveredHosts]);
+
+  useEffect(() => {
     const nextState = view?.scenario.state;
     if (priorScenarioState.current === "ACTIVE" && nextState && nextState !== "ACTIVE") void playAudio(view?.objectiveRetrieved ? "mission.completed" : "mission.failed");
     priorScenarioState.current = nextState;
@@ -51,7 +69,7 @@ export default function RedTeamPage() {
             {activeApp === "Mission" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} scenarioId={ids.scenarioId} actorId={ids.actorId} onViewChange={updateView} />}
             {activeApp === "Hosts" && <DataPanel title="HOST DETAILS" rows={view.machines.map((machine) => `${machine.hostname.padEnd(14)} ${machine.ip.padEnd(15)} ${machine.state}`)} empty="No hosts recorded." />}
             {activeApp === "Terminal" && <MissionPanel view={view} assistance={assistance ?? "GUIDED"} scenarioId={ids.scenarioId} actorId={ids.actorId} onViewChange={updateView} />}
-            {activeApp === "Browser" && <Browser scenarioId={ids.scenarioId} actorId={ids.actorId} session={{ currentSessionId: terminalState.currentSessionId, currentMachine: terminalState.currentMachine, currentUser: terminalState.currentUser, currentPath: terminalState.currentPath, context: terminalState.context, discoveredHosts: terminalState.discoveredHosts }} onDiscovered={(hosts) => setTerminalState((prior) => ({ ...prior, discoveredHosts: hosts }))} />}
+            {activeApp === "Browser" && <Browser scenarioId={ids.scenarioId} actorId={ids.actorId} session={terminalState} httpSessions={view.httpSessions} onStateChange={setTerminalState} onRefresh={() => refresh()} />}
             {activeApp === "Files" && <DataPanel title={`FILES — ${terminalState.currentMachine}`} rows={(currentMachine?.files ?? []).map((file) => `${file.permissions}  ${file.owner.padEnd(12)} ${file.path}`)} empty="No filesystem access on this host." />}
             {activeApp === "Credentials" && <CredentialsPanel scenarioId={ids.scenarioId} actorId={ids.actorId} credentials={view.credentials} onUse={(command) => { setTerminalPrefill(command); setActiveApp("Terminal"); }} />}
             {activeApp === "Network" && <DataPanel title="DISCOVERED RELATIONSHIPS" rows={[...view.intel.hosts.map((host) => `HOST  ${host}`), ...view.intel.relationships.map((relationship) => `TRUST ${relationship}`)]} empty="No relationships recorded." />}

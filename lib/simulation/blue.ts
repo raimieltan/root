@@ -121,7 +121,8 @@ export async function respondToAttack(input: ResponseInput) {
     if (input.action === "RESET_PASSWORD" || input.action === "DISABLE_ACCOUNT") {
       const closed = await prisma.session.updateMany({ where: { scenarioId: input.scenarioId, active: true, user: { username: input.username } }, data: { active: false } });
       const invalidated = await prisma.credential.updateMany({ where: { scenarioId: input.scenarioId, username: input.username, valid: true }, data: { valid: false } });
-      affected = closed.count + invalidated.count + 1;
+      const httpSessions = await prisma.httpSession.deleteMany({ where: { scenarioId: input.scenarioId, user: { username: input.username } } });
+      affected = closed.count + invalidated.count + httpSessions.count + 1;
     }
   }
   if (["BLOCK_CONNECTION", "UNBLOCK_CONNECTION"].includes(input.action)) {

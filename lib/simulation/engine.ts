@@ -1,6 +1,6 @@
 import { AccessLevel, ScenarioState, SecurityEventCategory, SecurityEventSeverity } from "@/app/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
-import type { CommandResult, SimulationEvent, TerminalState } from "./types";
+import type { CommandResult, SimulatedHttpResponse, SimulationEvent, TerminalState } from "./types";
 import { detectionForAction, parseMetadata } from "./rules";
 import { getDefinitionForScenario } from "./initializer";
 import type { ScenarioDefinition, ScenarioEventDefinition } from "./scenarios";
@@ -19,6 +19,20 @@ type EventInput = {
   visibleToBlue?: boolean;
   metadata?: Record<string, unknown>;
 };
+
+function structuredHttpOutput(url: string, method: string, output: string, success: boolean): Omit<SimulatedHttpResponse, "session"> {
+  const lines = output.split("\n");
+  const statusMatch = lines[0]?.match(/^HTTP\/\d(?:\.\d)?\s+(\d{3})\s*(.*)$/i);
+  if (!statusMatch) return { url, method, status: success ? 200 : 422, reason: success ? "OK" : "Request rejected", headers: [], body: output };
+  const headers: Array<{ name: string; value: string }> = [];
+  let index = 1;
+  for (; index < lines.length && lines[index].trim(); index += 1) {
+    const separator = lines[index].indexOf(":");
+    if (separator > 0) headers.push({ name: lines[index].slice(0, separator).trim(), value: lines[index].slice(separator + 1).trim() });
+  }
+  while (index < lines.length && !lines[index].trim()) index += 1;
+  return { url, method, status: Number(statusMatch[1]), reason: statusMatch[2] || "Response", headers, body: lines.slice(index).join("\n") };
+}
 
 export class SimulationEngine {
   private scenarioDefinition?: Promise<ScenarioDefinition>;
@@ -595,6 +609,19 @@ Type 'help <command>' for details, e.g. help curl`;
     if (!target?.services.some((service) => service.name === "http" || service.name === "https")) return this.result(false, "curl: connection failed");
     if (!await reachable(this.scenarioId, source.machine.id, target.id, [80, 443])) return this.result(false, "curl: route blocked");
     const path = new URL(`http://${intent.url.replace(/^https?:\/\//, "")}`).pathname;
+    const respond = async (result: CommandResult): Promise<CommandResult> => {
+      const cookie = await prisma.httpSession.findFirst({
+        where: { scenarioId: this.scenarioId, actorId: this.actorId, machineId: target.id },
+        include: { user: true },
+      });
+      return {
+        ...result,
+        httpResponse: {
+          ...structuredHttpOutput(intent.url!, intent.method, result.output, result.success),
+          session: cookie ? { host: target.hostname, username: cookie.user.username, cookieName: "session", createdAt: cookie.createdAt.toISOString() } : undefined,
+        },
+      };
+    };
     const events = [await this.emit({ action: "WEB_REQUEST", category: SecurityEventCategory.WEB, severity: SecurityEventSeverity.INFO, sourceMachineId: source.machine.id, targetMachineId: target.id, metadata: { method: intent.method, path, data: intent.data } })];
     const form = new URLSearchParams(intent.data ?? "");
     const httpRoute = (await this.definition()).httpRoutes?.find((entry) => entry.host === target.hostname && entry.method === intent.method && entry.path === path);
@@ -604,47 +631,47 @@ Type 'help <command>' for details, e.g. help curl`;
       const identity = target.users.find((entry) => entry.username === username);
       const allowed = Boolean(identity?.password && identity.password === password);
       events.push(await this.emit({ action: allowed ? "WEB_LOGIN_SUCCESS" : "WEB_LOGIN_FAILED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: username ?? undefined, metadata: { path } }));
-      if (!allowed || !identity) return this.result(false, httpRoute.invalidOutput ?? "HTTP/1.1 401 Unauthorized\nInvalid credentials.", events);
+      if (!allowed || !identity) return respond(this.result(false, httpRoute.invalidOutput ?? "HTTP/1.1 401 Unauthorized\nInvalid credentials.", events));
       await prisma.httpSession.upsert({
         where: { scenarioId_actorId_machineId: { scenarioId: this.scenarioId, actorId: this.actorId, machineId: target.id } },
         create: { scenarioId: this.scenarioId, actorId: this.actorId, machineId: target.id, userId: identity.id },
         update: { userId: identity.id, createdAt: new Date() },
       });
       for (const evidence of httpRoute.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: identity.username }));
-      return { success: true, output: httpRoute.output, events };
+      return respond({ success: true, output: httpRoute.output, events });
     }
     if (httpRoute?.requiresSession) {
       const cookie = await prisma.httpSession.findFirst({ where: { scenarioId: this.scenarioId, actorId: this.actorId, machineId: target.id }, include: { user: true } });
-      if (!cookie) return this.result(false, httpRoute.unauthorizedOutput ?? "HTTP/1.1 401 Unauthorized\nA valid session cookie is required.", events);
+      if (!cookie) return respond(this.result(false, httpRoute.unauthorizedOutput ?? "HTTP/1.1 401 Unauthorized\nA valid session cookie is required.", events));
       const discovery = await this.applyDiscovery("web", target.hostname, `${httpRoute.method} ${httpRoute.path}`, source.machine.id);
       events.push(...discovery.events);
       for (const evidence of httpRoute.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: cookie.user.username }));
-      return { success: true, output: httpRoute.output, events, discoveredHosts: await this.discoveredHosts() };
+      return respond({ success: true, output: httpRoute.output, events, discoveredHosts: await this.discoveredHosts() });
     }
     if (httpRoute) {
       const discovery = await this.applyDiscovery("web", target.hostname, `${httpRoute.method} ${httpRoute.path}`, source.machine.id);
       events.push(...discovery.events);
       for (const evidence of httpRoute.evidence ?? []) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id }));
-      return { success: true, output: httpRoute.output, events, discoveredHosts: await this.discoveredHosts() };
+      return respond({ success: true, output: httpRoute.output, events, discoveredHosts: await this.discoveredHosts() });
     }
     const webInteractions = (await this.definition()).webInteractions ?? [];
     const publishedInterface = webInteractions.find((entry) => entry.host === target.hostname && entry.path === path);
     const interaction = webInteractions.find((entry) => entry.host === target.hostname && entry.method === intent.method && entry.path === path && (!entry.dataIncludes || intent.data?.includes(entry.dataIncludes)) && (!entry.formField || form.get(entry.formField) === entry.formValue));
     if (interaction) {
-      if (interaction.prerequisiteAction && !await prisma.securityEvent.count({ where: { scenarioId: this.scenarioId, action: interaction.prerequisiteAction, targetMachineId: target.id } })) return this.result(false, "Application behavior is not understood yet. Gather service evidence first.", events);
+      if (interaction.prerequisiteAction && !await prisma.securityEvent.count({ where: { scenarioId: this.scenarioId, action: interaction.prerequisiteAction, targetMachineId: target.id } })) return respond(this.result(false, "Application behavior is not understood yet. Gather service evidence first.", events));
       const user = target.users.find((entry) => entry.username === interaction.sessionUser);
-      if (!user) return this.result(false, "Application session identity is unavailable.", events);
+      if (!user) return respond(this.result(false, "Application session identity is unavailable.", events));
       await prisma.process.create({ data: { machineId: target.id, name: `http ${intent.method} ${path} → interactive-worker`, pid: 3000 + Math.floor(Math.random() * 900), runningAs: user.username } });
       for (const evidence of interaction.evidence) events.push(await this.emitDefinition(evidence, { sourceMachineId: source.machine.id, targetMachineId: target.id, userId: evidence.action === "PROCESS_SPAWN" ? user.username : undefined }));
       events.push(await this.emit({ action: "SESSION_CREATED", category: SecurityEventCategory.AUTH, severity: SecurityEventSeverity.MEDIUM, sourceMachineId: source.machine.id, targetMachineId: target.id, userId: user.username, metadata: { privilege: user.privilege, interface: "http" } }));
       const session = await prisma.session.create({ data: { actorId: this.actorId, userId: user.id, machineId: target.id, privilege: user.privilege, sourceMachineId: source.machine.id, scenarioId: this.scenarioId, context: "UNIX", serviceName: "http" } });
-      return { success: true, output: interaction.output, events, sessionUpdated: true, context: { type: "UNIX" as const }, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "UNIX" as const, serviceName: "http" } };
+      return respond({ success: true, output: interaction.output, events, sessionUpdated: true, context: { type: "UNIX" as const }, newSession: { id: session.id, userId: user.username, machineId: target.hostname, privilege: user.privilege, sourceMachineId: source.machine.id, createdAt: session.createdAt, active: true, context: "UNIX" as const, serviceName: "http" } });
     }
-    if (publishedInterface && publishedInterface.method !== intent.method) return this.result(false, `HTTP/1.1 405 Method Not Allowed\nAllow: ${publishedInterface.method}`, events);
-    if (publishedInterface) return this.result(false, "HTTP/1.1 422 Unprocessable Content\nThe submitted form fields or values are not accepted by this interface.", events);
+    if (publishedInterface && publishedInterface.method !== intent.method) return respond(this.result(false, `HTTP/1.1 405 Method Not Allowed\nAllow: ${publishedInterface.method}`, events));
+    if (publishedInterface) return respond(this.result(false, "HTTP/1.1 422 Unprocessable Content\nThe submitted form fields or values are not accepted by this interface.", events));
     const discovery = await this.applyDiscovery("web", target.hostname, intent.url, source.machine.id);
     events.push(...discovery.events);
-    return { success: true, output: discovery.output ?? `${target.hostname} responded.`, events, discoveredHosts: await this.discoveredHosts() };
+    return respond({ success: true, output: discovery.output ?? `${target.hostname} responded.`, events, discoveredHosts: await this.discoveredHosts() });
   }
 
   private async serviceOperation(intent: ServiceIntent, state: TerminalState) {

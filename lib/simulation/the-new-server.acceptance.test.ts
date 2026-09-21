@@ -6,6 +6,7 @@ import { deleteScenario, initializeScenario } from "./initializer";
 import { OperatorKnowledgeLedger } from "./operator-discoverability";
 import { getScenarioDefinition } from "./scenarios";
 import { getScenarioView } from "./state";
+import { respondToAttack } from "./blue";
 import type { TerminalState } from "./types";
 
 function applyResult(state: TerminalState, result: Awaited<ReturnType<SimulationEngine["executeCommand"]>>) {
@@ -84,24 +85,43 @@ describe("Act I The New Server", { concurrency: false }, () => {
         const result = await engine.executeCommand(command, state);
         assert.equal(result.success, expectSuccess, `${command}: ${result.output}`);
         applyResult(state, result);
-        return result.output;
+        return result;
       };
 
       // Without a cookie session, the protected route is unauthorized — no shell session is opened or switched.
-      assert.match(await run("curl NEW-APP-01/account", false), /401 Unauthorized/);
+      const unauthorized = await run("curl NEW-APP-01/account", false);
+      assert.match(unauthorized.output, /401 Unauthorized/);
+      assert.equal(unauthorized.httpResponse?.status, 401);
+      assert.equal(unauthorized.httpResponse?.session, undefined);
       assert.equal(state.currentMachine, initialized.startingState.currentMachine);
 
       // A wrong password does not mint a cookie.
-      assert.match(await run("curl -X POST NEW-APP-01/login --data \"username=commissioning&password=wrong\"", false), /401 Unauthorized/);
+      const rejected = await run("curl -X POST NEW-APP-01/login --data \"username=commissioning&password=wrong\"", false);
+      assert.match(rejected.output, /401 Unauthorized/);
+      assert.equal(rejected.httpResponse?.status, 401);
       assert.equal(await prisma.httpSession.count({ where: { scenarioId: initialized.scenarioId } }), 0);
 
       // The correct login credential mints a cookie session without switching the terminal's active machine.
-      assert.match(await run("curl -X POST NEW-APP-01/login --data \"username=commissioning&password=SignOff-2026\""), /Set-Cookie/);
+      const login = await run("curl -X POST NEW-APP-01/login --data \"username=commissioning&password=SignOff-2026\"");
+      assert.match(login.output, /Set-Cookie/);
+      assert.equal(login.httpResponse?.status, 200);
+      assert.deepEqual(login.httpResponse?.headers, [{ name: "Set-Cookie", value: "session=new-app-01" }]);
+      assert.equal(login.httpResponse?.session?.username, "commissioning");
       assert.equal(state.currentMachine, initialized.startingState.currentMachine);
       assert.equal(await prisma.httpSession.count({ where: { scenarioId: initialized.scenarioId } }), 1);
+      assert.deepEqual((await getScenarioView(initialized.scenarioId, initialized.actorId))?.httpSessions.map((session) => [session.host, session.username]), [["NEW-APP-01", "commissioning"]]);
 
       // The protected route now succeeds using the cookie, still without a shell session.
-      assert.match(await run("curl NEW-APP-01/account"), /launch checklist pending sign-off/);
+      const account = await run("curl NEW-APP-01/account");
+      assert.match(account.output, /launch checklist pending sign-off/);
+      assert.equal(account.httpResponse?.session?.host, "NEW-APP-01");
+
+      const blue = await prisma.actor.findFirstOrThrow({ where: { scenarioId: initialized.scenarioId, role: "blue_ai" } });
+      await prisma.actor.update({ where: { id: blue.id }, data: { role: "blue_operator" } });
+      await respondToAttack({ scenarioId: initialized.scenarioId, actorId: blue.id, action: "RESET_PASSWORD", username: "commissioning" });
+      assert.equal(await prisma.httpSession.count({ where: { scenarioId: initialized.scenarioId } }), 0);
+      assert.deepEqual((await getScenarioView(initialized.scenarioId, initialized.actorId))?.httpSessions, []);
+      assert.equal((await run("curl NEW-APP-01/account", false)).httpResponse?.status, 401);
     } finally {
       await deleteScenario(initialized.scenarioId);
     }

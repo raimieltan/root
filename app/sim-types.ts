@@ -19,6 +19,7 @@ export type ScenarioView = {
   actor: { id: string; role: string }; redActorId?: string;
   currentSession: { id: string; machine: string; user: string; privilege: string; path: string } | null;
   sessions: Array<{ id: string; machine: string; user: string; privilege: string; createdAt: string }>;
+  httpSessions: Array<{ host: string; username: string; cookieName: string; createdAt: string }>;
   discoveredHosts: string[]; machines: MachineView[]; events: EventView[];
   alerts: Array<{ id: string; ruleId: string; title: string; severity: string; summary: string; timestamp: string; rationale: string; evidenceEventId?: string }>;
   blueStatus?: {

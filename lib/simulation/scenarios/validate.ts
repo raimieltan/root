@@ -58,6 +58,15 @@ export function validateScenario(definition: ScenarioDefinition) {
   for (const route of definition.httpRoutes ?? []) {
     if (!host(route.host).services.some((service) => ["http", "https"].includes(service.name))) fail(`http route has no web service ${route.host}`);
     if (route.login && route.requiresSession) fail(`http route cannot be both a login and session-gated ${route.host}:${route.path}`);
+    if (route.login) {
+      const published = definition.discoveries
+        .filter((discovery) => discovery.trigger.kind === "web" && discovery.trigger.host === route.host)
+        .map((discovery) => discovery.output ?? "")
+        .join("\n");
+      for (const required of [route.path, route.login.usernameField, route.login.passwordField]) {
+        if (!published.includes(required)) fail(`login route control is not discoverable ${route.host}:${route.path}:${required}`);
+      }
+    }
   }
   for (const operation of definition.trustedServiceOperations ?? []) {
     user(operation.host, operation.fromUser); user(operation.host, operation.toUser);

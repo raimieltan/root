@@ -216,9 +216,9 @@
     "semantic_hash": "a204b372c5d55c1f54f7d45cebd2e649"
   },
   "docs/ROOT_CANONICAL_PLAN.md": {
-    "mtime": 1789871095.605916,
-    "seen": 1789882206.679612,
-    "ast_hash": "8e0f3b5a7b861cac8e02798c9b4034c5",
+    "mtime": 1789954874.1210315,
+    "seen": 1789955175.832202,
+    "ast_hash": "f5345afa369e6ce2a63079c55a9b6896",
     "semantic_hash": ""
   },
   "docs/ui/VISUAL_STYLES.md": {
@@ -282,9 +282,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/glasshouse.e2e.test.ts": {
-    "mtime": 1789906162.7229247,
-    "seen": 1789906488.9714172,
-    "ast_hash": "66745bac1c14d8edd3b97c06cfaac54a",
+    "mtime": 1789954578.5399086,
+    "seen": 1789955175.826507,
+    "ast_hash": "a115012a9aba37e08d2242c6a68b68d3",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/glasshouse.ts": {
@@ -330,9 +330,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/campaign.test.ts": {
-    "mtime": 1789875231.8038886,
-    "seen": 1789882206.674654,
-    "ast_hash": "2bbca60c0f0bff85be958df8e0210c3e",
+    "mtime": 1789954795.1377048,
+    "seen": 1789955175.8263261,
+    "ast_hash": "7c529815986b7a7a592a580c9fefdd02",
     "semantic_hash": ""
   },
   "lib/simulation/network.ts": {
@@ -348,15 +348,15 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/dead-drop.ts": {
-    "mtime": 1789873360.2822416,
-    "seen": 1789882206.6757498,
-    "ast_hash": "5cb4c0f37756d3470aa79991354b8a17",
+    "mtime": 1789954752.9063265,
+    "seen": 1789955175.8275719,
+    "ast_hash": "82f77d3cd6fcdba55d4838d7b7c0e932",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/nightshift.ts": {
-    "mtime": 1789873360.1703103,
-    "seen": 1789882206.675902,
-    "ast_hash": "0f8b08dbf1600323ff7cdf676a28daa7",
+    "mtime": 1789954752.6363184,
+    "seen": 1789955175.827889,
+    "ast_hash": "af371ba91c4b87695bce99b8f0845091",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/validate.ts": {
@@ -432,33 +432,33 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/paper-trail.ts": {
-    "mtime": 1789873360.4173238,
-    "seen": 1789882206.675971,
-    "ast_hash": "f71d8d0ed76809f51215025a7879c887",
+    "mtime": 1789954794.8182764,
+    "seen": 1789955175.827896,
+    "ast_hash": "be4dc575d249540d8423ac69aa52ec42",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/ghost-account.ts": {
-    "mtime": 1789873360.9545121,
-    "seen": 1789882206.6757581,
-    "ast_hash": "652bd50694bbb7461e28788b2196b9c8",
+    "mtime": 1789954754.9683585,
+    "seen": 1789955175.827661,
+    "ast_hash": "62f4da16e7ed6f76df8a833188d9489a",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/no-one-knows.ts": {
-    "mtime": 1789873361.137049,
-    "seen": 1789882206.6759539,
-    "ast_hash": "7003877aac4d4b586db49191af2d5a09",
+    "mtime": 1789954755.7459726,
+    "seen": 1789955175.827893,
+    "ast_hash": "3cb8725f2ee5e5124b529ad0d3ca7c34",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/something-calling-home.ts": {
-    "mtime": 1789873360.7677312,
-    "seen": 1789882206.675979,
-    "ast_hash": "850bdb2b4e6df1da9ed85f7db769a296",
+    "mtime": 1789954754.5400517,
+    "seen": 1789955175.827968,
+    "ast_hash": "65d820feeaa6dd230252f4de3987a366",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/strange-login.ts": {
-    "mtime": 1789873360.606012,
-    "seen": 1789882206.6759832,
-    "ast_hash": "ae86952a5312cdf085665dc7706863fb",
+    "mtime": 1789954753.966992,
+    "seen": 1789955175.82797,
+    "ast_hash": "d5ef246848ce97295a3916a69f60467b",
     "semantic_hash": ""
   },
   "image copy 6.png": {
@@ -780,21 +780,33 @@
     "semantic_hash": ""
   },
   "lib/simulation/operator-discoverability.test.ts": {
-    "mtime": 1789906539.4521444,
-    "seen": 1789906729.600063,
-    "ast_hash": "6df68da36603bd5f45e18f20ba3c293c",
+    "mtime": 1789953982.4799178,
+    "seen": 1789955175.827193,
+    "ast_hash": "348180aa480293477aa6842a14372c61",
     "semantic_hash": ""
   },
   "lib/simulation/operator-discoverability.ts": {
-    "mtime": 1789906558.5553577,
-    "seen": 1789906729.600064,
-    "ast_hash": "d9f723ef5332d75242fb4999aa8a024d",
+    "mtime": 1789953982.2200456,
+    "seen": 1789955175.827196,
+    "ast_hash": "3bede037bb7fe74b34e3b1a0f3284e68",
     "semantic_hash": ""
   },
   "docs/superpowers/plans/2026-09-20-operator-discoverability-gate.md": {
     "mtime": 1789904601.7864115,
     "seen": 1789906488.97265,
     "ast_hash": "451dad22315eb189e3c580ec54e5ce17",
+    "semantic_hash": ""
+  },
+  "lib/simulation/campaign-operator-routes.test.ts": {
+    "mtime": 1789954079.4470048,
+    "seen": 1789955175.82632,
+    "ast_hash": "d8da392c43795cc86a658059654a724b",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-09-21-campaign-operator-discoverability.md": {
+    "mtime": 1789953744.6217232,
+    "seen": 1789955175.833251,
+    "ast_hash": "14c26b9602ca1a3edae40acf011a6269",
     "semantic_hash": ""
   }
 }

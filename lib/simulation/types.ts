@@ -83,6 +83,24 @@ export type CommandResult = {
   objectiveRetrieved?: boolean;
   discoveredHosts?: string[];
   currentPath?: string;
+  httpResponse?: SimulatedHttpResponse;
+};
+
+export type SimulatedHttpSession = {
+  host: string;
+  username: string;
+  cookieName: string;
+  createdAt: string;
+};
+
+export type SimulatedHttpResponse = {
+  url: string;
+  method: string;
+  status: number;
+  reason: string;
+  headers: Array<{ name: string; value: string }>;
+  body: string;
+  session?: SimulatedHttpSession;
 };
 
 export type TerminalState = {

@@ -118,7 +118,21 @@ Applied local Prisma migrations:
 - Applied the no-oracle gate to Act 0, Act I, and Glasshouse's organic route. The audit replaced hidden absolute-path assumptions with directory traversal and exposed one missing New Server clue, now published in its provisioning ticket.
 - Glasshouse's organic path now uses the IP addresses actually printed by configuration evidence instead of silently substituting internal symbolic hostnames.
 - Scenario validation now rejects non-starting facts and fact objectives with no declared discovery source.
-- Remaining adoption scope: extend the executable no-oracle gate across Acts II–V before treating the full campaign as organically discoverable.
+- The initial adoption covered Act 0, Act I, and Glasshouse; Slice 13 below extends the executable no-oracle gate across the remaining campaign.
+
+### 13. Campaign-wide Operator discoverability
+
+- Extended `OperatorKnowledgeLedger` coverage across every campaign operation, so Operator acceptance routes must obtain scenario-specific hosts, identities, credentials, paths, HTTP controls, and database identifiers from mission-visible evidence or prior command output before using them.
+- Reworked under-signposted evidence and command paths exposed by that audit, including identity/group references and realistic directory traversal, so completion no longer depends on knowing simulator-only filenames or hidden operands.
+- Added campaign-wide acceptance coverage to keep every no-hints route organically discoverable as scenarios evolve.
+
+### 14. Stateful Browser and application-session parity
+
+- Promoted simulated HTTP output into a structured `CommandResult.httpResponse` contract with status, ordered headers, body, and actor-owned application-session metadata while keeping Browser and Terminal on the same authoritative command endpoint.
+- Rebuilt the Red Browser as a safe, stateful client: same-host links, declarative forms and selects, back/forward/reload navigation, response metadata, and a visible application-session inspector are rendered without injecting arbitrary scenario HTML.
+- Exposed actor-owned HTTP sessions in `ScenarioView`; successful web-worker routes propagate shell state to the shared Red workspace, while cookie-only authentication remains distinct from shell and database sessions.
+- Blue password reset and account disable now invalidate matching HTTP sessions as well as credentials and terminal sessions. New Server proves discoverable login controls, authenticated navigation, session visibility, and post-remediation denial.
+- Corrected orientation replay fallback so missions without shell-session telemetry begin from their first observed host rather than a fabricated `INTERNET` node, while real session-based attack chains preserve their Internet origin.
 
 ## Canonical roadmap alignment
 
@@ -130,7 +144,7 @@ The expanded canonical roadmap places Multiplayer Alpha at Milestone 11. Milesto
 
 - Act 0 orientation and the Act I network/service operations are built (see Slice 10 above). Milestone 2's content requirement is satisfied; its exit condition still needs validation with human playtesting, not just automated acceptance tests.
 - First-class DNS and full Intel auto-recording are built (see Slice 11 above), closing Milestone 3's content requirement. Milestone 3's exit condition (a tester can independently determine what hosts exist, what is reachable, what services are exposed, and which discovered information is useful) is supported by the new `dig`/`nslookup` and Intel surfaces, but — like Milestone 2 — still needs a human playtest pass, not just automated acceptance tests.
-- Add the Browser interface and persistent HTTP cookie/application-session behavior for Milestone 4.
+- The first Browser and persistent HTTP cookie/application-session slice is built (see Slice 14). Milestone 4 still needs deeper PostgreSQL schemas/joins/errors and human validation of a multi-page authenticated workflow.
 
 ### Milestone 8 — ROOT MVP gaps
 
@@ -171,16 +185,15 @@ Production matchmaking, competitive analytics, and Red/Blue ranking belong to Mi
 
 The key rule for PvP is that clients may render and submit intent, but only the authoritative match simulation may decide state, telemetry, detection, or victory.
 
-## Suggested immediate next task — Milestone 4 (Browser interface, HTTP/cookie/session, deeper psql)
+## Suggested immediate next task — Milestone 4 (deeper PostgreSQL interaction)
 
-Milestone 3 is now closed (see Slice 11: first-class DNS, `dig`/`nslookup`, and the full Intel auto-recording panel). The next unmet roadmap gate is Milestone 4: a general-purpose Browser app, an HTTP route/cookie/session model, and deeper PostgreSQL `psql` support. Glasshouse already exercises a bounded slice of this (raw `curl` against a couple of routes, one `psql` query), but there's no general-purpose Browser app yet, and HTTP sessions/cookies aren't modeled as first-class state the way DNS and SSH sessions now are.
+Milestone 3 is closed, and Slice 14 delivers the first general-purpose Browser plus persistent HTTP application sessions. The remaining Milestone 4 implementation gap is deeper PostgreSQL `psql` support, followed by human validation of the Browser/application flow.
 
 Scope:
 
-1. Add a Browser app (`app/red/page.tsx` or a dedicated tab) that renders HTTP responses instead of raw `curl` text output, and model HTTP sessions/cookies as engine state so login flows, authenticated routes, and session expiry can be scripted into scenarios.
-2. Deepen `psql`: multiple tables/joins, more realistic query errors, and scenario-declared schemas beyond the single-table lookups Glasshouse currently uses.
-3. Add acceptance coverage for a scenario that requires navigating multiple authenticated HTTP routes (not just one `curl`) and a `psql` scenario with a non-trivial query.
-4. Re-validate the Milestone 4 exit condition against the new Browser/HTTP/psql surfaces once built.
+1. Deepen `psql`: multiple tables/joins, more realistic query errors, and scenario-declared schemas beyond the single-table lookups Glasshouse currently uses.
+2. Add acceptance coverage for a `psql` scenario with a non-trivial query and human-playtest the New Server Browser login/account flow.
+3. Re-validate the Milestone 4 exit condition against the combined Browser/HTTP/psql surfaces.
 
 Separately, and not blocking the above, Milestone 2's exit condition still needs a human playtest pass (a fresh tester walking Act 0 → Act I and explaining current host/user/files/processes/IP-host-service relationships unaided) — the acceptance-test suite proves the content is completable, not that it teaches successfully.
 
@@ -191,3 +204,5 @@ Separately, and not blocking the above, Milestone 2's exit condition still needs
 **2026-09-19 update:** Act 0 (`First Shift`, `The Printer`, `Locked Out`) and Act I (`Where Did the Website Go?`, `Service Unavailable`, `Wrong Network`, `The New Server`) are built and pass acceptance tests, closing Milestone 2's content requirement. DNS is only alias-based and Intel auto-recording is only partially built, so Milestone 3 is not fully closed. The immediate implementation priority is first-class DNS + the full Intel panel, per the scope above.
 
 **2026-09-20 update:** Slice 11 (first-class DNS + full Intel auto-recording) is complete, closing Milestone 3. `ScenarioDefinition.aliases` was fully retired in favor of `dnsRecords` (A/CNAME records with depth-limited chain resolution via `resolveDns()`), all 15 scenario files were migrated, and `dig`/`nslookup` were added as real terminal commands emitting `DNS_QUERY` telemetry and driving a new `dns` discovery-trigger kind. `Where Did the Website Go?` now requires an explicit `dig` query before the rest of the investigation, and a new `intel.test.ts` proves Intel auto-populates HOSTS/CREDENTIALS/NETWORKS/RELATIONSHIPS from Glasshouse's existing discovery/session data alone, with a dedicated Intel tab added to `app/red/page.tsx`. `tsc`, `yarn test` (2 pre-existing unrelated failures only), and `yarn build` all pass. The immediate implementation priority is now Milestone 4 (Browser app, HTTP/cookie/session model, deeper `psql`), per the scope above.
+
+**2026-09-21 update:** Slice 13 extends the no-oracle Operator gate across the full campaign. Slice 14 adds structured HTTP responses, a safe stateful Browser, actor-owned application sessions, shared Browser/Terminal state propagation, and Blue-side HTTP-session invalidation. The remaining Milestone 4 implementation priority is deeper `psql`, followed by human Browser and curriculum playtesting.
