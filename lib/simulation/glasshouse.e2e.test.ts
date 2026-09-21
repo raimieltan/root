@@ -31,7 +31,10 @@ const routes = {
     "cat /etc/fin-app/db.conf",
     "psql -h FIN-DB -U finance_app -d finance",
     "FinanceApp2026!Secure",
-    "SELECT filename, classification FROM documents;",
+    "\\dt",
+    "\\d documents",
+    "\\d projects",
+    "SELECT d.filename, p.name, d.classification FROM documents AS d INNER JOIN projects AS p ON d.project_id = p.id;",
   ],
   backup: [
     "curl -i http://10.10.10.10",
@@ -53,7 +56,8 @@ const routes = {
     "\\c finance",
     "\\dt",
     "\\d documents",
-    "SELECT filename, classification FROM documents;",
+    "\\d projects",
+    "SELECT d.filename, p.name, d.classification FROM documents AS d INNER JOIN projects AS p ON d.project_id = p.id;",
   ],
   organicDiscovery: [
     "nmap 10.10.10.10",
@@ -85,7 +89,8 @@ const routes = {
     "\\c finance",
     "\\dt",
     "\\d documents",
-    "SELECT filename, classification FROM documents;",
+    "\\d projects",
+    "SELECT d.filename, p.name, d.classification FROM documents AS d INNER JOIN projects AS p ON d.project_id = p.id;",
   ],
   postgres: [
     "curl -i http://10.10.10.10",
@@ -102,7 +107,9 @@ const routes = {
     "psql -h FIN-DB -U db_backup -d finance",
     "AtlasBackup-91d2",
     "\\dt",
-    "SELECT filename, classification FROM documents;",
+    "\\d documents",
+    "\\d projects",
+    "SELECT d.filename, p.name, d.classification FROM documents AS d INNER JOIN projects AS p ON d.project_id = p.id;",
   ],
 };
 
@@ -276,9 +283,12 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
     assert.match(outputFor("less /etc/fin-app/db.conf"), /DB_NAME=finance/);
     assert.match(outputFor("\\l"), /finance/);
     assert.match(outputFor("\\dt"), /documents/);
+    assert.match(outputFor("\\dt"), /projects/);
     assert.match(outputFor("\\d documents"), /filename/);
+    assert.match(outputFor("\\d projects"), /business_owner/);
+    assert.match(outputFor("SELECT d.filename, p.name, d.classification FROM documents AS d INNER JOIN projects AS p ON d.project_id = p.id;"), /PROJECT_ATLAS\.pdf\s+\| PROJECT ATLAS\s+\| CONFIDENTIAL/);
     const facts = result.events.filter((event) => event.action === "FACT_DISCOVERED").map((event) => event.metadata.factId);
-    for (const required of ["portal.hostname", "portal.uploadEndpoint", "portal.uploadMethod", "portal.uploadField", "portal.uploadArchive", "backupSync.configPath", "backupSync.runHook", "finance.database", "finance.documentsTable", "finance.documentColumns"]) assert.ok(facts.includes(required), `missing semantic discovery ${required}`);
+    for (const required of ["portal.hostname", "portal.uploadEndpoint", "portal.uploadMethod", "portal.uploadField", "portal.uploadArchive", "backupSync.configPath", "backupSync.runHook", "finance.database", "finance.documentsTable", "finance.documentColumns", "finance.projectColumns"]) assert.ok(facts.includes(required), `missing semantic discovery ${required}`);
   });
 
   it("invalidates an active PostgreSQL context when Blue resets its identity", async () => {
@@ -289,7 +299,7 @@ describe("Operation Glasshouse end-to-end routes", { concurrency: false }, () =>
     };
     try {
       const engine = new SimulationEngine(initialized.scenarioId, initialized.redActorId);
-      for (const command of routes.postgres.slice(0, -3)) {
+      for (const command of routes.postgres.slice(0, routes.postgres.indexOf("AtlasBackup-91d2"))) {
         const result = await engine.executeCommand(command, state);
         assert.equal(result.success, true, `${command}: ${result.output}`);
         if (result.newSession) {

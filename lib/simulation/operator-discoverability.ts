@@ -124,8 +124,11 @@ export class OperatorKnowledgeLedger {
       if (args[0] && !this.known(args[0], true)) required.push(args[0]);
     }
     else if (tool.toUpperCase() === "SELECT") {
-      const identifiers = command.match(/[A-Za-z_][A-Za-z0-9_]*/g) ?? [];
-      for (const identifier of identifiers.filter((value) => !["select", "from"].includes(value.toLowerCase()))) {
+      const withoutLiterals = command.replace(/'(?:''|[^'])*'/g, "");
+      const aliases = new Set([...withoutLiterals.matchAll(/\bAS\s+([A-Za-z_][A-Za-z0-9_]*)/gi)].map((match) => match[1].toLowerCase()));
+      const keywords = new Set(["select", "from", "as", "inner", "join", "on", "where"]);
+      const identifiers = withoutLiterals.match(/[A-Za-z_][A-Za-z0-9_]*/g) ?? [];
+      for (const identifier of identifiers.filter((value) => !keywords.has(value.toLowerCase()) && !aliases.has(value.toLowerCase()))) {
         if (!this.known(identifier, true)) required.push(identifier);
       }
     } else if (tool === "backup-sync" && !this.known(command.trim(), true)) required.push(command.trim());

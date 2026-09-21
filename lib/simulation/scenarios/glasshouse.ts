@@ -56,8 +56,9 @@ export const glasshouse: ScenarioDefinition = {
     { id: "finance.dbRelationship", category: "DATABASE", known: "PostgreSQL host: FIN-DB (10.30.10.21)", unknown: "Database host and identity", discoverableFrom: "/etc/fin-app/db.conf", requiredFor: "Connecting to PostgreSQL" },
     { id: "finance.dbCredential", category: "IDENTITY", known: "Database identity: finance_app@FIN-DB", unknown: "Database host and identity", guidance: "Connect with the known host and identity; the database name can be enumerated after authentication.", discoverableFrom: "/etc/fin-app/db.conf", requiredFor: "Authenticating to PostgreSQL" },
     { id: "finance.database", category: "DATABASE", known: "Database: finance", unknown: "Database names", guidance: "Connect to the discovered database and enumerate its tables.", discoverableFrom: "PostgreSQL \\l or database configuration", alternative: "DB_NAME in /etc/fin-app/db.conf", requiredFor: "Selecting the mission database" },
-    { id: "finance.documentsTable", category: "DATABASE", known: "Table: public.documents", unknown: "Database structure", guidance: "Describe the table before choosing columns to query.", discoverableFrom: "PostgreSQL \\dt", requiredFor: "Locating mission evidence" },
-    { id: "finance.documentColumns", category: "DATABASE", known: "documents columns: filename, classification", unknown: "Mission-relevant columns", guidance: "Query only the columns needed to identify the protected document.", discoverableFrom: "PostgreSQL \\d documents", requiredFor: "Retrieving mission evidence" },
+    { id: "finance.documentsTable", category: "DATABASE", known: "Tables: public.documents and public.projects", unknown: "Database structure", guidance: "Describe both visible tables before choosing columns to query.", discoverableFrom: "PostgreSQL \\dt", requiredFor: "Locating mission evidence" },
+    { id: "finance.documentColumns", category: "DATABASE", known: "documents columns: filename, classification, project_id", unknown: "Document columns", guidance: "Describe the documents table and identify its relationship key.", discoverableFrom: "PostgreSQL \\d documents", requiredFor: "Relating documents to projects" },
+    { id: "finance.projectColumns", category: "DATABASE", known: "projects columns: id, name, business_owner", unknown: "Project columns", guidance: "Describe the projects table and join its id to documents.project_id.", discoverableFrom: "PostgreSQL \\d projects", requiredFor: "Identifying the protected project document" },
     { id: "backup.peerConfig", category: "HOST", known: "VPN peer configuration: /etc/vpn/backup-peers.conf", unknown: "Backup peer relationship", discoverableFrom: "VPN-01 filesystem enumeration", requiredFor: "Discovering BACKUP-01" },
     { id: "backup.relationship", category: "NETWORK", known: "Backup host: BACKUP-01", unknown: "Backup peer relationship", discoverableFrom: "/etc/vpn/backup-peers.conf", requiredFor: "Accessing BACKUP-01" },
     { id: "backup.serviceCredential", category: "IDENTITY", known: "Backup identity: backup_svc@BACKUP-01", unknown: "Backup service identity", guidance: "Enumerate the backup host's readable configuration.", discoverableFrom: "/etc/vpn/backup-peers.conf", requiredFor: "Accessing BACKUP-01" },
@@ -205,14 +206,30 @@ export const glasshouse: ScenarioDefinition = {
     { trigger: { kind: "postgres", host: "FIN-DB", value: "databases" }, facts: ["finance.database"] },
     { trigger: { kind: "postgres", host: "FIN-DB", value: "tables:finance" }, facts: ["finance.documentsTable"] },
     { trigger: { kind: "postgres", host: "FIN-DB", value: "schema:finance.documents" }, facts: ["finance.documentColumns"] },
+    { trigger: { kind: "postgres", host: "FIN-DB", value: "schema:finance.projects" }, facts: ["finance.projectColumns"] },
   ],
   databases: [{
     host: "FIN-DB",
     service: "postgres",
     database: "finance",
+    schemas: [{
+      name: "public",
+      tables: [
+        {
+          name: "projects",
+          columns: [{ name: "id", type: "integer" }, { name: "name", type: "text" }, { name: "business_owner", type: "text" }],
+          rows: [{ id: "17", name: "PROJECT ATLAS", business_owner: "Finance Strategy" }, { id: "22", name: "Quarterly Reporting", business_owner: "Finance Operations" }],
+        },
+        {
+          name: "documents",
+          columns: [{ name: "filename", type: "text" }, { name: "classification", type: "text" }, { name: "project_id", type: "integer" }],
+          rows: [{ filename: "PROJECT_ATLAS.pdf", classification: "CONFIDENTIAL", project_id: "17" }, { filename: "Q3-SUMMARY.pdf", classification: "INTERNAL", project_id: "22" }],
+        },
+      ],
+    }],
     identities: [
-      { username: "finance_app", tables: [{ name: "documents", columns: ["filename", "classification"], rows: [{ filename: "PROJECT_ATLAS.pdf", classification: "CONFIDENTIAL" }] }] },
-      { username: "db_backup", tables: [{ name: "documents", columns: ["filename", "classification"], rows: [{ filename: "PROJECT_ATLAS.pdf", classification: "CONFIDENTIAL" }] }] },
+      { username: "finance_app", grants: [{ schema: "public", table: "documents", select: "*" }, { schema: "public", table: "projects", select: "*" }] },
+      { username: "db_backup", grants: [{ schema: "public", table: "documents", select: "*" }, { schema: "public", table: "projects", select: "*" }] },
     ],
   }],
   webInteractions: [{
@@ -268,8 +285,8 @@ export const glasshouse: ScenarioDefinition = {
     },
   ],
   blueProfiles: [
-    { id: "noisy-application", routeId: "application-chain", commands: ["nmap 10.10.10.10", "curl -i http://10.10.10.10", "curl portal.meridian.test", "curl --data upload=archive portal.meridian.test/legacy-upload", "less /var/www/meridian/app.conf", "ssh deploy@DEV-01", "MeridianDeploy2024!Secret", "id", "ps", "less /etc/backup-sync.conf", "ls -l /opt/backup/run.sh", "backup-sync --run-hook", "less /etc/meridian/routes.conf", "ssh svc_web@FIN-APP", "svc-meridian-2026", "ps", "less /etc/fin-app/db.conf", "psql -h FIN-DB -U finance_app", "FinanceApp2026!Secure", "\\l", "\\c finance", "\\dt", "\\d documents", "SELECT filename, classification FROM documents;"] },
-    { id: "trusted-backup", routeId: "backup-trust", commands: ["curl -i http://10.10.10.10", "curl portal.meridian.test", "curl portal.meridian.test/api/profile", "ssh fieldops@VPN-01", "FieldOps-ReadOnly", "ls -l /", "less /etc/vpn/backup-peers.conf", "ssh backup_svc@BACKUP-01", "BackupTransit-6f0a", "ls -l /", "less /etc/backup/finance-db.conf", "psql -h FIN-DB -U db_backup", "AtlasBackup-91d2", "\\l", "\\c finance", "\\dt", "\\d documents", "SELECT filename, classification FROM documents;"] },
+    { id: "noisy-application", routeId: "application-chain", commands: ["nmap 10.10.10.10", "curl -i http://10.10.10.10", "curl portal.meridian.test", "curl --data upload=archive portal.meridian.test/legacy-upload", "less /var/www/meridian/app.conf", "ssh deploy@DEV-01", "MeridianDeploy2024!Secret", "id", "ps", "less /etc/backup-sync.conf", "ls -l /opt/backup/run.sh", "backup-sync --run-hook", "less /etc/meridian/routes.conf", "ssh svc_web@FIN-APP", "svc-meridian-2026", "ps", "less /etc/fin-app/db.conf", "psql -h FIN-DB -U finance_app", "FinanceApp2026!Secure", "\\l", "\\c finance", "\\dt", "\\d documents", "\\d projects", "SELECT d.filename, p.name, d.classification FROM documents AS d INNER JOIN projects AS p ON d.project_id = p.id;"] },
+    { id: "trusted-backup", routeId: "backup-trust", commands: ["curl -i http://10.10.10.10", "curl portal.meridian.test", "curl portal.meridian.test/api/profile", "ssh fieldops@VPN-01", "FieldOps-ReadOnly", "ls -l /", "less /etc/vpn/backup-peers.conf", "ssh backup_svc@BACKUP-01", "BackupTransit-6f0a", "ls -l /", "less /etc/backup/finance-db.conf", "psql -h FIN-DB -U db_backup", "AtlasBackup-91d2", "\\l", "\\c finance", "\\dt", "\\d documents", "\\d projects", "SELECT d.filename, p.name, d.classification FROM documents AS d INNER JOIN projects AS p ON d.project_id = p.id;"] },
   ],
   defaultBlueProfile: "noisy-application",
 };

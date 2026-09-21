@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "app/red/page.tsx": {
-    "mtime": 1789959140.356302,
-    "seen": 1789959608.5781262,
-    "ast_hash": "e6f1400015e707b5c3fb96863dd17243",
+    "mtime": 1789959659.1602752,
+    "seen": 1789968978.6501708,
+    "ast_hash": "5fbee3ee4168d2382ae2718b2a0fc002",
     "semantic_hash": ""
   },
   "app/red/terminal.tsx": {
@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/engine.ts": {
-    "mtime": 1789957028.2448206,
-    "seen": 1789959608.578711,
-    "ast_hash": "f9117b85a1af6a8c8a23545d4f517643",
+    "mtime": 1789969007.660593,
+    "seen": 1789969036.174249,
+    "ast_hash": "e6f47b70ba00f6c7a36f6b647ef6a3f8",
     "semantic_hash": ""
   },
   "lib/simulation/initializer.ts": {
@@ -282,15 +282,15 @@
     "semantic_hash": ""
   },
   "lib/simulation/glasshouse.e2e.test.ts": {
-    "mtime": 1789954578.5399086,
-    "seen": 1789955175.826507,
-    "ast_hash": "a115012a9aba37e08d2242c6a68b68d3",
+    "mtime": 1789968838.3977652,
+    "seen": 1789968978.65186,
+    "ast_hash": "eb7964f75f62818798f6213d565022cd",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/glasshouse.ts": {
-    "mtime": 1789873360.026922,
-    "seen": 1789882206.675761,
-    "ast_hash": "87e4c985113c5e354dfb40a561e7d9f9",
+    "mtime": 1789968662.5140278,
+    "seen": 1789968978.653518,
+    "ast_hash": "d049a2f1c49c94154abd9059115e545f",
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/index.ts": {
@@ -300,9 +300,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/types.ts": {
-    "mtime": 1789883247.754364,
-    "seen": 1789895447.254817,
-    "ast_hash": "f60b9eb199a8a838119faafca861b862",
+    "mtime": 1789968523.8193936,
+    "seen": 1789968978.6542609,
+    "ast_hash": "5190ffaf2924308a03e4866f65da5cec",
     "semantic_hash": ""
   },
   "app/api/operations/route.ts": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/scenarios/validate.ts": {
-    "mtime": 1789956984.3987284,
-    "seen": 1789959608.579869,
-    "ast_hash": "171a87dae23210a1a965d7e4c2f4f565",
+    "mtime": 1789968793.7351792,
+    "seen": 1789968978.654263,
+    "ast_hash": "25e97ccf03c5685c00d44c6da896778e",
     "semantic_hash": ""
   },
   "playwright.config.ts": {
@@ -474,9 +474,9 @@
     "semantic_hash": ""
   },
   "lib/simulation/tools.ts": {
-    "mtime": 1789903378.3542027,
-    "seen": 1789904200.500373,
-    "ast_hash": "2a386fb4af6414f8e4b0737155973deb",
+    "mtime": 1789968598.4365318,
+    "seen": 1789968978.654486,
+    "ast_hash": "b9e9f20c17002de4680761fb27e0109d",
     "semantic_hash": ""
   },
   "docs/tools/tools-unix.md": {
@@ -498,9 +498,9 @@
     "semantic_hash": ""
   },
   "docs/REALISTIC_INTERACTION_PROGRESS.md": {
-    "mtime": 1789957589.0519278,
-    "seen": 1789959608.580538,
-    "ast_hash": "f73ae213bc59ffeda8308fb3e1ca7cf5",
+    "mtime": 1789968888.6704307,
+    "seen": 1789968978.6552498,
+    "ast_hash": "637333ced0455a73b5794320dcf5b5dc",
     "semantic_hash": ""
   },
   "app/ui/root-os.tsx": {
@@ -726,9 +726,9 @@
     "semantic_hash": ""
   },
   "app/red/browser.tsx": {
-    "mtime": 1789957363.932328,
-    "seen": 1789959608.578044,
-    "ast_hash": "8173bf50ef500780bf6359ae12957b9f",
+    "mtime": 1789959679.265101,
+    "seen": 1789968978.6501062,
+    "ast_hash": "de120f334e83665f5c6ec4a170dee06e",
     "semantic_hash": ""
   },
   "app/api/sim/hint/route.ts": {
@@ -780,15 +780,15 @@
     "semantic_hash": ""
   },
   "lib/simulation/operator-discoverability.test.ts": {
-    "mtime": 1789953982.4799178,
-    "seen": 1789955175.827193,
-    "ast_hash": "348180aa480293477aa6842a14372c61",
+    "mtime": 1789968707.9388506,
+    "seen": 1789968978.6528,
+    "ast_hash": "3488a8d546947e1bff4f44a81131959e",
     "semantic_hash": ""
   },
   "lib/simulation/operator-discoverability.ts": {
-    "mtime": 1789953982.2200456,
-    "seen": 1789955175.827196,
-    "ast_hash": "3bede037bb7fe74b34e3b1a0f3284e68",
+    "mtime": 1789968707.8044686,
+    "seen": 1789968978.652801,
+    "ast_hash": "046079f45ca45408f8c08b5e3f554adb",
     "semantic_hash": ""
   },
   "docs/superpowers/plans/2026-09-20-operator-discoverability-gate.md": {
@@ -843,6 +843,18 @@
     "mtime": 1789956880.166603,
     "seen": 1789959608.580951,
     "ast_hash": "cc86bcefc34b20880557279af6efae3d",
+    "semantic_hash": ""
+  },
+  "lib/simulation/postgres-query.test.ts": {
+    "mtime": 1789969007.5387638,
+    "seen": 1789969036.174569,
+    "ast_hash": "e8c5348804caac9337331212c751945a",
+    "semantic_hash": ""
+  },
+  "lib/simulation/postgres-query.ts": {
+    "mtime": 1789969007.442922,
+    "seen": 1789969036.17457,
+    "ast_hash": "d01e62eed766d26c47284e522fd9553e",
     "semantic_hash": ""
   }
 }

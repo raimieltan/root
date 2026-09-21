@@ -90,6 +90,10 @@ describe("OperatorKnowledgeLedger", () => {
     assert.equal(ledger.authorize("SELECT filename, classification FROM documents;", state).allowed, false);
     ledger.record("\\d documents", state, successful("filename | text\nclassification | text\ndocuments"));
     assert.equal(ledger.authorize("SELECT filename, classification FROM documents;", state).allowed, true);
+    assert.equal(ledger.authorize("SELECT d.filename, p.name FROM documents AS d INNER JOIN projects AS p ON d.project_id = p.id;", state).allowed, false);
+    ledger.record("\\d projects", state, successful("id | integer\nname | text\nprojects"));
+    ledger.record("\\d documents", state, successful("project_id | integer"));
+    assert.equal(ledger.authorize("SELECT d.filename, p.name FROM documents AS d INNER JOIN projects AS p ON d.project_id = p.id;", state).allowed, true);
   });
 
   it("does not learn from failed command output", () => {

@@ -146,6 +146,23 @@ export type ScenarioHttpRouteDefinition = {
   evidence?: ScenarioEventDefinition[];
 };
 
+export type ScenarioDatabaseColumn = {
+  name: string;
+  type: "text" | "integer" | "boolean" | "timestamp";
+};
+
+export type ScenarioDatabaseTable = {
+  name: string;
+  columns: ScenarioDatabaseColumn[];
+  rows: Array<Record<string, string>>;
+};
+
+export type ScenarioDatabaseGrant = {
+  schema: string;
+  table: string;
+  select: "*" | string[];
+};
+
 export type ScenarioDefinition = {
   id: string;
   name: string;
@@ -186,10 +203,8 @@ export type ScenarioDefinition = {
     host: string;
     service: string;
     database: string;
-    identities: Array<{
-      username: string;
-      tables: Array<{ name: string; columns: string[]; rows: Array<Record<string, string>> }>;
-    }>;
+    schemas: Array<{ name: string; tables: ScenarioDatabaseTable[] }>;
+    identities: Array<{ username: string; grants: ScenarioDatabaseGrant[] }>;
   }>;
   webInteractions?: Array<{
     host: string;

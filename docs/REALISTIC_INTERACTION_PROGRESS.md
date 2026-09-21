@@ -1,6 +1,6 @@
 # Realistic Interaction Layer — Progress Checkpoint
 
-**Status:** Realistic interaction Slices 1–8 complete; Act 0 and Act I content built; first-class DNS and full Intel auto-recording (Milestone 3 close-out) built; canonical pre-multiplayer gaps remain, 2026-09-20
+**Status:** Realistic interaction Slices 1–15 complete; Act 0 and Act I content built; Milestones 3 and 4 implementation scope built; canonical pre-multiplayer gaps and human validation remain, 2026-09-21
 **Source direction:** `docs/tools/tools-unix.md` and `docs/ROOT_CANONICAL_PLAN.md`
 
 This document records the state of the realistic Red-team interaction work before the PvP build begins. ROOT remains a fully simulated environment: terminal commands, services, credentials, events, and Blue-team consequences are modeled by the application; no live network targets are contacted.
@@ -134,6 +134,15 @@ Applied local Prisma migrations:
 - Blue password reset and account disable now invalidate matching HTTP sessions as well as credentials and terminal sessions. New Server proves discoverable login controls, authenticated navigation, session visibility, and post-remediation denial.
 - Corrected orientation replay fallback so missions without shell-session telemetry begin from their first observed host rather than a fabricated `INTERNET` node, while real session-based attack chains preserve their Internet origin.
 
+### 15. Schema-aware PostgreSQL queries and joins
+
+- Replaced identity-owned duplicate table fixtures with scenario-declared database schemas, typed columns, centralized rows, and explicit per-identity table/column `SELECT` grants.
+- Added a bounded PostgreSQL evaluator for qualified projections, aliases, `INNER JOIN ... ON` equality, and literal equality `WHERE` filters. It derives results from declared rows and grants rather than matching mission-specific command strings.
+- Added PostgreSQL-style failures for invalid syntax, missing relations and columns, ambiguous references, duplicate aliases, and table/column permission denial.
+- Deepened Glasshouse's finance model to two related tables (`public.documents` and `public.projects`). Both canonical routes now enumerate and describe the schema, then retrieve the objective through a non-trivial join whose operands are all discoverable in-world.
+- Expanded database telemetry with all queried relations, selected output columns, and row count while preserving shared Red/Blue/replay evidence and objective retrieval behavior.
+- Added focused evaluator, Operator-discoverability, and end-to-end acceptance coverage for joins, filtering, errors, grants, semantic discoveries, and Blue invalidation of PostgreSQL sessions.
+
 ## Canonical roadmap alignment
 
 The realistic interaction architecture is established, and new tools and scenario services must continue to satisfy the adapter/service contract tests. This does **not** move ROOT directly to Multiplayer Alpha.
@@ -144,7 +153,7 @@ The expanded canonical roadmap places Multiplayer Alpha at Milestone 11. Milesto
 
 - Act 0 orientation and the Act I network/service operations are built (see Slice 10 above). Milestone 2's content requirement is satisfied; its exit condition still needs validation with human playtesting, not just automated acceptance tests.
 - First-class DNS and full Intel auto-recording are built (see Slice 11 above), closing Milestone 3's content requirement. Milestone 3's exit condition (a tester can independently determine what hosts exist, what is reachable, what services are exposed, and which discovered information is useful) is supported by the new `dig`/`nslookup` and Intel surfaces, but — like Milestone 2 — still needs a human playtest pass, not just automated acceptance tests.
-- The first Browser and persistent HTTP cookie/application-session slice is built (see Slice 14). Milestone 4 still needs deeper PostgreSQL schemas/joins/errors and human validation of a multi-page authenticated workflow.
+- The Browser and persistent HTTP cookie/application-session slice is built (see Slice 14), and schema-aware PostgreSQL tables, joins, permissions, and errors are built (see Slice 15). Milestone 4's implementation scope is complete; its exit condition still needs a fresh human validation pass across the authenticated Browser and application-to-database workflow.
 
 ### Milestone 8 — ROOT MVP gaps
 
@@ -185,15 +194,15 @@ Production matchmaking, competitive analytics, and Red/Blue ranking belong to Mi
 
 The key rule for PvP is that clients may render and submit intent, but only the authoritative match simulation may decide state, telemetry, detection, or victory.
 
-## Suggested immediate next task — Milestone 4 (deeper PostgreSQL interaction)
+## Suggested immediate next task — Milestone 4 human validation and Milestone 8 planning
 
-Milestone 3 is closed, and Slice 14 delivers the first general-purpose Browser plus persistent HTTP application sessions. The remaining Milestone 4 implementation gap is deeper PostgreSQL `psql` support, followed by human validation of the Browser/application flow.
+Milestone 3 is closed. Slices 14 and 15 deliver the general-purpose Browser, persistent HTTP application sessions, and deeper PostgreSQL behavior. The remaining Milestone 4 gate is human validation rather than another known implementation slice.
 
 Scope:
 
-1. Deepen `psql`: multiple tables/joins, more realistic query errors, and scenario-declared schemas beyond the single-table lookups Glasshouse currently uses.
-2. Add acceptance coverage for a `psql` scenario with a non-trivial query and human-playtest the New Server Browser login/account flow.
-3. Re-validate the Milestone 4 exit condition against the combined Browser/HTTP/psql surfaces.
+1. Have a fresh tester complete the New Server login/account flow and Glasshouse's application-to-database route without source access or a walkthrough.
+2. Record confusion points around HTTP state, database enumeration, joins, permissions, and the browser → application → identity → database relationship; fix only evidence-backed usability gaps.
+3. Re-validate Milestone 4's exit condition, then plan the reusable machine-archetype and Knowledge Tracker work that opens Milestone 8.
 
 Separately, and not blocking the above, Milestone 2's exit condition still needs a human playtest pass (a fresh tester walking Act 0 → Act I and explaining current host/user/files/processes/IP-host-service relationships unaided) — the acceptance-test suite proves the content is completable, not that it teaches successfully.
 
@@ -206,3 +215,5 @@ Separately, and not blocking the above, Milestone 2's exit condition still needs
 **2026-09-20 update:** Slice 11 (first-class DNS + full Intel auto-recording) is complete, closing Milestone 3. `ScenarioDefinition.aliases` was fully retired in favor of `dnsRecords` (A/CNAME records with depth-limited chain resolution via `resolveDns()`), all 15 scenario files were migrated, and `dig`/`nslookup` were added as real terminal commands emitting `DNS_QUERY` telemetry and driving a new `dns` discovery-trigger kind. `Where Did the Website Go?` now requires an explicit `dig` query before the rest of the investigation, and a new `intel.test.ts` proves Intel auto-populates HOSTS/CREDENTIALS/NETWORKS/RELATIONSHIPS from Glasshouse's existing discovery/session data alone, with a dedicated Intel tab added to `app/red/page.tsx`. `tsc`, `yarn test` (2 pre-existing unrelated failures only), and `yarn build` all pass. The immediate implementation priority is now Milestone 4 (Browser app, HTTP/cookie/session model, deeper `psql`), per the scope above.
 
 **2026-09-21 update:** Slice 13 extends the no-oracle Operator gate across the full campaign. Slice 14 adds structured HTTP responses, a safe stateful Browser, actor-owned application sessions, shared Browser/Terminal state propagation, and Blue-side HTTP-session invalidation. The remaining Milestone 4 implementation priority is deeper `psql`, followed by human Browser and curriculum playtesting.
+
+**2026-09-21 database update:** Slice 15 replaces Glasshouse's duplicated single-table fixtures with scenario-declared schemas, typed columns, centralized rows, and explicit identity grants. The bounded `psql` surface now supports aliases, qualified projections, inner joins, simple equality filters, and PostgreSQL-style syntax/relation/column/ambiguity/permission errors. Glasshouse's objective path joins `public.documents` to `public.projects`, with Operator validation proving every database operand is learned from `\l`, `\dt`, and `\d`. Milestone 4's known implementation work is complete; fresh-player Browser and application-to-database validation remains before declaring the exit condition met.

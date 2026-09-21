@@ -132,7 +132,7 @@ export function createToolAdapterRegistry(handlers: ToolExecutionHandlers) {
       execute: (intent, state) => handlers.authenticate(intent.kind === "AUTHENTICATION_INPUT" ? intent.password : "", state),
     },
     {
-      contract: observable({ id: "database.psql-input", family: "database", syntax: "\\l | \\c DB | \\dt | \\d TABLE | SELECT ... | \\q", permissions: ["active PostgreSQL session", "database identity grants", "table/column access"], resources: ["database", "table", "columns", "rows"], outcomes: ["resource enumeration", "bounded query", "objective result", "session close"], telemetry: ["DATABASE_QUERY", "OBJECTIVE_RETRIEVED", "FACT_DISCOVERED"], blueResponses: ["REVOKE_SESSION", "RESET_PASSWORD", "BLOCK_CONNECTION", "ISOLATE_HOST"], replay: "STATE_AND_EVENTS" }),
+      contract: observable({ id: "database.psql-input", family: "database", syntax: "\\l | \\c DB | \\dt | \\d TABLE | SELECT ... [JOIN ...] [WHERE ...] | \\q", permissions: ["active PostgreSQL session", "database identity grants", "table/column access"], resources: ["database", "schema", "table", "columns", "rows"], outcomes: ["resource enumeration", "bounded query", "objective result", "session close"], telemetry: ["DATABASE_QUERY", "OBJECTIVE_RETRIEVED", "FACT_DISCOVERED"], blueResponses: ["REVOKE_SESSION", "RESET_PASSWORD", "BLOCK_CONNECTION", "ISOLATE_HOST"], replay: "STATE_AND_EVENTS" }),
       canHandle: (_input, context) => context.type === "POSTGRES", parse: (input) => ({ kind: "PSQL_INPUT", input: input.trim() }), validate: valid,
       execute: (intent, state) => handlers.postgresInput(intent.kind === "PSQL_INPUT" ? intent.input : "", state),
     },

@@ -5,6 +5,7 @@ import { detectionForAction, parseMetadata } from "./rules";
 import { getDefinitionForScenario } from "./initializer";
 import type { ScenarioDefinition, ScenarioEventDefinition } from "./scenarios";
 import { reachable } from "./network";
+import { executePostgresSelect } from "./postgres-query";
 import { createToolAdapterRegistry, psqlUsage } from "./tools";
 import type { CurlIntent, PostgresConnectIntent, ServiceIntent, ToolContract } from "./tools";
 
@@ -741,7 +742,7 @@ Type 'help <command>' for details, e.g. help curl`;
         newSession: { id: session.id, userId: session.user.username, machineId: session.machine.hostname, privilege: session.privilege, sourceMachineId: session.sourceMachineId ?? undefined, createdAt: session.createdAt, active: true, context: "POSTGRES" as const, serviceName: session.serviceName, databaseName: target.database },
       };
     }
-    if (input === "\\?") return this.result(true, "ROOT psql supports:\n  \\l           list databases\n  \\c DATABASE  connect to a database\n  \\dt          list tables in the current database\n  \\d TABLE     describe a table's columns\n  SELECT <columns> FROM <table>;\n  \\q           quit");
+    if (input === "\\?") return this.result(true, "ROOT psql supports:\n  \\l           list databases\n  \\c DATABASE  connect to a database\n  \\dt          list visible tables in the current database\n  \\d [SCHEMA.]TABLE\n               describe visible columns\n  SELECT columns FROM table [AS alias]\n    [INNER JOIN table AS alias ON column = column]\n    [WHERE column = 'value'];\n  \\q           quit");
     if (input === "\\q") {
       await prisma.session.update({ where: { id: session.id }, data: { active: false } });
       const parent = await prisma.session.findFirst({
@@ -766,29 +767,36 @@ Type 'help <command>' for details, e.g. help curl`;
     if (!database || !access) return this.result(false, "ERROR: permission denied for database");
     if (input === "\\dt") {
       const discovery = await this.applyDiscovery("postgres", session.machine.hostname, `tables:${database.database}`, session.machine.id);
-      return this.result(true, ` Schema | Name\n--------+-----------------\n${access.tables.map((table) => ` public | ${table.name}`).join("\n")}`, discovery.events);
+      const visible = access.grants.flatMap((grant) => {
+        const table = database.schemas.find((schema) => schema.name === grant.schema)?.tables.find((entry) => entry.name === grant.table);
+        return table ? [{ schema: grant.schema, table }] : [];
+      });
+      return this.result(true, ` Schema | Name             | Type  | Owner\n--------+------------------+-------+----------------\n${visible.map(({ schema, table }) => ` ${schema.padEnd(6)} | ${table.name.padEnd(16)} | table | ${session.user.username}`).join("\n")}`, discovery.events);
     }
     if (input.startsWith("\\d ")) {
-      const tableName = input.slice(3).trim();
-      const table = access.tables.find((entry) => entry.name.toLowerCase() === tableName.toLowerCase());
-      if (!table) return this.result(false, `ERROR: relation "${tableName}" does not exist`);
+      const relation = input.slice(3).trim();
+      const [schemaName, tableName] = relation.includes(".") ? relation.split(".", 2) : ["public", relation];
+      const table = database.schemas.find((schema) => schema.name.toLowerCase() === schemaName.toLowerCase())?.tables.find((entry) => entry.name.toLowerCase() === tableName.toLowerCase());
+      if (!table) return this.result(false, `ERROR: relation "${relation}" does not exist`);
+      const grant = access.grants.find((entry) => entry.schema.toLowerCase() === schemaName.toLowerCase() && entry.table.toLowerCase() === tableName.toLowerCase());
+      if (!grant) return this.result(false, `ERROR: permission denied for table ${table.name}`);
+      const columns = table.columns.filter((column) => grant.select === "*" || grant.select.includes(column.name));
       const discovery = await this.applyDiscovery("postgres", session.machine.hostname, `schema:${database.database}.${table.name}`, session.machine.id);
-      return this.result(true, ` Column        | Type\n---------------+---------\n${table.columns.map((column) => ` ${column.padEnd(13)} | text`).join("\n")}`, discovery.events);
+      return this.result(true, `                         Table "${schemaName}.${table.name}"\n Column        | Type\n---------------+------------------------\n${columns.map((column) => ` ${column.name.padEnd(13)} | ${column.type}`).join("\n")}`, discovery.events);
     }
-    const match = input.match(/^SELECT\s+([\w\s,*]+)\s+FROM\s+(\w+)\s*;?$/i);
-    if (!match) return this.result(false, "ERROR: ROOT psql supports bounded SELECT queries only.");
-    const table = access.tables.find((entry) => entry.name.toLowerCase() === match[2].toLowerCase());
-    if (!table) return this.result(false, `ERROR: relation "${match[2]}" does not exist`);
-    const requested = match[1].trim() === "*" ? table.columns : match[1].split(",").map((column) => column.trim());
-    if (requested.some((column) => !table.columns.includes(column))) return this.result(false, "ERROR: column does not exist");
-    const rows = table.rows.map((row) => requested.map((column) => row[column] ?? "").join(" | "));
-    const events = [await this.emit({ action: "DATABASE_QUERY", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.HIGH, sourceMachineId: session.sourceMachineId ?? undefined, targetMachineId: session.machineId, userId: session.user.username, metadata: { database: database.database, table: table.name, columns: requested } })];
-    const objective = (await this.definition()).objectives.find((entry) => entry.type === "retrieve_file" && entry.host === session.machine.hostname && table.rows.some((row) => row.filename === entry.path.split("/").at(-1)));
+    const query = executePostgresSelect(database, session.user.username, input);
+    if (!query.ok) return this.result(false, query.error);
+    const rows = query.rows.map((row) => row.join(" | "));
+    const events = [await this.emit({ action: "DATABASE_QUERY", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.HIGH, sourceMachineId: session.sourceMachineId ?? undefined, targetMachineId: session.machineId, userId: session.user.username, metadata: { database: database.database, tables: query.tables, columns: query.columns, rowCount: query.rows.length } })];
+    const selectedValues = query.rows.flat();
+    const objective = (await this.definition()).objectives.find((entry) => entry.type === "retrieve_file" && entry.host === session.machine.hostname && selectedValues.includes(entry.path.split("/").at(-1) ?? ""));
+    const rowLabel = `(${rows.length} ${rows.length === 1 ? "row" : "rows"})`;
+    const output = `${query.columns.join(" | ")}\n${query.columns.map(() => "----------------").join("+")}\n${rows.join("\n")}\n${rowLabel}`;
     if (objective?.type === "retrieve_file") {
       events.push(await this.emit({ action: "OBJECTIVE_RETRIEVED", category: SecurityEventCategory.FILESYSTEM, severity: SecurityEventSeverity.CRITICAL, targetMachineId: session.machineId, userId: session.user.username, metadata: { objectiveId: objective.id, file: objective.path.split("/").at(-1), via: "postgres" } }));
-      return { success: true, output: `${requested.join(" | ")}\n${requested.map(() => "----------------").join("+")}\n${rows.join("\n")}\n(${rows.length} row)\n\n${objective.label.replace(/^Retrieve /, "")} retrieved.`, events, objectiveRetrieved: true };
+      return { success: true, output: `${output}\n\n${objective.label.replace(/^Retrieve /, "")} retrieved.`, events, objectiveRetrieved: true };
     }
-    return { success: true, output: `${requested.join(" | ")}\n${requested.map(() => "----------------").join("+")}\n${rows.join("\n")}\n(${rows.length} row)`, events };
+    return { success: true, output, events };
   }
 
   private async completeAuthentication(password: string, state: TerminalState): Promise<CommandResult> {

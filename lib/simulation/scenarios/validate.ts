@@ -75,7 +75,28 @@ export function validateScenario(definition: ScenarioDefinition) {
   }
   for (const database of definition.databases ?? []) {
     if (!host(database.host).services.some((service) => service.name === database.service)) fail(`database has no service ${database.host}:${database.service}`);
-    for (const identity of database.identities) { user(database.host, identity.username); if (!identity.tables.length) fail(`database identity has no resources ${database.host}:${identity.username}`); }
+    if (!database.schemas.length) fail(`database has no schemas ${database.host}:${database.database}`);
+    unique(database.schemas.map((schema) => schema.name), `database schema ${database.host}:${database.database}`);
+    for (const schema of database.schemas) {
+      if (!schema.tables.length) fail(`database schema has no tables ${database.host}:${database.database}:${schema.name}`);
+      unique(schema.tables.map((table) => table.name), `database table ${database.host}:${database.database}:${schema.name}`);
+      for (const table of schema.tables) {
+        if (!table.columns.length) fail(`database table has no columns ${database.host}:${database.database}:${schema.name}.${table.name}`);
+        unique(table.columns.map((column) => column.name), `database column ${database.host}:${database.database}:${schema.name}.${table.name}`);
+        const columns = new Set(table.columns.map((column) => column.name));
+        for (const row of table.rows) for (const key of Object.keys(row)) if (!columns.has(key)) fail(`database row has unknown column ${database.host}:${database.database}:${schema.name}.${table.name}.${key}`);
+      }
+    }
+    for (const identity of database.identities) {
+      user(database.host, identity.username);
+      if (!identity.grants.length) fail(`database identity has no resources ${database.host}:${identity.username}`);
+      for (const grant of identity.grants) {
+        const table = database.schemas.find((schema) => schema.name === grant.schema)?.tables.find((entry) => entry.name === grant.table)
+          ?? fail(`database grant references unknown table ${database.host}:${identity.username}:${grant.schema}.${grant.table}`);
+        const columnNames = new Set(table.columns.map((entry) => entry.name));
+        if (grant.select !== "*") for (const column of grant.select) if (!columnNames.has(column)) fail(`database grant references unknown column ${database.host}:${identity.username}:${grant.schema}.${grant.table}.${column}`);
+      }
+    }
   }
   if (!definition.objectives.length) fail("objectives required");
   unique(definition.objectives.map((objective) => objective.id), "objective");

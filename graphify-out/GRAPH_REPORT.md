@@ -1,16 +1,16 @@
 # Graph Report - root  (2026-09-21)
 
 ## Corpus Check
-- 121 files · ~647,537 words
+- 123 files · ~649,620 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1080 nodes · 2080 edges · 65 communities (54 shown, 8 thin omitted)
+- 1100 nodes · 2117 edges · 66 communities (55 shown, 8 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 20 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `31c5b290`
+- Built from commit: `d1bd3c5d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,7 +45,7 @@
 - 17. ACT V — ROOT
 - 20. Meaning of the Title
 - 13. Canonical Recurring Characters
-- Delivered vertical slices
+- Verification completed
 - blue/page.tsx
 - AUDIO_DESIGN.md
 - 92. Canonical Taxonomy
@@ -53,7 +53,7 @@
 - 66. Page Mapping
 - 6. Canonical Application Names
 - Broken Unstyled Career Page Screenshot
-- replay-client.tsx
+- replay.ts
 - Operation Glasshouse — Discovery Graph
 - 16. SIEM / Log Viewer
 - 40. Audio Production Priority
@@ -76,7 +76,8 @@
 - Review Focus
 - Campaign-wide Operator Discoverability Implementation Plan
 - Review Focus
-- BlueTeamPage
+- postgres-query.ts
+- audio-system.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `SimulationEngine` - 59 edges
@@ -108,7 +109,7 @@
 ## Hyperedges (group relationships)
 - **Shared Simulation Model** — docs_root_canonical_plan_shared_simulation, docs_root_canonical_plan_everything_leaves_evidence, docs_root_canonical_plan_post_operation_reconstruction [EXTRACTED 1.00]
 
-## Communities (65 total, 8 thin omitted)
+## Communities (66 total, 8 thin omitted)
 
 ### Community 0 - "browser.tsx"
 Cohesion: 0.16
@@ -127,8 +128,8 @@ Cohesion: 0.07
 Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules (+20 more)
 
 ### Community 4 - "engine.ts"
-Cohesion: 0.05
-Nodes (65): POST(), POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma (+57 more)
+Cohesion: 0.06
+Nodes (56): POST(), POST(), POST(), POST(), POST(), GET(), GET(), globalForPrisma (+48 more)
 
 ### Community 5 - "SimulationEngine"
 Cohesion: 0.23
@@ -218,13 +219,13 @@ Nodes (6): 20. Meaning of the Title, Personal Meaning, Root Access, Root Cause, 
 Cohesion: 0.40
 Nodes (5): 13. Canonical Recurring Characters, Daniel Kade — Senior Red Operator, Elias Ward — Founder of Nodeline Security, Lena Ortiz — SOC Lead, Mara Voss — Director of Operations
 
-### Community 32 - "Delivered vertical slices"
-Cohesion: 0.08
-Nodes (25): 10. Act 0 orientation and Act I network/service missions, 11. First-class DNS and full Intel auto-recording (Milestone 3 close-out), 12. Operator discoverability gate and realistic filesystem navigation, 13. Campaign-wide Operator discoverability, 14. Stateful Browser and application-session parity, 1. Structured tool intents and terminal context, 2. Declarative Glasshouse application route, 3. Unix investigation commands (+17 more)
+### Community 32 - "Verification completed"
+Cohesion: 0.07
+Nodes (26): 10. Act 0 orientation and Act I network/service missions, 11. First-class DNS and full Intel auto-recording (Milestone 3 close-out), 12. Operator discoverability gate and realistic filesystem navigation, 13. Campaign-wide Operator discoverability, 14. Stateful Browser and application-session parity, 15. Schema-aware PostgreSQL queries and joins, 1. Structured tool intents and terminal context, 2. Declarative Glasshouse application route (+18 more)
 
 ### Community 34 - "blue/page.tsx"
-Cohesion: 0.09
-Nodes (33): HostInspector(), Inspector(), ProcessInspector(), relatedAlerts(), RespondFn, alertEndpoints(), AlertQueue(), Authentication() (+25 more)
+Cohesion: 0.08
+Nodes (39): HostInspector(), Inspector(), ProcessInspector(), relatedAlerts(), RespondFn, alertEndpoints(), AlertQueue(), Authentication() (+31 more)
 
 ### Community 35 - "AUDIO_DESIGN.md"
 Cohesion: 0.06
@@ -238,9 +239,9 @@ Nodes (8): 92. Canonical Taxonomy, Artifact, Engagement, Evidence, Exercise, Fin
 Cohesion: 0.33
 Nodes (6): 109. Canonical Page Copy, After-Action Review, Employee Portal, Engagement Workspace, Operations Desk, Security Operations Center
 
-### Community 41 - "replay-client.tsx"
-Cohesion: 0.07
-Nodes (34): CareerPage(), completeExercise(), proficiencyLabel, geistMono, geistSans, metadata, engagementId(), Home() (+26 more)
+### Community 41 - "replay.ts"
+Cohesion: 0.06
+Nodes (43): CareerPage(), completeExercise(), proficiencyLabel, geistMono, geistSans, metadata, engagementId(), Home() (+35 more)
 
 ### Community 42 - "Operation Glasshouse — Discovery Graph"
 Cohesion: 0.29
@@ -303,8 +304,8 @@ Cohesion: 0.33
 Nodes (9): attribute(), BrowserDocument, BrowserField, BrowserForm, BrowserLink, fieldLabel(), parseBrowserDocument(), plainText() (+1 more)
 
 ### Community 58 - "root-chrome.tsx"
-Cohesion: 0.10
-Nodes (28): RedTeamPage(), Terminal(), submit(), AudioControlPanel(), runCheck(), AudioVisualIndicator(), MIXER_CHANNELS, useRootAudio() (+20 more)
+Cohesion: 0.19
+Nodes (14): RedTeamPage(), Terminal(), submit(), AudioControlPanel(), runCheck(), AudioVisualIndicator(), useRootAudio(), appInfo (+6 more)
 
 ### Community 59 - "Stateful Browser and Application Session Design"
 Cohesion: 0.20
@@ -322,29 +323,33 @@ Nodes (5): Campaign-wide Operator Discoverability Implementation Plan, Task 1: M
 Cohesion: 0.22
 Nodes (8): Global Constraints, Review Focus, Stateful Browser and Application Session Implementation Plan, Task 1: Structured HTTP protocol result, Task 2: Discoverable declarative page controls, Task 3: Shared state and cookie-session lifecycle, Task 4: ROOT/OS Browser client, Task 5: Regression closure and roadmap sync
 
-### Community 64 - "BlueTeamPage"
-Cohesion: 0.29
-Nodes (5): BlueTeamPage(), onNavigate(), onSelect(), selectionToken(), useReadState()
+### Community 64 - "postgres-query.ts"
+Cohesion: 0.17
+Nodes (17): bindTable(), BoundTable, canSelect(), columnDefinition(), executePostgresSelect(), parseLiteral(), PostgresDatabase, PostgresQueryResult (+9 more)
+
+### Community 65 - "audio-system.ts"
+Cohesion: 0.20
+Nodes (13): MIXER_CHANNELS, AudioSettings, AudioSnapshot, DEFAULT_AUDIO_SETTINGS, Listener, rootAudio, SERVER_AUDIO_SNAPSHOT, AUDIO_CHECK_EVENTS (+5 more)
 
 ## Knowledge Gaps
-- **558 isolated node(s):** `RespondFn`, `RespondFn`, `ModuleProps`, `FindingState`, `NAV` (+553 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 633 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **563 isolated node(s):** `RespondFn`, `RespondFn`, `ModuleProps`, `FindingState`, `NAV` (+558 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 638 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `TerminalState` connect `SimulationEngine` to `tools.ts`, `engine.ts`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **Why does `SimulationEngine` connect `SimulationEngine` to `tools.ts`, `engine.ts`, `index.ts`?**
-  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Why does `TerminalState` connect `SimulationEngine` to `tools.ts`, `engine.ts`?**
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Why does `RootAudioSystem` connect `RootAudioSystem` to `audio-system.ts`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `RespondFn`, `RespondFn`, `ModuleProps` to the rest of the system?**
-  _558 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _563 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `TypeScript Configuration` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
-- **Should `engine.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.05109677419354839 - nodes in this community are weakly interconnected._

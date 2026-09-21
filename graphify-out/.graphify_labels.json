@@ -31,7 +31,7 @@
   "29": "17. ACT V — ROOT",
   "30": "20. Meaning of the Title",
   "31": "13. Canonical Recurring Characters",
-  "32": "Delivered vertical slices",
+  "32": "Verification completed",
   "33": "scratch-shot.mjs",
   "34": "blue/page.tsx",
   "35": "AUDIO_DESIGN.md",
@@ -40,7 +40,7 @@
   "38": "66. Page Mapping",
   "39": "6. Canonical Application Names",
   "40": "Broken Unstyled Career Page Screenshot",
-  "41": "replay-client.tsx",
+  "41": "replay.ts",
   "42": "Operation Glasshouse — Discovery Graph",
   "43": "16. SIEM / Log Viewer",
   "44": "40. Audio Production Priority",
@@ -63,5 +63,6 @@
   "61": "Review Focus",
   "62": "Campaign-wide Operator Discoverability Implementation Plan",
   "63": "Review Focus",
-  "64": "BlueTeamPage"
+  "64": "postgres-query.ts",
+  "65": "audio-system.ts"
 }

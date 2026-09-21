@@ -251,7 +251,7 @@
       "file_type": "code",
       "norm_label": "eventinput",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L11"
+      "source_location": "L12"
     },
     {
       "id": "lib_simulation_hints_hintrequesterror",
@@ -317,45 +317,6 @@
       "norm_label": "operatorvisiblecredential",
       "source_file": "lib/simulation/operator-discoverability.ts",
       "source_location": "L5"
-    },
-    {
-      "id": "lib_simulation_replay_replayevent",
-      "label": "ReplayEvent",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replayevent",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "lib_simulation_replay_replaylens",
-      "label": "ReplayLens",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replaylens",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "lib_simulation_replay_replayscenario",
-      "label": "ReplayScenario",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replayscenario",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L20"
     },
     {
       "id": "lib_simulation_rules_alertview",
@@ -507,7 +468,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "replaypageprops",
       "source_file": "app/replay/[scenarioId]/page.tsx",
@@ -520,7 +481,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "replaypayload",
       "source_file": "app/replay/[scenarioId]/replay-client.tsx",
@@ -533,7 +494,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "localrun",
       "source_file": "lib/campaign.ts",
@@ -546,7 +507,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "trainingmodule",
       "source_file": "lib/campaign.ts",
@@ -559,7 +520,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "trainingrecord",
       "source_file": "lib/campaign.ts",
@@ -572,11 +533,50 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "keydecision",
       "source_file": "lib/simulation/replay.ts",
       "source_location": "L56"
+    },
+    {
+      "id": "lib_simulation_replay_replayevent",
+      "label": "ReplayEvent",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replayevent",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "lib_simulation_replay_replaylens",
+      "label": "ReplayLens",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replaylens",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "lib_simulation_replay_replayscenario",
+      "label": "ReplayScenario",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replayscenario",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L20"
     },
     {
       "id": "lib_simulation_replay_replaysnapshot",
@@ -585,7 +585,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "replaysnapshot",
       "source_file": "lib/simulation/replay.ts",
@@ -598,7 +598,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "replaysummary",
       "source_file": "lib/simulation/replay.ts",
@@ -615,7 +615,7 @@
       "file_type": "code",
       "norm_label": "simulationengine",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L37"
+      "source_location": "L38"
     },
     {
       "id": "lib_simulation_types_commandresult",
@@ -914,7 +914,7 @@
       "file_type": "code",
       "norm_label": "credential",
       "source_file": "app/red/page.tsx",
-      "source_location": "L103"
+      "source_location": "L106"
     },
     {
       "id": "app_sim_types_eventview",
@@ -1032,97 +1032,6 @@
       "norm_label": "tone",
       "source_file": "app/ui/root-chrome.tsx",
       "source_location": "L11"
-    },
-    {
-      "id": "lib_audio_audio_system_audiosettings",
-      "label": "AudioSettings",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "audiosettings",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "lib_audio_audio_system_audiosnapshot",
-      "label": "AudioSnapshot",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "audiosnapshot",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L22"
-    },
-    {
-      "id": "lib_audio_audio_system_listener",
-      "label": "Listener",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "listener",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L47"
-    },
-    {
-      "id": "lib_audio_catalog_audiocategory",
-      "label": "AudioCategory",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "audiocategory",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_audio_catalog_audioeventdefinition",
-      "label": "AudioEventDefinition",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "audioeventdefinition",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L34"
-    },
-    {
-      "id": "lib_audio_catalog_audioeventname",
-      "label": "AudioEventName",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "audioeventname",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "lib_audio_catalog_tonestep",
-      "label": "ToneStep",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "tonestep",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L27"
     },
     {
       "id": "lib_simulation_scenarios_content_machine",
@@ -1252,7 +1161,7 @@
       "file_type": "code",
       "norm_label": "scenariodefinition",
       "source_file": "lib/simulation/scenarios/types.ts",
-      "source_location": "L149"
+      "source_location": "L166"
     },
     {
       "id": "lib_simulation_scenarios_types_scenariodiscovery",
@@ -1398,6 +1307,188 @@
       "source_location": "L50"
     },
     {
+      "id": "lib_simulation_postgres_query_boundtable",
+      "label": "BoundTable",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "boundtable",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "lib_simulation_postgres_query_postgresdatabase",
+      "label": "PostgresDatabase",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "postgresdatabase",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "lib_simulation_postgres_query_postgresqueryresult",
+      "label": "PostgresQueryResult",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "postgresqueryresult",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "lib_simulation_postgres_query_rowcontext",
+      "label": "RowContext",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "rowcontext",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "lib_simulation_scenarios_types_scenariodatabasecolumn",
+      "label": "ScenarioDatabaseColumn",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "scenariodatabasecolumn",
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L149"
+    },
+    {
+      "id": "lib_simulation_scenarios_types_scenariodatabasegrant",
+      "label": "ScenarioDatabaseGrant",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "scenariodatabasegrant",
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L160"
+    },
+    {
+      "id": "lib_simulation_scenarios_types_scenariodatabasetable",
+      "label": "ScenarioDatabaseTable",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "scenariodatabasetable",
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L154"
+    },
+    {
+      "id": "lib_audio_audio_system_audiosettings",
+      "label": "AudioSettings",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audiosettings",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "lib_audio_audio_system_audiosnapshot",
+      "label": "AudioSnapshot",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audiosnapshot",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "lib_audio_audio_system_listener",
+      "label": "Listener",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "listener",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "lib_audio_catalog_audiocategory",
+      "label": "AudioCategory",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audiocategory",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_audio_catalog_audioeventdefinition",
+      "label": "AudioEventDefinition",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audioeventdefinition",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "lib_audio_catalog_audioeventname",
+      "label": "AudioEventName",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audioeventname",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "lib_audio_catalog_tonestep",
+      "label": "ToneStep",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "tonestep",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L27"
+    },
+    {
       "id": "app_red_browser_browser",
       "label": "Browser()",
       "_callable": true,
@@ -1443,7 +1534,7 @@
       "file_type": "code",
       "norm_label": "browserformview()",
       "source_file": "app/red/browser.tsx",
-      "source_location": "L142"
+      "source_location": "L141"
     },
     {
       "id": "app_red_browser_fallbackresponse",
@@ -1491,7 +1582,7 @@
       "file_type": "code",
       "norm_label": "credentialspanel()",
       "source_file": "app/red/page.tsx",
-      "source_location": "L105"
+      "source_location": "L108"
     },
     {
       "id": "app_blue_inspector_alertinspector",
@@ -1794,6 +1885,78 @@
       "source_location": "L524"
     },
     {
+      "id": "app_blue_page_blueteampage",
+      "label": "BlueTeamPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "blueteampage()",
+      "source_file": "app/blue/page.tsx",
+      "source_location": "L46"
+    },
+    {
+      "id": "app_blue_page_blueteampage_advance",
+      "label": "advance()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "advance()",
+      "source_file": "app/blue/page.tsx",
+      "source_location": "L78"
+    },
+    {
+      "id": "app_blue_page_blueteampage_onnavigate",
+      "label": "onNavigate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "onnavigate()",
+      "source_file": "app/blue/page.tsx",
+      "source_location": "L68"
+    },
+    {
+      "id": "app_blue_page_blueteampage_onpinevidence",
+      "label": "onPinEvidence()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "onpinevidence()",
+      "source_file": "app/blue/page.tsx",
+      "source_location": "L73"
+    },
+    {
+      "id": "app_blue_page_blueteampage_onselect",
+      "label": "onSelect()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "onselect()",
+      "source_file": "app/blue/page.tsx",
+      "source_location": "L62"
+    },
+    {
+      "id": "app_blue_page_blueteampage_respond",
+      "label": "respond()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "respond()",
+      "source_file": "app/blue/page.tsx",
+      "source_location": "L128"
+    },
+    {
       "id": "app_blue_soc_state_formatwindow",
       "label": "formatWindow()",
       "_callable": true,
@@ -1840,6 +2003,42 @@
       "norm_label": "processrisk()",
       "source_file": "app/blue/soc-state.ts",
       "source_location": "L22"
+    },
+    {
+      "id": "app_blue_soc_state_selectiontoken",
+      "label": "selectionToken()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "selectiontoken()",
+      "source_file": "app/blue/soc-state.ts",
+      "source_location": "L80"
+    },
+    {
+      "id": "app_blue_soc_state_usereadstate",
+      "label": "useReadState()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "usereadstate()",
+      "source_file": "app/blue/soc-state.ts",
+      "source_location": "L39"
+    },
+    {
+      "id": "lib_audio_catalog_alerteventforseverity",
+      "label": "alertEventForSeverity()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "blue/page.tsx",
+      "file_type": "code",
+      "norm_label": "alerteventforseverity()",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L80"
     },
     {
       "id": "app_api_sim_blue_advance_route_post",
@@ -2067,7 +2266,7 @@
       "file_type": "code",
       "norm_label": "runroute()",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L109"
+      "source_location": "L116"
     },
     {
       "id": "lib_simulation_hints_hintrequesterror_constructor",
@@ -2235,7 +2434,7 @@
       "file_type": "code",
       "norm_label": ".known()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L157"
+      "source_location": "L160"
     },
     {
       "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_observecredential",
@@ -2259,7 +2458,7 @@
       "file_type": "code",
       "norm_label": ".observepath()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L176"
+      "source_location": "L179"
     },
     {
       "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_pathkey",
@@ -2271,7 +2470,7 @@
       "file_type": "code",
       "norm_label": ".pathkey()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L180"
+      "source_location": "L183"
     },
     {
       "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_pathknown",
@@ -2283,7 +2482,7 @@
       "file_type": "code",
       "norm_label": ".pathknown()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L163"
+      "source_location": "L166"
     },
     {
       "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_record",
@@ -2295,7 +2494,7 @@
       "file_type": "code",
       "norm_label": ".record()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L136"
+      "source_location": "L139"
     },
     {
       "id": "lib_simulation_operator_discoverability_operatorknowledgeledger_resultfor",
@@ -2307,7 +2506,7 @@
       "file_type": "code",
       "norm_label": ".resultfor()",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L171"
+      "source_location": "L174"
     },
     {
       "id": "lib_simulation_operator_discoverability_test_failed",
@@ -2358,30 +2557,6 @@
       "source_location": "L27"
     },
     {
-      "id": "lib_simulation_replay_attackpathfromevents",
-      "label": "attackPathFromEvents()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "attackpathfromevents()",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L122"
-    },
-    {
-      "id": "lib_simulation_replay_identifyroute",
-      "label": "identifyRoute()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "identifyroute()",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L134"
-    },
-    {
       "id": "lib_simulation_replay_normalizereplayevent",
       "label": "normalizeReplayEvent()",
       "_callable": true,
@@ -2394,18 +2569,6 @@
       "source_location": "L226"
     },
     {
-      "id": "lib_simulation_replay_selectkeydecision",
-      "label": "selectKeyDecision()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "selectkeydecision()",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L189"
-    },
-    {
       "id": "lib_simulation_replay_summarizereplay",
       "label": "summarizeReplay()",
       "_callable": true,
@@ -2416,30 +2579,6 @@
       "norm_label": "summarizereplay()",
       "source_file": "lib/simulation/replay.ts",
       "source_location": "L140"
-    },
-    {
-      "id": "lib_simulation_replay_test_at",
-      "label": "at()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "at()",
-      "source_file": "lib/simulation/replay.test.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "lib_simulation_replay_test_event",
-      "label": "event()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "event()",
-      "source_file": "lib/simulation/replay.test.ts",
-      "source_location": "L7"
     },
     {
       "id": "lib_simulation_rules_alertsfromevents",
@@ -2579,7 +2718,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "get()",
       "source_file": "app/api/operations/route.ts",
@@ -2591,7 +2730,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "careerpage()",
       "source_file": "app/career/page.tsx",
@@ -2603,7 +2742,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "completeexercise()",
       "source_file": "app/career/page.tsx",
@@ -2615,7 +2754,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "rootlayout()",
       "source_file": "app/layout.tsx",
@@ -2627,7 +2766,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "engagementid()",
       "source_file": "app/page.tsx",
@@ -2639,7 +2778,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "home()",
       "source_file": "app/page.tsx",
@@ -2651,7 +2790,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "replaypage()",
       "source_file": "app/replay/[scenarioId]/page.tsx",
@@ -2663,7 +2802,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "formatelapsed()",
       "source_file": "app/replay/[scenarioId]/replay-client.tsx",
@@ -2675,7 +2814,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "replayclient()",
       "source_file": "app/replay/[scenarioId]/replay-client.tsx",
@@ -2687,7 +2826,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "rootbutton()",
       "source_file": "app/ui/root-os.tsx",
@@ -2699,7 +2838,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "rootempty()",
       "source_file": "app/ui/root-os.tsx",
@@ -2711,7 +2850,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "rootinput()",
       "source_file": "app/ui/root-os.tsx",
@@ -2723,7 +2862,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "rootmenubar()",
       "source_file": "app/ui/root-os.tsx",
@@ -2735,7 +2874,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "rootpane()",
       "source_file": "app/ui/root-os.tsx",
@@ -2747,7 +2886,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "rootselect()",
       "source_file": "app/ui/root-os.tsx",
@@ -2759,7 +2898,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "rootstatusbar()",
       "source_file": "app/ui/root-os.tsx",
@@ -2771,7 +2910,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "roottable()",
       "source_file": "app/ui/root-os.tsx",
@@ -2783,7 +2922,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "roottabs()",
       "source_file": "app/ui/root-os.tsx",
@@ -2795,7 +2934,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "roottitlebar()",
       "source_file": "app/ui/root-os.tsx",
@@ -2807,7 +2946,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "roottoolbar()",
       "source_file": "app/ui/root-os.tsx",
@@ -2819,7 +2958,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "roottree()",
       "source_file": "app/ui/root-os.tsx",
@@ -2831,7 +2970,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "rootwindow()",
       "source_file": "app/ui/root-os.tsx",
@@ -2843,7 +2982,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "useoperation()",
       "source_file": "app/use-operation.ts",
@@ -2855,7 +2994,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "campaignprogress()",
       "source_file": "lib/campaign.ts",
@@ -2867,7 +3006,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "readruns()",
       "source_file": "lib/campaign.ts",
@@ -2879,7 +3018,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "readtraining()",
       "source_file": "lib/campaign.ts",
@@ -2891,7 +3030,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "saverun()",
       "source_file": "lib/campaign.ts",
@@ -2903,11 +3042,47 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "savetraining()",
       "source_file": "lib/campaign.ts",
       "source_location": "L60"
+    },
+    {
+      "id": "lib_simulation_replay_attackpathfromevents",
+      "label": "attackPathFromEvents()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "attackpathfromevents()",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L122"
+    },
+    {
+      "id": "lib_simulation_replay_identifyroute",
+      "label": "identifyRoute()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "identifyroute()",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L134"
+    },
+    {
+      "id": "lib_simulation_replay_selectkeydecision",
+      "label": "selectKeyDecision()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "selectkeydecision()",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L189"
     },
     {
       "id": "lib_simulation_replay_snapshotat",
@@ -2915,11 +3090,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "snapshotat()",
       "source_file": "lib/simulation/replay.ts",
       "source_location": "L67"
+    },
+    {
+      "id": "lib_simulation_replay_test_at",
+      "label": "at()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "at()",
+      "source_file": "lib/simulation/replay.test.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "lib_simulation_replay_test_event",
+      "label": "event()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "event()",
+      "source_file": "lib/simulation/replay.test.ts",
+      "source_location": "L7"
     },
     {
       "id": "lib_simulation_replay_visibletolens",
@@ -2927,7 +3126,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "visibletolens()",
       "source_file": "lib/simulation/replay.ts",
@@ -2939,7 +3138,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "step()",
       "source_file": "tests/browser/campaign.spec.ts",
@@ -2955,7 +3154,7 @@
       "file_type": "code",
       "norm_label": ".applydiscovery()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L332"
+      "source_location": "L333"
     },
     {
       "id": "lib_simulation_engine_simulationengine_canreadfile",
@@ -2967,7 +3166,7 @@
       "file_type": "code",
       "norm_label": ".canreadfile()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L458"
+      "source_location": "L459"
     },
     {
       "id": "lib_simulation_engine_simulationengine_changedirectory",
@@ -2979,7 +3178,7 @@
       "file_type": "code",
       "norm_label": ".changedirectory()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L395"
+      "source_location": "L396"
     },
     {
       "id": "lib_simulation_engine_simulationengine_completeauthentication",
@@ -2991,7 +3190,7 @@
       "file_type": "code",
       "norm_label": ".completeauthentication()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L794"
+      "source_location": "L802"
     },
     {
       "id": "lib_simulation_engine_simulationengine_connectpostgres",
@@ -3003,7 +3202,7 @@
       "file_type": "code",
       "norm_label": ".connectpostgres()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L693"
+      "source_location": "L694"
     },
     {
       "id": "lib_simulation_engine_simulationengine_constructor",
@@ -3015,7 +3214,7 @@
       "file_type": "code",
       "norm_label": ".constructor()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L41"
+      "source_location": "L42"
     },
     {
       "id": "lib_simulation_engine_simulationengine_curl",
@@ -3027,7 +3226,7 @@
       "file_type": "code",
       "norm_label": ".curl()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L604"
+      "source_location": "L605"
     },
     {
       "id": "lib_simulation_engine_simulationengine_currentmachine",
@@ -3039,7 +3238,7 @@
       "file_type": "code",
       "norm_label": ".currentmachine()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L229"
+      "source_location": "L230"
     },
     {
       "id": "lib_simulation_engine_simulationengine_definition",
@@ -3051,7 +3250,7 @@
       "file_type": "code",
       "norm_label": ".definition()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L43"
+      "source_location": "L44"
     },
     {
       "id": "lib_simulation_engine_simulationengine_dig",
@@ -3063,7 +3262,7 @@
       "file_type": "code",
       "norm_label": ".dig()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L260"
+      "source_location": "L261"
     },
     {
       "id": "lib_simulation_engine_simulationengine_discoveredhosts",
@@ -3075,7 +3274,7 @@
       "file_type": "code",
       "norm_label": ".discoveredhosts()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L320"
+      "source_location": "L321"
     },
     {
       "id": "lib_simulation_engine_simulationengine_emit",
@@ -3087,7 +3286,7 @@
       "file_type": "code",
       "norm_label": ".emit()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L285"
+      "source_location": "L286"
     },
     {
       "id": "lib_simulation_engine_simulationengine_emitdefinition",
@@ -3099,7 +3298,7 @@
       "file_type": "code",
       "norm_label": ".emitdefinition()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L328"
+      "source_location": "L329"
     },
     {
       "id": "lib_simulation_engine_simulationengine_environment",
@@ -3111,7 +3310,7 @@
       "file_type": "code",
       "norm_label": ".environment()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L443"
+      "source_location": "L444"
     },
     {
       "id": "lib_simulation_engine_simulationengine_evaluateobjectives",
@@ -3123,7 +3322,7 @@
       "file_type": "code",
       "norm_label": ".evaluateobjectives()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L121"
+      "source_location": "L122"
     },
     {
       "id": "lib_simulation_engine_simulationengine_executecommand",
@@ -3135,7 +3334,7 @@
       "file_type": "code",
       "norm_label": ".executecommand()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L48"
+      "source_location": "L49"
     },
     {
       "id": "lib_simulation_engine_simulationengine_filesystemdirectories",
@@ -3147,7 +3346,7 @@
       "file_type": "code",
       "norm_label": ".filesystemdirectories()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L420"
+      "source_location": "L421"
     },
     {
       "id": "lib_simulation_engine_simulationengine_find",
@@ -3159,7 +3358,7 @@
       "file_type": "code",
       "norm_label": ".find()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L554"
+      "source_location": "L555"
     },
     {
       "id": "lib_simulation_engine_simulationengine_grep",
@@ -3171,7 +3370,7 @@
       "file_type": "code",
       "norm_label": ".grep()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L526"
+      "source_location": "L527"
     },
     {
       "id": "lib_simulation_engine_simulationengine_help",
@@ -3183,7 +3382,7 @@
       "file_type": "code",
       "norm_label": ".help()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L192"
+      "source_location": "L193"
     },
     {
       "id": "lib_simulation_engine_simulationengine_identity",
@@ -3195,7 +3394,7 @@
       "file_type": "code",
       "norm_label": ".identity()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L430"
+      "source_location": "L431"
     },
     {
       "id": "lib_simulation_engine_simulationengine_installagent",
@@ -3207,7 +3406,7 @@
       "file_type": "code",
       "norm_label": ".installagent()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L863"
+      "source_location": "L871"
     },
     {
       "id": "lib_simulation_engine_simulationengine_ip",
@@ -3219,7 +3418,7 @@
       "file_type": "code",
       "norm_label": ".ip()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L577"
+      "source_location": "L578"
     },
     {
       "id": "lib_simulation_engine_simulationengine_john",
@@ -3231,7 +3430,7 @@
       "file_type": "code",
       "norm_label": ".john()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L846"
+      "source_location": "L854"
     },
     {
       "id": "lib_simulation_engine_simulationengine_listfiles",
@@ -3243,7 +3442,7 @@
       "file_type": "code",
       "norm_label": ".listfiles()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L463"
+      "source_location": "L464"
     },
     {
       "id": "lib_simulation_engine_simulationengine_observe",
@@ -3255,7 +3454,7 @@
       "file_type": "code",
       "norm_label": ".observe()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L380"
+      "source_location": "L381"
     },
     {
       "id": "lib_simulation_engine_simulationengine_ping",
@@ -3267,7 +3466,7 @@
       "file_type": "code",
       "norm_label": ".ping()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L582"
+      "source_location": "L583"
     },
     {
       "id": "lib_simulation_engine_simulationengine_postgresinput",
@@ -3279,7 +3478,7 @@
       "file_type": "code",
       "norm_label": ".postgresinput()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L719"
+      "source_location": "L720"
     },
     {
       "id": "lib_simulation_engine_simulationengine_processes",
@@ -3291,7 +3490,7 @@
       "file_type": "code",
       "norm_label": ".processes()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L567"
+      "source_location": "L568"
     },
     {
       "id": "lib_simulation_engine_simulationengine_readfile",
@@ -3303,7 +3502,7 @@
       "file_type": "code",
       "norm_label": ".readfile()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L503"
+      "source_location": "L504"
     },
     {
       "id": "lib_simulation_engine_simulationengine_resolvedns",
@@ -3315,7 +3514,7 @@
       "file_type": "code",
       "norm_label": ".resolvedns()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L250"
+      "source_location": "L251"
     },
     {
       "id": "lib_simulation_engine_simulationengine_resolvepath",
@@ -3327,7 +3526,7 @@
       "file_type": "code",
       "norm_label": ".resolvepath()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L407"
+      "source_location": "L408"
     },
     {
       "id": "lib_simulation_engine_simulationengine_result",
@@ -3339,7 +3538,7 @@
       "file_type": "code",
       "norm_label": ".result()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L117"
+      "source_location": "L118"
     },
     {
       "id": "lib_simulation_engine_simulationengine_scan",
@@ -3351,7 +3550,7 @@
       "file_type": "code",
       "norm_label": ".scan()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L591"
+      "source_location": "L592"
     },
     {
       "id": "lib_simulation_engine_simulationengine_serviceoperation",
@@ -3363,7 +3562,7 @@
       "file_type": "code",
       "norm_label": ".serviceoperation()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L677"
+      "source_location": "L678"
     },
     {
       "id": "lib_simulation_engine_simulationengine_sessions",
@@ -3375,7 +3574,7 @@
       "file_type": "code",
       "norm_label": ".sessions()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L850"
+      "source_location": "L858"
     },
     {
       "id": "lib_simulation_engine_simulationengine_ssh",
@@ -3387,7 +3586,7 @@
       "file_type": "code",
       "norm_label": ".ssh()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L821"
+      "source_location": "L829"
     },
     {
       "id": "lib_simulation_engine_simulationengine_target",
@@ -3399,7 +3598,7 @@
       "file_type": "code",
       "norm_label": ".target()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L242"
+      "source_location": "L243"
     },
     {
       "id": "lib_simulation_engine_simulationengine_toolregistry",
@@ -3411,7 +3610,7 @@
       "file_type": "code",
       "norm_label": ".toolregistry()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L79"
+      "source_location": "L80"
     },
     {
       "id": "lib_simulation_engine_structuredhttpoutput",
@@ -3423,7 +3622,7 @@
       "file_type": "code",
       "norm_label": "structuredhttpoutput()",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L23"
+      "source_location": "L24"
     },
     {
       "id": "lib_simulation_network_reachable",
@@ -3735,7 +3934,7 @@
       "file_type": "code",
       "norm_label": "datapanel()",
       "source_file": "app/red/page.tsx",
-      "source_location": "L84"
+      "source_location": "L87"
     },
     {
       "id": "app_red_page_intelpanel",
@@ -3747,7 +3946,7 @@
       "file_type": "code",
       "norm_label": "intelpanel()",
       "source_file": "app/red/page.tsx",
-      "source_location": "L88"
+      "source_location": "L91"
     },
     {
       "id": "app_red_browser_document_attribute",
@@ -3940,18 +4139,6 @@
       "norm_label": "playaudio()",
       "source_file": "lib/audio/audio-system.ts",
       "source_location": "L160"
-    },
-    {
-      "id": "lib_audio_catalog_alerteventforseverity",
-      "label": "alertEventForSeverity()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "alerteventforseverity()",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L80"
     },
     {
       "id": "lib_simulation_scenarios_content_discover",
@@ -4326,100 +4513,112 @@
       "source_location": "L70"
     },
     {
-      "id": "app_blue_page_blueteampage",
-      "label": "BlueTeamPage()",
+      "id": "lib_simulation_postgres_query_bindtable",
+      "label": "bindTable()",
       "_callable": true,
       "_origin": "ast",
       "community": 64,
-      "community_name": "BlueTeamPage",
+      "community_name": "postgres-query.ts",
       "file_type": "code",
-      "norm_label": "blueteampage()",
-      "source_file": "app/blue/page.tsx",
+      "norm_label": "bindtable()",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L36"
+    },
+    {
+      "id": "lib_simulation_postgres_query_canselect",
+      "label": "canSelect()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "canselect()",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L50"
+    },
+    {
+      "id": "lib_simulation_postgres_query_columndefinition",
+      "label": "columnDefinition()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "columndefinition()",
+      "source_file": "lib/simulation/postgres-query.ts",
       "source_location": "L46"
     },
     {
-      "id": "app_blue_page_blueteampage_advance",
-      "label": "advance()",
+      "id": "lib_simulation_postgres_query_executepostgresselect",
+      "label": "executePostgresSelect()",
       "_callable": true,
       "_origin": "ast",
       "community": 64,
-      "community_name": "BlueTeamPage",
+      "community_name": "postgres-query.ts",
       "file_type": "code",
-      "norm_label": "advance()",
-      "source_file": "app/blue/page.tsx",
+      "norm_label": "executepostgresselect()",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L85"
+    },
+    {
+      "id": "lib_simulation_postgres_query_parseliteral",
+      "label": "parseLiteral()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "parseliteral()",
+      "source_file": "lib/simulation/postgres-query.ts",
       "source_location": "L78"
     },
     {
-      "id": "app_blue_page_blueteampage_onnavigate",
-      "label": "onNavigate()",
+      "id": "lib_simulation_postgres_query_relationparts",
+      "label": "relationParts()",
       "_callable": true,
       "_origin": "ast",
       "community": 64,
-      "community_name": "BlueTeamPage",
+      "community_name": "postgres-query.ts",
       "file_type": "code",
-      "norm_label": "onnavigate()",
-      "source_file": "app/blue/page.tsx",
-      "source_location": "L68"
+      "norm_label": "relationparts()",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L26"
     },
     {
-      "id": "app_blue_page_blueteampage_onpinevidence",
-      "label": "onPinEvidence()",
+      "id": "lib_simulation_postgres_query_resolvereference",
+      "label": "resolveReference()",
       "_callable": true,
       "_origin": "ast",
       "community": 64,
-      "community_name": "BlueTeamPage",
+      "community_name": "postgres-query.ts",
       "file_type": "code",
-      "norm_label": "onpinevidence()",
-      "source_file": "app/blue/page.tsx",
-      "source_location": "L73"
+      "norm_label": "resolvereference()",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L54"
     },
     {
-      "id": "app_blue_page_blueteampage_onselect",
-      "label": "onSelect()",
+      "id": "lib_simulation_postgres_query_syntaxerror",
+      "label": "syntaxError()",
       "_callable": true,
       "_origin": "ast",
       "community": 64,
-      "community_name": "BlueTeamPage",
+      "community_name": "postgres-query.ts",
       "file_type": "code",
-      "norm_label": "onselect()",
-      "source_file": "app/blue/page.tsx",
-      "source_location": "L62"
+      "norm_label": "syntaxerror()",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L31"
     },
     {
-      "id": "app_blue_page_blueteampage_respond",
-      "label": "respond()",
+      "id": "lib_simulation_postgres_query_valuefor",
+      "label": "valueFor()",
       "_callable": true,
       "_origin": "ast",
       "community": 64,
-      "community_name": "BlueTeamPage",
+      "community_name": "postgres-query.ts",
       "file_type": "code",
-      "norm_label": "respond()",
-      "source_file": "app/blue/page.tsx",
-      "source_location": "L128"
-    },
-    {
-      "id": "app_blue_soc_state_selectiontoken",
-      "label": "selectionToken()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "BlueTeamPage",
-      "file_type": "code",
-      "norm_label": "selectiontoken()",
-      "source_file": "app/blue/soc-state.ts",
-      "source_location": "L80"
-    },
-    {
-      "id": "app_blue_soc_state_usereadstate",
-      "label": "useReadState()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "BlueTeamPage",
-      "file_type": "code",
-      "norm_label": "usereadstate()",
-      "source_file": "app/blue/soc-state.ts",
-      "source_location": "L39"
+      "norm_label": "valuefor()",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L74"
     },
     {
       "id": "app_red_browser",
@@ -6873,7 +7072,7 @@
       "label": "REALISTIC_INTERACTION_PROGRESS.md",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "page",
       "norm_label": "realistic_interaction_progress.md",
@@ -6885,7 +7084,7 @@
       "label": "10. Act 0 orientation and Act I network/service missions",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "10. act 0 orientation and act i network/service missions",
@@ -6897,7 +7096,7 @@
       "label": "11. First-class DNS and full Intel auto-recording (Milestone 3 close-out)",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "11. first-class dns and full intel auto-recording (milestone 3 close-out)",
@@ -6909,7 +7108,7 @@
       "label": "12. Operator discoverability gate and realistic filesystem navigation",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "12. operator discoverability gate and realistic filesystem navigation",
@@ -6921,7 +7120,7 @@
       "label": "13. Campaign-wide Operator discoverability",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "13. campaign-wide operator discoverability",
@@ -6933,7 +7132,7 @@
       "label": "14. Stateful Browser and application-session parity",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "14. stateful browser and application-session parity",
@@ -6941,11 +7140,23 @@
       "source_location": "L129"
     },
     {
+      "id": "docs_realistic_interaction_progress_15_schema_aware_postgresql_queries_and_joins",
+      "label": "15. Schema-aware PostgreSQL queries and joins",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "Verification completed",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "15. schema-aware postgresql queries and joins",
+      "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
+      "source_location": "L137"
+    },
+    {
       "id": "docs_realistic_interaction_progress_1_structured_tool_intents_and_terminal_context",
       "label": "1. Structured tool intents and terminal context",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "1. structured tool intents and terminal context",
@@ -6957,7 +7168,7 @@
       "label": "2. Declarative Glasshouse application route",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "2. declarative glasshouse application route",
@@ -6969,7 +7180,7 @@
       "label": "3. Unix investigation commands",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "3. unix investigation commands",
@@ -6981,7 +7192,7 @@
       "label": "4. Prompted SSH and PostgreSQL authentication",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "4. prompted ssh and postgresql authentication",
@@ -6993,7 +7204,7 @@
       "label": "5. Scenario content and migrations",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "5. scenario content and migrations",
@@ -7005,7 +7216,7 @@
       "label": "6. First-class credentials and Credentials application",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "6. first-class credentials and credentials application",
@@ -7017,7 +7228,7 @@
       "label": "7. Legacy generic attack shortcuts retired",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "7. legacy generic attack shortcuts retired",
@@ -7029,7 +7240,7 @@
       "label": "8. Composable tool-adapter layer",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "8. composable tool-adapter layer",
@@ -7041,7 +7252,7 @@
       "label": "9. Explicit services and Red/Blue/replay parity",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "9. explicit services and red/blue/replay parity",
@@ -7053,19 +7264,19 @@
       "label": "Canonical roadmap alignment",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "canonical roadmap alignment",
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L137"
+      "source_location": "L146"
     },
     {
       "id": "docs_realistic_interaction_progress_delivered_vertical_slices",
       "label": "Delivered vertical slices",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "delivered vertical slices",
@@ -7077,67 +7288,67 @@
       "label": "Fundamentals, network, and application gaps",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "fundamentals, network, and application gaps",
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L143"
+      "source_location": "L152"
     },
     {
       "id": "docs_realistic_interaction_progress_milestone_10_enterprise_operator_alpha_gaps",
       "label": "Milestone 10 \u2014 Enterprise Operator Alpha gaps",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "milestone 10 \u2014 enterprise operator alpha gaps",
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L166"
+      "source_location": "L175"
     },
     {
       "id": "docs_realistic_interaction_progress_milestone_8_root_mvp_gaps",
       "label": "Milestone 8 \u2014 ROOT MVP gaps",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "milestone 8 \u2014 root mvp gaps",
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L149"
+      "source_location": "L158"
     },
     {
       "id": "docs_realistic_interaction_progress_milestone_9_learning_content_alpha_gaps",
       "label": "Milestone 9 \u2014 Learning / Content Alpha gaps",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "milestone 9 \u2014 learning / content alpha gaps",
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L156"
+      "source_location": "L165"
     },
     {
       "id": "docs_realistic_interaction_progress_pvp_assessment",
       "label": "PvP assessment",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "pvp assessment",
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L173"
+      "source_location": "L182"
     },
     {
       "id": "docs_realistic_interaction_progress_realistic_interaction_layer_progress_checkpoint",
       "label": "Realistic Interaction Layer \u2014 Progress Checkpoint",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "realistic interaction layer \u2014 progress checkpoint",
@@ -7149,31 +7360,31 @@
       "label": "Session memory",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "session memory",
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L200"
+      "source_location": "L209"
     },
     {
-      "id": "docs_realistic_interaction_progress_suggested_immediate_next_task_milestone_4_deeper_postgresql_interaction",
-      "label": "Suggested immediate next task \u2014 Milestone 4 (deeper PostgreSQL interaction)",
+      "id": "docs_realistic_interaction_progress_suggested_immediate_next_task_milestone_4_human_validation_and_milestone_8_planning",
+      "label": "Suggested immediate next task \u2014 Milestone 4 human validation and Milestone 8 planning",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "suggested immediate next task \u2014 milestone 4 (deeper postgresql interaction)",
+      "norm_label": "suggested immediate next task \u2014 milestone 4 human validation and milestone 8 planning",
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L188"
+      "source_location": "L197"
     },
     {
       "id": "docs_realistic_interaction_progress_verification_completed",
       "label": "Verification completed",
       "_origin": "ast",
       "community": 32,
-      "community_name": "Delivered vertical slices",
+      "community_name": "Verification completed",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "verification completed",
@@ -8235,39 +8446,6 @@
       "source_location": "L1"
     },
     {
-      "id": "lib_simulation_replay",
-      "label": "replay.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replay.ts",
-      "source_file": "lib/simulation/replay.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_simulation_replay_test",
-      "label": "replay.test.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "replay.test.ts",
-      "source_file": "lib/simulation/replay.test.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_simulation_replay_test_glasshouse",
-      "label": "glasshouse",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "engine.ts",
-      "file_type": "code",
-      "norm_label": "glasshouse",
-      "source_file": "lib/simulation/replay.test.ts",
-      "source_location": "L21"
-    },
-    {
       "id": "lib_simulation_rules",
       "label": "rules.ts",
       "_origin": "ast",
@@ -8371,7 +8549,7 @@
       "label": "operations/route.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "operations/route.ts",
       "source_file": "app/api/operations/route.ts",
@@ -8382,7 +8560,7 @@
       "label": "career/page.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "career/page.tsx",
       "source_file": "app/career/page.tsx",
@@ -8393,7 +8571,7 @@
       "label": "proficiencyLabel",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "proficiencylabel",
       "source_file": "app/career/page.tsx",
@@ -8404,7 +8582,7 @@
       "label": "layout.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "layout.tsx",
       "source_file": "app/layout.tsx",
@@ -8415,7 +8593,7 @@
       "label": "geistMono",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "geistmono",
       "source_file": "app/layout.tsx",
@@ -8426,7 +8604,7 @@
       "label": "geistSans",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "geistsans",
       "source_file": "app/layout.tsx",
@@ -8437,7 +8615,7 @@
       "label": "metadata",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "metadata",
       "source_file": "app/layout.tsx",
@@ -8448,7 +8626,7 @@
       "label": "app/page.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "app/page.tsx",
       "source_file": "app/page.tsx",
@@ -8459,7 +8637,7 @@
       "label": "[scenarioId]/page.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "[scenarioid]/page.tsx",
       "source_file": "app/replay/[scenarioId]/page.tsx",
@@ -8470,7 +8648,7 @@
       "label": "replay-client.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "replay-client.tsx",
       "source_file": "app/replay/[scenarioId]/replay-client.tsx",
@@ -8481,7 +8659,7 @@
       "label": "emptySnapshot",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "emptysnapshot",
       "source_file": "app/replay/[scenarioId]/replay-client.tsx",
@@ -8492,7 +8670,7 @@
       "label": "root-os.tsx",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "root-os.tsx",
       "source_file": "app/ui/root-os.tsx",
@@ -8503,7 +8681,7 @@
       "label": "use-operation.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "use-operation.ts",
       "source_file": "app/use-operation.ts",
@@ -8514,7 +8692,7 @@
       "label": "campaign.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "campaign.ts",
       "source_file": "lib/campaign.ts",
@@ -8525,18 +8703,51 @@
       "label": "trainingModules",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "trainingmodules",
       "source_file": "lib/campaign.ts",
       "source_location": "L7"
     },
     {
+      "id": "lib_simulation_replay",
+      "label": "replay.ts",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replay.ts",
+      "source_file": "lib/simulation/replay.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_replay_test",
+      "label": "replay.test.ts",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "replay.test.ts",
+      "source_file": "lib/simulation/replay.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_replay_test_glasshouse",
+      "label": "glasshouse",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "replay.ts",
+      "file_type": "code",
+      "norm_label": "glasshouse",
+      "source_file": "lib/simulation/replay.test.ts",
+      "source_location": "L21"
+    },
+    {
       "id": "lib_simulation_scenarios_index_campaign",
       "label": "campaign",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "campaign",
       "source_file": "lib/simulation/scenarios/index.ts",
@@ -8547,7 +8758,7 @@
       "label": "campaign.spec.ts",
       "_origin": "ast",
       "community": 41,
-      "community_name": "replay-client.tsx",
+      "community_name": "replay.ts",
       "file_type": "code",
       "norm_label": "campaign.spec.ts",
       "source_file": "tests/browser/campaign.spec.ts",
@@ -9648,28 +9859,6 @@
       "source_location": "L1"
     },
     {
-      "id": "app_ui_audio_control",
-      "label": "audio-control.tsx",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "audio-control.tsx",
-      "source_file": "app/ui/audio-control.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_ui_audio_control_mixer_channels",
-      "label": "MIXER_CHANNELS",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "mixer_channels",
-      "source_file": "app/ui/audio-control.tsx",
-      "source_location": "L14"
-    },
-    {
       "id": "app_ui_root_chrome",
       "label": "root-chrome.tsx",
       "_origin": "ast",
@@ -9701,83 +9890,6 @@
       "norm_label": "shortcuts",
       "source_file": "app/ui/root-chrome.tsx",
       "source_location": "L21"
-    },
-    {
-      "id": "lib_audio_audio_system",
-      "label": "audio-system.ts",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "audio-system.ts",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_audio_audio_system_default_audio_settings",
-      "label": "DEFAULT_AUDIO_SETTINGS",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "default_audio_settings",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L29"
-    },
-    {
-      "id": "lib_audio_audio_system_rootaudio",
-      "label": "rootAudio",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "rootaudio",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L159"
-    },
-    {
-      "id": "lib_audio_audio_system_server_audio_snapshot",
-      "label": "SERVER_AUDIO_SNAPSHOT",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "server_audio_snapshot",
-      "source_file": "lib/audio/audio-system.ts",
-      "source_location": "L48"
-    },
-    {
-      "id": "lib_audio_catalog",
-      "label": "catalog.ts",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "catalog.ts",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_audio_catalog_audio_check_events",
-      "label": "AUDIO_CHECK_EVENTS",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "audio_check_events",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L68"
-    },
-    {
-      "id": "lib_audio_catalog_audio_event_catalog",
-      "label": "AUDIO_EVENT_CATALOG",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "root-chrome.tsx",
-      "file_type": "code",
-      "norm_label": "audio_event_catalog",
-      "source_file": "lib/audio/catalog.ts",
-      "source_location": "L43"
     },
     {
       "id": "docs_superpowers_specs_2026_09_21_stateful_browser_design",
@@ -10614,6 +10726,138 @@
       "norm_label": "task 5: regression closure and roadmap sync",
       "source_file": "docs/superpowers/plans/2026-09-21-stateful-browser.md",
       "source_location": "L97"
+    },
+    {
+      "id": "lib_simulation_postgres_query",
+      "label": "postgres-query.ts",
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "postgres-query.ts",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_postgres_query_test",
+      "label": "postgres-query.test.ts",
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "postgres-query.test.ts",
+      "source_file": "lib/simulation/postgres-query.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_simulation_postgres_query_test_database",
+      "label": "database",
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "postgres-query.ts",
+      "file_type": "code",
+      "norm_label": "database",
+      "source_file": "lib/simulation/postgres-query.test.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "app_ui_audio_control",
+      "label": "audio-control.tsx",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audio-control.tsx",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_ui_audio_control_mixer_channels",
+      "label": "MIXER_CHANNELS",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "mixer_channels",
+      "source_file": "app/ui/audio-control.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "lib_audio_audio_system",
+      "label": "audio-system.ts",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audio-system.ts",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_audio_audio_system_default_audio_settings",
+      "label": "DEFAULT_AUDIO_SETTINGS",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "default_audio_settings",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "lib_audio_audio_system_rootaudio",
+      "label": "rootAudio",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "rootaudio",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L159"
+    },
+    {
+      "id": "lib_audio_audio_system_server_audio_snapshot",
+      "label": "SERVER_AUDIO_SNAPSHOT",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "server_audio_snapshot",
+      "source_file": "lib/audio/audio-system.ts",
+      "source_location": "L48"
+    },
+    {
+      "id": "lib_audio_catalog",
+      "label": "catalog.ts",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "catalog.ts",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_audio_catalog_audio_check_events",
+      "label": "AUDIO_CHECK_EVENTS",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audio_check_events",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L68"
+    },
+    {
+      "id": "lib_audio_catalog_audio_event_catalog",
+      "label": "AUDIO_EVENT_CATALOG",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "audio-system.ts",
+      "file_type": "code",
+      "norm_label": "audio_event_catalog",
+      "source_file": "lib/audio/catalog.ts",
+      "source_location": "L43"
     },
     {
       "id": "docs_tools_tools_unix",
@@ -13590,7 +13834,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/red/page.tsx",
-      "source_location": "L127",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -13614,7 +13858,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/red/page.tsx",
-      "source_location": "L48",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -14046,7 +14290,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L333",
+      "source_location": "L334",
       "weight": 1.0
     },
     {
@@ -14058,7 +14302,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L345",
+      "source_location": "L346",
       "weight": 1.0
     },
     {
@@ -14070,7 +14314,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L349",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -14082,7 +14326,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L353",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -14094,24 +14338,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L375",
+      "source_location": "L376",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_changedirectory",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L396",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_changedirectory",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14123,19 +14355,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_changedirectory",
-      "target": "lib_simulation_engine_simulationengine_resolvepath",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L399",
+      "source_location": "L398",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_changedirectory",
-      "target": "lib_simulation_engine_simulationengine_filesystemdirectories",
+      "target": "lib_simulation_engine_simulationengine_resolvepath",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14147,6 +14379,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_changedirectory",
+      "target": "lib_simulation_engine_simulationengine_filesystemdirectories",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L401",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_changedirectory",
       "target": "lib_simulation_engine_simulationengine_observe",
       "relation": "calls",
       "_origin": "ast",
@@ -14154,7 +14398,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L403",
+      "source_location": "L404",
       "weight": 1.0
     },
     {
@@ -14166,48 +14410,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L795",
+      "source_location": "L803",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_completeauthentication",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L796",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_engine_simulationengine_find",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L800",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_network_reachable",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L801",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14219,7 +14427,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_engine_simulationengine_definition",
+      "target": "lib_simulation_engine_simulationengine_find",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L808",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_completeauthentication",
+      "target": "lib_simulation_network_reachable",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14231,30 +14451,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_completeauthentication",
-      "target": "lib_simulation_engine_simulationengine_emitdefinition",
+      "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L810",
+      "source_location": "L812",
       "weight": 1.0
     },
     {
-      "source": "lib_simulation_engine_simulationengine_connectpostgres",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L694",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_connectpostgres",
+      "source": "lib_simulation_engine_simulationengine_completeauthentication",
       "target": "lib_simulation_engine_simulationengine_definition",
       "relation": "calls",
       "_origin": "ast",
@@ -14262,24 +14470,24 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L694",
+      "source_location": "L817",
       "weight": 1.0
     },
     {
-      "source": "lib_simulation_engine_simulationengine_connectpostgres",
-      "target": "lib_simulation_engine_simulationengine_target",
+      "source": "lib_simulation_engine_simulationengine_completeauthentication",
+      "target": "lib_simulation_engine_simulationengine_emitdefinition",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L694",
+      "source_location": "L818",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_connectpostgres",
-      "target": "lib_simulation_engine_simulationengine_find",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14291,6 +14499,42 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_connectpostgres",
+      "target": "lib_simulation_engine_simulationengine_definition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L695",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_connectpostgres",
+      "target": "lib_simulation_engine_simulationengine_target",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L695",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_connectpostgres",
+      "target": "lib_simulation_engine_simulationengine_find",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L696",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_connectpostgres",
       "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
@@ -14298,7 +14542,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L698",
+      "source_location": "L699",
       "weight": 1.0
     },
     {
@@ -14310,7 +14554,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L704",
+      "source_location": "L705",
       "weight": 1.0
     },
     {
@@ -14322,24 +14566,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L705",
+      "source_location": "L706",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_curl",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L605",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_curl",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14351,6 +14583,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L607",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_curl",
       "target": "lib_simulation_engine_simulationengine_target",
       "relation": "calls",
       "_origin": "ast",
@@ -14358,7 +14602,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L608",
+      "source_location": "L609",
       "weight": 1.0
     },
     {
@@ -14370,7 +14614,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L610",
+      "source_location": "L611",
       "weight": 1.0
     },
     {
@@ -14382,7 +14626,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L620",
+      "source_location": "L621",
       "weight": 1.0
     },
     {
@@ -14394,7 +14638,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L625",
+      "source_location": "L626",
       "weight": 1.0
     },
     {
@@ -14406,7 +14650,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L627",
+      "source_location": "L628",
       "weight": 1.0
     },
     {
@@ -14418,7 +14662,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L627",
+      "source_location": "L628",
       "weight": 1.0
     },
     {
@@ -14430,7 +14674,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L640",
+      "source_location": "L641",
       "weight": 1.0
     },
     {
@@ -14442,7 +14686,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L646",
+      "source_location": "L647",
       "weight": 1.0
     },
     {
@@ -14454,7 +14698,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L649",
+      "source_location": "L650",
       "weight": 1.0
     },
     {
@@ -14466,24 +14710,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_dig",
       "target": "lib_simulation_engine_simulationengine_find",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L261",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_dig",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14495,7 +14727,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_dig",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14507,6 +14739,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_dig",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L264",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_dig",
       "target": "lib_simulation_engine_simulationengine_resolvedns",
       "relation": "calls",
       "_origin": "ast",
@@ -14514,7 +14758,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L265",
+      "source_location": "L266",
       "weight": 1.0
     },
     {
@@ -14526,24 +14770,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L267",
+      "source_location": "L268",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_dig",
       "target": "lib_simulation_engine_simulationengine_target",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L271",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_dig",
-      "target": "lib_simulation_engine_simulationengine_applydiscovery",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14555,6 +14787,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_dig",
+      "target": "lib_simulation_engine_simulationengine_applydiscovery",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L273",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_dig",
       "target": "lib_simulation_engine_simulationengine_discoveredhosts",
       "relation": "calls",
       "_origin": "ast",
@@ -14562,7 +14806,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L279",
+      "source_location": "L280",
       "weight": 1.0
     },
     {
@@ -14574,7 +14818,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L322",
+      "source_location": "L323",
       "weight": 1.0
     },
     {
@@ -14586,7 +14830,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L286",
+      "source_location": "L287",
       "weight": 1.0
     },
     {
@@ -14598,7 +14842,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L289",
+      "source_location": "L290",
       "weight": 1.0
     },
     {
@@ -14610,7 +14854,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L299",
+      "source_location": "L300",
       "weight": 1.0
     },
     {
@@ -14622,24 +14866,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L329",
+      "source_location": "L330",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_environment",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L444",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_environment",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14651,6 +14883,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_environment",
+      "target": "lib_simulation_engine_simulationengine_result",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L446",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_environment",
       "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
@@ -14658,7 +14902,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L454",
+      "source_location": "L455",
       "weight": 1.0
     },
     {
@@ -14670,7 +14914,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L123",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -14682,7 +14926,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L136",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -14694,7 +14938,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L142",
+      "source_location": "L143",
       "weight": 1.0
     },
     {
@@ -14706,24 +14950,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L153",
+      "source_location": "L154",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_executecommand",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L50",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_executecommand",
-      "target": "lib_simulation_engine_simulationengine_toolregistry",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14735,6 +14967,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_executecommand",
+      "target": "lib_simulation_engine_simulationengine_toolregistry",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_executecommand",
       "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
@@ -14742,7 +14986,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L55",
+      "source_location": "L56",
       "weight": 1.0
     },
     {
@@ -14754,24 +14998,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L60",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_find",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L555",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_find",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14783,19 +15015,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_find",
-      "target": "lib_simulation_engine_simulationengine_resolvepath",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L561",
+      "source_location": "L557",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_find",
-      "target": "lib_simulation_engine_simulationengine_filesystemdirectories",
+      "target": "lib_simulation_engine_simulationengine_resolvepath",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14807,7 +15039,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_find",
-      "target": "lib_simulation_engine_simulationengine_canreadfile",
+      "target": "lib_simulation_engine_simulationengine_filesystemdirectories",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14818,20 +15050,20 @@
       "weight": 1.0
     },
     {
-      "source": "lib_simulation_engine_simulationengine_grep",
-      "target": "lib_simulation_engine_simulationengine_result",
+      "source": "lib_simulation_engine_simulationengine_find",
+      "target": "lib_simulation_engine_simulationengine_canreadfile",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L528",
+      "source_location": "L564",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_grep",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14843,19 +15075,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_grep",
-      "target": "lib_simulation_engine_simulationengine_resolvepath",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L532",
+      "source_location": "L530",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_grep",
-      "target": "lib_simulation_engine_simulationengine_filesystemdirectories",
+      "target": "lib_simulation_engine_simulationengine_resolvepath",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14867,6 +15099,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_grep",
+      "target": "lib_simulation_engine_simulationengine_filesystemdirectories",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L534",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_grep",
       "target": "lib_simulation_engine_simulationengine_canreadfile",
       "relation": "calls",
       "_origin": "ast",
@@ -14874,7 +15118,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L538",
+      "source_location": "L539",
       "weight": 1.0
     },
     {
@@ -14886,7 +15130,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L547",
+      "source_location": "L548",
       "weight": 1.0
     },
     {
@@ -14898,24 +15142,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L549",
+      "source_location": "L550",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_identity",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L431",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_identity",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14927,6 +15159,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_identity",
+      "target": "lib_simulation_engine_simulationengine_result",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L433",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_identity",
       "target": "lib_simulation_engine_simulationengine_find",
       "relation": "calls",
       "_origin": "ast",
@@ -14934,7 +15178,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L434",
+      "source_location": "L435",
       "weight": 1.0
     },
     {
@@ -14946,7 +15190,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L438",
+      "source_location": "L439",
       "weight": 1.0
     },
     {
@@ -14958,7 +15202,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L439",
+      "source_location": "L440",
       "weight": 1.0
     },
     {
@@ -14970,7 +15214,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L864",
+      "source_location": "L872",
       "weight": 1.0
     },
     {
@@ -14982,7 +15226,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L865",
+      "source_location": "L873",
       "weight": 1.0
     },
     {
@@ -14994,7 +15238,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L866",
+      "source_location": "L874",
       "weight": 1.0
     },
     {
@@ -15006,7 +15250,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L870",
+      "source_location": "L878",
       "weight": 1.0
     },
     {
@@ -15018,7 +15262,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L578",
+      "source_location": "L579",
       "weight": 1.0
     },
     {
@@ -15030,7 +15274,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L579",
+      "source_location": "L580",
       "weight": 1.0
     },
     {
@@ -15042,24 +15286,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L847",
+      "source_location": "L855",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_listfiles",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L464",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_listfiles",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15071,19 +15303,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_listfiles",
-      "target": "lib_simulation_engine_simulationengine_find",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L467",
+      "source_location": "L466",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_listfiles",
-      "target": "lib_simulation_engine_simulationengine_resolvepath",
+      "target": "lib_simulation_engine_simulationengine_find",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15095,7 +15327,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_listfiles",
-      "target": "lib_simulation_engine_simulationengine_filesystemdirectories",
+      "target": "lib_simulation_engine_simulationengine_resolvepath",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15107,6 +15339,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_listfiles",
+      "target": "lib_simulation_engine_simulationengine_filesystemdirectories",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L470",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_listfiles",
       "target": "lib_simulation_engine_simulationengine_emit",
       "relation": "calls",
       "_origin": "ast",
@@ -15114,24 +15358,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L499",
+      "source_location": "L500",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_observe",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L381",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_observe",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15143,7 +15375,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_observe",
-      "target": "lib_simulation_engine_simulationengine_emit",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15151,6 +15383,18 @@
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
       "source_location": "L383",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_observe",
+      "target": "lib_simulation_engine_simulationengine_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L384",
       "weight": 1.0
     },
     {
@@ -15162,7 +15406,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L583",
+      "source_location": "L584",
       "weight": 1.0
     },
     {
@@ -15174,7 +15418,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L584",
+      "source_location": "L585",
       "weight": 1.0
     },
     {
@@ -15186,7 +15430,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L584",
+      "source_location": "L585",
       "weight": 1.0
     },
     {
@@ -15198,7 +15442,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L586",
+      "source_location": "L587",
       "weight": 1.0
     },
     {
@@ -15210,24 +15454,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L587",
+      "source_location": "L588",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_postgresinput",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L720",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_postgresinput",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15239,7 +15471,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_postgresinput",
-      "target": "lib_simulation_engine_simulationengine_definition",
+      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15251,6 +15483,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_postgresinput",
+      "target": "lib_simulation_engine_simulationengine_definition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L723",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_postgresinput",
       "target": "lib_simulation_engine_simulationengine_applydiscovery",
       "relation": "calls",
       "_origin": "ast",
@@ -15258,7 +15502,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L726",
+      "source_location": "L727",
       "weight": 1.0
     },
     {
@@ -15270,7 +15514,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L732",
+      "source_location": "L733",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_postgresinput",
+      "target": "lib_simulation_postgres_query_executepostgresselect",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L787",
       "weight": 1.0
     },
     {
@@ -15282,24 +15538,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L785",
+      "source_location": "L790",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_processes",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L568",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_processes",
-      "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15311,6 +15555,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_processes",
+      "target": "lib_simulation_engine_simulationengine_result",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L570",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_processes",
       "target": "lib_simulation_engine_simulationengine_applydiscovery",
       "relation": "calls",
       "_origin": "ast",
@@ -15318,7 +15574,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L572",
+      "source_location": "L573",
       "weight": 1.0
     },
     {
@@ -15330,24 +15586,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L573",
+      "source_location": "L574",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_readfile",
       "target": "lib_simulation_engine_simulationengine_result",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L504",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_readfile",
-      "target": "lib_simulation_engine_simulationengine_currentmachine",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15359,19 +15603,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_readfile",
-      "target": "lib_simulation_engine_simulationengine_resolvepath",
+      "target": "lib_simulation_engine_simulationengine_currentmachine",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L507",
+      "source_location": "L506",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_readfile",
-      "target": "lib_simulation_engine_simulationengine_find",
+      "target": "lib_simulation_engine_simulationengine_resolvepath",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15383,6 +15627,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_readfile",
+      "target": "lib_simulation_engine_simulationengine_find",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L509",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_readfile",
       "target": "lib_simulation_engine_simulationengine_canreadfile",
       "relation": "calls",
       "_origin": "ast",
@@ -15390,7 +15646,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L510",
+      "source_location": "L511",
       "weight": 1.0
     },
     {
@@ -15402,7 +15658,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L512",
+      "source_location": "L513",
       "weight": 1.0
     },
     {
@@ -15414,7 +15670,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L514",
+      "source_location": "L515",
       "weight": 1.0
     },
     {
@@ -15426,7 +15682,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L516",
+      "source_location": "L517",
       "weight": 1.0
     },
     {
@@ -15438,7 +15694,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L521",
+      "source_location": "L522",
       "weight": 1.0
     },
     {
@@ -15450,7 +15706,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L252",
+      "source_location": "L253",
       "weight": 1.0
     },
     {
@@ -15462,7 +15718,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L253",
+      "source_location": "L254",
       "weight": 1.0
     },
     {
@@ -15474,7 +15730,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L592",
+      "source_location": "L593",
       "weight": 1.0
     },
     {
@@ -15486,7 +15742,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L593",
+      "source_location": "L594",
       "weight": 1.0
     },
     {
@@ -15498,7 +15754,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L593",
+      "source_location": "L594",
       "weight": 1.0
     },
     {
@@ -15510,24 +15766,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L595",
+      "source_location": "L596",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_scan",
       "target": "lib_simulation_engine_simulationengine_emit",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L597",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_scan",
-      "target": "lib_simulation_engine_simulationengine_applydiscovery",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15539,6 +15783,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_scan",
+      "target": "lib_simulation_engine_simulationengine_applydiscovery",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L599",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_scan",
       "target": "lib_simulation_engine_simulationengine_discoveredhosts",
       "relation": "calls",
       "_origin": "ast",
@@ -15546,36 +15802,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L601",
+      "source_location": "L602",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_serviceoperation",
       "target": "lib_simulation_engine_simulationengine_currentmachine",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L678",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_serviceoperation",
-      "target": "lib_simulation_engine_simulationengine_definition",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L678",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_serviceoperation",
-      "target": "lib_simulation_engine_simulationengine_find",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15587,6 +15819,30 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_definition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L679",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_find",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L680",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_serviceoperation",
       "target": "lib_simulation_engine_simulationengine_result",
       "relation": "calls",
       "_origin": "ast",
@@ -15594,7 +15850,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L683",
+      "source_location": "L684",
       "weight": 1.0
     },
     {
@@ -15606,7 +15862,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L687",
+      "source_location": "L688",
       "weight": 1.0
     },
     {
@@ -15618,7 +15874,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L688",
+      "source_location": "L689",
       "weight": 1.0
     },
     {
@@ -15630,7 +15886,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L854",
+      "source_location": "L862",
       "weight": 1.0
     },
     {
@@ -15642,7 +15898,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L822",
+      "source_location": "L830",
       "weight": 1.0
     },
     {
@@ -15654,7 +15910,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L824",
+      "source_location": "L832",
       "weight": 1.0
     },
     {
@@ -15666,7 +15922,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L824",
+      "source_location": "L832",
       "weight": 1.0
     },
     {
@@ -15678,7 +15934,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L826",
+      "source_location": "L834",
       "weight": 1.0
     },
     {
@@ -15690,7 +15946,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L835",
+      "source_location": "L843",
       "weight": 1.0
     },
     {
@@ -15702,7 +15958,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L836",
+      "source_location": "L844",
       "weight": 1.0
     },
     {
@@ -15714,7 +15970,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L839",
+      "source_location": "L847",
       "weight": 1.0
     },
     {
@@ -15726,7 +15982,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L841",
+      "source_location": "L849",
       "weight": 1.0
     },
     {
@@ -15738,12 +15994,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L244",
+      "source_location": "L245",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_ping",
+      "target": "lib_simulation_engine_simulationengine_ip",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15755,7 +16011,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_scan",
+      "target": "lib_simulation_engine_simulationengine_ping",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15767,7 +16023,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_dig",
+      "target": "lib_simulation_engine_simulationengine_scan",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15779,19 +16035,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_ssh",
+      "target": "lib_simulation_engine_simulationengine_dig",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L104",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_john",
+      "target": "lib_simulation_engine_simulationengine_ssh",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15803,7 +16059,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_sessions",
+      "target": "lib_simulation_engine_simulationengine_john",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15815,7 +16071,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_installagent",
+      "target": "lib_simulation_engine_simulationengine_sessions",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15827,19 +16083,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_curl",
+      "target": "lib_simulation_engine_simulationengine_installagent",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L109",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_serviceoperation",
+      "target": "lib_simulation_engine_simulationengine_curl",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15851,7 +16107,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_connectpostgres",
+      "target": "lib_simulation_engine_simulationengine_serviceoperation",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15863,7 +16119,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_postgresinput",
+      "target": "lib_simulation_engine_simulationengine_connectpostgres",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15875,7 +16131,7 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_completeauthentication",
+      "target": "lib_simulation_engine_simulationengine_postgresinput",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15887,19 +16143,19 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_tools_createtooladapterregistry",
+      "target": "lib_simulation_engine_simulationengine_completeauthentication",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L80",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_result",
+      "target": "lib_simulation_tools_createtooladapterregistry",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15911,6 +16167,18 @@
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
+      "target": "lib_simulation_engine_simulationengine_result",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L82",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine_toolregistry",
       "target": "lib_simulation_engine_simulationengine_help",
       "relation": "calls",
       "_origin": "ast",
@@ -15918,7 +16186,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L84",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -15930,7 +16198,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L86",
+      "source_location": "L87",
       "weight": 1.0
     },
     {
@@ -15942,7 +16210,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L87",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -15954,7 +16222,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L88",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -15966,7 +16234,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L90",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -15978,7 +16246,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L91",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -15990,7 +16258,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L92",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -16002,7 +16270,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L93",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -16014,7 +16282,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L95",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -16026,24 +16294,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L96",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine_simulationengine_toolregistry",
       "target": "lib_simulation_engine_simulationengine_processes",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L98",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine_toolregistry",
-      "target": "lib_simulation_engine_simulationengine_ip",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -16062,7 +16318,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L110",
+      "source_location": "L117",
       "weight": 1.0
     },
     {
@@ -16074,7 +16330,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L121",
+      "source_location": "L128",
       "weight": 1.0
     },
     {
@@ -16086,7 +16342,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L122",
+      "source_location": "L129",
       "weight": 1.0
     },
     {
@@ -16098,7 +16354,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L156",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -16110,7 +16366,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L173",
+      "source_location": "L180",
       "weight": 1.0
     },
     {
@@ -16122,7 +16378,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L176",
+      "source_location": "L183",
       "weight": 1.0
     },
     {
@@ -16374,7 +16630,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L177",
+      "source_location": "L180",
       "weight": 1.0
     },
     {
@@ -16386,7 +16642,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L165",
+      "source_location": "L168",
       "weight": 1.0
     },
     {
@@ -16398,7 +16654,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L166",
+      "source_location": "L169",
       "weight": 1.0
     },
     {
@@ -16410,7 +16666,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L168",
+      "source_location": "L171",
       "weight": 1.0
     },
     {
@@ -16422,7 +16678,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L143",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -16434,7 +16690,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L145",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -16446,7 +16702,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L148",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -16459,6 +16715,114 @@
       "context": "call",
       "source_file": "lib/simulation/operator-discoverability.test.ts",
       "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_bindtable",
+      "target": "lib_simulation_postgres_query_relationparts",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_executepostgresselect",
+      "target": "lib_simulation_postgres_query_parseliteral",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_executepostgresselect",
+      "target": "lib_simulation_postgres_query_resolvereference",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_executepostgresselect",
+      "target": "lib_simulation_postgres_query_canselect",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L127",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_executepostgresselect",
+      "target": "lib_simulation_postgres_query_valuefor",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L151",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_executepostgresselect",
+      "target": "lib_simulation_postgres_query_syntaxerror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_executepostgresselect",
+      "target": "lib_simulation_postgres_query_bindtable",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_resolvereference",
+      "target": "lib_simulation_postgres_query_columndefinition",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_resolvereference",
+      "target": "lib_simulation_postgres_query_canselect",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -16963,7 +17327,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -16975,7 +17339,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L38",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -16987,7 +17351,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L794",
+      "source_location": "L802",
       "weight": 1.0
     },
     {
@@ -16999,7 +17363,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L285",
+      "source_location": "L286",
       "weight": 1.0
     },
     {
@@ -17011,7 +17375,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L48",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -17023,7 +17387,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L250",
+      "source_location": "L251",
       "weight": 1.0
     },
     {
@@ -19188,6 +19552,54 @@
     },
     {
       "source": "lib_simulation_engine",
+      "target": "lib_simulation_tools_curlintent",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine",
+      "target": "lib_simulation_tools_postgresconnectintent",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine",
+      "target": "lib_simulation_tools_serviceintent",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine",
+      "target": "lib_simulation_tools_toolcontract",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine",
       "target": "lib_prisma_prisma",
       "relation": "imports",
       "_origin": "ast",
@@ -19320,6 +19732,18 @@
     },
     {
       "source": "lib_simulation_engine",
+      "target": "lib_simulation_postgres_query_executepostgresselect",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine",
       "target": "lib_simulation_tools_createtooladapterregistry",
       "relation": "imports",
       "_origin": "ast",
@@ -19327,60 +19751,12 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
       "source": "lib_simulation_engine",
       "target": "lib_simulation_tools_psqlusage",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine",
-      "target": "lib_simulation_tools_curlintent",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine",
-      "target": "lib_simulation_tools_postgresconnectintent",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine",
-      "target": "lib_simulation_tools_serviceintent",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine",
-      "target": "lib_simulation_tools_toolcontract",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -20180,6 +20556,66 @@
       "context": "import",
       "source_file": "lib/simulation/operator-discoverability.test.ts",
       "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_scenarios_types_scenariodatabasecolumn",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_scenarios_types_scenariodatabasegrant",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_scenarios_types_scenariodatabasetable",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_test",
+      "target": "lib_simulation_postgres_query_executepostgresselect",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/postgres-query.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_test",
+      "target": "lib_simulation_postgres_query_postgresdatabase",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/postgres-query.test.ts",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -24342,6 +24778,19 @@
     },
     {
       "source": "lib_simulation_engine",
+      "target": "lib_simulation_tools",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L10",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine",
       "target": "lib_prisma",
       "relation": "imports_from",
       "_origin": "ast",
@@ -24416,15 +24865,14 @@
     },
     {
       "source": "lib_simulation_engine",
-      "target": "lib_simulation_tools",
+      "target": "lib_simulation_postgres_query",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L9",
-      "type_only": true,
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -25036,6 +25484,31 @@
       "source_file": "lib/simulation/operator-discoverability.test.ts",
       "source_location": "L6",
       "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_scenarios_types",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_test",
+      "target": "lib_simulation_postgres_query",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/simulation/postgres-query.test.ts",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -26272,7 +26745,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L395",
+      "source_location": "L396",
       "weight": 1.0
     },
     {
@@ -26284,7 +26757,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L794",
+      "source_location": "L802",
       "weight": 1.0
     },
     {
@@ -26296,7 +26769,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L693",
+      "source_location": "L694",
       "weight": 1.0
     },
     {
@@ -26308,7 +26781,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L693",
+      "source_location": "L694",
       "weight": 1.0
     },
     {
@@ -26320,7 +26793,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L604",
+      "source_location": "L605",
       "weight": 1.0
     },
     {
@@ -26332,7 +26805,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L604",
+      "source_location": "L605",
       "weight": 1.0
     },
     {
@@ -26344,7 +26817,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L229",
+      "source_location": "L230",
       "weight": 1.0
     },
     {
@@ -26356,7 +26829,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L260",
+      "source_location": "L261",
       "weight": 1.0
     },
     {
@@ -26368,7 +26841,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L328",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -26380,7 +26853,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L443",
+      "source_location": "L444",
       "weight": 1.0
     },
     {
@@ -26392,7 +26865,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L48",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -26404,7 +26877,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L554",
+      "source_location": "L555",
       "weight": 1.0
     },
     {
@@ -26416,7 +26889,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L526",
+      "source_location": "L527",
       "weight": 1.0
     },
     {
@@ -26428,7 +26901,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L430",
+      "source_location": "L431",
       "weight": 1.0
     },
     {
@@ -26440,7 +26913,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L863",
+      "source_location": "L871",
       "weight": 1.0
     },
     {
@@ -26452,7 +26925,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L577",
+      "source_location": "L578",
       "weight": 1.0
     },
     {
@@ -26464,7 +26937,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L463",
+      "source_location": "L464",
       "weight": 1.0
     },
     {
@@ -26476,7 +26949,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L380",
+      "source_location": "L381",
       "weight": 1.0
     },
     {
@@ -26488,7 +26961,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L582",
+      "source_location": "L583",
       "weight": 1.0
     },
     {
@@ -26500,7 +26973,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L719",
+      "source_location": "L720",
       "weight": 1.0
     },
     {
@@ -26512,7 +26985,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L567",
+      "source_location": "L568",
       "weight": 1.0
     },
     {
@@ -26524,7 +26997,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L503",
+      "source_location": "L504",
       "weight": 1.0
     },
     {
@@ -26536,7 +27009,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L407",
+      "source_location": "L408",
       "weight": 1.0
     },
     {
@@ -26548,7 +27021,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L117",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -26560,7 +27033,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L591",
+      "source_location": "L592",
       "weight": 1.0
     },
     {
@@ -26572,7 +27045,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L677",
+      "source_location": "L678",
       "weight": 1.0
     },
     {
@@ -26584,7 +27057,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L677",
+      "source_location": "L678",
       "weight": 1.0
     },
     {
@@ -26596,7 +27069,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L821",
+      "source_location": "L829",
       "weight": 1.0
     },
     {
@@ -26632,7 +27105,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L163",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -26644,7 +27117,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L136",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -26656,7 +27129,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L136",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -26772,7 +27245,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L117",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -27443,7 +27916,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/browser.tsx",
-      "source_location": "L142",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -27663,7 +28136,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L103",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -27674,7 +28147,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L105",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -27718,7 +28191,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L84",
+      "source_location": "L87",
       "weight": 1.0
     },
     {
@@ -27729,7 +28202,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/red/page.tsx",
-      "source_location": "L88",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -29016,7 +29489,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L143",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -29027,7 +29500,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L149",
+      "source_location": "L158",
       "weight": 1.0
     },
     {
@@ -29038,7 +29511,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L156",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -29049,7 +29522,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L166",
+      "source_location": "L175",
       "weight": 1.0
     },
     {
@@ -29137,7 +29610,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L137",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -29148,18 +29621,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L173",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
       "source": "docs_realistic_interaction_progress_realistic_interaction_layer_progress_checkpoint",
-      "target": "docs_realistic_interaction_progress_suggested_immediate_next_task_milestone_4_deeper_postgresql_interaction",
+      "target": "docs_realistic_interaction_progress_suggested_immediate_next_task_milestone_4_human_validation_and_milestone_8_planning",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L188",
+      "source_location": "L197",
       "weight": 1.0
     },
     {
@@ -29170,7 +29643,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
-      "source_location": "L200",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -29237,6 +29710,17 @@
       "confidence_score": 1.0,
       "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
       "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_realistic_interaction_progress_verification_completed",
+      "target": "docs_realistic_interaction_progress_15_schema_aware_postgresql_queries_and_joins",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/REALISTIC_INTERACTION_PROGRESS.md",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -33306,7 +33790,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -33317,7 +33801,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -33328,7 +33812,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L37",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -33350,7 +33834,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L109",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -33714,6 +34198,160 @@
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.test.ts",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_boundtable",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_rowcontext",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_relationparts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_postgresdatabase",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_syntaxerror",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_bindtable",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_columndefinition",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_canselect",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_resolvereference",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_valuefor",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_parseliteral",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_executepostgresselect",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query",
+      "target": "lib_simulation_postgres_query_postgresqueryresult",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.ts",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_postgres_query_test",
+      "target": "lib_simulation_postgres_query_test_database",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/postgres-query.test.ts",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -34510,13 +35148,46 @@
     },
     {
       "source": "lib_simulation_scenarios_types",
-      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "target": "lib_simulation_scenarios_types_scenariodatabasecolumn",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/scenarios/types.ts",
       "source_location": "L149",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_types",
+      "target": "lib_simulation_scenarios_types_scenariodatabasetable",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L154",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_types",
+      "target": "lib_simulation_scenarios_types_scenariodatabasegrant",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L160",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_scenarios_types",
+      "target": "lib_simulation_scenarios_types_scenariodefinition",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/scenarios/types.ts",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -36142,7 +36813,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L117",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -36153,7 +36824,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L121",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -36164,7 +36835,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L192",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
@@ -36175,7 +36846,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L229",
+      "source_location": "L230",
       "weight": 1.0
     },
     {
@@ -36186,7 +36857,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L242",
+      "source_location": "L243",
       "weight": 1.0
     },
     {
@@ -36197,7 +36868,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L250",
+      "source_location": "L251",
       "weight": 1.0
     },
     {
@@ -36208,7 +36879,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L260",
+      "source_location": "L261",
       "weight": 1.0
     },
     {
@@ -36219,7 +36890,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L285",
+      "source_location": "L286",
       "weight": 1.0
     },
     {
@@ -36230,7 +36901,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L320",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -36241,7 +36912,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L328",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -36252,7 +36923,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L332",
+      "source_location": "L333",
       "weight": 1.0
     },
     {
@@ -36263,7 +36934,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L380",
+      "source_location": "L381",
       "weight": 1.0
     },
     {
@@ -36274,7 +36945,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L395",
+      "source_location": "L396",
       "weight": 1.0
     },
     {
@@ -36285,7 +36956,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L407",
+      "source_location": "L408",
       "weight": 1.0
     },
     {
@@ -36296,7 +36967,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -36307,18 +36978,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L420",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_simulation_engine_simulationengine",
-      "target": "lib_simulation_engine_simulationengine_definition",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/simulation/engine.ts",
-      "source_location": "L43",
+      "source_location": "L421",
       "weight": 1.0
     },
     {
@@ -36329,7 +36989,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L430",
+      "source_location": "L431",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_simulation_engine_simulationengine",
+      "target": "lib_simulation_engine_simulationengine_definition",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/simulation/engine.ts",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -36340,7 +37011,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L443",
+      "source_location": "L444",
       "weight": 1.0
     },
     {
@@ -36351,7 +37022,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L458",
+      "source_location": "L459",
       "weight": 1.0
     },
     {
@@ -36362,7 +37033,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L463",
+      "source_location": "L464",
       "weight": 1.0
     },
     {
@@ -36373,7 +37044,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L48",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -36384,7 +37055,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L503",
+      "source_location": "L504",
       "weight": 1.0
     },
     {
@@ -36395,7 +37066,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L526",
+      "source_location": "L527",
       "weight": 1.0
     },
     {
@@ -36406,7 +37077,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L554",
+      "source_location": "L555",
       "weight": 1.0
     },
     {
@@ -36417,7 +37088,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L567",
+      "source_location": "L568",
       "weight": 1.0
     },
     {
@@ -36428,7 +37099,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L577",
+      "source_location": "L578",
       "weight": 1.0
     },
     {
@@ -36439,7 +37110,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L582",
+      "source_location": "L583",
       "weight": 1.0
     },
     {
@@ -36450,7 +37121,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L591",
+      "source_location": "L592",
       "weight": 1.0
     },
     {
@@ -36461,7 +37132,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L604",
+      "source_location": "L605",
       "weight": 1.0
     },
     {
@@ -36472,7 +37143,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L677",
+      "source_location": "L678",
       "weight": 1.0
     },
     {
@@ -36483,7 +37154,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L693",
+      "source_location": "L694",
       "weight": 1.0
     },
     {
@@ -36494,7 +37165,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L719",
+      "source_location": "L720",
       "weight": 1.0
     },
     {
@@ -36505,7 +37176,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L79",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -36516,7 +37187,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L794",
+      "source_location": "L802",
       "weight": 1.0
     },
     {
@@ -36527,7 +37198,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L821",
+      "source_location": "L829",
       "weight": 1.0
     },
     {
@@ -36538,7 +37209,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L846",
+      "source_location": "L854",
       "weight": 1.0
     },
     {
@@ -36549,7 +37220,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L850",
+      "source_location": "L858",
       "weight": 1.0
     },
     {
@@ -36560,7 +37231,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/engine.ts",
-      "source_location": "L863",
+      "source_location": "L871",
       "weight": 1.0
     },
     {
@@ -36582,7 +37253,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L136",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -36593,7 +37264,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L157",
+      "source_location": "L160",
       "weight": 1.0
     },
     {
@@ -36604,7 +37275,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L163",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -36615,7 +37286,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L171",
+      "source_location": "L174",
       "weight": 1.0
     },
     {
@@ -36626,7 +37297,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L176",
+      "source_location": "L179",
       "weight": 1.0
     },
     {
@@ -36637,7 +37308,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/simulation/operator-discoverability.ts",
-      "source_location": "L180",
+      "source_location": "L183",
       "weight": 1.0
     },
     {
@@ -36694,7 +37365,7 @@
       "confidence_score": 0.8,
       "context": "call",
       "source_file": "lib/simulation/glasshouse.e2e.test.ts",
-      "source_location": "L130",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -37042,5 +37713,5 @@
       "source_file": "docs/ROOT_CANONICAL_PLAN.md"
     }
   ],
-  "built_at_commit": "31c5b2905738a183f72136247b5a82b5bcca3658"
+  "built_at_commit": "d1bd3c5d02d833e13642c982f4b841b09535e58d"
 }
